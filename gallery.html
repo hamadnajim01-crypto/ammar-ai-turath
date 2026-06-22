@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المعرض الكبير لفن التراث الإماراتي 🇦🇪</title>
+<style>
+  :root{
+    --sand:#C2A878;--clay:#8B5A2B;--gold:#C9A227;
+    --red:#CE1126;--green:#009739;--teal:#2A9D8F;--paper:#f6efe2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Segoe UI","Tahoma",sans-serif;
+    background:#0c0907;color:var(--paper);overflow-x:hidden}
+
+  /* ===== INTRO (artistic) ===== */
+  #intro{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;position:relative;overflow:hidden;
+    background:linear-gradient(180deg,#1a1030 0%,#5a2a3a 35%,#c25a2a 62%,#f2a64a 85%,#ffd98a 100%)}
+  #intro svg.scene{position:absolute;inset:0;width:100%;height:100%}
+  .intro-content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;padding:0 20px}
+  /* ornate gold frame line */
+  .ornament{width:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    animation:expand 1.4s 2.2s forwards ease-out}
+  .ornament.top{margin-bottom:22px}.ornament.bot{margin-top:22px}
+  @keyframes expand{to{width:min(80vw,560px)}}
+  #intro .diamond{color:var(--gold);font-size:1.4rem;opacity:0;animation:fadeIn 1s 2.6s forwards;letter-spacing:8px}
+  #intro h1{font-size:clamp(1.8rem,6vw,3.4rem);color:#fff;font-weight:800;letter-spacing:1px;
+    text-shadow:0 0 24px rgba(255,210,120,.6),0 3px 10px #000;
+    opacity:0;animation:titleIn 1.6s 1.4s forwards;
+    background:linear-gradient(120deg,#fff 30%,#ffe7a3 50%,#fff 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  @keyframes titleIn{from{opacity:0;transform:translateY(40px) scale(.9);letter-spacing:14px}to{opacity:1;transform:none;letter-spacing:1px}}
+  #intro .sub{color:#fff;font-size:clamp(.95rem,2.4vw,1.25rem);margin-top:18px;max-width:640px;line-height:2;
+    text-shadow:0 2px 8px #000;opacity:0;animation:fadeUp 1.4s 2.2s forwards}
+  #intro .count-badge{margin-top:22px;padding:8px 24px;border:1px solid var(--gold);border-radius:30px;
+    color:var(--gold);background:rgba(0,0,0,.25);font-size:1rem;opacity:0;animation:fadeUp 1.2s 3s forwards}
+  .scroll-hint{position:absolute;bottom:26px;z-index:5;color:#fff;font-size:1rem;text-shadow:0 2px 6px #000;
+    animation:bounce 1.8s infinite;opacity:0;animation-delay:3.4s}
+  .scroll-hint span{display:block;font-size:1.8rem;margin-top:4px}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{to{opacity:1}}
+  /* floating gold particles */
+  .particle{position:absolute;bottom:-10px;width:6px;height:6px;border-radius:50%;
+    background:radial-gradient(circle,#ffe7a3,#c9a227);opacity:.7;z-index:4;
+    animation:floatUp linear infinite}
+  @keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:0}10%{opacity:.8}90%{opacity:.6}100%{transform:translateY(-105vh) scale(.4);opacity:0}}
+
+  /* ===== GALLERY ===== */
+  .section-title{text-align:center;font-size:2rem;color:var(--gold);margin:60px 0 10px;text-shadow:0 2px 12px #000}
+  .section-sub{text-align:center;color:var(--sand);margin-bottom:30px}
+  .grid{display:grid;gap:24px;max-width:1200px;margin:0 auto;padding:0 16px;
+    grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+  .card{background:linear-gradient(160deg,#2a1f15,#15100a);border:1px solid #4a3a26;
+    border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.55);
+    opacity:0;transform:translateY(40px);transition:.3s}
+  .card.show{opacity:1;transform:translateY(0)}
+  .card:hover{transform:translateY(-8px) scale(1.02);border-color:var(--gold);box-shadow:0 16px 40px rgba(201,162,39,.25)}
+  .card svg{display:block;width:100%;height:240px;background:linear-gradient(#0e0a06,#070504)}
+  .meta{padding:16px}
+  .meta h3{color:var(--gold);font-size:1.18rem;margin-bottom:6px}
+  .meta p{color:var(--sand);font-size:.9rem;line-height:1.65}
+
+  /* animations used inside svgs */
+  .float{animation:fl 5s ease-in-out infinite alternate}
+  @keyframes fl{to{transform:translateY(-8px)}}
+  .sway{transform-box:fill-box;transform-origin:bottom center;animation:sw 4s ease-in-out infinite alternate}
+  @keyframes sw{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+  .spin{transform-box:fill-box;transform-origin:center;animation:sp 18s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .flame{transform-box:fill-box;transform-origin:bottom center;animation:fla .5s ease-in-out infinite alternate}
+  @keyframes fla{from{transform:scaleY(.85) scaleX(1.05)}to{transform:scaleY(1.1) scaleX(.92)}}
+  .shimmer{animation:shm 2.5s ease-in-out infinite}
+  @keyframes shm{0%,100%{opacity:.5}50%{opacity:1}}
+  .wave{animation:wv 3s ease-in-out infinite alternate}
+  @keyframes wv{to{transform:translateX(8px)}}
+  .pulse{transform-box:fill-box;transform-origin:center;animation:pl 2s ease-in-out infinite}
+  @keyframes pl{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+
+  /* ===== OUTRO (artistic) ===== */
+  #outro{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:60px 20px;margin-top:70px;position:relative;overflow:hidden;
+    background:linear-gradient(180deg,#070a1a 0%,#0e1428 45%,#1a2238 100%)}
+  #outro svg.onight{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+  .outro-content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center}
+  #outro h2{font-size:clamp(1.6rem,5vw,2.6rem);color:#fff;margin:14px 0 18px;
+    text-shadow:0 0 22px rgba(255,210,120,.5),0 3px 12px #000;
+    background:linear-gradient(120deg,#fff,#ffe7a3,#fff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  #outro p{color:#eadfc8;max-width:660px;line-height:2.1;font-size:clamp(1rem,2.4vw,1.2rem);text-shadow:0 2px 8px #000}
+  #outro .thanks{margin-top:22px;color:var(--gold)}
+  footer{text-align:center;padding:30px;color:#8a7a5e;font-size:.85rem}
+</style>
+</head>
+<body>
+
+<!-- ===================== INTRO (artistic) ===================== -->
+<section id="intro">
+  <!-- animated desert scene: sun, dunes, palms, falcon, camel caravan -->
+  <svg class="scene" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+    <!-- glowing sun -->
+    <circle cx="600" cy="300" r="120" fill="#fff3cf" opacity=".9" style="animation:sunPulse 5s ease-in-out infinite alternate"/>
+    <circle cx="600" cy="300" r="80" fill="#ffe09a"/>
+    <!-- rays -->
+    <g stroke="#ffe7a3" stroke-width="2" opacity=".35" style="transform-origin:600px 300px;animation:sp 60s linear infinite">
+      <line x1="600" y1="120" x2="600" y2="180"/><line x1="600" y1="420" x2="600" y2="480"/>
+      <line x1="420" y1="300" x2="480" y2="300"/><line x1="720" y1="300" x2="780" y2="300"/>
+      <line x1="470" y1="170" x2="510" y2="210"/><line x1="690" y1="390" x2="730" y2="430"/>
+      <line x1="730" y1="170" x2="690" y2="210"/><line x1="510" y1="390" x2="470" y2="430"/>
+    </g>
+    <!-- falcon gliding -->
+    <g fill="#3a2418" style="animation:glideX 14s linear infinite">
+      <g style="animation:wingBeat 1.4s ease-in-out infinite alternate;transform-origin:center">
+        <path d="M150 150 Q120 130 90 138 Q120 144 150 156 Z"/><path d="M150 150 Q180 130 210 138 Q180 144 150 156 Z"/>
+        <ellipse cx="150" cy="156" rx="8" ry="14"/></g>
+    </g>
+    <!-- dunes -->
+    <path d="M0 430 Q300 360 600 430 T1200 420 L1200 600 L0 600 Z" fill="#caa15a"/>
+    <path d="M0 480 Q350 410 700 480 T1200 470 L1200 600 L0 600 Z" fill="#b07a42"/>
+    <path d="M0 530 Q400 470 800 530 T1200 525 L1200 600 L0 600 Z" fill="#8a5a2e"/>
+    <!-- palms -->
+    <g transform="translate(170,430)"><rect x="-6" y="0" width="12" height="90" fill="#5a3a1f"/>
+      <g fill="#2e5a22" style="transform-origin:0 0;animation:sw 5s ease-in-out infinite alternate">
+      <path d="M0 0 Q-50 -20 -80 -10 Q-44 -16 0 6 Z"/><path d="M0 0 Q50 -20 80 -10 Q44 -16 0 6 Z"/>
+      <path d="M0 -2 Q-30 -40 -44 -56 Q-12 -28 0 4 Z"/><path d="M0 -2 Q30 -40 44 -56 Q12 -28 0 4 Z"/><path d="M0 -4 Q0 -46 0 -60 Q12 -30 6 0 Z"/></g></g>
+    <g transform="translate(1030,460) scale(.85)"><rect x="-6" y="0" width="12" height="90" fill="#5a3a1f"/>
+      <g fill="#2e5a22" style="transform-origin:0 0;animation:sw 6s ease-in-out infinite alternate">
+      <path d="M0 0 Q-50 -20 -80 -10 Q-44 -16 0 6 Z"/><path d="M0 0 Q50 -20 80 -10 Q44 -16 0 6 Z"/>
+      <path d="M0 -2 Q-30 -40 -44 -56 Q-12 -28 0 4 Z"/><path d="M0 -2 Q30 -40 44 -56 Q12 -28 0 4 Z"/><path d="M0 -4 Q0 -46 0 -60 Q12 -30 6 0 Z"/></g></g>
+    <!-- camel caravan silhouette -->
+    <g fill="#3a2414" style="animation:caravan 22s linear infinite">
+      <g transform="translate(0,500) scale(.8)"><ellipse cx="60" cy="20" rx="34" ry="14"/><path d="M40 14 q-3 -18 5 -18 q4 0 2 16 Z"/><path d="M66 12 q-2 -20 6 -20 q5 0 1 18 Z"/><path d="M34 20 q-16 -6 -20 -22 q-1 -5 4 -2 q2 10 18 16 Z"/><circle cx="16" cy="-12" r="6"/><rect x="42" y="32" width="5" height="24"/><rect x="70" y="32" width="5" height="24"/></g>
+      <g transform="translate(130,505) scale(.65)"><ellipse cx="60" cy="20" rx="34" ry="14"/><path d="M40 14 q-3 -18 5 -18 q4 0 2 16 Z"/><path d="M66 12 q-2 -20 6 -20 q5 0 1 18 Z"/><path d="M34 20 q-16 -6 -20 -22 q-1 -5 4 -2 q2 10 18 16 Z"/><circle cx="16" cy="-12" r="6"/><rect x="42" y="32" width="5" height="24"/><rect x="70" y="32" width="5" height="24"/></g>
+    </g>
+  </svg>
+  <!-- floating particles injected by JS -->
+  <div class="intro-content">
+    <div class="ornament top"></div>
+    <div class="diamond">✦ ◆ ✦</div>
+    <h1>المعرضُ الكبيرُ لِفنِّ التراثِ الإماراتي</h1>
+    <p class="sub">رحلةٌ فنّيةٌ بينَ رمالِ الصحراءِ وأمواجِ الخليج..<br>حيثُ يَنبضُ الماضي بالحياةِ في كلِّ لوحةٍ متحركة 🇦🇪</p>
+    <div class="count-badge" id="introCount">🖼️ لوحات متحركة</div>
+    <div class="ornament bot"></div>
+  </div>
+  <div class="scroll-hint">ابدأ الرحلة<span>⌄</span></div>
+</section>
+<style>
+@keyframes sunPulse{from{opacity:.7;r:115}to{opacity:1;r:128}}
+@keyframes glideX{0%{transform:translate(-200px,80px)}50%{transform:translate(700px,40px)}100%{transform:translate(1400px,90px)}}
+@keyframes wingBeat{from{transform:scaleY(.6)}to{transform:scaleY(1.15)}}
+@keyframes caravan{from{transform:translateX(-260px)}to{transform:translateX(1300px)}}
+</style>
+
+<h2 class="section-title">🎨 لوحات التراث المتحركة</h2>
+<p class="section-sub">حرّك الماوس على أي لوحة لتكبر — كل لوحة لها قصتها · <span id="count" style="color:var(--gold);font-weight:bold"></span></p>
+<div style="text-align:center;margin-bottom:24px">
+  <input id="search" type="text" placeholder="🔎 ابحث عن لوحة... (مثل: دلة، نخلة، صقر)"
+    style="width:min(90%,420px);padding:12px 18px;border-radius:30px;border:1px solid #4a3a26;
+    background:#1a130c;color:#f6efe2;font-size:1rem;outline:none;text-align:center;font-family:inherit"/>
+</div>
+
+<div class="grid" id="grid">
+
+<!-- The cards are injected by JS from a data array to keep it tidy -->
+</div>
+
+<!-- ===================== OUTRO (artistic) ===================== -->
+<section id="outro">
+  <!-- night sky scene: stars, moon, skyline, fireworks -->
+  <svg class="onight" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+    <g fill="#fff" opacity=".8">
+      <circle cx="120" cy="80" r="2"/><circle cx="300" cy="50" r="1.5"/><circle cx="500" cy="90" r="2"/><circle cx="700" cy="60" r="1.5"/>
+      <circle cx="900" cy="100" r="2"/><circle cx="1080" cy="70" r="1.5"/><circle cx="200" cy="160" r="1.5"/><circle cx="1000" cy="180" r="2"/>
+    </g>
+    <!-- crescent moon -->
+    <g style="animation:fl 6s ease-in-out infinite alternate"><path d="M1050 120 a44 44 0 1 0 18 70 a32 32 0 1 1 -18 -70" fill="#fff3cf"/></g>
+    <!-- fireworks -->
+    <g style="transform-origin:280px 180px;animation:pl 2.4s ease-in-out infinite"><g stroke="#CE1126" stroke-width="2">
+      <line x1="280" y1="140" x2="280" y2="220"/><line x1="240" y1="180" x2="320" y2="180"/><line x1="252" y1="152" x2="308" y2="208"/><line x1="308" y1="152" x2="252" y2="208"/></g><circle cx="280" cy="180" r="5" fill="#fff3cf"/></g>
+    <g style="transform-origin:920px 150px;animation:pl 2.4s ease-in-out .8s infinite"><g stroke="#009739" stroke-width="2">
+      <line x1="920" y1="110" x2="920" y2="190"/><line x1="880" y1="150" x2="960" y2="150"/><line x1="892" y1="122" x2="948" y2="178"/><line x1="948" y1="122" x2="892" y2="178"/></g><circle cx="920" cy="150" r="5" fill="#fff3cf"/></g>
+    <g style="transform-origin:600px 110px;animation:pl 2.4s ease-in-out 1.4s infinite"><g stroke="#C9A227" stroke-width="2">
+      <line x1="600" y1="78" x2="600" y2="142"/><line x1="568" y1="110" x2="632" y2="110"/></g></g>
+    <!-- city skyline silhouette (heritage + modern) -->
+    <g fill="#1a1208">
+      <rect x="0" y="420" width="1200" height="180"/>
+      <!-- burj khalifa -->
+      <polygon points="600,180 590,420 610,420"/><polygon points="585,260 615,260 612,420 588,420"/>
+      <!-- sheikh zayed mosque dome -->
+      <path d="M180 420 Q180 360 230 360 Q280 360 280 420 Z"/><rect x="150" y="340" width="6" height="80"/><rect x="304" y="340" width="6" height="80"/>
+      <!-- barjeel tower -->
+      <rect x="400" y="350" width="50" height="70"/><polygon points="395,350 455,350 445,330 405,330"/>
+      <!-- generic towers -->
+      <rect x="760" y="300" width="40" height="120"/><rect x="820" y="340" width="34" height="80"/><rect x="980" y="280" width="46" height="140"/>
+      <rect x="60" y="370" width="50" height="50"/>
+    </g>
+    <!-- waving flag on a pole -->
+    <g transform="translate(1080,250)"><line x1="0" y1="0" x2="0" y2="170" stroke="#C9A227" stroke-width="4"/>
+      <g style="transform-origin:0 0;animation:wv 3s ease-in-out infinite alternate">
+      <rect x="2" y="6" width="22" height="60" fill="#CE1126"/><rect x="24" y="6" width="70" height="20" fill="#009739"/><rect x="24" y="26" width="70" height="20" fill="#fff"/><rect x="24" y="46" width="70" height="20" fill="#111"/></g></g>
+  </svg>
+  <div class="outro-content">
+    <div class="ornament top" style="animation-delay:.2s"></div>
+    <div style="color:var(--gold);letter-spacing:8px;margin-bottom:14px">✦ ◆ ✦</div>
+    <h2>الإماراتُ.. حضارةٌ لا تَشيخ</h2>
+    <p>مِن بيتِ العريشِ إلى ناطحاتِ السحاب،<br>ومِن سفينةِ الغوصِ إلى الفضاء..<br>يبقى التُّراثُ هو الجذرَ الذي نَنمو منه. 🌴</p>
+    <p class="thanks">شكراً لزيارتك — وخلِّ «الفنان التراثي» في تليجرام يُكمل معك أيَّ فكرة 🎨</p>
+    <div class="ornament bot"></div>
+  </div>
+</section>
+
+<footer>
+  صُنع بالكامل بالكود (SVG + CSS) — رسوم متجهية متحركة عن التراث الإماراتي
+  <br>الألوان: رملي #C2A878 · ذهبي #C9A227 · أحمر #CE1126 · أخضر #009739 · فيروزي #2A9D8F
+</footer>
+
+<script>
+const ART = [
+ {t:"البارجيل (الملقف)",d:"برج الهواء التقليدي يلتقط النسيم ويبرّد البيت — عبقرية العمارة الإماراتية قبل المكيفات.",
+  svg:`<defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7c873"/><stop offset="1" stop-color="#7a4f28"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky1)"/><circle cx="150" cy="60" r="42" fill="#fff3cf" opacity=".85" class="float"/>
+  <rect x="60" y="160" width="180" height="80" fill="#9a6536"/><rect x="116" y="64" width="68" height="100" fill="#b07a42"/>
+  <polygon points="110,64 190,64 178,42 122,42" fill="#7a4f28"/><rect x="118" y="40" width="64" height="6" fill="#C9A227"/>
+  <g fill="#5e3d1f"><rect x="126" y="74" width="9" height="86"/><rect x="146" y="74" width="9" height="86"/><rect x="166" y="74" width="9" height="86"/></g>
+  <rect x="138" y="190" width="26" height="50" rx="13" fill="#3a2614"/>`},
+
+ {t:"دلّة القهوة",d:"رمز الكرم الإماراتي. تُقدَّم بها القهوة بالهيل والزعفران للضيوف.",
+  svg:`<defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#e7c64a"/><stop offset="1" stop-color="#9a7a17"/></linearGradient></defs>
+  <rect width="300" height="240" fill="#160f08"/><ellipse cx="150" cy="212" rx="70" ry="13" fill="#000" opacity=".4"/>
+  <g class="float"><path d="M110 205 Q100 135 132 112 L168 112 Q200 135 190 205 Z" fill="url(#g1)"/>
+  <rect x="135" y="80" width="30" height="36" fill="#d4b03a"/><polygon points="132,80 168,80 158,58 142,58" fill="#C9A227"/>
+  <circle cx="150" cy="52" r="7" fill="#e7c64a"/><path d="M168 96 Q212 90 206 132 Q200 112 168 114 Z" fill="#d4b03a"/>
+  <path d="M132 92 Q98 112 120 162" stroke="#a8851a" stroke-width="9" fill="none"/></g>`},
+
+ {t:"نقش السدو",d:"نسيج بدوي من صوف الإبل. ألوانه ومعيناته ترمز للصحراء والحياة.",
+  svg:`<rect width="300" height="240" fill="#1a0f0a"/>
+  <rect y="30" width="300" height="30" fill="#CE1126"/><rect y="90" width="300" height="30" fill="#EEE6D6"/>
+  <rect y="150" width="300" height="30" fill="#18120e"/><rect y="190" width="300" height="30" fill="#784e2c"/>
+  <g fill="#CE1126" class="shimmer"><polygon points="40,135 55,123 70,135 55,147"/><polygon points="110,135 125,123 140,135 125,147"/><polygon points="180,135 195,123 210,135 195,147"/><polygon points="250,135 265,123 280,135 265,147"/></g>
+  <g fill="#EEE6D6"><polygon points="40,205 55,193 70,205 55,217"/><polygon points="110,205 125,193 140,205 125,217"/><polygon points="180,205 195,193 210,205 195,217"/><polygon points="250,205 265,193 280,205 265,217"/></g>`},
+
+ {t:"النخلة والتمر",d:"\"أمّ الشجر\" — غذاء وظل وبناء. رمز العطاء والصبر.",
+  svg:`<defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#caa15a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky2)"/><rect x="143" y="120" width="14" height="100" fill="#7a4f28"/>
+  <g class="sway"><g fill="#0a7a2e"><path d="M150 120 Q88 90 46 105 Q98 100 150 128 Z"/><path d="M150 120 Q212 90 254 105 Q202 100 150 128 Z"/>
+  <path d="M150 118 Q98 68 68 56 Q120 88 150 126 Z"/><path d="M150 118 Q202 68 232 56 Q180 88 150 126 Z"/><path d="M150 116 Q150 56 150 42 Q162 78 156 122 Z"/></g>
+  <g fill="#b5781f"><circle cx="140" cy="126" r="4"/><circle cx="150" cy="130" r="4"/><circle cx="160" cy="126" r="4"/><circle cx="155" cy="136" r="4"/></g></g>`},
+
+ {t:"الصقر (القنص)",d:"رمز الشموخ والفروسية الإماراتية، وشعار الدولة.",
+  svg:`<rect width="300" height="240" fill="#14100a"/><ellipse cx="150" cy="214" rx="50" ry="9" fill="#000" opacity=".4"/>
+  <g class="float"><ellipse cx="150" cy="146" rx="34" ry="52" fill="#8B5A2B"/><ellipse cx="150" cy="156" rx="22" ry="40" fill="#a87a4a"/>
+  <g fill="#5e3d1f"><circle cx="145" cy="146" r="3"/><circle cx="155" cy="156" r="3"/><circle cx="148" cy="166" r="3"/></g>
+  <circle cx="150" cy="86" r="26" fill="#6e4420"/><path d="M124 86 Q150 46 176 86 Q150 76 124 86" fill="#CE1126"/>
+  <circle cx="150" cy="54" r="5" fill="#C9A227"/><polygon points="150,92 138,98 150,104" fill="#C9A227"/></g>`},
+
+ {t:"النجمة الثمانية",d:"خاتم سليمان — أساس الزخرفة الهندسية الإسلامية في الأبواب والعمارة.",
+  svg:`<rect width="300" height="240" fill="#0d0a14"/><g transform="translate(150,120)" class="spin">
+  <g fill="none" stroke="#C9A227" stroke-width="3"><rect x="-58" y="-58" width="116" height="116"/><rect x="-58" y="-58" width="116" height="116" transform="rotate(45)"/></g>
+  <g fill="none" stroke="#2A9D8F" stroke-width="2"><rect x="-40" y="-40" width="80" height="80"/><rect x="-40" y="-40" width="80" height="80" transform="rotate(45)"/></g>
+  <circle r="22" fill="none" stroke="#CE1126" stroke-width="3"/><circle r="6" fill="#C9A227"/></g>`},
+
+ {t:"بيت العريش",d:"بيت صيفي من سعف النخيل — يسمح بمرور الهواء ويقي حرّ الصيف.",
+  svg:`<defs><linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#e0b878"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky3)"/><rect x="60" y="150" width="180" height="90" fill="#caa15a"/>
+  <g stroke="#9a6f30" stroke-width="2"><line x1="80" y1="150" x2="80" y2="240"/><line x1="110" y1="150" x2="110" y2="240"/><line x1="140" y1="150" x2="140" y2="240"/><line x1="170" y1="150" x2="170" y2="240"/><line x1="200" y1="150" x2="200" y2="240"/><line x1="230" y1="150" x2="230" y2="240"/></g>
+  <polygon points="50,150 250,150 220,110 80,110" fill="#a87f3a"/><polygon points="50,150 250,150 220,110 80,110" fill="none" stroke="#7a5a24" stroke-width="2"/>
+  <rect x="135" y="195" width="30" height="45" fill="#5e3d1f"/>`},
+
+ {t:"سفينة الغوص (البوم)",d:"سفينة اللؤلؤ التي حملت الغواصين لرزق البحر قبل النفط.",
+  svg:`<defs><linearGradient id="sea1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8c0"/><stop offset="1" stop-color="#176b6b"/></linearGradient></defs>
+  <rect width="300" height="160" fill="#ffd98a"/><rect y="160" width="300" height="80" fill="url(#sea1)"/>
+  <g class="float"><path d="M80 190 Q150 230 220 190 L210 170 L90 170 Z" fill="#7a4f28"/>
+  <rect x="146" y="80" width="6" height="92" fill="#5e3d1f"/><polygon points="152,84 152,165 220,160" fill="#f1e6cf"/><polygon points="148,90 148,165 92,158" fill="#e8dcc2"/></g>
+  <g class="wave" fill="#fff" opacity=".5"><path d="M60 215 q10 -8 20 0 t20 0 t20 0"/><path d="M180 222 q10 -8 20 0 t20 0 t20 0"/></g>`},
+
+ {t:"الكندورة والغترة",d:"اللباس الإماراتي الأصيل: كندورة بيضاء، غترة، وعقال أسود.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/><g class="float">
+  <ellipse cx="150" cy="64" rx="26" ry="28" fill="#cda878"/>
+  <path d="M118 60 Q150 30 182 60 L186 96 Q150 78 114 96 Z" fill="#f6efe2"/>
+  <ellipse cx="150" cy="50" rx="34" ry="10" fill="#15110a"/><ellipse cx="150" cy="46" rx="30" ry="8" fill="#222"/>
+  <path d="M110 96 Q150 110 190 96 L210 240 L90 240 Z" fill="#f6efe2"/>
+  <line x1="150" y1="108" x2="150" y2="240" stroke="#ddd2b8" stroke-width="2"/></g>`},
+
+ {t:"البرقع",d:"زينة المرأة الإماراتية التقليدية — قطعة من القماش المذهّب تزيّن الوجه.",
+  svg:`<rect width="300" height="240" fill="#1a0f12"/><g class="float">
+  <ellipse cx="150" cy="120" rx="56" ry="68" fill="#cda878"/>
+  <path d="M104 70 Q150 40 196 70 Q160 60 104 70" fill="#5a2331"/>
+  <path d="M150 76 L150 150 M120 92 L120 140 M180 92 L180 140" stroke="#C9A227" stroke-width="3"/>
+  <rect x="116" y="92" width="68" height="50" rx="6" fill="none" stroke="#C9A227" stroke-width="3" class="shimmer"/>
+  <g fill="#2b1a1a"><ellipse cx="128" cy="150" rx="6" ry="4"/><ellipse cx="172" cy="150" rx="6" ry="4"/></g></g>`},
+
+ {t:"فن التلّي",d:"تطريز إماراتي بخيوط ذهبية وفضية يزيّن أطراف الملابس.",
+  svg:`<rect width="300" height="240" fill="#160d10"/>
+  <g class="shimmer"><g stroke="#C9A227" stroke-width="2" fill="none">
+  <path d="M30 60 q20 -20 40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+  <path d="M30 110 q20 20 40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+  <path d="M30 160 q20 -20 40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/></g>
+  <g fill="#e7c64a"><circle cx="50" cy="60" r="3"/><circle cx="130" cy="60" r="3"/><circle cx="210" cy="60" r="3"/>
+  <circle cx="90" cy="110" r="3"/><circle cx="170" cy="110" r="3"/><circle cx="250" cy="110" r="3"/></g></g>
+  <rect y="195" width="300" height="45" fill="#7a1f2e"/><line y1="195" x2="300" y2="195" stroke="#C9A227" stroke-width="3"/>`},
+
+ {t:"الفنجان والقهوة",d:"فنجان القهوة العربية — يُقدَّم باليمين، ويهزّه الضيف عند الاكتفاء.",
+  svg:`<rect width="300" height="240" fill="#180f08"/><ellipse cx="150" cy="200" rx="46" ry="10" fill="#000" opacity=".4"/>
+  <g class="flame" style="transform-origin:150px 150px"><path d="M150 96 q-8 -16 0 -28 q8 12 0 28" fill="#caa15a" opacity=".6"/></g>
+  <path d="M118 150 Q120 196 150 196 Q180 196 182 150 Z" fill="#f1e6cf"/>
+  <ellipse cx="150" cy="150" rx="32" ry="9" fill="#e2d3b3"/><ellipse cx="150" cy="150" rx="24" ry="6" fill="#4a2c14"/>
+  <path d="M118 150 q-22 4 -10 30" stroke="#e2d3b3" stroke-width="6" fill="none"/>`},
+
+ {t:"الجمل (سفينة الصحراء)",d:"رفيق البدوي في الترحال — مصدر الحليب واللحم والتنقل.",
+  svg:`<defs><linearGradient id="sky4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky4)"/><circle cx="240" cy="56" r="30" fill="#fff3cf" opacity=".8"/>
+  <g class="float" fill="#9a6f3a"><ellipse cx="150" cy="150" rx="56" ry="30"/>
+  <path d="M110 140 q-6 -30 6 -30 q8 0 6 26 Z"/><path d="M170 138 q-4 -34 8 -34 q10 0 4 30 Z"/>
+  <path d="M96 150 q-26 -10 -34 -40 q-2 -8 6 -6 q6 16 30 30 Z"/><circle cx="58" cy="100" r="9"/>
+  <rect x="120" y="170" width="8" height="40"/><rect x="170" y="170" width="8" height="40"/></g>`},
+
+ {t:"قصر الحصن",d:"أقدم مبنى في أبوظبي — حصن طيني كان مقر الحكم ومنارة المدينة.",
+  svg:`<defs><linearGradient id="sky5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#e3bd7e"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky5)"/><rect x="50" y="120" width="200" height="120" fill="#e3c189"/>
+  <rect x="70" y="80" width="50" height="160" fill="#d9b478"/><rect x="180" y="80" width="50" height="160" fill="#d9b478"/>
+  <g fill="#c99f5f"><rect x="50" y="112" width="14" height="14"/><rect x="78" y="112" width="14" height="14"/><rect x="106" y="112" width="14" height="14"/><rect x="180" y="112" width="14" height="14"/><rect x="208" y="112" width="14" height="14"/><rect x="236" y="112" width="14" height="14"/></g>
+  <rect x="135" y="175" width="30" height="65" fill="#6e4a24"/><circle cx="95" cy="120" r="6" fill="#6e4a24"/><circle cx="205" cy="120" r="6" fill="#6e4a24"/>`},
+
+ {t:"الفلج",d:"نظام ري قديم في العين يجرّ الماء من الجبال — مُدرج بالتراث العالمي.",
+  svg:`<rect width="300" height="120" fill="#caa15a"/><rect y="120" width="300" height="120" fill="#7a5a30"/>
+  <rect x="0" y="150" width="300" height="34" fill="#5a4222"/>
+  <rect x="0" y="156" width="300" height="22" fill="#2A9D8F" class="wave"/>
+  <g fill="#0a7a2e" class="sway"><ellipse cx="40" cy="120" rx="16" ry="26"/><ellipse cx="260" cy="120" rx="16" ry="26"/></g>
+  <g fill="#fff" opacity=".4" class="wave"><rect x="20" y="164" width="30" height="3"/><rect x="120" y="167" width="30" height="3"/><rect x="220" y="164" width="30" height="3"/></g>`},
+
+ {t:"اللؤلؤة والمحار",d:"كنز الخليج — رزق صنع اقتصاد الإمارات قبل اكتشاف النفط.",
+  svg:`<defs><radialGradient id="prl"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#cfe6e4"/></radialGradient>
+  <linearGradient id="sea2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3aa6a0"/><stop offset="1" stop-color="#0d4d4d"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sea2)"/>
+  <g class="float"><path d="M90 150 Q150 90 210 150 Q150 175 90 150 Z" fill="#c98f6a"/>
+  <path d="M90 150 Q150 210 210 150 Q150 130 90 150 Z" fill="#e0b48d"/>
+  <g stroke="#a8694a" stroke-width="2"><path d="M150 130 L120 150"/><path d="M150 130 L150 150"/><path d="M150 130 L180 150"/></g>
+  <circle cx="150" cy="150" r="16" fill="url(#prl)" class="pulse"/></g>
+  <g fill="#fff" opacity=".3"><circle cx="70" cy="60" r="4"/><circle cx="230" cy="80" r="3"/><circle cx="200" cy="40" r="3"/></g>`},
+
+ {t:"الخنجر",d:"رمز الرجولة والزينة — يُلبس في الحزام في المناسبات والأعراس.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><g class="float" transform="rotate(-20 150 120)">
+  <path d="M150 60 Q190 110 170 170 L150 160 L130 170 Q110 110 150 60 Z" fill="#cfcfcf"/>
+  <path d="M150 60 Q170 110 160 165 L150 160 Z" fill="#eee"/>
+  <rect x="138" y="160" width="24" height="36" rx="6" fill="#C9A227"/>
+  <ellipse cx="150" cy="200" rx="20" ry="10" fill="#9a7a17"/>
+  <g stroke="#7a5a10" stroke-width="2"><line x1="140" y1="168" x2="160" y2="168"/><line x1="140" y1="178" x2="160" y2="178"/></g></g>`},
+
+ {t:"العيّالة",d:"رقصة الصفوف بالعصي والطبول — فن شعبي يعبّر عن الفخر والوحدة.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/>
+  <g class="sway"><rect x="60" y="100" width="40" height="60" rx="8" fill="#9a6f3a"/><ellipse cx="80" cy="100" rx="20" ry="6" fill="#e8dcc2"/><ellipse cx="80" cy="160" rx="20" ry="6" fill="#caa15a"/></g>
+  <g class="sway" style="animation-delay:.6s"><rect x="200" y="100" width="40" height="60" rx="8" fill="#9a6f3a"/><ellipse cx="220" cy="100" rx="20" ry="6" fill="#e8dcc2"/><ellipse cx="220" cy="160" rx="20" ry="6" fill="#caa15a"/></g>
+  <g stroke="#C9A227" stroke-width="5" class="float"><line x1="140" y1="60" x2="140" y2="180"/><line x1="160" y1="60" x2="160" y2="180"/></g>
+  <circle cx="140" cy="55" r="6" fill="#CE1126"/><circle cx="160" cy="55" r="6" fill="#009739"/>`},
+
+ {t:"الفانوس",d:"ضوء المجالس والأعراس — نقوشه تطبع الجدران بظلال ساحرة.",
+  svg:`<rect width="300" height="240" fill="#0e0a06"/><line x1="150" y1="0" x2="150" y2="40" stroke="#C9A227" stroke-width="3"/>
+  <g class="float"><polygon points="130,40 170,40 150,28" fill="#C9A227"/>
+  <rect x="124" y="44" width="52" height="120" rx="10" fill="#3a2a14" stroke="#C9A227" stroke-width="3"/>
+  <circle cx="150" cy="104" r="22" fill="#ffd98a" class="shimmer"/>
+  <g stroke="#C9A227" stroke-width="2"><line x1="124" y1="84" x2="176" y2="84"/><line x1="124" y1="124" x2="176" y2="124"/><line x1="138" y1="44" x2="138" y2="164"/><line x1="162" y1="44" x2="162" y2="164"/></g>
+  <polygon points="124,164 176,164 168,180 132,180" fill="#C9A227"/></g>
+  <g fill="#ffd98a" opacity=".15"><polygon points="40,200 90,140 140,200"/><polygon points="160,200 210,140 260,200"/></g>`},
+
+ {t:"اللقيمات",d:"حلوى إماراتية مقرمشة بالدبس — نجمة موائد رمضان والأعياد.",
+  svg:`<rect width="300" height="240" fill="#1a120a"/><ellipse cx="150" cy="170" rx="100" ry="40" fill="#e8dcc2"/><ellipse cx="150" cy="166" rx="100" ry="36" fill="#f6efe2"/>
+  <g class="float"><circle cx="120" cy="150" r="22" fill="#a8651f"/><circle cx="160" cy="158" r="24" fill="#9a5a18"/><circle cx="150" cy="130" r="20" fill="#b5701f"/><circle cx="185" cy="140" r="18" fill="#a8651f"/>
+  <g fill="#6e3d10" opacity=".7"><path d="M110 140 q40 -20 80 4" stroke="#6e3d10" stroke-width="3" fill="none"/><path d="M120 152 q30 -14 60 2" stroke="#6e3d10" stroke-width="3" fill="none"/></g></g>`},
+
+ {t:"المجبوس",d:"طبق الأرز باللحم والبهارات — سيّد الموائد الإماراتية.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="180" rx="120" ry="44" fill="#cfcfcf"/><ellipse cx="150" cy="174" rx="118" ry="40" fill="#e6e6e6"/>
+  <ellipse cx="150" cy="166" rx="104" ry="34" fill="#e3c98f"/>
+  <g class="float"><ellipse cx="150" cy="150" rx="40" ry="26" fill="#9a5a22"/><ellipse cx="150" cy="146" rx="34" ry="20" fill="#b5701f"/></g>
+  <g fill="#CE1126"><circle cx="100" cy="168" r="5"/><circle cx="205" cy="170" r="5"/><circle cx="150" cy="186" r="5"/></g>
+  <g fill="#009739"><circle cx="120" cy="180" r="3"/><circle cx="185" cy="180" r="3"/></g>`},
+
+ {t:"الصحراء والكثبان",d:"الربع الخالي — بحر من الرمال الذهبية، مهد الهوية الإماراتية.",
+  svg:`<defs><linearGradient id="sky6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9e57"/><stop offset="1" stop-color="#ffd98a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky6)"/><circle cx="150" cy="80" r="36" fill="#fff3cf" class="float"/>
+  <path d="M0 160 Q80 120 160 160 T300 150 L300 240 L0 240 Z" fill="#e0a85a"/>
+  <path d="M0 190 Q90 150 180 190 T300 185 L300 240 L0 240 Z" fill="#c98f44"/>
+  <path d="M0 215 Q100 185 200 215 T300 212 L300 240 L0 240 Z" fill="#a8722f"/>`},
+
+ {t:"علم الإمارات",d:"أحمر وأخضر وأبيض وأسود — وحدة وسلام وخير وقوة.",
+  svg:`<rect width="300" height="240" fill="#0e0a06"/><line x1="40" y1="20" x2="40" y2="230" stroke="#C9A227" stroke-width="5"/>
+  <g class="wave"><rect x="42" y="40" width="60" height="120" fill="#CE1126"/>
+  <rect x="102" y="40" width="150" height="40" fill="#009739"/><rect x="102" y="80" width="150" height="40" fill="#fff"/><rect x="102" y="120" width="150" height="40" fill="#111"/></g>`},
+
+ {t:"المندوس",d:"صندوق خشبي مزخرف بالنحاس — يحفظ فيه أهل الإمارات الثياب والذهب والذكريات.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="206" rx="100" ry="14" fill="#000" opacity=".4"/>
+  <g class="float"><rect x="62" y="120" width="176" height="86" rx="6" fill="#6e4420"/><rect x="62" y="120" width="176" height="86" rx="6" fill="none" stroke="#C9A227" stroke-width="3"/>
+  <path d="M62 120 Q150 92 238 120 L238 134 L62 134 Z" fill="#8B5A2B" stroke="#C9A227" stroke-width="2"/>
+  <g fill="#C9A227"><circle cx="86" cy="160" r="4"/><circle cx="214" cy="160" r="4"/><circle cx="86" cy="186" r="4"/><circle cx="214" cy="186" r="4"/><rect x="142" y="150" width="16" height="22" rx="3"/></g>
+  <g stroke="#C9A227" stroke-width="2" fill="none"><rect x="100" y="146" width="100" height="48"/></g></g>`},
+
+ {t:"المبخرة والبخور",d:"عطر المجالس — العود والبخور يُحرق ترحيباً بالضيف وفي المناسبات.",
+  svg:`<rect width="300" height="240" fill="#100b14"/>
+  <g class="flame" style="transform-origin:150px 120px"><path d="M150 120 q-14 -34 0 -60 q14 26 0 60" fill="#cdb4e0" opacity=".5"/>
+  <path d="M150 120 q-8 -24 0 -42 q8 18 0 42" fill="#e6d4f0" opacity=".6"/></g>
+  <path d="M110 120 L190 120 L178 150 L122 150 Z" fill="#C9A227"/><rect x="118" y="150" width="64" height="10" fill="#9a7a17"/>
+  <polygon points="150,160 130,200 170,200" fill="#b08f2a"/><ellipse cx="150" cy="200" rx="40" ry="10" fill="#9a7a17"/>
+  <g fill="#5a4222"><rect x="132" y="124" width="10" height="10"/><rect x="158" y="124" width="10" height="10"/></g>`},
+
+ {t:"الحناء",d:"نقوش الحناء على اليدين — زينة العروس والأعياد بأشكال نباتية وهندسية.",
+  svg:`<rect width="300" height="240" fill="#1a120c"/>
+  <g class="float"><path d="M110 200 L110 120 Q110 90 130 90 L170 90 Q190 90 190 120 L190 200 Z" fill="#cda878"/>
+  <g fill="#7a3b1a"><rect x="124" y="70" width="9" height="36" rx="4"/><rect x="140" y="62" width="9" height="44" rx="4"/><rect x="156" y="62" width="9" height="44" rx="4"/><rect x="172" y="70" width="9" height="36" rx="4"/></g>
+  <g stroke="#5a2310" stroke-width="2.5" fill="none" class="shimmer"><circle cx="150" cy="150" r="14"/><path d="M150 120 q14 14 0 30 q-14 -16 0 -30"/><path d="M124 150 q14 -10 26 0"/><path d="M150 150 q14 10 26 0"/><circle cx="150" cy="150" r="4" fill="#5a2310"/></g></g>`},
+
+ {t:"المحماس (تحميص القهوة)",d:"أدوات تحميص ودقّ البنّ يدوياً — رائحة القهوة تبدأ من هنا.",
+  svg:`<rect width="300" height="240" fill="#160f08"/><ellipse cx="150" cy="206" rx="90" ry="12" fill="#000" opacity=".4"/>
+  <g class="float"><rect x="100" y="150" width="100" height="50" rx="8" fill="#7a4f28"/>
+  <rect x="100" y="150" width="100" height="50" rx="8" fill="none" stroke="#C9A227" stroke-width="2"/>
+  <ellipse cx="150" cy="150" rx="50" ry="12" fill="#5e3d1f"/>
+  <g fill="#3a2414"><circle cx="130" cy="150" r="5"/><circle cx="150" cy="152" r="5"/><circle cx="170" cy="150" r="5"/><circle cx="140" cy="148" r="5"/><circle cx="162" cy="148" r="5"/></g>
+  <rect x="200" y="168" width="40" height="8" rx="4" fill="#5e3d1f"/></g>`},
+
+ {t:"النول (نسج السدو)",d:"إطار خشبي تُحاك عليه المرأة البدوية بيوت الشَّعر والبسط.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/>
+  <rect x="50" y="60" width="200" height="14" fill="#7a4f28"/><rect x="50" y="186" width="200" height="14" fill="#7a4f28"/>
+  <g stroke="#caa15a" stroke-width="2"><line x1="70" y1="74" x2="70" y2="186"/><line x1="90" y1="74" x2="90" y2="186"/><line x1="110" y1="74" x2="110" y2="186"/><line x1="130" y1="74" x2="130" y2="186"/><line x1="150" y1="74" x2="150" y2="186"/><line x1="170" y1="74" x2="170" y2="186"/><line x1="190" y1="74" x2="190" y2="186"/><line x1="210" y1="74" x2="210" y2="186"/><line x1="230" y1="74" x2="230" y2="186"/></g>
+  <g class="wave"><rect x="50" y="90" width="200" height="10" fill="#CE1126"/><rect x="50" y="120" width="200" height="10" fill="#EEE6D6"/><rect x="50" y="150" width="200" height="10" fill="#784e2c"/></g>`},
+
+ {t:"اليولة",d:"فن رقص البندقية — يرميها الشاب عالياً ويلتقطها في إيقاع العرضة.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/>
+  <g class="float" transform="rotate(35 150 110)"><rect x="80" y="104" width="140" height="12" rx="4" fill="#5e3d1f"/>
+  <rect x="80" y="104" width="40" height="12" fill="#3a2414"/><rect x="200" y="100" width="20" height="20" rx="3" fill="#3a2414"/>
+  <circle cx="120" cy="110" r="4" fill="#C9A227"/></g>
+  <g class="sway"><circle cx="150" cy="190" r="20" fill="#cda878"/><path d="M124 186 Q150 160 176 186 L180 210 Q150 198 120 210 Z" fill="#f6efe2"/></g>`},
+
+ {t:"القرقيعان",d:"احتفال أطفال منتصف رمضان — يطوفون البيوت بالأكياس وينشدون للحلوى.",
+  svg:`<rect width="300" height="240" fill="#0e0a18"/><circle cx="240" cy="50" r="22" fill="#fff3cf" class="shimmer"/>
+  <g fill="#fff" opacity=".7"><circle cx="60" cy="40" r="2"/><circle cx="120" cy="70" r="2"/><circle cx="200" cy="90" r="2"/><circle cx="90" cy="100" r="2"/></g>
+  <g class="float"><circle cx="150" cy="120" r="26" fill="#cda878"/><path d="M120 116 Q150 88 180 116 L184 150 Q150 136 116 150 Z" fill="#CE1126"/>
+  <rect x="118" y="150" width="64" height="70" rx="10" fill="#009739"/>
+  <g fill="#C9A227"><circle cx="140" cy="178" r="6"/><circle cx="160" cy="190" r="6"/><circle cx="150" cy="170" r="6"/></g></g>`},
+
+ {t:"سوق التراث",d:"أزقّة السوق القديم — توابل وعطور وأقمشة وروائح تحكي تاريخ التجارة.",
+  svg:`<defs><linearGradient id="sky7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#caa15a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky7)"/><rect y="170" width="300" height="70" fill="#9a6f3a"/>
+  <g><rect x="20" y="120" width="80" height="50" fill="#b07a42"/><rect x="110" y="120" width="80" height="50" fill="#a06a36"/><rect x="200" y="120" width="80" height="50" fill="#b07a42"/></g>
+  <g class="sway"><rect x="14" y="110" width="92" height="14" fill="#CE1126"/><rect x="104" y="110" width="92" height="14" fill="#009739"/><rect x="194" y="110" width="92" height="14" fill="#C9A227"/></g>
+  <g fill="#a8651f"><circle cx="50" cy="158" r="8"/><circle cx="70" cy="158" r="8"/><circle cx="230" cy="158" r="8"/><circle cx="250" cy="158" r="8"/></g>`},
+
+ {t:"الغترة على الراس",d:"تفصيلة العقال والغترة — رمز الهيبة والوقار في اللباس الإماراتي.",
+  svg:`<rect width="300" height="240" fill="#15110a"/><g class="float">
+  <ellipse cx="150" cy="150" rx="40" ry="46" fill="#cda878"/>
+  <path d="M96 120 Q150 50 204 120 Q210 150 200 175 Q150 130 100 175 Q90 150 96 120 Z" fill="#f6efe2"/>
+  <path d="M96 120 Q150 50 204 120" fill="none" stroke="#ddd2b8" stroke-width="2"/>
+  <ellipse cx="150" cy="86" rx="48" ry="12" fill="#15110a"/><ellipse cx="150" cy="80" rx="44" ry="10" fill="#222"/>
+  <g fill="#2b1a12"><ellipse cx="134" cy="150" rx="5" ry="3"/><ellipse cx="166" cy="150" rx="5" ry="3"/></g></g>`},
+
+ {t:"برج خليفة (الحاضر)",d:"من بيت العريش إلى أعلى برج في العالم — الإمارات تبني المستقبل بجذور الماضي.",
+  svg:`<defs><linearGradient id="sky8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2a55"/><stop offset="1" stop-color="#e08a4a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky8)"/><circle cx="60" cy="60" r="20" fill="#fff3cf" opacity=".7"/>
+  <g class="float"><polygon points="150,20 140,90 160,90" fill="#cfe0ff"/>
+  <polygon points="135,90 165,90 172,150 128,150" fill="#bcd0f0"/><polygon points="128,150 172,150 182,220 118,220" fill="#a8c0e8"/>
+  <g stroke="#5a7aa8" stroke-width="1"><line x1="140" y1="100" x2="160" y2="100"/><line x1="135" y1="130" x2="165" y2="130"/><line x1="128" y1="170" x2="172" y2="170"/><line x1="122" y1="200" x2="178" y2="200"/></g></g>
+  <rect y="220" width="300" height="20" fill="#6e4a24"/>`},
+
+ {t:"الطنبورة",d:"آلة وترية إفريقية الأصل دخلت فنون الساحل — تصاحب أهازيج البحر.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><g class="float">
+  <ellipse cx="150" cy="170" rx="46" ry="40" fill="#7a4f28"/><ellipse cx="150" cy="170" rx="38" ry="32" fill="#e8dcc2"/>
+  <line x1="110" y1="60" x2="120" y2="150" stroke="#5e3d1f" stroke-width="6"/><line x1="190" y1="60" x2="180" y2="150" stroke="#5e3d1f" stroke-width="6"/>
+  <line x1="105" y1="60" x2="195" y2="60" stroke="#5e3d1f" stroke-width="6"/>
+  <g stroke="#C9A227" stroke-width="2"><line x1="130" y1="64" x2="140" y2="170"/><line x1="142" y1="62" x2="148" y2="170"/><line x1="158" y1="62" x2="152" y2="170"/><line x1="170" y1="64" x2="160" y2="170"/></g></g>`},
+
+ {t:"المجلس",d:"قلب البيت الإماراتي — مفارش ومساند ودلة، حيث تُروى القصص وتُحلّ الأمور.",
+  svg:`<rect width="300" height="160" fill="#3a2a16"/><rect y="160" width="300" height="80" fill="#6e4a24"/>
+  <g><rect x="20" y="120" width="260" height="44" rx="8" fill="#9a1f2e"/>
+  <g fill="#C9A227"><rect x="40" y="100" width="34" height="34" rx="6"/><rect x="90" y="100" width="34" height="34" rx="6"/><rect x="176" y="100" width="34" height="34" rx="6"/><rect x="226" y="100" width="34" height="34" rx="6"/></g></g>
+  <g class="float"><path d="M138 96 Q132 64 150 54 L160 54 Q176 64 170 96 Z" fill="#C9A227"/><rect x="146" y="40" width="14" height="16" fill="#d4b03a"/><path d="M170 70 Q190 66 186 84" stroke="#C9A227" stroke-width="4" fill="none"/></g>
+  <g stroke="#7a1622" stroke-width="2"><line x1="20" y1="142" x2="280" y2="142"/></g>`},
+
+ {t:"الغزال العربي",d:"المها والغزال — جمال الصحراء البري وأيقونة الحياة الفطرية الإماراتية.",
+  svg:`<defs><linearGradient id="sky9" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky9)"/>
+  <g class="float" fill="#e8dcc2"><ellipse cx="150" cy="150" rx="44" ry="24"/>
+  <path d="M120 140 q-10 26 -4 50 M132 148 q-2 24 2 44" stroke="#e8dcc2" stroke-width="7" fill="none"/>
+  <path d="M180 140 q10 26 4 50 M168 148 q2 24 -2 44" stroke="#e8dcc2" stroke-width="7" fill="none"/>
+  <path d="M190 140 q24 -6 28 -30 q4 -8 -4 -6 q-6 18 -28 24 Z"/><circle cx="216" cy="100" r="9"/>
+  <path d="M214 92 q-4 -40 6 -56 M222 92 q4 -40 -6 -56" stroke="#5e3d1f" stroke-width="4" fill="none"/></g>`},
+
+ {t:"الأهازيج البحرية (النهمة)",d:"غناء الغواصين الجماعي — يشدّ الهمم على ظهر السفينة في رحلة اللؤلؤ.",
+  svg:`<defs><linearGradient id="sea3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4aa6a0"/><stop offset="1" stop-color="#0d4d4d"/></linearGradient></defs>
+  <rect width="300" height="120" fill="#1a2330"/><rect y="120" width="300" height="120" fill="url(#sea3)"/>
+  <g fill="#fff" opacity=".7"><circle cx="60" cy="40" r="2"/><circle cx="120" cy="60" r="2"/><circle cx="220" cy="40" r="2"/><circle cx="180" cy="80" r="2"/></g>
+  <g class="sway" fill="#2b1a12"><circle cx="110" cy="120" r="12"/><rect x="100" y="130" width="20" height="40" rx="6"/>
+  <circle cx="150" cy="112" r="12"/><rect x="140" y="122" width="20" height="48" rx="6"/>
+  <circle cx="190" cy="120" r="12"/><rect x="180" y="130" width="20" height="40" rx="6"/></g>
+  <g class="wave" fill="#fff" opacity=".4"><path d="M40 200 q15 -10 30 0 t30 0 t30 0"/><path d="M170 208 q15 -10 30 0 t30 0 t30 0"/></g>`},
+
+ {t:"البشت",d:"عباءة الرجال الفاخرة بأطرافها الذهبية — تُلبس في الأعراس والمناسبات الرسمية.",
+  svg:`<rect width="300" height="240" fill="#15110a"/><g class="float">
+  <circle cx="150" cy="62" r="20" fill="#cda878"/><ellipse cx="150" cy="52" rx="26" ry="8" fill="#222"/>
+  <path d="M118 80 Q150 70 182 80 L226 230 L74 230 Z" fill="#1a1a1a"/>
+  <path d="M118 80 Q150 70 182 80 L196 230 L160 230 L150 100 Z" fill="#2a2a2a"/>
+  <path d="M120 84 L80 224 M180 84 L220 224" stroke="#C9A227" stroke-width="6" class="shimmer"/>
+  <path d="M132 88 Q150 80 168 88" stroke="#C9A227" stroke-width="4" fill="none"/></g>`},
+
+ {t:"السيف والترس",d:"سلاح الفخر في العرضة والمناسبات — السيف العربي والترس الجلدي.",
+  svg:`<rect width="300" height="240" fill="#140f0a"/><g class="float">
+  <g transform="rotate(20 150 120)"><rect x="146" y="40" width="8" height="150" fill="#dcdcdc"/><polygon points="146,40 154,40 150,28" fill="#eee"/>
+  <rect x="134" y="186" width="32" height="14" rx="4" fill="#C9A227"/><rect x="138" y="200" width="24" height="30" rx="6" fill="#7a4f28"/></g>
+  <g transform="rotate(-20 150 140)"><circle cx="150" cy="140" r="44" fill="#7a4f28"/><circle cx="150" cy="140" r="44" fill="none" stroke="#C9A227" stroke-width="3"/>
+  <circle cx="150" cy="140" r="28" fill="none" stroke="#C9A227" stroke-width="2"/><circle cx="150" cy="140" r="6" fill="#C9A227"/>
+  <g fill="#C9A227"><circle cx="150" cy="106" r="3"/><circle cx="150" cy="174" r="3"/><circle cx="116" cy="140" r="3"/><circle cx="184" cy="140" r="3"/></g></g></g>`},
+
+ {t:"خيمة بيت الشَّعر",d:"بيت البدو المتنقل — من شعر الماعز، دافئ شتاءً بارد صيفاً.",
+  svg:`<defs><linearGradient id="sky10" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky10)"/><circle cx="250" cy="56" r="24" fill="#fff3cf" opacity=".8"/>
+  <g class="float"><path d="M40 200 Q90 130 150 150 Q210 130 260 200 Z" fill="#2a2018"/>
+  <path d="M40 200 Q90 130 150 150 L150 200 Z" fill="#3a2c1f"/>
+  <line x1="150" y1="150" x2="150" y2="130" stroke="#5e3d1f" stroke-width="4"/>
+  <path d="M118 200 L118 168 Q134 158 150 168 L150 200 Z" fill="#5a1f1f"/></g>
+  <rect y="200" width="300" height="40" fill="#c98f44"/>`},
+
+ {t:"الباب الخشبي القديم",d:"باب البيت المنقوش — مساميره النحاسية وزخارفه تحكي مكانة أهله.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/><rect x="74" y="30" width="152" height="200" rx="6" fill="#5e3d1f"/>
+  <rect x="74" y="30" width="152" height="200" rx="6" fill="none" stroke="#C9A227" stroke-width="3"/>
+  <line x1="150" y1="30" x2="150" y2="230" stroke="#3a2414" stroke-width="3"/>
+  <g fill="#C9A227" class="shimmer"><circle cx="92" cy="50" r="4"/><circle cx="150" cy="50" r="4"/><circle cx="208" cy="50" r="4"/>
+  <circle cx="92" cy="120" r="4"/><circle cx="208" cy="120" r="4"/><circle cx="92" cy="200" r="4"/><circle cx="150" cy="210" r="4"/><circle cx="208" cy="200" r="4"/></g>
+  <g fill="none" stroke="#C9A227" stroke-width="2"><rect x="92" y="70" width="48" height="120"/><rect x="160" y="70" width="48" height="120"/></g>
+  <circle cx="130" cy="130" r="8" fill="#C9A227"/><circle cx="170" cy="130" r="8" fill="#C9A227"/>`},
+
+ {t:"السلال (الخوص)",d:"أوانٍ من سعف النخيل — السمة والمكبّة، فن نسج يدوي توارثته النساء.",
+  svg:`<rect width="300" height="240" fill="#160f08"/><ellipse cx="150" cy="206" rx="80" ry="14" fill="#000" opacity=".4"/>
+  <g class="float"><path d="M96 200 Q90 130 150 124 Q210 130 204 200 Z" fill="#caa15a"/>
+  <g stroke="#9a6f30" stroke-width="2"><path d="M100 150 Q150 140 200 150"/><path d="M98 170 Q150 160 202 170"/><path d="M96 190 Q150 180 204 190"/></g>
+  <g stroke="#b5874a" stroke-width="2"><line x1="120" y1="128" x2="116" y2="200"/><line x1="150" y1="126" x2="150" y2="200"/><line x1="180" y1="128" x2="184" y2="200"/></g>
+  <ellipse cx="150" cy="126" rx="56" ry="12" fill="#b5874a"/></g>`},
+
+ {t:"مدفع رمضان",d:"مدفع الإفطار — صوته يعلن غروب الشمس وموعد الإفطار في رمضان.",
+  svg:`<defs><linearGradient id="sky11" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a55"/><stop offset="1" stop-color="#e0884a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky11)"/><circle cx="60" cy="60" r="18" fill="#fff3cf" opacity=".8"/>
+  <g class="flame" style="transform-origin:80px 150px"><path d="M80 150 q-26 -12 -44 -4 q18 -16 44 -8" fill="#ff8a3a"/><path d="M80 150 q-18 -8 -30 -2 q14 -10 30 -6" fill="#ffd98a"/></g>
+  <rect x="100" y="146" width="90" height="22" rx="6" fill="#3a3a3a"/><circle cx="190" cy="157" r="6" fill="#222"/>
+  <polygon points="120,168 200,168 210,200 110,200" fill="#5e3d1f"/><circle cx="135" cy="200" r="14" fill="#2a2a2a"/><circle cx="185" cy="200" r="14" fill="#2a2a2a"/>`},
+
+ {t:"مسبار الأمل (الفضاء)",d:"من الصحراء إلى المريخ — الإمارات أول دولة عربية تصل الكوكب الأحمر.",
+  svg:`<rect width="300" height="240" fill="#0a0a18"/>
+  <g fill="#fff" opacity=".8"><circle cx="40" cy="40" r="2"/><circle cx="100" cy="70" r="1.5"/><circle cx="240" cy="50" r="2"/><circle cx="200" cy="100" r="1.5"/><circle cx="70" cy="160" r="1.5"/><circle cx="260" cy="180" r="2"/></g>
+  <circle cx="220" cy="190" r="40" fill="#b5481f"/><circle cx="210" cy="180" r="8" fill="#8a3416" opacity=".6"/><circle cx="235" cy="200" r="6" fill="#8a3416" opacity=".6"/>
+  <g class="float"><rect x="120" y="100" width="40" height="50" rx="8" fill="#cfcfcf"/><polygon points="120,100 160,100 140,80" fill="#C9A227"/>
+  <rect x="78" y="112" width="40" height="26" fill="#2A9D8F"/><rect x="162" y="112" width="40" height="26" fill="#2A9D8F"/>
+  <circle cx="140" cy="124" r="8" fill="#7ec8ff"/></g>`},
+
+ {t:"الردحة (المرقوقة)",d:"رقصة شعر النساء التراثية — تمايل الشعر مع الإيقاع تعبيراً عن الفرح.",
+  svg:`<rect width="300" height="240" fill="#1a0f14"/>
+  <g class="sway"><circle cx="150" cy="80" r="22" fill="#cda878"/>
+  <path d="M128 70 Q120 30 150 26 Q180 30 172 70 Q190 130 178 190 Q150 150 122 190 Q110 130 128 70 Z" fill="#2a1a22"/>
+  <path d="M138 96 Q150 110 162 96 L168 230 L132 230 Z" fill="#7a1f3a"/>
+  <g stroke="#C9A227" stroke-width="2"><line x1="138" y1="120" x2="162" y2="120"/><line x1="134" y1="150" x2="166" y2="150"/></g></g>`},
+
+ {t:"النورس وطيور الخليج",d:"طيور الساحل ترافق الصيادين — رمز البحر والحرية في سماء الإمارات.",
+  svg:`<defs><linearGradient id="sea4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#3aa6a0"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sea4)"/><circle cx="60" cy="56" r="22" fill="#fff3cf" opacity=".8"/>
+  <g fill="#f6efe2" class="float"><path d="M120 100 q14 -16 28 0 q14 -16 28 0 q-14 8 -28 2 q-14 6 -28 -2 Z"/></g>
+  <g fill="#f6efe2" class="float" style="animation-delay:.8s"><path d="M70 70 q10 -12 20 0 q10 -12 20 0 q-10 6 -20 2 q-10 4 -20 -2 Z"/></g>
+  <g fill="#f6efe2" class="float" style="animation-delay:1.4s"><path d="M190 60 q10 -12 20 0 q10 -12 20 0 q-10 6 -20 2 q-10 4 -20 -2 Z"/></g>
+  <g class="wave" fill="#fff" opacity=".4"><path d="M30 200 q20 -12 40 0 t40 0 t40 0 t40 0 t40 0"/></g>`},
+
+ {t:"الهريس",d:"قمح ولحم يُطبخ ساعات حتى يصير عجينة ناعمة — طبق رمضان والأفراح.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="178" rx="110" ry="42" fill="#cfcfcf"/><ellipse cx="150" cy="172" rx="108" ry="38" fill="#e6e6e6"/>
+  <ellipse cx="150" cy="164" rx="94" ry="30" fill="#e9ddc0"/>
+  <g class="float"><ellipse cx="150" cy="150" rx="30" ry="14" fill="#caa15a"/><path d="M140 144 q10 -6 20 0" stroke="#9a7a17" stroke-width="3" fill="none"/></g>
+  <path d="M150 134 q-6 -14 0 -24" stroke="#caa15a" stroke-width="3" fill="none" class="flame" style="transform-origin:150px 134px"/>`},
+
+ {t:"الكرك (الشاي)",d:"شاي بالحليب والهيل والزعفران — مشروب الإمارات الشعبي في كل مجلس.",
+  svg:`<rect width="300" height="240" fill="#180f08"/><ellipse cx="150" cy="206" rx="46" ry="10" fill="#000" opacity=".4"/>
+  <g class="flame" style="transform-origin:150px 110px"><path d="M150 110 q-8 -18 0 -30 q8 14 0 30" fill="#caa15a" opacity=".5"/></g>
+  <g class="float"><path d="M120 130 L130 200 L170 200 L180 130 Z" fill="#f1e6cf"/><rect x="118" y="124" width="64" height="10" rx="4" fill="#e2d3b3"/>
+  <path d="M150 134 L150 196 L170 196 L178 134 Z" fill="#d9a86a"/>
+  <path d="M180 140 q22 6 14 36" stroke="#e2d3b3" stroke-width="7" fill="none"/></g>`},
+
+ {t:"سباق الهجن",d:"رياضة الآباء — هجن أصيلة تتسابق على الرمل، فخر وإرث بدوي.",
+  svg:`<defs><linearGradient id="sky12" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#e0b878"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky12)"/><rect y="190" width="300" height="50" fill="#d9ad62"/>
+  <g class="float" fill="#9a6f3a"><ellipse cx="130" cy="150" rx="46" ry="22"/><path d="M96 142 q-4 -24 6 -24 q6 0 4 22 Z"/><path d="M150 140 q-2 -28 8 -28 q8 0 2 26 Z"/>
+  <path d="M82 150 q-22 -8 -28 -32 q-2 -8 6 -4 q4 14 26 24 Z"/><circle cx="50" cy="106" r="8"/>
+  <rect x="104" y="166" width="7" height="34"/><rect x="150" y="166" width="7" height="34"/></g>
+  <g class="wave" fill="#c98f44" opacity=".5"><ellipse cx="220" cy="210" rx="30" ry="6"/></g>`},
+
+ {t:"المئذنة والهلال",d:"منارة المسجد تعلو الفريج — الأذان يوحّد القلوب خمس مرات باليوم.",
+  svg:`<defs><linearGradient id="sky13" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2a55"/><stop offset="1" stop-color="#e0884a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky13)"/>
+  <g class="float"><path d="M150 30 a14 14 0 1 0 8 26 a10 10 0 1 1 -8 -26" fill="#fff3cf"/></g>
+  <rect x="134" y="80" width="32" height="140" fill="#e3c189"/><rect x="128" y="120" width="44" height="10" fill="#caa15a"/><rect x="128" y="160" width="44" height="10" fill="#caa15a"/>
+  <polygon points="134,80 166,80 158,58 142,58" fill="#caa15a"/><circle cx="150" cy="52" r="6" fill="#C9A227"/>
+  <rect x="60" y="180" width="180" height="40" fill="#d9b478"/>`},
+
+ {t:"الربابة",d:"آلة وتر واحد تصاحب الشعر النبطي — صوتها يحرّك مشاعر البادية.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><g class="float" transform="rotate(-15 150 130)">
+  <rect x="120" y="120" width="60" height="60" rx="10" fill="#7a4f28"/><rect x="126" y="126" width="48" height="48" fill="#e8dcc2"/>
+  <rect x="144" y="40" width="12" height="90" fill="#5e3d1f"/><rect x="138" y="34" width="24" height="14" rx="4" fill="#3a2414"/>
+  <line x1="150" y1="46" x2="150" y2="176" stroke="#C9A227" stroke-width="2"/>
+  <path d="M170 90 Q210 110 196 150" stroke="#5e3d1f" stroke-width="5" fill="none"/></g>`},
+
+ {t:"الدف والطبل",d:"إيقاع الأفراح — الطار والدف يقودان الأهازيج والرزفة والعرضة.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/>
+  <g class="pulse" style="transform-origin:100px 130px"><circle cx="100" cy="130" r="48" fill="#7a4f28"/><circle cx="100" cy="130" r="40" fill="#e8dcc2"/><circle cx="100" cy="130" r="40" fill="none" stroke="#9a6f30" stroke-width="3"/>
+  <g fill="#C9A227"><circle cx="100" cy="86" r="4"/><circle cx="144" cy="130" r="4"/><circle cx="100" cy="174" r="4"/><circle cx="56" cy="130" r="4"/></g></g>
+  <g class="float"><rect x="180" y="110" width="60" height="70" rx="10" fill="#9a6f3a"/><ellipse cx="210" cy="110" rx="30" ry="8" fill="#e8dcc2"/><ellipse cx="210" cy="180" rx="30" ry="8" fill="#caa15a"/></g>`},
+
+ {t:"البئر والوناش",d:"بئر الماء العذب — يُرفع الدلو بالحبل والبكرة لسقيا الناس والزرع.",
+  svg:`<defs><linearGradient id="sky14" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#caa15a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky14)"/><rect y="200" width="300" height="40" fill="#c98f44"/>
+  <rect x="110" y="160" width="80" height="60" rx="6" fill="#9a6f3a"/><ellipse cx="150" cy="160" rx="40" ry="10" fill="#5a4222"/><ellipse cx="150" cy="160" rx="32" ry="7" fill="#2A9D8F"/>
+  <line x1="110" y1="60" x2="110" y2="160" stroke="#5e3d1f" stroke-width="6"/><line x1="190" y1="60" x2="190" y2="160" stroke="#5e3d1f" stroke-width="6"/><line x1="104" y1="60" x2="196" y2="60" stroke="#5e3d1f" stroke-width="6"/>
+  <circle cx="150" cy="60" r="8" fill="#C9A227"/><line x1="150" y1="68" x2="150" y2="120" stroke="#3a2414" stroke-width="2"/>
+  <g class="float"><rect x="138" y="118" width="24" height="22" rx="3" fill="#7a4f28"/></g>`},
+
+ {t:"بوصلة النوخذة",d:"أداة قائد السفينة — يهتدي بها في البحر بين مغاصات اللؤلؤ والموانئ.",
+  svg:`<rect width="300" height="240" fill="#100b08"/><g class="float">
+  <circle cx="150" cy="120" r="70" fill="#7a4f28"/><circle cx="150" cy="120" r="70" fill="none" stroke="#C9A227" stroke-width="4"/>
+  <circle cx="150" cy="120" r="56" fill="#e8dcc2"/><circle cx="150" cy="120" r="56" fill="none" stroke="#9a7a17" stroke-width="2"/>
+  <g class="spin" style="transform-origin:150px 120px"><polygon points="150,76 158,120 150,164 142,120" fill="#CE1126"/><polygon points="150,164 158,120 150,76 142,120" fill="#2a2a2a" transform="rotate(180 150 120)"/></g>
+  <circle cx="150" cy="120" r="6" fill="#C9A227"/>
+  <g fill="#5a4222" font-size="12" font-weight="bold"><text x="146" y="64">N</text><text x="146" y="190">S</text></g></g>`},
+
+ {t:"القرقور",d:"قفص صيد السمك التقليدي — يُصنع من السلك ويُلقى في قاع البحر.",
+  svg:`<defs><linearGradient id="sea5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3aa6a0"/><stop offset="1" stop-color="#0d4d4d"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sea5)"/>
+  <g class="float"><path d="M80 180 Q80 90 150 84 Q220 90 220 180 Z" fill="none" stroke="#caa15a" stroke-width="3"/>
+  <g stroke="#caa15a" stroke-width="1.5" opacity=".8"><line x1="92" y1="120" x2="208" y2="120"/><line x1="84" y1="150" x2="216" y2="150"/><line x1="100" y1="100" x2="100" y2="180"/><line x1="150" y1="86" x2="150" y2="180"/><line x1="200" y1="100" x2="200" y2="180"/></g>
+  <circle cx="150" cy="130" r="14" fill="#caa15a" opacity=".4"/></g>
+  <g fill="#fff" opacity=".25"><circle cx="60" cy="50" r="3"/><circle cx="240" cy="70" r="3"/></g>`},
+
+ {t:"الحصان العربي",d:"الجواد الأصيل — رمز النبل والكرم والفروسية في التراث العربي.",
+  svg:`<defs><linearGradient id="sky15" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky15)"/>
+  <g class="float" fill="#6e4420"><ellipse cx="150" cy="150" rx="50" ry="26"/>
+  <path d="M186 142 q22 -30 30 -54 q4 -10 -6 -8 q-10 18 -34 44 Z"/><circle cx="214" cy="92" r="11"/>
+  <path d="M210 84 q-2 -16 6 -22 M222 86 q2 -14 -6 -22" stroke="#5e3d1f" stroke-width="3"/>
+  <path d="M196 96 q14 -8 22 6 q-12 -2 -22 2 Z" fill="#3a2414"/>
+  <g stroke="#6e4420" stroke-width="8"><line x1="120" y1="166" x2="116" y2="208"/><line x1="140" y1="170" x2="138" y2="208"/><line x1="168" y1="170" x2="170" y2="208"/></g>
+  <path d="M108 150 q-26 14 -34 50 q14 -22 38 -34 Z" fill="#5e3d1f"/></g>`},
+
+ {t:"السلوقي العربي",d:"كلب الصيد النحيل والسريع — رفيق البدوي في رحلات القنص.",
+  svg:`<defs><linearGradient id="sky16" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky16)"/>
+  <g class="float" fill="#cda878"><ellipse cx="150" cy="150" rx="50" ry="18"/>
+  <path d="M194 148 q20 -8 26 -26 q2 -6 -4 -4 q-6 14 -26 20 Z"/><ellipse cx="216" cy="116" rx="8" ry="11"/>
+  <path d="M210 108 q-6 -14 0 -24 q8 12 6 24 Z" fill="#a87a4a"/>
+  <path d="M106 150 q-24 8 -30 0 q22 -2 30 -8 Z"/>
+  <g stroke="#cda878" stroke-width="6"><line x1="120" y1="162" x2="118" y2="200"/><line x1="138" y1="164" x2="136" y2="200"/><line x1="166" y1="164" x2="168" y2="200"/><line x1="184" y1="160" x2="186" y2="198"/></g></g>`},
+
+ {t:"الحبارى",d:"طائر الصيد المرغوب — رحلات الصقّارين خلفه جزء من تراث البر.",
+  svg:`<defs><linearGradient id="sky17" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#caa15a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky17)"/><rect y="200" width="300" height="40" fill="#c98f44"/>
+  <g class="float" fill="#cda878"><ellipse cx="150" cy="160" rx="46" ry="26"/>
+  <path d="M186 150 q18 -6 24 -20 q-4 16 -20 26 Z"/><ellipse cx="118" cy="120" rx="12" ry="14"/>
+  <path d="M118 108 q-4 -22 4 -30 q6 16 2 30 Z" fill="#a87a4a"/>
+  <polygon points="106,120 92,124 106,128" fill="#7a4f28"/>
+  <g fill="#7a4f28"><path d="M104 124 q-10 4 -16 16 M108 130 q-10 6 -14 18"/></g>
+  <line x1="140" y1="184" x2="138" y2="204" stroke="#7a4f28" stroke-width="3"/><line x1="160" y1="184" x2="162" y2="204" stroke="#7a4f28" stroke-width="3"/></g>`},
+
+ {t:"المها العربي",d:"المها أبو حِراب — أعيد للبرية بعد أن كاد ينقرض، رمز الحفاظ على الطبيعة.",
+  svg:`<defs><linearGradient id="sky18" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky18)"/>
+  <g class="float" fill="#f6efe2"><ellipse cx="150" cy="152" rx="46" ry="24"/>
+  <path d="M186 146 q18 -6 24 -22 q2 -6 -4 -4 q-6 14 -24 18 Z"/><circle cx="212" cy="108" r="9"/>
+  <g fill="#2b1a12"><path d="M196 116 q10 -4 18 0 l2 6 q-12 -2 -22 0 Z"/></g>
+  <path d="M210 100 q-8 -56 2 -72 M220 100 q8 -56 -2 -72" stroke="#2b1a12" stroke-width="3" fill="none"/>
+  <g stroke="#f6efe2" stroke-width="7"><line x1="122" y1="168" x2="118" y2="206"/><line x1="142" y1="170" x2="140" y2="206"/><line x1="168" y1="170" x2="170" y2="206"/></g>
+  <g fill="#2b1a12"><rect x="116" y="200" width="6" height="6"/><rect x="138" y="200" width="6" height="6"/><rect x="168" y="200" width="6" height="6"/></g></g>`},
+
+ {t:"الشوعي (المركب الشراعي)",d:"قارب صيد خفيف بشراع مثلث — يجوب المياه الضحلة قرب الساحل.",
+  svg:`<defs><linearGradient id="sea6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8c0"/><stop offset="1" stop-color="#176b6b"/></linearGradient></defs>
+  <rect width="300" height="150" fill="#ffd98a"/><rect y="150" width="300" height="90" fill="url(#sea6)"/>
+  <g class="float"><path d="M90 180 Q150 214 210 180 L200 166 L100 166 Z" fill="#7a4f28"/>
+  <line x1="150" y1="60" x2="150" y2="166" stroke="#5e3d1f" stroke-width="5"/>
+  <path d="M150 64 L150 160 L84 156 Z" fill="#f1e6cf"/></g>
+  <g class="wave" fill="#fff" opacity=".5"><path d="M50 200 q12 -8 24 0 t24 0 t24 0"/><path d="M180 206 q12 -8 24 0 t24 0 t24 0"/></g>`},
+
+ {t:"المرساة",d:"مرساة سفن اللؤلؤ — تثبّت السفينة فوق المغاص حتى يكمل الغوص.",
+  svg:`<defs><linearGradient id="sea7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3aa6a0"/><stop offset="1" stop-color="#0a3d3d"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sea7)"/>
+  <g class="sway" stroke="#cfcfcf" stroke-width="9" fill="none" stroke-linecap="round">
+  <circle cx="150" cy="60" r="14"/><line x1="150" y1="74" x2="150" y2="190"/><line x1="118" y1="110" x2="182" y2="110"/>
+  <path d="M150 190 Q110 190 100 150 M150 190 Q190 190 200 150"/></g>
+  <g class="wave" fill="#fff" opacity=".3"><circle cx="70" cy="60" r="3"/><circle cx="230" cy="80" r="3"/><circle cx="210" cy="40" r="3"/></g>`},
+
+ {t:"الجرة الفخارية",d:"خزف رأس الخيمة — تحفظ الماء باردًا، وتزيّن البيوت بنقوشها الترابية.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="210" rx="60" ry="12" fill="#000" opacity=".4"/>
+  <g class="float"><path d="M118 90 Q108 100 110 130 Q90 160 110 195 Q130 215 170 215 Q210 195 190 160 Q192 130 182 90 Z" fill="#b5701f"/>
+  <path d="M118 90 Q108 100 110 130 Q98 155 108 185 L150 185 L150 90 Z" fill="#9a5a18"/>
+  <rect x="130" y="70" width="40" height="24" fill="#a8651f"/><ellipse cx="150" cy="70" rx="20" ry="6" fill="#8a4a14"/>
+  <g stroke="#6e3d10" stroke-width="2" fill="none" class="shimmer"><path d="M115 130 Q150 122 185 130"/><path d="M112 150 Q150 142 188 150"/></g></g>`},
+
+ {t:"المرش (ماء الورد)",d:"قارورة فضية لرشّ ماء الورد على الضيوف — لمسة عطر وكرم في المجالس.",
+  svg:`<rect width="300" height="240" fill="#160f12"/><ellipse cx="150" cy="208" rx="44" ry="10" fill="#000" opacity=".4"/>
+  <g class="float"><path d="M124 200 Q120 150 150 140 Q180 150 176 200 Z" fill="#cfcfcf"/>
+  <path d="M124 200 Q120 150 150 140 L150 200 Z" fill="#aeaeae"/>
+  <rect x="138" y="110" width="24" height="32" fill="#dcdcdc"/>
+  <ellipse cx="150" cy="108" rx="14" ry="8" fill="#e6e6e6"/><path d="M150 100 q-2 -16 0 -24 q2 8 0 24" fill="#C9A227"/>
+  <g fill="#C9A227" class="shimmer"><circle cx="150" cy="168" r="4"/><circle cx="138" cy="180" r="3"/><circle cx="162" cy="180" r="3"/></g></g>`},
+
+ {t:"مروحة السعف (الخوصة)",d:"مهفّة يدوية من خوص النخيل — تلطّف الجو في حرّ الصيف قبل المراوح.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/><g class="sway" style="transform-origin:150px 220px">
+  <path d="M150 130 L80 60 Q150 30 220 60 Z" fill="#caa15a"/>
+  <g stroke="#9a6f30" stroke-width="2"><line x1="150" y1="130" x2="90" y2="66"/><line x1="150" y1="130" x2="120" y2="52"/><line x1="150" y1="130" x2="150" y2="46"/><line x1="150" y1="130" x2="180" y2="52"/><line x1="150" y1="130" x2="210" y2="66"/></g>
+  <path d="M80 60 Q150 30 220 60" fill="none" stroke="#b5874a" stroke-width="4"/>
+  <rect x="144" y="130" width="12" height="80" rx="5" fill="#7a4f28"/></g>`},
+
+ {t:"المنز (مهد الطفل)",d:"سرير الرضيع المعلّق — يهتزّ بلطف على أنغام تهويدة الأم.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/>
+  <line x1="80" y1="20" x2="120" y2="120" stroke="#C9A227" stroke-width="2"/><line x1="220" y1="20" x2="180" y2="120" stroke="#C9A227" stroke-width="2"/>
+  <g class="sway" style="transform-origin:150px 30px"><path d="M100 120 Q150 160 200 120 L196 160 Q150 196 104 160 Z" fill="#7a4f28"/>
+  <path d="M100 120 Q150 150 200 120" fill="none" stroke="#C9A227" stroke-width="3"/>
+  <ellipse cx="150" cy="150" rx="40" ry="12" fill="#f6efe2"/>
+  <circle cx="150" cy="142" r="12" fill="#cda878"/></g>`},
+
+ {t:"الصدف والودع",d:"محار وأصداف البحر — زينة وعملة قديمة، وذكرى رحلات الغوص.",
+  svg:`<defs><linearGradient id="sea8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8c0"/><stop offset="1" stop-color="#caa15a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sea8)"/>
+  <g class="float"><path d="M150 80 Q100 160 80 190 L220 190 Q200 160 150 80 Z" fill="#f0e3cf"/>
+  <g stroke="#cdb98e" stroke-width="2"><path d="M150 90 L110 185"/><path d="M150 90 L130 188"/><path d="M150 90 L150 190"/><path d="M150 90 L170 188"/><path d="M150 90 L190 185"/></g>
+  <ellipse cx="150" cy="86" rx="14" ry="8" fill="#e0d0b0"/></g>
+  <g fill="#e8dcc2"><ellipse cx="60" cy="170" rx="18" ry="10" class="float" style="animation-delay:.5s"/><ellipse cx="244" cy="180" rx="16" ry="9" class="float" style="animation-delay:1s"/></g>`},
+
+ {t:"خبز الرقاق",d:"خبز رقيق يُخبز على الصاج الساخن — يُقدّم بالعسل أو البيض على الفطور.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="170" rx="110" ry="40" fill="#3a3a3a"/><ellipse cx="150" cy="164" rx="106" ry="36" fill="#4a4a4a"/>
+  <g class="float"><ellipse cx="150" cy="150" rx="86" ry="30" fill="#d9a86a"/>
+  <g fill="#a8651f" opacity=".7"><circle cx="120" cy="148" r="5"/><circle cx="160" cy="142" r="5"/><circle cx="180" cy="156" r="5"/><circle cx="135" cy="158" r="5"/><circle cx="150" cy="150" r="5"/></g></g>
+  <path d="M120 130 q-4 -14 4 -22 M180 132 q4 -14 -4 -22" stroke="#caa15a" stroke-width="2" fill="none" class="flame" style="transform-origin:150px 130px"/>`},
+
+ {t:"المسحّراتي",d:"موقظ السحور في رمضان — يطوف الفريج بطبله منادياً: قوموا للسحور.",
+  svg:`<rect width="300" height="240" fill="#0e0a18"/><path d="M250 50 a18 18 0 1 0 6 22 a13 13 0 1 1 -6 -22" fill="#fff3cf" class="float"/>
+  <g fill="#fff" opacity=".7"><circle cx="60" cy="40" r="2"/><circle cx="120" cy="70" r="2"/><circle cx="200" cy="90" r="2"/></g>
+  <g class="float"><circle cx="150" cy="100" r="20" fill="#cda878"/><path d="M126 96 Q150 70 174 96 L178 124 Q150 110 122 124 Z" fill="#f6efe2"/>
+  <path d="M132 124 Q150 134 168 124 L182 220 L118 220 Z" fill="#5a3a1f"/></g>
+  <g class="pulse" style="transform-origin:96px 150px"><circle cx="96" cy="150" r="26" fill="#7a4f28"/><circle cx="96" cy="150" r="20" fill="#e8dcc2"/></g>
+  <g stroke="#C9A227" stroke-width="4"><line x1="120" y1="120" x2="150" y2="150"/></g>`},
+
+ {t:"شجرة الغاف",d:"الشجرة الوطنية للإمارات — تصمد في الصحراء وتظلّل المسافرين، رمز الصمود.",
+  svg:`<defs><linearGradient id="sky19" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky19)"/><rect y="200" width="300" height="40" fill="#c98f44"/>
+  <g><rect x="144" y="150" width="12" height="56" fill="#6e4420"/>
+  <g stroke="#6e4420" stroke-width="5" fill="none"><path d="M150 156 Q120 140 96 144"/><path d="M150 152 Q180 136 206 142"/><path d="M150 150 Q150 124 150 116"/></g></g>
+  <g class="sway" fill="#5a7a2e"><ellipse cx="100" cy="138" rx="34" ry="20"/><ellipse cx="200" cy="136" rx="34" ry="20"/><ellipse cx="150" cy="112" rx="40" ry="24"/></g>`},
+
+ {t:"العقد الذهبي (المرتعشة)",d:"حليّ المرأة الإماراتية — قلائد وأساور ذهبية تتوارثها الأجيال في الأعراس.",
+  svg:`<rect width="300" height="240" fill="#160f12"/><g class="float">
+  <path d="M70 60 Q150 160 230 60" fill="none" stroke="#C9A227" stroke-width="3"/>
+  <g fill="#e7c64a" class="shimmer"><circle cx="100" cy="110" r="6"/><circle cx="125" cy="135" r="7"/><circle cx="150" cy="148" r="9"/><circle cx="175" cy="135" r="7"/><circle cx="200" cy="110" r="6"/></g>
+  <g fill="#C9A227"><polygon points="150,158 142,178 150,196 158,178"/><polygon points="125,145 119,160 125,174 131,160"/><polygon points="175,145 169,160 175,174 181,160"/></g></g>`},
+
+ {t:"الخلخال والأساور",d:"حليّ القدم والمعصم الفضية — زينة ترنّ مع الخطوات في الرقصات الشعبية.",
+  svg:`<rect width="300" height="240" fill="#15110f"/><g class="float">
+  <g fill="none" stroke="#dcdcdc" stroke-width="8" class="shimmer"><circle cx="90" cy="100" r="40"/><circle cx="210" cy="100" r="40"/></g>
+  <g fill="#cfcfcf"><circle cx="90" cy="60" r="5"/><circle cx="130" cy="100" r="5"/><circle cx="90" cy="140" r="5"/><circle cx="50" cy="100" r="5"/></g>
+  <g fill="none" stroke="#C9A227" stroke-width="6"><circle cx="150" cy="190" r="30"/></g>
+  <g fill="#e7c64a"><circle cx="150" cy="160" r="4"/><circle cx="180" cy="190" r="4"/><circle cx="120" cy="190" r="4"/></g></g>`},
+
+ {t:"الطشت والإبريق",d:"أدوات الوضوء وغسل اليدين — يقدّمها المضيف لضيوفه قبل الطعام.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="212" rx="90" ry="14" fill="#000" opacity=".4"/>
+  <g class="float"><path d="M90 180 Q90 210 150 210 Q210 210 210 180 Z" fill="#C9A227"/><ellipse cx="150" cy="180" rx="60" ry="14" fill="#d4b03a"/><ellipse cx="150" cy="180" rx="48" ry="9" fill="#9a7a17"/>
+  <g transform="translate(80,90)"><path d="M0 70 Q-6 30 18 18 L42 18 Q66 30 60 70 Z" fill="#d4b03a"/><rect x="22" y="-2" width="16" height="20" fill="#C9A227"/><polygon points="20,-2 40,-2 30,-16" fill="#d4b03a"/>
+  <path d="M58 26 Q86 22 80 52" stroke="#C9A227" stroke-width="6" fill="none"/><path d="M2 30 Q-22 44 -8 76" stroke="#9a7a17" stroke-width="6" fill="none"/></g></g>`},
+
+ {t:"النعال (المداس)",d:"حذاء جلدي تقليدي — يُصنع يدوياً بنقوش بسيطة، رفيق المشي في الرمل.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/><g class="float">
+  <path d="M50 150 Q60 120 110 124 Q150 128 150 150 Q150 172 110 176 Q60 180 50 150 Z" fill="#8B5A2B"/>
+  <path d="M70 138 Q100 130 130 142" stroke="#C9A227" stroke-width="3" fill="none"/>
+  <path d="M150 150 Q160 120 210 124 Q250 128 250 150 Q250 172 210 176 Q160 180 150 150 Z" fill="#7a4f28"/>
+  <path d="M170 138 Q200 130 230 142" stroke="#C9A227" stroke-width="3" fill="none"/></g>`},
+
+ {t:"الميزان القديم",d:"ميزان كفّتين نحاسي — يوزن به التجار اللؤلؤ والذهب والبهارات في السوق.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><g class="sway" style="transform-origin:150px 50px">
+  <line x1="150" y1="40" x2="150" y2="70" stroke="#C9A227" stroke-width="3"/><line x1="70" y1="70" x2="230" y2="70" stroke="#C9A227" stroke-width="4"/>
+  <line x1="70" y1="70" x2="70" y2="120" stroke="#9a7a17" stroke-width="1.5"/><line x1="230" y1="70" x2="230" y2="120" stroke="#9a7a17" stroke-width="1.5"/>
+  <path d="M44 120 Q70 140 96 120 Z" fill="#d4b03a"/><path d="M204 120 Q230 140 256 120 Z" fill="#d4b03a"/>
+  <circle cx="150" cy="40" r="6" fill="#C9A227"/></g>
+  <g fill="#e7c64a"><circle cx="70" cy="122" r="5"/><circle cx="222" cy="124" r="4"/><circle cx="238" cy="124" r="4"/></g>`},
+
+ {t:"القفل والمفتاح",d:"قفل خشبي قديم بمفتاح حديدي — يحمي المخزن والمندوس، صناعة محلية بارعة.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/><g class="float">
+  <rect x="90" y="100" width="120" height="50" rx="8" fill="#7a4f28"/><rect x="90" y="100" width="120" height="50" rx="8" fill="none" stroke="#C9A227" stroke-width="2"/>
+  <circle cx="120" cy="125" r="8" fill="#3a2414"/><rect x="116" y="125" width="8" height="18" fill="#3a2414"/>
+  <g fill="#C9A227"><circle cx="170" cy="125" r="4"/><circle cx="190" cy="125" r="4"/></g></g>
+  <g class="sway" style="transform-origin:150px 175px"><rect x="146" y="160" width="8" height="60" fill="#9a9a9a"/><circle cx="150" cy="166" r="12" fill="none" stroke="#9a9a9a" stroke-width="6"/>
+  <rect x="154" y="200" width="14" height="6" fill="#9a9a9a"/><rect x="154" y="210" width="10" height="6" fill="#9a9a9a"/></g>`},
+
+ {t:"العسل وخلية النحل",d:"عسل الجبال الإماراتي (السدر) — غذاء ودواء، يجمعه النحّالون من خلايا الطين.",
+  svg:`<rect width="300" height="240" fill="#1a1206"/><g class="float">
+  <g fill="#C9A227" stroke="#9a7a17" stroke-width="2"><polygon points="120,80 140,80 150,98 140,116 120,116 110,98"/><polygon points="160,80 180,80 190,98 180,116 160,116 150,98"/>
+  <polygon points="140,116 160,116 170,134 160,152 140,152 130,134"/><polygon points="120,116 140,116 150,134 140,152 120,152 110,134"/><polygon points="160,116 180,116 190,134 180,152 160,152 150,134"/></g></g>
+  <g class="float" style="animation-delay:.4s" fill="#e7c64a"><ellipse cx="80" cy="100" rx="8" ry="5"/><path d="M72 100 q-8 -6 -4 -10 M88 100 q8 -6 4 -10" stroke="#f6efe2" stroke-width="1.5"/></g>
+  <g class="float" style="animation-delay:.9s" fill="#e7c64a"><ellipse cx="220" cy="140" rx="8" ry="5"/></g>
+  <path d="M150 152 q-4 30 0 50" stroke="#C9A227" stroke-width="4" fill="none" class="shimmer"/>`},
+
+ {t:"السمك المالح",d:"تجفيف وتمليح السمك — طريقة حفظ قديمة لرزق البحر طوال العام.",
+  svg:`<defs><linearGradient id="sky20" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8c0"/><stop offset="1" stop-color="#caa15a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky20)"/><line x1="20" y1="60" x2="280" y2="60" stroke="#7a4f28" stroke-width="3"/>
+  <g class="sway" fill="#cfcfcf"><g transform="translate(70,90)"><path d="M0 0 Q30 -16 50 0 Q30 16 0 0 Z"/><polygon points="50,0 64,-10 64,10"/><circle cx="14" cy="0" r="2" fill="#333"/></g></g>
+  <g class="sway" style="animation-delay:.5s" fill="#dcdcdc"><g transform="translate(160,96)"><path d="M0 0 Q30 -16 50 0 Q30 16 0 0 Z"/><polygon points="50,0 64,-10 64,10"/><circle cx="14" cy="0" r="2" fill="#333"/></g></g>
+  <line x1="95" y1="60" x2="95" y2="86" stroke="#7a4f28" stroke-width="1.5"/><line x1="185" y1="60" x2="185" y2="92" stroke="#7a4f28" stroke-width="1.5"/>`},
+
+ {t:"ألعاب اليوم الوطني",d:"احتفالات الثاني من ديسمبر — الألعاب النارية تضيء سماء الإمارات فخراً.",
+  svg:`<rect width="300" height="240" fill="#0a0a1a"/>
+  <g class="pulse" style="transform-origin:100px 90px"><g stroke="#CE1126" stroke-width="2"><line x1="100" y1="60" x2="100" y2="120"/><line x1="70" y1="90" x2="130" y2="90"/><line x1="80" y1="70" x2="120" y2="110"/><line x1="120" y1="70" x2="80" y2="110"/></g><circle cx="100" cy="90" r="4" fill="#fff3cf"/></g>
+  <g class="pulse" style="transform-origin:210px 110px;animation-delay:.5s"><g stroke="#009739" stroke-width="2"><line x1="210" y1="80" x2="210" y2="140"/><line x1="180" y1="110" x2="240" y2="110"/><line x1="190" y1="90" x2="230" y2="130"/><line x1="230" y1="90" x2="190" y2="130"/></g><circle cx="210" cy="110" r="4" fill="#fff3cf"/></g>
+  <g class="pulse" style="transform-origin:160px 60px;animation-delay:1s"><g stroke="#C9A227" stroke-width="2"><line x1="160" y1="38" x2="160" y2="82"/><line x1="138" y1="60" x2="182" y2="60"/></g></g>
+  <rect y="210" width="300" height="30" fill="#1a1a2a"/>`},
+
+ {t:"صينية القهوة والتمر",d:"طاولة الضيافة — الدلة والفناجين والتمر، رمز الترحيب الإماراتي الكامل.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="180" rx="120" ry="40" fill="#C9A227"/><ellipse cx="150" cy="174" rx="116" ry="36" fill="#d4b03a"/><ellipse cx="150" cy="172" rx="100" ry="30" fill="#9a7a17"/>
+  <g class="float"><path d="M88 168 Q82 130 104 116 L124 116 Q146 130 140 168 Z" fill="#e7c64a"/><rect x="106" y="98" width="18" height="20" fill="#d4b03a"/><polygon points="104,98 126,98 115,84" fill="#e7c64a"/><path d="M140 124 Q160 120 156 138" stroke="#e7c64a" stroke-width="4" fill="none"/></g>
+  <g fill="#f1e6cf"><path d="M170 150 L174 172 L194 172 L198 150 Z"/><path d="M204 150 L208 172 L228 172 L232 150 Z"/></g>
+  <g fill="#6e3d10"><ellipse cx="160" cy="166" rx="7" ry="4"/><ellipse cx="240" cy="166" rx="7" ry="4"/></g>`},
+
+ {t:"جامع الشيخ زايد",d:"تحفة معمارية بيضاء بقبابها ومآذنها — يجمع التراث الإسلامي بالفخامة الحديثة.",
+  svg:`<defs><linearGradient id="sky21" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4a7a"/><stop offset="1" stop-color="#e0aa6a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky21)"/>
+  <g class="float"><path d="M150 70 Q120 70 120 110 L180 110 Q180 70 150 70 Z" fill="#f6efe2"/><circle cx="150" cy="66" r="6" fill="#C9A227"/>
+  <path d="M90 130 Q72 130 72 160 L108 160 Q108 130 90 130 Z" fill="#e8dcc2"/><path d="M210 130 Q192 130 192 160 L228 160 Q228 130 210 130 Z" fill="#e8dcc2"/></g>
+  <rect x="60" y="160" width="180" height="60" fill="#f0e8d8"/>
+  <g fill="#e0d4be"><rect x="50" y="80" width="8" height="140"/><rect x="242" y="80" width="8" height="140"/></g>
+  <g fill="#C9A227"><circle cx="54" cy="76" r="4"/><circle cx="246" cy="76" r="4"/></g>
+  <g fill="#c9bca4"><path d="M76 200 q14 -20 28 0 Z"/><path d="M136 200 q14 -20 28 0 Z"/><path d="M196 200 q14 -20 28 0 Z"/></g>`},
+
+ {t:"الواحة",d:"جنة وسط الصحراء — نخيل وماء وظل، محطة الراحة لقوافل التجار.",
+  svg:`<defs><linearGradient id="sky22" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#e0b878"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky22)"/><path d="M0 180 Q90 150 180 180 T300 175 L300 240 L0 240 Z" fill="#d9ad62"/>
+  <ellipse cx="150" cy="210" rx="80" ry="18" fill="#2A9D8F"/><ellipse cx="150" cy="208" rx="74" ry="14" fill="#3aa6a0"/>
+  <g class="sway"><g transform="translate(90,0)"><rect x="-4" y="120" width="8" height="80" fill="#7a4f28"/><g fill="#0a7a2e"><path d="M0 120 Q-30 104 -52 112 Q-22 112 0 128 Z"/><path d="M0 120 Q30 104 52 112 Q22 112 0 128 Z"/><path d="M0 118 Q0 90 0 80 Q10 104 6 124 Z"/></g></g>
+  <g transform="translate(210,0)"><rect x="-4" y="130" width="8" height="70" fill="#7a4f28"/><g fill="#0a7a2e"><path d="M0 130 Q-26 116 -46 124 Q-20 122 0 136 Z"/><path d="M0 130 Q26 116 46 124 Q20 122 0 136 Z"/><path d="M0 128 Q0 102 0 94 Q10 116 6 134 Z"/></g></g></g>
+  <g class="wave" fill="#fff" opacity=".4"><path d="M110 210 q14 -6 28 0 t28 0"/></g>`},
+
+ {t:"السقاء (القربة)",d:"وعاء جلدي يحفظ الماء بارداً في الترحال — رفيق المسافر في الصحراء.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/><line x1="110" y1="30" x2="190" y2="30" stroke="#5e3d1f" stroke-width="4"/>
+  <g class="float"><path d="M110 60 Q100 120 120 180 Q140 215 170 200 Q200 180 190 120 Q186 80 170 56 Q140 44 110 60 Z" fill="#8B5A2B"/>
+  <path d="M110 60 Q100 120 120 180 Q135 205 150 200 L150 56 Q130 48 110 60 Z" fill="#7a4f28"/>
+  <rect x="130" y="40" width="30" height="20" rx="4" fill="#5e3d1f"/>
+  <g stroke="#5e3d1f" stroke-width="2"><path d="M118 100 Q150 92 182 100"/><path d="M120 140 Q150 132 180 140"/></g></g>
+  <line x1="110" y1="30" x2="120" y2="50" stroke="#5e3d1f" stroke-width="3"/><line x1="190" y1="30" x2="170" y2="50" stroke="#5e3d1f" stroke-width="3"/>`},
+
+ {t:"البساط (الزولية)",d:"سجادة المجلس المنسوجة بنقوش السدو — تفرش الأرض وتزيّن البيت بالدفء.",
+  svg:`<rect width="300" height="240" fill="#1a0f0a"/>
+  <g class="float"><rect x="40" y="50" width="220" height="140" fill="#7a1f2e"/><rect x="40" y="50" width="220" height="140" fill="none" stroke="#C9A227" stroke-width="4"/>
+  <rect x="56" y="66" width="188" height="108" fill="none" stroke="#EEE6D6" stroke-width="2"/>
+  <g fill="#C9A227" class="shimmer"><polygon points="150,90 168,120 150,150 132,120"/><polygon points="90,120 104,120 97,134"/><polygon points="196,120 210,120 203,134"/></g>
+  <g fill="#EEE6D6"><polygon points="150,108 158,120 150,132 142,120"/></g>
+  <g stroke="#C9A227" stroke-width="2"><line x1="40" y1="190" x2="40" y2="200"/><line x1="80" y1="190" x2="80" y2="200"/><line x1="120" y1="190" x2="120" y2="200"/><line x1="160" y1="190" x2="160" y2="200"/><line x1="200" y1="190" x2="200" y2="200"/><line x1="240" y1="190" x2="240" y2="200"/></g></g>`},
+
+ {t:"الرحى (طاحونة الحب)",d:"حجران دائريان لطحن القمح والبهارات يدوياً — صوتها يملأ بيوت الأمس.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="200" rx="80" ry="16" fill="#000" opacity=".4"/>
+  <g class="spin" style="transform-origin:150px 150px"><circle cx="150" cy="150" r="70" fill="#8a8a8a"/><circle cx="150" cy="150" r="70" fill="none" stroke="#6a6a6a" stroke-width="3"/>
+  <circle cx="150" cy="150" r="12" fill="#3a3a3a"/><rect x="200" y="140" width="22" height="20" rx="4" fill="#7a4f28"/>
+  <g stroke="#6a6a6a" stroke-width="2"><line x1="150" y1="80" x2="150" y2="220"/><line x1="80" y1="150" x2="220" y2="150"/></g></g>
+  <g fill="#d9c89a"><circle cx="120" cy="150" r="3"/><circle cx="180" cy="160" r="3"/><circle cx="160" cy="130" r="3"/></g>`},
+
+ {t:"السدر (النبق)",d:"شجرة السدر المباركة — ثمرها النبق وعسلها ثمين، ظلّها وارف في الحرّ.",
+  svg:`<defs><linearGradient id="sky23" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky23)"/><rect y="200" width="300" height="40" fill="#c98f44"/>
+  <rect x="142" y="140" width="16" height="66" fill="#6e4420"/>
+  <g class="sway" fill="#3a6e2a"><circle cx="150" cy="110" r="44"/><circle cx="108" cy="130" r="30"/><circle cx="192" cy="130" r="30"/><circle cx="150" cy="86" r="30"/></g>
+  <g fill="#C9A227"><circle cx="130" cy="110" r="4"/><circle cx="170" cy="118" r="4"/><circle cx="150" cy="130" r="4"/><circle cx="120" cy="130" r="4"/><circle cx="180" cy="104" r="4"/></g>`},
+
+ {t:"الدست النحاسي",d:"قِدر نحاسي ضخم — يُطبخ فيه للولائم والأعراس، يشبع العزبة كلها.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><ellipse cx="150" cy="208" rx="86" ry="14" fill="#000" opacity=".4"/>
+  <g class="flame" style="transform-origin:150px 200px"><path d="M110 200 q-10 -14 4 -22 q-2 12 8 18 Z" fill="#ff8a3a"/><path d="M190 200 q10 -14 -4 -22 q2 12 -8 18 Z" fill="#ff8a3a"/></g>
+  <g class="float"><path d="M86 130 Q80 190 150 196 Q220 190 214 130 Z" fill="#C9A227"/><path d="M86 130 Q80 190 150 196 L150 130 Z" fill="#a8851a"/>
+  <ellipse cx="150" cy="130" rx="64" ry="14" fill="#d4b03a"/><ellipse cx="150" cy="130" rx="52" ry="9" fill="#7a5a10"/>
+  <path d="M86 140 Q60 140 64 160" stroke="#a8851a" stroke-width="6" fill="none"/><path d="M214 140 Q240 140 236 160" stroke="#a8851a" stroke-width="6" fill="none"/></g>`},
+
+ {t:"الملاحة بالنجوم",d:"كان البحّارة يهتدون بالنجوم والسهيل — علم فلكي توارثه أهل البحر.",
+  svg:`<rect width="300" height="240" fill="#070a1a"/>
+  <g fill="#fff" class="shimmer"><circle cx="60" cy="50" r="2"/><circle cx="120" cy="40" r="1.5"/><circle cx="200" cy="60" r="2"/><circle cx="250" cy="44" r="1.5"/><circle cx="90" cy="90" r="1.5"/><circle cx="170" cy="100" r="2"/><circle cx="230" cy="110" r="1.5"/></g>
+  <g class="float"><polygon points="150,60 158,96 196,96 165,118 178,154 150,132 122,154 135,118 104,96 142,96" fill="#fff3cf"/></g>
+  <g stroke="#3a5a7a" stroke-width="1" opacity=".6"><line x1="60" y1="50" x2="120" y2="40"/><line x1="120" y1="40" x2="200" y2="60"/><line x1="200" y1="60" x2="250" y2="44"/></g>
+  <defs><linearGradient id="sea9" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d4d4d"/><stop offset="1" stop-color="#0a2a2a"/></linearGradient></defs>
+  <rect y="190" width="300" height="50" fill="url(#sea9)"/><g class="wave" fill="#2A9D8F" opacity=".5"><path d="M0 200 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/></g>`},
+
+ {t:"السمسمية",d:"آلة موسيقية بحرية بأوتار — تصدح في ليالي الفنون الشعبية على الساحل.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><g class="float">
+  <rect x="70" y="50" width="14" height="150" fill="#7a4f28"/><rect x="216" y="50" width="14" height="150" fill="#7a4f28"/><rect x="70" y="50" width="160" height="14" fill="#7a4f28"/>
+  <ellipse cx="150" cy="180" rx="40" ry="26" fill="#8B5A2B"/><ellipse cx="150" cy="180" rx="30" ry="18" fill="#e8dcc2"/>
+  <g stroke="#C9A227" stroke-width="2" class="shimmer"><line x1="100" y1="64" x2="120" y2="180"/><line x1="120" y1="64" x2="135" y2="180"/><line x1="140" y1="64" x2="150" y2="180"/><line x1="160" y1="64" x2="165" y2="180"/><line x1="180" y1="64" x2="180" y2="180"/></g></g>`},
+
+ {t:"اللبان (الكندر)",d:"بخور عطري من شجر اللبان — يُحرق للرائحة الطيبة وفي الطب الشعبي.",
+  svg:`<rect width="300" height="240" fill="#100b14"/>
+  <g class="flame" style="transform-origin:150px 140px"><path d="M150 140 q-12 -30 0 -54 q12 24 0 54" fill="#cdb4e0" opacity=".5"/></g>
+  <g class="float"><ellipse cx="150" cy="170" rx="50" ry="30" fill="#7a4f28"/><ellipse cx="150" cy="160" rx="44" ry="20" fill="#5e3d1f"/>
+  <g fill="#e7d9a8"><circle cx="135" cy="158" r="7"/><circle cx="155" cy="162" r="8"/><circle cx="168" cy="156" r="6"/><circle cx="146" cy="150" r="6"/></g>
+  <g fill="#d9c489"><circle cx="155" cy="162" r="3" opacity=".6"/></g></g>`},
+
+ {t:"القهوة (شجرة البن)",d:"حبوب البن الخضراء قبل التحميص — أصل القهوة العربية ورمز الكرم.",
+  svg:`<defs><linearGradient id="sky24" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8e8c8"/><stop offset="1" stop-color="#a8c888"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky24)"/><rect x="144" y="150" width="12" height="60" fill="#6e4420"/>
+  <g class="sway" fill="#2e6e2a"><ellipse cx="110" cy="120" rx="30" ry="44" transform="rotate(-20 110 120)"/><ellipse cx="190" cy="120" rx="30" ry="44" transform="rotate(20 190 120)"/><ellipse cx="150" cy="90" rx="28" ry="42"/></g>
+  <g fill="#CE1126"><circle cx="120" cy="120" r="6"/><circle cx="180" cy="116" r="6"/><circle cx="150" cy="100" r="6"/><circle cx="135" cy="140" r="6"/><circle cx="168" cy="138" r="6"/></g>`},
+
+ {t:"الدراجة القديمة",d:"السيكل — أول وسائل التنقل في الفرجان قبل السيارات، ذكرى الزمن الجميل.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/><rect y="200" width="300" height="40" fill="#3a2c1f"/>
+  <g class="float"><circle cx="90" cy="170" r="40" fill="none" stroke="#cfcfcf" stroke-width="5"/><circle cx="210" cy="170" r="40" fill="none" stroke="#cfcfcf" stroke-width="5"/>
+  <g stroke="#7a7a7a" stroke-width="1.5"><line x1="90" y1="130" x2="90" y2="210"/><line x1="50" y1="170" x2="130" y2="170"/><line x1="210" y1="130" x2="210" y2="210"/><line x1="170" y1="170" x2="250" y2="170"/></g>
+  <g stroke="#C9A227" stroke-width="5" fill="none"><path d="M90 170 L150 120 L210 170"/><line x1="150" y1="120" x2="120" y2="170"/><line x1="150" y1="120" x2="150" y2="90"/></g>
+  <rect x="138" y="84" width="30" height="8" rx="4" fill="#7a4f28"/><circle cx="150" cy="170" r="6" fill="#C9A227"/></g>`},
+
+ {t:"الطيارة الورقية",d:"لعبة الأطفال على شاطئ البحر — فرح بسيط يرقص مع نسيم الخليج.",
+  svg:`<defs><linearGradient id="sky25" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8e0"/><stop offset="1" stop-color="#ffd98a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky25)"/>
+  <g class="sway" style="transform-origin:150px 200px"><polygon points="150,40 195,95 150,150 105,95" fill="#CE1126"/>
+  <line x1="150" y1="40" x2="150" y2="150" stroke="#9a1622" stroke-width="2"/><line x1="105" y1="95" x2="195" y2="95" stroke="#9a1622" stroke-width="2"/>
+  <polygon points="105,95 150,95 128,118" fill="#009739"/><polygon points="150,95 195,95 172,118" fill="#fff"/>
+  <path d="M150 150 q-10 16 6 28 q-12 14 4 28 q-10 14 4 26" stroke="#C9A227" stroke-width="2" fill="none"/>
+  <g fill="#CE1126"><polygon points="156,162 164,168 156,174 148,168"/><polygon points="160,190 168,196 160,202 152,196"/></g></g>`},
+
+ {t:"الردح (الميدان)",d:"ساحة الاحتفالات الشعبية — تجتمع فيها الفرق للعرضة والرزفة في الأعياد.",
+  svg:`<defs><linearGradient id="sky26" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a55"/><stop offset="1" stop-color="#e0a85a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sky26)"/><rect y="180" width="300" height="60" fill="#caa15a"/>
+  <g class="sway" fill="#2b1a12"><g transform="translate(80,0)"><circle cx="0" cy="120" r="12"/><rect x="-10" y="130" width="20" height="50" rx="6"/><line x1="0" y1="100" x2="0" y2="60" stroke="#C9A227" stroke-width="4"/></g>
+  <g transform="translate(150,0)"><circle cx="0" cy="112" r="12"/><rect x="-10" y="122" width="20" height="58" rx="6"/><line x1="0" y1="92" x2="0" y2="52" stroke="#C9A227" stroke-width="4"/></g>
+  <g transform="translate(220,0)"><circle cx="0" cy="120" r="12"/><rect x="-10" y="130" width="20" height="50" rx="6"/><line x1="0" y1="100" x2="0" y2="60" stroke="#C9A227" stroke-width="4"/></g></g>
+  <g fill="#fff" opacity=".7"><circle cx="60" cy="50" r="2"/><circle cx="240" cy="60" r="2"/></g>`},
+
+ {t:"الغوّاص (طلعة اللؤلؤ)",d:"غواص يغوص لقاع البحر بحجر وحبل بحثاً عن المحار — شجاعة وكدّ الأجداد.",
+  svg:`<defs><linearGradient id="dsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4aa6a0"/><stop offset="1" stop-color="#062e2e"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#dsea)"/>
+  <g style="animation:dv 5s ease-in-out infinite alternate"><circle cx="150" cy="90" r="13" fill="#cda878"/>
+  <path d="M138 100 Q150 92 162 100 L160 150 L140 150 Z" fill="#6e4420"/>
+  <g stroke="#6e4420" stroke-width="6"><line x1="142" y1="150" x2="134" y2="190"/><line x1="158" y1="150" x2="166" y2="190"/><line x1="140" y1="110" x2="120" y2="130"/><line x1="160" y1="110" x2="182" y2="128"/></g></g>
+  <line x1="150" y1="0" x2="150" y2="80" stroke="#e8dcc2" stroke-width="1.5" opacity=".6"/>
+  <g fill="#fff" opacity=".4"><circle cx="120" cy="60" r="3"/><circle cx="180" cy="40" r="2.5"/><circle cx="160" cy="70" r="2"/></g>
+  <style>@keyframes dv{from{transform:translateY(-10px)}to{transform:translateY(20px)}}</style>`},
+
+ {t:"طيران الصقر",d:"الصقر يحلّق بجناحيه الواسعين — لحظة الانطلاق نحو الفريسة، رمز الحرية.",
+  svg:`<defs><linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8e0"/><stop offset="1" stop-color="#ffd98a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#fsky)"/><circle cx="240" cy="60" r="24" fill="#fff3cf" opacity=".7"/>
+  <g style="animation:gl 6s linear infinite"><g style="animation:flap 1.2s ease-in-out infinite alternate;transform-origin:150px 130px">
+  <ellipse cx="150" cy="135" rx="16" ry="30" fill="#6e4420"/><circle cx="150" cy="100" r="13" fill="#7a4f28"/><polygon points="150,98 138,104 150,108" fill="#C9A227"/>
+  <path d="M138 125 Q80 100 50 120 Q90 128 134 140 Z" fill="#5e3d1f"/><path d="M162 125 Q220 100 250 120 Q210 128 166 140 Z" fill="#5e3d1f"/>
+  <path d="M144 160 Q140 190 150 200 Q160 190 156 160 Z" fill="#6e4420"/></g></g>
+  <style>@keyframes flap{from{transform:scaleY(.7)}to{transform:scaleY(1.1)}}@keyframes gl{0%{transform:translate(-30px,10px)}50%{transform:translate(30px,-10px)}100%{transform:translate(-30px,10px)}}</style>`},
+
+ {t:"الدلفين",d:"دلافين الخليج تقفز قرب القوارب — رفيق البحّار المرح في المياه الفيروزية.",
+  svg:`<defs><linearGradient id="dsea2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8c0"/><stop offset="1" stop-color="#0d4d4d"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#dsea2)"/>
+  <g style="animation:jump 3s ease-in-out infinite"><path d="M100 180 Q120 90 180 80 Q160 100 168 130 Q200 120 210 150 Q190 150 176 138 Q150 170 130 200 Z" fill="#5a7a8a"/>
+  <path d="M100 180 Q120 110 160 95 Q150 130 140 175 Z" fill="#8aa6b6"/><circle cx="168" cy="98" r="3" fill="#1a2a30"/></g>
+  <g class="wave" fill="#fff" opacity=".5"><path d="M40 195 q18 -10 36 0 t36 0 t36 0 t36 0 t36 0 t36 0"/></g>
+  <ellipse cx="130" cy="200" rx="40" ry="8" fill="#fff" opacity=".3" class="pulse"/>
+  <style>@keyframes jump{0%,100%{transform:translateY(20px) rotate(8deg)}50%{transform:translateY(-10px) rotate(-4deg)}}</style>`},
+
+ {t:"فلامنجو رأس الخور",d:"طيور النحام الوردية في محمية دبي — لوحة طبيعية ساحرة وسط المدينة.",
+  svg:`<defs><linearGradient id="fl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd0c0"/><stop offset="1" stop-color="#a8d0d0"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#fl1)"/><rect y="180" width="300" height="60" fill="#6aa8a8"/>
+  <g class="float" fill="#ec7a9a"><g transform="translate(110,0)"><ellipse cx="0" cy="120" rx="22" ry="14"/><path d="M-8 110 Q-14 70 -2 60 Q4 90 6 110 Z"/><circle cx="-2" cy="56" r="7"/><path d="M-6 54 Q-18 56 -16 64" stroke="#222" stroke-width="3" fill="none"/>
+  <line x1="-2" y1="134" x2="-6" y2="180" stroke="#d05a7a" stroke-width="3"/><line x1="6" y1="134" x2="10" y2="180" stroke="#d05a7a" stroke-width="3"/></g></g>
+  <g class="float" style="animation-delay:.6s" fill="#f08aa8"><g transform="translate(190,10)"><ellipse cx="0" cy="120" rx="20" ry="13"/><path d="M-8 112 Q-12 78 0 68 Q4 94 4 112 Z"/><circle cx="0" cy="64" r="6"/>
+  <line x1="-2" y1="132" x2="-4" y2="170" stroke="#d05a7a" stroke-width="3"/><line x1="6" y1="132" x2="8" y2="170" stroke="#d05a7a" stroke-width="3"/></g></g>
+  <g class="wave" fill="#fff" opacity=".4"><path d="M40 200 q16 -6 32 0 t32 0 t32 0 t32 0"/></g>`},
+
+ {t:"القافلة (المحمل)",d:"قافلة الإبل تعبر الصحراء محمّلة بالبضائع — شريان التجارة قديماً.",
+  svg:`<defs><linearGradient id="csky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9e57"/><stop offset="1" stop-color="#ffd98a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#csky)"/><circle cx="60" cy="60" r="28" fill="#fff3cf"/>
+  <path d="M0 200 Q150 170 300 200 L300 240 L0 240 Z" fill="#c98f44"/>
+  <g style="animation:walk 7s linear infinite"><g fill="#7a4f28" transform="scale(.7)"><ellipse cx="150" cy="220" rx="40" ry="18"/><path d="M122 212 q-4 -22 6 -22 q5 0 3 20 Z"/><path d="M156 210 q-2 -26 7 -26 q7 0 2 24 Z"/><path d="M118 220 q-18 -8 -22 -28 q-1 -6 5 -3 q3 12 21 22 Z"/><circle cx="92" cy="184" r="7"/><rect x="124" y="232" width="6" height="28"/><rect x="160" y="232" width="6" height="28"/><rect x="130" y="180" width="34" height="18" fill="#9a1f2e"/></g></g>
+  <style>@keyframes walk{from{transform:translateX(-80px)}to{transform:translateX(260px)}}</style>`},
+
+ {t:"برج العرب (الشراع)",d:"فندق على شكل شراع — رمز دبي الحديثة المستوحى من سفن الغوص التراثية.",
+  svg:`<defs><linearGradient id="bsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3a6a"/><stop offset="1" stop-color="#e0a85a"/></linearGradient><linearGradient id="sail" x1="0" x2="1"><stop offset="0" stop-color="#f6efe2"/><stop offset="1" stop-color="#cfe0f0"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#bsky)"/>
+  <g class="float"><path d="M130 30 L130 210 Q170 210 175 180 L150 30 Z" fill="#dcdcdc"/>
+  <path d="M130 30 L150 30 L175 180 Q150 60 130 40 Z" fill="url(#sail)"/>
+  <g stroke="#a8c0e0" stroke-width="1"><path d="M132 60 Q150 70 152 60"/><path d="M134 100 Q155 112 158 100"/><path d="M137 150 Q165 164 168 150"/></g></g>
+  <defs><linearGradient id="bsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A9D8F"/><stop offset="1" stop-color="#176b6b"/></linearGradient></defs>
+  <rect y="210" width="300" height="30" fill="url(#bsea)"/><g class="wave" fill="#fff" opacity=".4"><path d="M0 218 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/></g>`},
+
+ {t:"عين دبي",d:"أكبر عجلة مشاهدة في العالم — تدور فوق الخليج معلنةً طموح الإمارات.",
+  svg:`<defs><linearGradient id="esky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2a55"/><stop offset="1" stop-color="#c87a9a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#esky)"/>
+  <g class="spin" style="transform-origin:150px 110px"><circle cx="150" cy="110" r="80" fill="none" stroke="#9ab0d0" stroke-width="4"/><circle cx="150" cy="110" r="62" fill="none" stroke="#9ab0d0" stroke-width="2"/>
+  <g stroke="#9ab0d0" stroke-width="1.5"><line x1="70" y1="110" x2="230" y2="110"/><line x1="150" y1="30" x2="150" y2="190"/><line x1="93" y1="53" x2="207" y2="167"/><line x1="207" y1="53" x2="93" y2="167"/></g>
+  <g fill="#C9A227"><circle cx="150" cy="30" r="5"/><circle cx="230" cy="110" r="5"/><circle cx="150" cy="190" r="5"/><circle cx="70" cy="110" r="5"/><circle cx="207" cy="53" r="5"/><circle cx="93" cy="167" r="5"/></g>
+  <circle cx="150" cy="110" r="8" fill="#9ab0d0"/></g>
+  <g stroke="#6a7a9a" stroke-width="5"><line x1="150" y1="110" x2="110" y2="220"/><line x1="150" y1="110" x2="190" y2="220"/></g>
+  <rect y="218" width="300" height="22" fill="#0d4d4d"/>`},
+
+ {t:"نخلة جميرا",d:"جزيرة اصطناعية على شكل نخلة — هندسة جريئة تحمل رمز الإمارات الأول.",
+  svg:`<defs><linearGradient id="psea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3aa6c0"/><stop offset="1" stop-color="#176b8b"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#psea)"/>
+  <g class="float" fill="#caa15a"><rect x="144" y="120" width="12" height="100"/>
+  <g stroke="#caa15a" stroke-width="5"><line x1="150" y1="140" x2="100" y2="120"/><line x1="150" y1="135" x2="200" y2="115"/><line x1="150" y1="160" x2="95" y2="150"/><line x1="150" y1="155" x2="205" y2="145"/><line x1="150" y1="180" x2="100" y2="180"/><line x1="150" y1="175" x2="200" y2="175"/></g>
+  <g fill="#0a7a2e"><path d="M150 118 Q110 100 80 108 Q116 104 150 124 Z"/><path d="M150 118 Q190 100 220 108 Q184 104 150 124 Z"/><path d="M150 114 Q150 86 150 78 Q162 100 156 122 Z"/></g></g>
+  <path d="M80 210 Q150 200 220 210 Q190 224 150 224 Q110 224 80 210 Z" fill="#caa15a" opacity=".5"/>
+  <g class="wave" fill="#fff" opacity=".3"><path d="M30 200 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/></g>`},
+
+ {t:"السلحفاة البحرية",d:"سلاحف الخليج تعود لشواطئها لتبيض — كنز بيئي تحميه الإمارات بعناية.",
+  svg:`<defs><linearGradient id="tsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4aa6a0"/><stop offset="1" stop-color="#0d4d4d"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#tsea)"/>
+  <g style="animation:swim 6s ease-in-out infinite alternate"><ellipse cx="150" cy="130" rx="50" ry="38" fill="#3a6a4a"/>
+  <g fill="#2a5238" stroke="#5a8a6a" stroke-width="1.5"><polygon points="150,100 130,118 150,136 170,118"/><polygon points="120,110 108,128 124,140 134,122"/><polygon points="180,110 192,128 176,140 166,122"/></g>
+  <circle cx="150" cy="84" r="14" fill="#3a6a4a"/><g fill="#1a2a20"><circle cx="144" cy="82" r="2"/><circle cx="156" cy="82" r="2"/></g>
+  <path d="M104 120 Q78 110 70 124 Q90 124 110 132 Z" fill="#3a6a4a"/><path d="M196 120 Q222 110 230 124 Q210 124 190 132 Z" fill="#3a6a4a"/>
+  <path d="M120 160 Q108 184 122 188 Q126 172 132 162 Z" fill="#3a6a4a"/><path d="M180 160 Q192 184 178 188 Q174 172 168 162 Z" fill="#3a6a4a"/></g>
+  <g fill="#fff" opacity=".3"><circle cx="60" cy="60" r="3"/><circle cx="240" cy="50" r="2.5"/></g>
+  <style>@keyframes swim{from{transform:translateX(-20px) rotate(-3deg)}to{transform:translateX(20px) rotate(3deg)}}</style>`},
+
+ {t:"سفينة تبحر",d:"سفينة البوم تشقّ الموج بشراعها الممتلئ — رحلة الغوص نحو مغاص اللؤلؤ.",
+  svg:`<defs><linearGradient id="sail2sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8c0"/><stop offset="1" stop-color="#176b6b"/></linearGradient></defs>
+  <rect width="300" height="150" fill="#ffd98a"/><rect y="150" width="300" height="90" fill="url(#sail2sea)"/><circle cx="60" cy="56" r="24" fill="#fff3cf"/>
+  <g style="animation:boat 4s ease-in-out infinite alternate"><path d="M90 185 Q150 220 210 185 L200 168 L100 168 Z" fill="#7a4f28"/>
+  <rect x="146" y="74" width="6" height="94" fill="#5e3d1f"/><path d="M152 78 L152 164 L222 158 Z" fill="#f1e6cf" style="animation:billow 3s ease-in-out infinite alternate;transform-origin:152px 120px"/>
+  <path d="M146 86 L146 164 L88 156 Z" fill="#e8dcc2"/></g>
+  <g class="wave" fill="#fff" opacity=".5"><path d="M0 200 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/></g>
+  <style>@keyframes boat{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-8px) rotate(2deg)}}@keyframes billow{from{transform:scaleX(.94)}to{transform:scaleX(1.06)}}</style>`},
+
+ {t:"خيل تركض",d:"الخيل العربي ينطلق على الرمل — قوة ورشاقة في مشهد يخطف الأنفاس.",
+  svg:`<defs><linearGradient id="rsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9e57"/><stop offset="1" stop-color="#ffd98a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#rsky)"/><rect y="190" width="300" height="50" fill="#d9ad62"/>
+  <g style="animation:gallop 6s linear infinite"><g style="animation:bob .5s ease-in-out infinite alternate;transform-origin:center"><g fill="#6e4420" transform="scale(.85) translate(20,30)">
+  <ellipse cx="150" cy="140" rx="46" ry="22"/><path d="M186 132 q22 -28 30 -50 q4 -8 -6 -6 q-10 16 -34 40 Z"/><circle cx="214" cy="86" r="10"/>
+  <path d="M196 92 q14 -8 22 4 q-12 -2 -22 2 Z" fill="#3a2414"/><path d="M108 140 q-28 12 -36 46 q16 -20 40 -32 Z" fill="#5e3d1f"/>
+  <g stroke="#6e4420" stroke-width="7"><line x1="124" y1="156" x2="108" y2="196"/><line x1="142" y1="160" x2="158" y2="196"/><line x1="166" y1="158" x2="150" y2="196"/><line x1="178" y1="156" x2="194" y2="194"/></g></g></g></g>
+  <style>@keyframes gallop{from{transform:translateX(-90px)}to{transform:translateX(280px)}}@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-6px)}}</style>`},
+
+ {t:"شهب الصحراء",d:"سماء البادية الصافية ليلاً — شهب تتساقط فوق رمال هادئة، سحر لا يُنسى.",
+  svg:`<rect width="300" height="240" fill="#0a0a1e"/>
+  <g fill="#fff"><circle cx="40" cy="40" r="1.5"/><circle cx="100" cy="30" r="1"/><circle cx="160" cy="50" r="1.5"/><circle cx="220" cy="35" r="1"/><circle cx="270" cy="60" r="1.5"/><circle cx="70" cy="80" r="1"/><circle cx="200" cy="90" r="1"/></g>
+  <g stroke="#fff3cf" stroke-width="2" stroke-linecap="round"><line x1="60" y1="30" x2="100" y2="70" style="animation:shoot 3s linear infinite"/></g>
+  <g stroke="#fff3cf" stroke-width="2" stroke-linecap="round"><line x1="200" y1="20" x2="240" y2="60" style="animation:shoot 3s linear 1.5s infinite"/></g>
+  <path d="M0 180 Q90 150 180 180 T300 175 L300 240 L0 240 Z" fill="#2a2018"/>
+  <path d="M0 205 Q100 180 200 205 T300 202 L300 240 L0 240 Z" fill="#1a130d"/>
+  <style>@keyframes shoot{0%{opacity:0;transform:translate(-20px,-20px)}20%{opacity:1}100%{opacity:0;transform:translate(40px,40px)}}</style>`},
+
+ {t:"نار المخيّم",d:"حول النار يجتمع البدو للسمر والقهوة والحكايات تحت سماء النجوم.",
+  svg:`<rect width="300" height="240" fill="#0e0a14"/>
+  <g fill="#fff" opacity=".7"><circle cx="50" cy="40" r="1.5"/><circle cx="150" cy="30" r="1.5"/><circle cx="250" cy="50" r="1.5"/><circle cx="200" cy="70" r="1"/></g>
+  <ellipse cx="150" cy="200" rx="70" ry="16" fill="#3a2a14"/>
+  <g style="transform-origin:150px 190px"><path class="flame" style="transform-origin:150px 190px" d="M150 190 Q126 150 150 110 Q174 150 150 190 Z" fill="#ff6a1a"/>
+  <path class="flame" style="transform-origin:150px 190px;animation-delay:.15s" d="M150 190 Q134 158 150 130 Q166 158 150 190 Z" fill="#ffb84a"/>
+  <path class="flame" style="transform-origin:150px 190px;animation-delay:.3s" d="M150 188 Q142 168 150 150 Q158 168 150 188 Z" fill="#fff3a0"/></g>
+  <g stroke="#5e3d1f" stroke-width="6"><line x1="118" y1="208" x2="170" y2="194"/><line x1="182" y1="208" x2="130" y2="194"/></g>
+  <ellipse cx="150" cy="200" rx="90" ry="40" fill="#ff8a3a" opacity=".12" class="pulse"/>`},
+
+ {t:"الصقر ينقضّ",d:"لحظة الانقضاض — الصقر يطوي جناحيه ويهوي كالسهم نحو فريسته.",
+  svg:`<defs><linearGradient id="dive" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8e0"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#dive)"/>
+  <g style="animation:dive 2.5s ease-in infinite"><g transform="rotate(40 150 120)"><ellipse cx="150" cy="120" rx="12" ry="34" fill="#6e4420"/><circle cx="150" cy="86" r="11" fill="#7a4f28"/><polygon points="150,84 140,90 150,94" fill="#C9A227"/>
+  <path d="M140 110 Q116 96 110 110 Q128 112 142 122 Z" fill="#5e3d1f"/><path d="M160 110 Q184 96 190 110 Q172 112 158 122 Z" fill="#5e3d1f"/></g></g>
+  <rect y="210" width="300" height="30" fill="#c98f44"/>
+  <style>@keyframes dive{0%{transform:translate(-40px,-40px) scale(.7)}70%{transform:translate(30px,80px) scale(1.1)}100%{transform:translate(-40px,-40px) scale(.7)}}</style>`},
+
+ {t:"العاصفة الرملية",d:"الطوز يجتاح الصحراء — رياح محمّلة بالرمل تحجب الأفق، قوة الطبيعة.",
+  svg:`<defs><linearGradient id="storm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c89a5a"/><stop offset="1" stop-color="#8a6a3a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#storm)"/><circle cx="220" cy="70" r="26" fill="#e0b878" opacity=".5"/>
+  <g stroke="#e0c89a" stroke-width="6" stroke-linecap="round" opacity=".6"><line x1="-40" y1="80" x2="60" y2="80" style="animation:gust 2s linear infinite"/><line x1="-40" y1="120" x2="80" y2="120" style="animation:gust 1.6s linear infinite"/><line x1="-40" y1="160" x2="70" y2="160" style="animation:gust 2.4s linear infinite"/><line x1="-40" y1="200" x2="90" y2="200" style="animation:gust 1.8s linear infinite"/></g>
+  <path d="M0 200 Q90 180 180 200 T300 195 L300 240 L0 240 Z" fill="#7a5a30"/>
+  <style>@keyframes gust{from{transform:translateX(0);opacity:0}30%{opacity:.7}to{transform:translateX(320px);opacity:0}}</style>`},
+
+ {t:"غروب الصحراء",d:"الشمس تغيب خلف الكثبان وتصبغ السماء ذهباً وحمرة — أجمل لحظات البر.",
+  svg:`<defs><linearGradient id="sunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a55"/><stop offset=".5" stop-color="#e0884a"/><stop offset="1" stop-color="#ffd98a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#sunset)"/>
+  <circle cx="150" cy="150" r="44" fill="#ff9e3a" style="animation:set 8s ease-in-out infinite alternate"/>
+  <g class="float"><g transform="translate(60,0)"><rect x="-3" y="150" width="6" height="60" fill="#2a1a10"/><g fill="#2a1a10"><path d="M0 150 Q-24 138 -40 144 Q-18 142 0 156 Z"/><path d="M0 150 Q24 138 40 144 Q18 142 0 156 Z"/><path d="M0 148 Q0 126 0 118 Q8 138 4 154 Z"/></g></g></g>
+  <path d="M0 200 Q90 175 180 200 T300 195 L300 240 L0 240 Z" fill="#5a3a1a"/>
+  <style>@keyframes set{from{transform:translateY(-20px)}to{transform:translateY(30px)}}</style>`},
+
+ {t:"اللؤلؤة تتلألأ",d:"اللؤلؤة الأبرز في الصدفة — بريقها يضيء قاع البحر، ثمرة الصبر والمشقّة.",
+  svg:`<defs><radialGradient id="pearl2"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#e0f0ee"/><stop offset="1" stop-color="#a8cac8"/></radialGradient>
+  <linearGradient id="psea2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3aa6a0"/><stop offset="1" stop-color="#062e2e"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#psea2)"/>
+  <g class="float"><path d="M80 150 Q150 80 220 150 Q150 178 80 150 Z" fill="#c98f6a"/><path d="M80 150 Q150 215 220 150 Q150 128 80 150 Z" fill="#e8c39a"/>
+  <circle cx="150" cy="148" r="22" fill="url(#pearl2)"/><circle cx="150" cy="148" r="22" fill="none" stroke="#fff" stroke-width="1" class="shimmer"/>
+  <circle cx="142" cy="140" r="6" fill="#fff" opacity=".8" class="shimmer"/></g>
+  <g fill="#fff"><polygon points="150,110 153,124 167,127 153,130 150,144 147,130 133,127 147,124" class="pulse" style="transform-origin:150px 127px"/></g>
+  <g fill="#fff" opacity=".3"><circle cx="60" cy="50" r="3"/><circle cx="240" cy="70" r="2.5"/></g>`},
+
+ {t:"المسبحة (السبحة)",d:"خرز يُسبّح به المسلم، غالباً 33 أو 99 حبة. تُصنع من العقيق واليُسر والعود، ويتوارثها الكبار رمزاً للسكينة والذكر.",
+  svg:`<rect width="300" height="240" fill="#160f1a"/><g class="sway" style="transform-origin:150px 40px">
+  <g fill="#7a3b2a"><circle cx="120" cy="70" r="7"/><circle cx="100" cy="95" r="7"/><circle cx="90" cy="125" r="7"/><circle cx="95" cy="155" r="7"/><circle cx="115" cy="180" r="7"/><circle cx="150" cy="192" r="7"/><circle cx="185" cy="180" r="7"/><circle cx="205" cy="155" r="7"/><circle cx="210" cy="125" r="7"/><circle cx="200" cy="95" r="7"/><circle cx="180" cy="70" r="7"/></g>
+  <line x1="120" y1="50" x2="180" y2="50" stroke="#C9A227" stroke-width="2"/><circle cx="150" cy="46" r="5" fill="#C9A227"/>
+  <g fill="#9a4a33"><circle cx="150" cy="210" r="9"/><rect x="146" y="216" width="8" height="18" rx="3"/></g></g>`},
+
+ {t:"التنور",d:"فرن طيني أسطواني يُخبز فيه الخبز بلصقه على جدرانه الساخنة. رائحة خبز التنور جزء من ذاكرة الفريج الإماراتي.",
+  svg:`<rect width="300" height="240" fill="#140d08"/><ellipse cx="150" cy="212" rx="80" ry="14" fill="#000" opacity=".4"/>
+  <g class="float"><path d="M96 200 Q92 120 150 112 Q208 120 204 200 Z" fill="#8a5226"/><path d="M96 200 Q92 120 150 112 L150 200 Z" fill="#6e4019"/>
+  <ellipse cx="150" cy="112" rx="40" ry="12" fill="#3a2410"/></g>
+  <g class="flame" style="transform-origin:150px 175px"><path d="M150 185 q-16 -28 0 -52 q16 24 0 52 Z" fill="#ff7a2a"/><path d="M150 182 q-8 -18 0 -32 q8 14 0 32 Z" fill="#ffd98a"/></g>
+  <g fill="#e8b878"><path d="M118 130 q14 -8 0 -14 M180 134 q-14 -8 0 -14" stroke="#caa15a" stroke-width="3"/></g>`},
+
+ {t:"العود",d:"آلة وترية عربية بصندوق كمثري، تُعدّ سيدة الآلات. صوته الدافئ يصاحب الشعر والطرب في السهرات الخليجية.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/><g class="float" transform="rotate(-18 150 130)">
+  <ellipse cx="140" cy="160" rx="56" ry="48" fill="#8a5226"/><ellipse cx="140" cy="160" rx="56" ry="48" fill="none" stroke="#C9A227" stroke-width="2"/>
+  <circle cx="140" cy="155" r="16" fill="#3a2414"/><circle cx="140" cy="155" r="16" fill="none" stroke="#C9A227" stroke-width="1.5"/>
+  <rect x="175" y="60" width="20" height="110" rx="4" fill="#5e3d1f" transform="rotate(20 185 115)"/>
+  <path d="M205 50 q18 -6 14 14 q-6 -10 -16 -6 Z" fill="#3a2414"/>
+  <g stroke="#e8dcc2" stroke-width="1.5"><line x1="120" y1="120" x2="150" y2="200"/><line x1="130" y1="118" x2="158" y2="200"/><line x1="140" y1="116" x2="166" y2="200"/></g></g>`},
+
+ {t:"الفرضة (الميناء القديم)",d:"مرسى السفن التجارية حيث تُفرّغ البضائع واللؤلؤ. كانت قلب الاقتصاد ونقطة التقاء التجار من الهند وفارس وشرق إفريقيا.",
+  svg:`<defs><linearGradient id="psky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#e0b878"/></linearGradient><linearGradient id="psea3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3aa6a0"/><stop offset="1" stop-color="#176b6b"/></linearGradient></defs>
+  <rect width="300" height="150" fill="url(#psky)"/><rect y="150" width="300" height="90" fill="url(#psea3)"/>
+  <rect y="150" width="300" height="14" fill="#7a4f28"/><g stroke="#5e3d1f" stroke-width="4"><line x1="60" y1="164" x2="60" y2="210"/><line x1="240" y1="164" x2="240" y2="210"/></g>
+  <g class="float"><path d="M120 150 Q160 178 200 150 L194 138 L126 138 Z" fill="#7a4f28"/><line x1="160" y1="70" x2="160" y2="138" stroke="#5e3d1f" stroke-width="4"/><path d="M160 74 L160 132 L214 128 Z" fill="#f1e6cf"/></g>
+  <g fill="#a8651f"><rect x="40" y="138" width="14" height="14"/><rect x="58" y="138" width="14" height="14"/></g>`},
+
+ {t:"المنارة",d:"برج بحري يرشد سفن الصيد والغوص ليلاً بضوئه الدوّار. حارس الساحل الذي يهدي البحّارة إلى ديارهم بأمان.",
+  svg:`<rect width="300" height="160" fill="#1a2336"/><rect y="160" width="300" height="80" fill="#176b6b"/>
+  <g fill="#fff" opacity=".7"><circle cx="60" cy="40" r="2"/><circle cx="220" cy="50" r="2"/></g>
+  <g class="float"><polygon points="135,80 165,80 172,200 128,200" fill="#f0e8d8"/>
+  <g fill="#CE1126"><polygon points="138,110 162,110 164,135 136,135"/><polygon points="135,160 165,160 167,185 133,185"/></g>
+  <rect x="130" y="60" width="40" height="22" fill="#C9A227"/><polygon points="128,60 172,60 150,40" fill="#9a1622"/></g>
+  <g class="shimmer"><polygon points="172,68 250,40 250,96" fill="#ffe7a3" opacity=".5"/></g>
+  <g class="wave" fill="#fff" opacity=".4"><path d="M0 210 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/></g>`},
+
+ {t:"أشجار القرم (المانجروف)",d:"غابات خضراء تنمو في مياه البحر المالحة على سواحل الإمارات. ملاذ للطيور والأسماك وحاجز طبيعي يحمي الشواطئ.",
+  svg:`<defs><linearGradient id="qsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3d8"/><stop offset="1" stop-color="#7ec8c0"/></linearGradient></defs>
+  <rect width="300" height="170" fill="url(#qsky)"/><rect y="170" width="300" height="70" fill="#3a8a7a"/>
+  <g class="sway" fill="#2e6e3a"><ellipse cx="80" cy="110" rx="40" ry="30"/><ellipse cx="150" cy="95" rx="48" ry="34"/><ellipse cx="220" cy="110" rx="40" ry="30"/></g>
+  <g stroke="#5a3a1f" stroke-width="3"><path d="M80 130 L70 175 M80 130 L88 175 M150 120 L140 175 M150 120 L160 175 M220 130 L212 175 M220 130 L230 175"/></g>
+  <g class="wave" fill="#fff" opacity=".3"><path d="M0 200 q20 -6 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/></g>`},
+
+ {t:"الشعاب المرجانية",d:"حدائق ملونة تحت سطح الخليج تعجّ بالحياة. موطن مئات أنواع الأسماك، ومصدر غنى بيئي يفخر به البحر الإماراتي.",
+  svg:`<defs><linearGradient id="rsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4aa6c0"/><stop offset="1" stop-color="#0a3d4d"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#rsea)"/>
+  <g class="sway" fill="#e0884a"><path d="M70 220 Q60 160 80 150 Q70 180 90 200 Q92 170 100 160 Q102 200 110 220 Z"/></g>
+  <g class="sway" style="animation-delay:.6s" fill="#CE6a8a"><path d="M210 220 Q200 150 222 140 Q210 175 230 195 Q235 165 244 158 Q244 200 250 220 Z"/></g>
+  <g fill="#C9A227"><ellipse cx="150" cy="200" rx="30" ry="16"/><circle cx="135" cy="195" r="4" fill="#0a3d4d"/><circle cx="150" cy="200" r="4" fill="#0a3d4d"/><circle cx="165" cy="195" r="4" fill="#0a3d4d"/></g>
+  <g class="float" fill="#ffd98a"><path d="M120 90 q14 -8 24 0 q-10 6 -24 0 Z M180 110 q12 -7 22 0 q-9 5 -22 0 Z"/></g>
+  <g fill="#fff" opacity=".25"><circle cx="60" cy="40" r="3"/><circle cx="240" cy="30" r="2"/></g>`},
+
+ {t:"الروبيان",d:"الجمبري الخليجي — صيد ثمين على موائد الإمارات. يُطبخ بالأرز والبهارات في أطباق بحرية أصيلة كالمكبوس بالروبيان.",
+  svg:`<defs><linearGradient id="shsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8c0"/><stop offset="1" stop-color="#176b6b"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#shsea)"/>
+  <g class="float" transform="rotate(10 150 130)"><path d="M90 130 Q120 90 180 100 Q210 105 210 130 Q190 135 170 128 Q150 145 120 145 Q100 142 90 130 Z" fill="#e08a6a"/>
+  <path d="M90 130 Q120 100 170 108 Q150 130 120 135 Z" fill="#f0a888"/>
+  <path d="M210 125 q24 -10 30 4 q-18 -2 -26 6 Z M210 130 q24 0 32 14 q-20 -2 -28 -2 Z" fill="#c96a4a"/>
+  <circle cx="100" cy="128" r="3" fill="#3a1a10"/>
+  <g stroke="#c96a4a" stroke-width="2"><path d="M120 145 l-4 12 M140 146 l-3 12 M160 142 l-2 12"/></g></g>
+  <g fill="#fff" opacity=".25"><circle cx="60" cy="50" r="3"/><circle cx="240" cy="70" r="2.5"/></g>`},
+
+ {t:"سرطان البحر",d:"يسكن الشواطئ الرملية والصخرية في الخليج. يصطاده الأطفال للتسلية، وبعض أنواعه طعام بحري لذيذ على الموائد.",
+  svg:`<defs><linearGradient id="crsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#caa15a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#crsea)"/><rect y="200" width="300" height="40" fill="#c98f44"/>
+  <g class="sway" style="transform-origin:150px 150px"><ellipse cx="150" cy="150" rx="46" ry="30" fill="#CE5a3a"/><ellipse cx="150" cy="142" rx="38" ry="20" fill="#e07a5a"/>
+  <g fill="#1a0a08"><circle cx="138" cy="138" r="4"/><circle cx="162" cy="138" r="4"/></g>
+  <path d="M104 145 q-24 -8 -30 -24 q14 8 22 6 q-6 10 8 18 Z" fill="#CE5a3a"/><path d="M196 145 q24 -8 30 -24 q-14 8 -22 6 q6 10 -8 18 Z" fill="#CE5a3a"/>
+  <g stroke="#CE5a3a" stroke-width="4"><path d="M112 168 l-18 16 M126 176 l-12 18 M188 168 l18 16 M174 176 l12 18"/></g></g>`},
+
+ {t:"الحظرة",d:"سياج من جريد النخل يُنصب في الماء الضحل ليحتجز السمك مع الجزر. طريقة صيد قديمة تعتمد حركة المد والجزر.",
+  svg:`<defs><linearGradient id="hsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ec8c0"/><stop offset="1" stop-color="#2a8a8a"/></linearGradient></defs>
+  <rect width="300" height="150" fill="#ffd98a"/><rect y="150" width="300" height="90" fill="url(#hsea)"/>
+  <g stroke="#8a5a2e" stroke-width="3"><path d="M40 200 Q90 120 150 150 Q210 180 260 110"/></g>
+  <g stroke="#a87a4a" stroke-width="1.5"><line x1="60" y1="178" x2="60" y2="210"/><line x1="90" y1="150" x2="90" y2="205"/><line x1="120" y1="140" x2="120" y2="205"/><line x1="150" y1="150" x2="150" y2="205"/><line x1="180" y1="160" x2="180" y2="205"/><line x1="210" y1="150" x2="210" y2="205"/><line x1="240" y1="125" x2="240" y2="205"/></g>
+  <g class="sway" fill="#cfcfcf"><ellipse cx="120" cy="185" rx="10" ry="5"/><ellipse cx="170" cy="190" rx="9" ry="4"/></g>`},
+
+ {t:"اللومي (الليمون المجفف)",d:"ليمون يُغلى ويُجفّف تحت الشمس حتى يسودّ، فيمنح الطبخات نكهة حامضة مميزة. سرّ من أسرار المطبخ الإماراتي.",
+  svg:`<rect width="300" height="240" fill="#1a1206"/><ellipse cx="150" cy="200" rx="90" ry="16" fill="#000" opacity=".3"/>
+  <g class="float" fill="#5a3a1a"><circle cx="120" cy="150" r="26"/><circle cx="175" cy="160" r="28"/><circle cx="150" cy="120" r="24"/><circle cx="190" cy="125" r="22"/></g>
+  <g fill="#3a2410"><circle cx="120" cy="150" r="6"/><circle cx="175" cy="160" r="6"/><circle cx="150" cy="120" r="6"/></g>
+  <g stroke="#3a2410" stroke-width="1.5" opacity=".6"><path d="M104 145 q16 -6 32 0 M160 156 q15 -6 30 0"/></g>`},
+
+ {t:"الزعفران والهيل",d:"بهارات القهوة العربية. الزعفران الأحمر يمنح اللون والنكهة الفاخرة، والهيل يضيف العطر الذي يميّز ضيافة الإمارات.",
+  svg:`<rect width="300" height="240" fill="#160f0a"/>
+  <g class="float"><ellipse cx="100" cy="170" rx="44" ry="20" fill="#7a4f28"/><ellipse cx="100" cy="164" rx="38" ry="14" fill="#9a1f10"/>
+  <g stroke="#CE1126" stroke-width="2"><path d="M82 160 q6 -4 10 2 M96 158 q5 -5 9 1 M112 160 q5 -4 9 2"/></g></g>
+  <g class="float" style="animation-delay:.5s"><ellipse cx="200" cy="170" rx="44" ry="20" fill="#7a4f28"/><ellipse cx="200" cy="164" rx="38" ry="14" fill="#6a8a3a"/>
+  <g fill="#3a5a1a"><ellipse cx="188" cy="162" rx="6" ry="9"/><ellipse cx="202" cy="164" rx="6" ry="9"/><ellipse cx="214" cy="161" rx="6" ry="9"/></g></g>
+  <text x="100" y="210" fill="#C9A227" font-size="13" text-anchor="middle">زعفران</text><text x="200" y="210" fill="#6a8a3a" font-size="13" text-anchor="middle">هيل</text>`},
+
+ {t:"الفقع (الكمأة)",d:"كنز الصحراء بعد المطر — فطر بري ينمو تحت الرمال ويُكشف بخبرة البدو. يُعدّ أكلة فاخرة تُطبخ مع اللحم والأرز.",
+  svg:`<defs><linearGradient id="fsky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#fsky2)"/><path d="M0 150 Q150 130 300 150 L300 240 L0 240 Z" fill="#caa15a"/>
+  <g class="float"><ellipse cx="120" cy="175" rx="30" ry="24" fill="#8a5a36"/><ellipse cx="120" cy="168" rx="24" ry="16" fill="#a87a4a"/>
+  <ellipse cx="185" cy="190" rx="26" ry="20" fill="#7a4f2e"/><ellipse cx="185" cy="184" rx="20" ry="13" fill="#9a6a40"/></g>
+  <g fill="#6e4420" opacity=".5"><circle cx="112" cy="166" r="2"/><circle cx="124" cy="170" r="2"/><circle cx="180" cy="183" r="2"/><circle cx="190" cy="187" r="2"/></g>`},
+
+ {t:"الضبّ",d:"زاحف صحراوي بذيل شوكي يعيش في جحور الرمال. كان البدو يصطادونه للأكل، وصار رمزاً طريفاً لحياة البر.",
+  svg:`<defs><linearGradient id="dsky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#dsky3)"/><rect y="195" width="300" height="45" fill="#caa15a"/>
+  <g class="sway" style="transform-origin:150px 170px" fill="#9a7a44"><ellipse cx="140" cy="170" rx="52" ry="20"/>
+  <path d="M188 168 q40 -4 56 8 q-10 -16 -40 -14 Z" fill="#8a6a3a"/>
+  <ellipse cx="92" cy="166" rx="16" ry="11"/><circle cx="84" cy="162" r="2" fill="#1a0a08"/>
+  <g stroke="#8a6a3a" stroke-width="2"><path d="M244 176 l8 4 l-2 6 M244 176 l4 8"/></g>
+  <g stroke="#9a7a44" stroke-width="6"><line x1="120" y1="186" x2="116" y2="200"/><line x1="160" y1="186" x2="164" y2="200"/></g></g>`},
+
+ {t:"الثعلب الصحراوي (الفنك)",d:"ثعلب صغير بأذنين كبيرتين تبرّده وتلتقط أدق الأصوات. مخلوق ليلي لطيف يجوب كثبان الإمارات بحثاً عن الطعام.",
+  svg:`<rect width="300" height="240" fill="#1a1632"/>
+  <g fill="#fff" opacity=".7"><circle cx="60" cy="40" r="2"/><circle cx="240" cy="50" r="2"/><circle cx="150" cy="30" r="1.5"/></g>
+  <path d="M0 200 Q150 170 300 200 L300 240 L0 240 Z" fill="#3a2e4a"/>
+  <g class="float" fill="#e0c08a"><ellipse cx="150" cy="170" rx="34" ry="24"/><circle cx="150" cy="130" r="22"/>
+  <path d="M132 116 L118 70 L146 108 Z"/><path d="M168 116 L182 70 L154 108 Z"/>
+  <path d="M186 180 q34 -6 44 14 q-22 -6 -44 2 Z"/></g>
+  <g fill="#1a1010"><circle cx="142" cy="128" r="3"/><circle cx="158" cy="128" r="3"/><polygon points="150,136 145,141 155,141"/></g>`},
+
+ {t:"اليربوع",d:"قارض صغير يقفز على ساقين طويلتين كالكنغر. يعيش في جحور الصحراء ويخرج ليلاً، من ظرفاء كائنات البر الإماراتي.",
+  svg:`<defs><linearGradient id="ysky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2440"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#ysky)"/><rect y="200" width="300" height="40" fill="#caa15a"/>
+  <g style="animation:hop 1.4s ease-in-out infinite"><g fill="#d9b878"><ellipse cx="150" cy="150" rx="22" ry="26"/><circle cx="150" cy="118" r="13"/>
+  <path d="M142 108 L138 84 L148 106 Z"/><path d="M158 108 L162 84 L152 106 Z"/>
+  <path d="M168 160 q30 14 30 40 q-14 -10 -34 -22 Z" fill="#c9a868"/>
+  <g stroke="#c9a868" stroke-width="4"><line x1="142" y1="174" x2="134" y2="200"/><line x1="158" y1="174" x2="166" y2="200"/></g></g>
+  <g fill="#1a1010"><circle cx="147" cy="116" r="2"/><circle cx="153" cy="116" r="2"/></g></g>
+  <style>@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}</style>`},
+
+ {t:"الهدهد",d:"طائر بريشة ملوّنة وتاج فوق رأسه. ذُكر في القرآن مع نبي الله سليمان، ويزور حدائق الإمارات في مواسم الهجرة.",
+  svg:`<defs><linearGradient id="hosky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f0"/><stop offset="1" stop-color="#ffd98a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#hosky)"/><rect y="205" width="300" height="35" fill="#7aa84a"/>
+  <g class="float"><ellipse cx="150" cy="150" rx="30" ry="22" fill="#d99a5a"/>
+  <g fill="#2a1a10"><rect x="120" y="135" width="60" height="6"/><rect x="120" y="148" width="60" height="6"/><rect x="120" y="161" width="60" height="6"/></g>
+  <circle cx="150" cy="115" r="15" fill="#e0a868"/>
+  <g fill="#d9883a"><polygon points="140,104 138,88 146,102"/><polygon points="150,102 150,84 156,100"/><polygon points="160,104 164,88 156,102"/></g>
+  <g fill="#2a1a10"><polygon points="160,114 110,118 160,122"/><circle cx="146" cy="113" r="2"/></g>
+  <line x1="150" y1="172" x2="148" y2="200" stroke="#d9883a" stroke-width="3"/></g>`},
+
+ {t:"الماعز والغنم",d:"ثروة البدوي المتنقلة — مصدر الحليب واللحم والصوف الذي يُغزل سدواً. ترعى في البر وتُربّى قرب البيوت في العزب.",
+  svg:`<defs><linearGradient id="gsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#d9ad62"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#gsky)"/><rect y="195" width="300" height="45" fill="#bfa860"/>
+  <g class="float" fill="#f0e8d8"><ellipse cx="110" cy="150" rx="40" ry="26"/><circle cx="75" cy="135" r="16" fill="#3a2e24"/>
+  <path d="M68 124 q-8 -14 2 -16 M82 124 q8 -14 -2 -16" stroke="#1a1410" stroke-width="3" fill="none"/>
+  <g stroke="#caa878" stroke-width="6"><line x1="92" y1="170" x2="90" y2="195"/><line x1="128" y1="170" x2="130" y2="195"/></g></g>
+  <g class="float" style="animation-delay:.5s" fill="#5a4a3a"><ellipse cx="210" cy="160" rx="32" ry="22"/><circle cx="240" cy="148" r="13" fill="#3a2e24"/>
+  <g stroke="#caa878" stroke-width="5"><line x1="196" y1="178" x2="194" y2="195"/><line x1="224" y1="178" x2="226" y2="195"/></g></g>`},
+
+ {t:"الوسمي (مطر الخير)",d:"أول أمطار الموسم التي تحيي الأرض وتنبت العشب والفقع. يفرح بها أهل البادية ويسمّونها مطر الخير والبركة.",
+  svg:`<defs><linearGradient id="wsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a5a6a"/><stop offset="1" stop-color="#9aa86a"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#wsky)"/>
+  <g class="float" fill="#3a4452"><ellipse cx="100" cy="70" rx="44" ry="22"/><ellipse cx="150" cy="58" rx="40" ry="24"/><ellipse cx="200" cy="72" rx="40" ry="20"/></g>
+  <g stroke="#bcd8e8" stroke-width="2" stroke-linecap="round"><line x1="80" y1="100" x2="74" y2="130" style="animation:rain .8s linear infinite"/><line x1="120" y1="100" x2="114" y2="130" style="animation:rain .8s linear .2s infinite"/><line x1="160" y1="100" x2="154" y2="130" style="animation:rain .8s linear .4s infinite"/><line x1="200" y1="100" x2="194" y2="130" style="animation:rain .8s linear .1s infinite"/><line x1="240" y1="100" x2="234" y2="130" style="animation:rain .8s linear .3s infinite"/></g>
+  <path d="M0 195 Q150 180 300 195 L300 240 L0 240 Z" fill="#5a7a3a"/>
+  <g class="sway" fill="#3a6a2a"><path d="M60 200 l-3 -18 M64 200 l2 -16 M180 198 l-3 -16 M184 198 l2 -14 M250 200 l-2 -16"/></g>
+  <style>@keyframes rain{from{transform:translateY(-10px);opacity:0}30%{opacity:1}to{transform:translateY(40px);opacity:0}}</style>`},
+
+ {t:"السراب",d:"خدعة بصرية في حرّ الصحراء تجعل الأفق يبدو كبحيرة ماء. ظاهرة طبيعية ألهمت الشعراء وحيّرت المسافرين قديماً.",
+  svg:`<defs><linearGradient id="srsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb86a"/><stop offset="1" stop-color="#ffe7b0"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#srsky)"/><circle cx="150" cy="70" r="34" fill="#fff3cf" class="float"/>
+  <g class="float"><rect x="60" y="120" width="6" height="40" fill="#8a6a3a"/><g fill="#5a7a2a"><path d="M63 120 Q40 110 26 116 Q44 114 63 126 Z"/><path d="M63 120 Q86 110 100 116 Q82 114 63 126 Z"/></g></g>
+  <rect y="160" width="300" height="40" fill="#e8c87a"/>
+  <g class="wave" opacity=".5"><rect y="166" width="300" height="20" fill="#bcdfe8"/></g>
+  <rect y="200" width="300" height="40" fill="#d9ad62"/>
+  <g fill="#bcdfe8" opacity=".4" class="shimmer"><ellipse cx="150" cy="180" rx="120" ry="10"/></g>`},
+
+ {t:"وادي جبال الحجر",d:"أودية خضراء بين جبال الحجر الصخرية في الشرق. مياهها العذبة وبركها الطبيعية وجهة للمتنزهين ورمز لجمال طبيعة الإمارات.",
+  svg:`<defs><linearGradient id="vsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe0f0"/><stop offset="1" stop-color="#e8dcc0"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#vsky)"/>
+  <polygon points="0,120 80,40 150,120" fill="#8a7a5a"/><polygon points="100,120 200,30 300,120" fill="#9a8a66"/><polygon points="0,120 80,55 150,120" fill="#a89a76" opacity=".6"/>
+  <rect y="120" width="300" height="60" fill="#7a6a48"/>
+  <path d="M120 120 Q140 160 130 240 L170 240 Q160 160 180 120 Z" fill="#3a7aa0" class="wave"/>
+  <g class="sway" fill="#3a6a2a"><ellipse cx="90" cy="170" rx="14" ry="20"/><ellipse cx="215" cy="172" rx="14" ry="20"/></g>
+  <g class="wave" fill="#fff" opacity=".4"><path d="M135 200 q8 -4 16 0 t16 0"/></g>`},
+
+ {t:"المسواك (الأراك)",d:"عود من شجر الأراك يُنظَّف به الأسنان، سنّة نبوية متوارثة. يُباع في الأسواق الشعبية وله رائحة وفوائد صحية معروفة.",
+  svg:`<rect width="300" height="240" fill="#1a130c"/><g class="float">
+  <rect x="60" y="150" width="180" height="16" rx="8" fill="#caa15a" transform="rotate(-10 150 158)"/>
+  <path d="M60 152 q-14 4 -16 16 q12 -2 20 -6 Z" fill="#e8dcc2" transform="rotate(-10 150 158)"/>
+  <g stroke="#9a6f30" stroke-width="1.5" transform="rotate(-10 150 158)"><line x1="100" y1="152" x2="100" y2="164"/><line x1="140" y1="152" x2="140" y2="164"/><line x1="180" y1="152" x2="180" y2="164"/></g></g>
+  <g class="sway" fill="#3a6a2a"><ellipse cx="230" cy="90" rx="26" ry="18"/><ellipse cx="200" cy="70" rx="20" ry="14"/></g>
+  <g fill="#5a8a3a"><circle cx="222" cy="86" r="3"/><circle cx="236" cy="92" r="3"/></g>`},
+
+ {t:"قوس قزح بعد المطر",d:"ألوان تتقوّس في السماء بعد الوسمي، فرح بصري يعقب الخير. مشهد نادر وجميل يزيّن صحراء الإمارات بعد الأمطار.",
+  svg:`<defs><linearGradient id="rbsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8aa8c0"/><stop offset="1" stop-color="#cfe0d0"/></linearGradient></defs>
+  <rect width="300" height="240" fill="url(#rbsky)"/>
+  <g fill="none" stroke-width="9" class="float"><path d="M40 220 A110 110 0 0 1 260 220" stroke="#CE1126"/><path d="M52 220 A98 98 0 0 1 248 220" stroke="#e0884a"/><path d="M64 220 A86 86 0 0 1 236 220" stroke="#C9A227"/><path d="M76 220 A74 74 0 0 1 224 220" stroke="#009739"/><path d="M88 220 A62 62 0 0 1 212 220" stroke="#2A9D8F"/><path d="M100 220 A50 50 0 0 1 200 220" stroke="#3a5aa0"/></g>
+  <g fill="#fff" opacity=".5" class="float"><ellipse cx="70" cy="60" rx="30" ry="14"/><ellipse cx="240" cy="50" rx="26" ry="12"/></g>
+  <path d="M0 215 Q150 205 300 215 L300 240 L0 240 Z" fill="#6a8a4a"/>`},
+];
+
+document.getElementById('count').textContent='🖼️ '+ART.length+' لوحة';
+document.getElementById('introCount').textContent='🖼️ أكثر من '+ART.length+' لوحة فنية متحركة';
+
+// floating gold particles in the intro
+const intro=document.getElementById('intro');
+for(let i=0;i<28;i++){
+  const p=document.createElement('div');p.className='particle';
+  const x=(i*37)%100, dur=8+(i%7)*2, delay=(i%10)*0.9, size=3+(i%4)*2;
+  p.style.left=x+'%';p.style.width=p.style.height=size+'px';
+  p.style.animationDuration=dur+'s';p.style.animationDelay='-'+delay+'s';
+  intro.appendChild(p);
+}
+
+const grid=document.getElementById('grid');
+ART.forEach(a=>{
+  const card=document.createElement('div');
+  card.className='card';
+  card.dataset.text=(a.t+' '+a.d);
+  card.innerHTML=`<svg viewBox="0 0 300 240">${a.svg}</svg><div class="meta"><h3>${a.t}</h3><p>${a.d}</p></div>`;
+  grid.appendChild(card);
+});
+
+// live search filter
+document.getElementById('search').addEventListener('input',e=>{
+  const q=e.target.value.trim();
+  let shown=0;
+  document.querySelectorAll('.card').forEach(c=>{
+    const ok=!q||c.dataset.text.includes(q);
+    c.style.display=ok?'':'none';
+    if(ok)shown++;
+  });
+  document.getElementById('count').textContent='🖼️ '+(q?shown+' نتيجة':ART.length+' لوحة');
+});
+
+// reveal on scroll
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.15});
+document.querySelectorAll('.card').forEach(c=>io.observe(c));
+</script>
+</body>
+</html>

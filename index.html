@@ -9,7 +9,7 @@
 <title>عمار AI 🇦🇪 — موسوعة التراث الإماراتي + مساعد ذكي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=Tajawal:wght@400;500;700&family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&family=El+Messiri:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --sand:#C2A878;--clay:#8B5A2B;--gold:#E9BC46;--red:#CE1126;--green:#009739;--teal:#2A9D8F;--paper:#f4ead6;
@@ -525,23 +525,56 @@
   #musicBtn:hover{transform:translateY(-3px)}
   #musicBtn.playing{background:linear-gradient(135deg,#22d3ee,#7c3aed);color:#fff;border-color:transparent;animation:musPulse 1.6s ease-in-out infinite}
   @keyframes musPulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}50%{box-shadow:0 0 0 12px rgba(34,211,238,0)}}
-  /* color theme switcher */
-  #themeBtn{position:fixed;bottom:140px;left:22px;z-index:55;width:48px;height:48px;border-radius:50%;border:1px solid rgba(233,188,70,.5);
-    background:rgba(42,29,16,.75);backdrop-filter:blur(10px);color:var(--gold);cursor:pointer;display:grid;place-items:center;font-size:1.25rem;
-    transition:transform .25s;box-shadow:var(--shadow)}
-  html[dir=ltr] #themeBtn{left:auto;right:22px}
-  #themeBtn:hover{transform:translateY(-3px) rotate(18deg)}
-  #themePanel{position:fixed;bottom:140px;left:80px;z-index:56;background:rgba(36,24,12,.97);backdrop-filter:blur(14px);
-    border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);display:none;width:240px}
-  html[dir=ltr] #themePanel{left:auto;right:80px}
-  #themePanel.open{display:block;animation:souqpop .25s ease}
-  #themePanel h4{color:var(--gold);font-size:.92rem;margin-bottom:12px;text-align:center}
-  .theme-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .theme-opt{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;background:none;border:none;font-family:inherit;padding:0}
-  .theme-sw{width:42px;height:42px;border-radius:50%;border:2px solid transparent;box-shadow:0 4px 10px rgba(0,0,0,.45);transition:transform .15s,border-color .15s}
+  /* ===== Personalize pill + panel ===== */
+  #prznBtn{position:fixed;bottom:140px;left:22px;z-index:55;display:inline-flex;align-items:center;gap:9px;padding:8px 16px 8px 9px;
+    border-radius:30px;border:none;cursor:pointer;background:rgba(20,14,7,.82);backdrop-filter:blur(10px);color:var(--paper);
+    font-family:var(--body);font-weight:700;font-size:.9rem;box-shadow:var(--shadow);transition:transform .2s}
+  html[dir=ltr] #prznBtn{left:auto;right:22px;padding:8px 9px 8px 16px}
+  #prznBtn:hover{transform:translateY(-3px)}
+  #prznBtn .przn-orb{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:1rem;
+    background:conic-gradient(from 0deg,var(--gold),var(--teal),var(--red),var(--gold));animation:prznSpin 6s linear infinite}
+  #prznBtn .przn-orb b{width:24px;height:24px;border-radius:50%;background:#140e07;display:grid;place-items:center}
+  @keyframes prznSpin{to{transform:rotate(360deg)}}
+  /* glowing animated border like the reference */
+  #prznBtn::before{content:"";position:absolute;inset:-2px;border-radius:32px;padding:2px;z-index:-1;
+    background:conic-gradient(from var(--ang,0deg),var(--gold),var(--teal),var(--red),var(--gold));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+    animation:prznRot 4s linear infinite;filter:drop-shadow(0 0 6px rgba(233,188,70,.5))}
+  @keyframes prznRot{to{--ang:360deg}}
+  @property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+  .przn-panel{position:fixed;bottom:200px;left:22px;z-index:56;width:min(330px,92vw);max-height:min(70vh,560px);overflow:auto;
+    background:rgba(28,19,9,.98);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;padding:18px;
+    box-shadow:0 24px 60px -16px rgba(0,0,0,.85);display:none}
+  html[dir=ltr] .przn-panel{left:auto;right:22px}
+  .przn-panel.open{display:block;animation:souqpop .28s ease}
+  .przn-head{display:flex;align-items:center;margin-bottom:6px}
+  .przn-head b{color:var(--gold);font-size:1.05rem;font-family:var(--display)}
+  .przn-x{margin-inline-start:auto;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;line-height:1}
+  .przn-x:hover{color:var(--red)}
+  .przn-tip{color:var(--muted);font-size:.78rem;margin-bottom:14px}
+  .przn-sec{margin-bottom:16px}
+  .przn-lbl{display:block;color:var(--paper);font-size:.82rem;font-weight:700;margin-bottom:9px;opacity:.85}
+  .theme-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+  .theme-opt{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;background:none;border:none;font-family:inherit;padding:0}
+  .theme-sw{width:40px;height:40px;border-radius:50%;border:2px solid transparent;box-shadow:0 4px 10px rgba(0,0,0,.45);transition:transform .15s,border-color .15s}
   .theme-opt:hover .theme-sw{transform:scale(1.12)}
   .theme-opt.on .theme-sw{border-color:var(--gold);box-shadow:0 0 0 3px rgba(233,188,70,.3)}
-  .theme-opt em{font-style:normal;font-size:.7rem;color:var(--muted)}
+  .theme-opt em{font-style:normal;font-size:.68rem;color:var(--muted)}
+  .przn-fonts{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+  .przn-font{padding:10px;border-radius:13px;border:1px solid var(--line);background:rgba(201,162,39,.05);color:var(--paper);
+    cursor:pointer;font-size:1.05rem;text-align:center;transition:.15s}
+  .przn-font:hover{border-color:var(--gold)}
+  .przn-font.on{border-color:var(--gold);background:rgba(201,162,39,.16)}
+  .przn-font em{display:block;font-style:normal;font-size:.66rem;color:var(--muted);margin-top:2px}
+  .przn-row{display:flex;align-items:center;gap:10px}
+  .przn-row span{color:var(--paper);font-size:.85rem}
+  .przn-switch{margin-inline-start:auto;position:relative;width:48px;height:26px;border-radius:14px;background:var(--line);cursor:pointer;transition:background .2s;flex:none}
+  .przn-switch.on{background:linear-gradient(135deg,var(--gold),#a87f1c)}
+  .przn-switch i{position:absolute;top:3px;inset-inline-start:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:inset-inline-start .2s}
+  .przn-switch.on i{inset-inline-start:25px}
+  .przn-reset{width:100%;background:none;border:1px dashed var(--line);color:var(--muted);padding:9px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.82rem;transition:.2s}
+  .przn-reset:hover{border-color:var(--gold);color:var(--gold)}
+  html.no-anim *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   /* animated Islamic geometric mandala */
   #mandala{text-align:center}
   .mandala{width:320px;height:320px;max-width:80vw;margin:6px auto 0;position:relative}
@@ -635,9 +668,16 @@
   .cp-bar i{width:12px;height:12px;border-radius:50%;display:inline-block}
   .cp-bar .d1{background:#ff5f57}.cp-bar .d2{background:#febc2e}.cp-bar .d3{background:#28c840}
   .cp-bar b{margin-inline-start:auto;color:#7fa8d8;font-size:.78rem;font-weight:600;font-family:'Courier New',monospace}
-  .cp-code{margin:0;padding:18px 18px 20px;font-family:'Courier New',ui-monospace,monospace;font-size:.92rem;line-height:1.85;color:#cfe3ff;
+  .cp-body{display:flex;align-items:stretch}
+  .cp-gutter{margin:0;padding:18px 0 20px;width:36px;flex:none;text-align:center;color:#3d5573;border-inline-end:1px solid #1b2a44;
+    font-family:'Courier New',ui-monospace,monospace;font-size:.92rem;line-height:1.85;user-select:none;direction:ltr;background:rgba(0,0,0,.18)}
+  .cp-code{flex:1;margin:0;padding:18px 16px 20px;font-family:'Courier New',ui-monospace,monospace;font-size:.92rem;line-height:1.85;color:#cfe3ff;
     min-height:148px;white-space:pre-wrap;word-break:break-word;text-align:start;direction:ltr}
   .cp-code .kw{color:#ff9d6c}.cp-code .fn{color:#7ee787}.cp-code .st{color:#ffd479}.cp-code .cm{color:#6b8299;font-style:italic}.cp-code .nm{color:#79c0ff}
+  .cp-out{margin:0 14px 14px;padding:9px 13px;background:rgba(40,200,100,.09);border:1px solid rgba(40,200,100,.28);border-radius:11px;
+    color:#7ee787;font-family:'Courier New',ui-monospace,monospace;font-size:.85rem;direction:ltr;text-align:start;animation:souqpop .3s ease}
+  .cp-out b{color:#6b8299;font-weight:400}
+  .cp-robot{display:inline-block;font-size:1.4rem;animation:cbob 2.4s ease-in-out infinite}
   .cp-cursor{display:inline-block;width:9px;height:1.05em;background:#7ee787;vertical-align:-2px;animation:cpblink 1s steps(1) infinite;border-radius:1px}
   @keyframes cpblink{50%{opacity:0}}
   .cp-foot{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
@@ -1171,8 +1211,15 @@
 <canvas id="aeConfettiCanvas" aria-hidden="true"></canvas>
 <div id="ytWrap" aria-hidden="true"><div id="ytplayer"></div></div>
 <button id="musicBtn" data-k-title="music_title" title="تشغيل أغنية تراثية" aria-label="music">🎵</button>
-<button id="themeBtn" data-k-title="theme_title" title="غيّر ألوان الموقع" aria-label="theme">🎨</button>
-<div id="themePanel"><h4 data-k="theme_h">غيّر ألوان الموقع</h4><div class="theme-opts" id="themeOpts"></div></div>
+<button id="prznBtn" aria-label="personalize"><span class="przn-orb"><b>🪄</b></span><span data-k="przn_btn">خصّص الموقع</span></button>
+<div id="prznPanel" class="przn-panel" aria-hidden="true">
+  <div class="przn-head"><b data-k="przn_t">🪄 خصّص موقعك</b><button class="przn-x" id="prznX" aria-label="close">×</button></div>
+  <p class="przn-tip" data-k="przn_tip">اختر شكل الموقع كما يعجبك — يُحفظ تلقائياً.</p>
+  <div class="przn-sec"><span class="przn-lbl" data-k="przn_color">🎨 اللون</span><div class="theme-opts" id="themeOpts"></div></div>
+  <div class="przn-sec"><span class="przn-lbl" data-k="przn_font">🔤 الخط</span><div class="przn-fonts" id="prznFonts"></div></div>
+  <div class="przn-sec"><div class="przn-row"><span data-k="przn_motion">✨ الحركة والتأثيرات</span><button class="przn-switch on" id="prznMotion" role="switch" aria-checked="true"><i></i></button></div></div>
+  <button class="przn-reset" id="prznReset" data-k="przn_reset">↺ إعادة الضبط الافتراضي</button>
+</div>
 <div id="lightbox" aria-hidden="true"><button id="lbClose" aria-label="إغلاق">✕</button><img id="lbImg" src="" alt=""></div>
 <nav>
   <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg> <span data-k="brand">عمار AI</span></div>
@@ -1886,7 +1933,7 @@ const I18N={
   fc_txt:'اسأل عمار',
   hero_badge:'🇦🇪 موسوعة التراث الإماراتي التفاعلية',
   man_eb:'فنّ الزخرفة',man_t:'زخرفةٌ <em>إسلامية متحركة</em>',man_sub:'نجمة الخاتم التراثية — هندسةٌ تدور بلا نهاية.',
-  music_title:'تشغيل أغنية تراثية',theme_title:'غيّر ألوان الموقع',theme_h:'اختر لون الموقع 🎨',
+  music_title:'تشغيل أغنية تراثية',przn_btn:'خصّص الموقع',przn_t:'🪄 خصّص موقعك',przn_tip:'اختر شكل الموقع كما يعجبك — يُحفظ تلقائياً.',przn_color:'🎨 اللون',przn_font:'🔤 الخط',przn_motion:'✨ الحركة والتأثيرات',przn_reset:'↺ إعادة الضبط الافتراضي',
   prov_eb:'حكمة الأجداد',prov_t:'أمثال <em>شعبية إماراتية</em>',prov_sub:'حِكَمٌ توارثها الأجداد، تختصر تجارب الحياة في كلمات.',
   poem_eb:'بيتٌ من التراث',poem_lines:['من رمالِ الصحراء','تُولَدُ الأساطير','وتبقى خالدةً للأبد'],
   search_eb:'ابحث',search_t:'ابحث في <em>التراث</em>',search_sub:'اكتب أي كلمة (قهوة، صقر، دبي، لؤلؤ...) لتجد ما يخصّها فوراً.',search_ph:'ابحث في التراث الإماراتي...',
@@ -1962,7 +2009,7 @@ const I18N={
   stat_1:'Documented photos',stat_2:'Heritage bodies',stat_3:'On UNESCO lists',stat_4:'Questions for Ammar AI',
   hero_badge:'🇦🇪 The interactive UAE heritage encyclopedia',
   man_eb:'The art of ornament',man_t:'A living <em>Islamic pattern</em>',man_sub:'The traditional khatam star — geometry spinning endlessly.',
-  music_title:'Play heritage music',theme_title:'Change site colors',theme_h:'Pick a color theme 🎨',
+  music_title:'Play heritage music',przn_btn:'Personalize',przn_t:'🪄 Personalize your site',przn_tip:'Choose how the site looks — saved automatically.',przn_color:'🎨 Color',przn_font:'🔤 Font',przn_motion:'✨ Motion & effects',przn_reset:'↺ Reset to default',
   prov_eb:'Wisdom of the elders',prov_t:'Emirati <em>folk proverbs</em>',prov_sub:'Sayings passed down by the ancestors, distilling life into a few words.',
   poem_eb:'A verse of heritage',poem_lines:['From the desert sands','legends are born','and live forever'],
   search_eb:'Search',search_t:'Search the <em>heritage</em>',search_sub:'Type any word (coffee, falcon, Dubai, pearl...) to instantly find what matches.',search_ph:'Search UAE heritage...',
@@ -3038,27 +3085,53 @@ const THEMES={
   pearl:{n:'لؤلؤي',ne:'Pearl',sw:'linear-gradient(135deg,#cfe8ff,#0c2230)',v:{'--bg':'#0c2230','--surface':'#123040','--line':'#2a5366','--paper':'#eaf6fb','--muted':'#a9cdd8','--gold':'#dcc488','--sand':'#7fb0c4','--clay':'#2f6b7a','--teal':'#39b0c4'}},
   royal:{n:'ملكي',ne:'Royal',sw:'linear-gradient(135deg,#7c3aed,#e9bc46)',v:{'--bg':'#1a1026','--surface':'#241636','--line':'#43305f','--paper':'#f0e8fb','--muted':'#bda9d6','--gold':'#e9bc46','--sand':'#9d7fc4','--clay':'#5e3a8b','--teal':'#9b6fd6'}}
 };
+const FONTS={
+  kufi:{n:'كوفي',ne:'Kufi',pv:'أبجد',d:'"Reem Kufi"',b:'"Tajawal"'},
+  modern:{n:'حديث',ne:'Modern',pv:'أبجد',d:'"Cairo"',b:'"Cairo"'},
+  classic:{n:'كلاسيكي',ne:'Classic',pv:'أبجد',d:'"Amiri"',b:'"Amiri"'},
+  elegant:{n:'أنيق',ne:'Elegant',pv:'أبجد',d:'"El Messiri"',b:'"El Messiri"'}
+};
 (function(){
-  const btn=document.getElementById('themeBtn'),panel=document.getElementById('themePanel'),opts=document.getElementById('themeOpts');
+  const btn=document.getElementById('prznBtn'),panel=document.getElementById('prznPanel'),opts=document.getElementById('themeOpts'),
+        fbox=document.getElementById('prznFonts'),mot=document.getElementById('prznMotion'),xb=document.getElementById('prznX'),rs=document.getElementById('prznReset');
   if(!btn||!panel||!opts)return;
-  let current='sand';
-  try{const s=localStorage.getItem('ammar_theme');if(s&&THEMES[s])current=s;}catch(e){}
-  function apply(key,save){
-    const t=THEMES[key]||THEMES.sand;current=key;
+  const LS={t:'ammar_theme',f:'ammar_font',m:'ammar_motion'};
+  let curT='sand',curF='kufi',motion=true;
+  try{const a=localStorage.getItem(LS.t);if(a&&THEMES[a])curT=a;
+      const b=localStorage.getItem(LS.f);if(b&&FONTS[b])curF=b;
+      if(localStorage.getItem(LS.m)==='off')motion=false;}catch(e){}
+  function save(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function applyTheme(key,store){const t=THEMES[key]||THEMES.sand;curT=key;
     for(const k in t.v)document.documentElement.style.setProperty(k,t.v[k]);
-    if(save){try{localStorage.setItem('ammar_theme',key);}catch(e){}}
-    opts.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('on',o.getAttribute('data-k')===key));
-  }
+    if(store)save(LS.t,key);
+    opts.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('on',o.getAttribute('data-k')===key));}
+  function applyFont(key,store){const f=FONTS[key]||FONTS.kufi;curF=key;
+    document.documentElement.style.setProperty('--display',f.d+',"Segoe UI",sans-serif');
+    document.documentElement.style.setProperty('--body',f.b+',"Segoe UI",sans-serif');
+    if(store)save(LS.f,key);
+    fbox&&fbox.querySelectorAll('.przn-font').forEach(o=>o.classList.toggle('on',o.getAttribute('data-k')===key));}
+  function applyMotion(on,store){motion=on;document.documentElement.classList.toggle('no-anim',!on);
+    if(mot){mot.classList.toggle('on',on);mot.setAttribute('aria-checked',on?'true':'false');}
+    if(store)save(LS.m,on?'on':'off');}
   function build(){
-    const ar=(typeof LANG!=='undefined'&&LANG==='ar');opts.innerHTML='';
+    const ar=(typeof LANG!=='undefined'&&LANG==='ar');
+    opts.innerHTML='';
     for(const key in THEMES){const t=THEMES[key];
-      const b=document.createElement('button');b.className='theme-opt'+(key===current?' on':'');b.setAttribute('data-k',key);
+      const b=document.createElement('button');b.className='theme-opt'+(key===curT?' on':'');b.setAttribute('data-k',key);
       b.innerHTML='<span class="theme-sw" style="background:'+t.sw+'"></span><em>'+(ar?t.n:t.ne)+'</em>';
-      b.onclick=()=>{apply(key,true);};opts.appendChild(b);}
+      b.onclick=()=>applyTheme(key,true);opts.appendChild(b);}
+    if(fbox){fbox.innerHTML='';
+      for(const key in FONTS){const f=FONTS[key];
+        const b=document.createElement('button');b.className='przn-font'+(key===curF?' on':'');b.setAttribute('data-k',key);
+        b.innerHTML='<span style="font-family:'+f.d+'">'+f.pv+'</span><em>'+(ar?f.n:f.ne)+'</em>';
+        b.onclick=()=>applyFont(key,true);fbox.appendChild(b);}}
   }
-  build();apply(current,false);
+  build();applyTheme(curT,false);applyFont(curF,false);applyMotion(motion,false);
   btn.addEventListener('click',e=>{e.stopPropagation();panel.classList.toggle('open');});
-  document.addEventListener('click',e=>{if(panel.classList.contains('open')&&!panel.contains(e.target)&&e.target!==btn)panel.classList.remove('open');});
+  xb&&xb.addEventListener('click',()=>panel.classList.remove('open'));
+  mot&&mot.addEventListener('click',()=>applyMotion(!motion,true));
+  rs&&rs.addEventListener('click',()=>{applyTheme('sand',true);applyFont('kufi',true);applyMotion(true,true);});
+  document.addEventListener('click',e=>{if(panel.classList.contains('open')&&!panel.contains(e.target)&&e.target!==btn&&!btn.contains(e.target))panel.classList.remove('open');});
   const sel=document.getElementById('langSel');if(sel)sel.addEventListener('change',()=>setTimeout(build,30));
   window._rebuildThemes=build;
 })();
@@ -3289,32 +3362,40 @@ function renderSearch(){
     return out+esc2(code.slice(last));
   }
   const SNIPS=[
-    {file:'robot.lua',lang:'Luau · Roblox',code:"-- Hamad's robot in Roblox 🤖\nlocal robot = Instance.new(\"Part\")\nrobot.Name = \"RoboFriend\"\nrobot.BrickColor = BrickColor.new(\"Gold\")\nrobot.Parent = workspace\nprint(\"Hello! I am Hamad's robot 🇦🇪\")"},
-    {file:'brain.py',lang:'Python · AI',code:"# Hamad teaches a robot to think\ndef robot_brain(q):\n    if \"heritage\" in q:\n        return \"I love UAE heritage! 🇦🇪\"\n    return \"Beep boop... learning 🤖\"\n\nprint(robot_brain(\"heritage\"))"},
-    {file:'future.js',lang:'JavaScript',code:"// Hamad builds the future with code\nconst dreams = [\"code\", \"robots\", \"AI\"];\ndreams.forEach(d => console.log(\"Hamad ❤️ \" + d));\n// keep building 🚀"}
+    {file:'robot.lua',lang:'Luau · Roblox',out:"Hello! I am Hamad's robot 🇦🇪",code:"-- Hamad's robot in Roblox 🤖\nlocal robot = Instance.new(\"Part\")\nrobot.Name = \"RoboFriend\"\nrobot.BrickColor = BrickColor.new(\"Gold\")\nrobot.Parent = workspace\nprint(\"Hello! I am Hamad's robot 🇦🇪\")"},
+    {file:'brain.py',lang:'Python · AI',out:"I love UAE heritage! 🇦🇪",code:"# Hamad teaches a robot to think\ndef robot_brain(q):\n    if \"heritage\" in q:\n        return \"I love UAE heritage! 🇦🇪\"\n    return \"Beep boop... learning 🤖\"\n\nprint(robot_brain(\"heritage\"))"},
+    {file:'army.lua',lang:'Luau · Roblox',out:"Spawned 5 robots! 🤖🤖🤖🤖🤖",code:"-- Hamad spawns a robot army!\nfor i = 1, 5 do\n  local bot = Instance.new(\"Part\")\n  bot.Position = Vector3.new(i*4, 5, 0)\n  bot.Parent = workspace\nend\nprint(\"Spawned 5 robots! 🤖\")"},
+    {file:'future.js',lang:'JavaScript',out:"Hamad ❤️ code · robots · AI",code:"// Hamad builds the future with code\nconst dreams = [\"code\", \"robots\", \"AI\"];\ndreams.forEach(d => console.log(\"Hamad ❤️ \" + d));\n// keep building 🚀"},
+    {file:'hello.cpp',lang:'C++',out:"Hamad builds robots 🤖",code:"#include <iostream>\nint main() {\n  std::string name = \"Hamad\";\n  std::cout << name << \" builds robots 🤖\";\n  return 0;\n}"},
+    {file:'page.html',lang:'HTML · Web',out:"🌐 A web page by Hamad!",code:"<!-- Hamad makes websites too 🌐 -->\n<!doctype html>\n<html>\n  <body>\n    <h1>Hi, I'm Hamad 👋</h1>\n    <p>I love code & robots!</p>\n  </body>\n</html>"}
   ];
   function hamadPanel(){
     clearInterval(window._cpTimer);clearTimeout(window._cpWait);
     const enx=LANG!=='ar';
     box.innerHTML='<div class="codepanel">'+
-      '<div class="cp-head">💻🤖 '+(enx?'Hamad ❤️ Coding & Robots':'حمد ❤️ البرمجة والروبوتات')+'</div>'+
+      '<div class="cp-head"><span class="cp-robot">🤖</span> '+(enx?'Hamad ❤️ Coding & Robots':'حمد ❤️ البرمجة والروبوتات')+'</div>'+
       '<div class="cp-term"><div class="cp-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><b id="cpFile">robot.lua</b></div>'+
-      '<pre class="cp-code" id="cpCode"></pre></div>'+
+      '<div class="cp-body"><pre class="cp-gutter" id="cpGutter"></pre><pre class="cp-code" id="cpCode"></pre></div>'+
+      '<div class="cp-out" id="cpOut" hidden></div></div>'+
       '<div class="cp-langs" id="cpLangs"></div>'+
       '<div class="cp-foot"><button class="cp-btn" id="cpAsk">'+(enx?'Ask Ammar about coding & robots':'اسأل عمار عن البرمجة والروبوتات')+'</button>'+
       '<button class="cp-btn alt" id="cpNext">'+(enx?'Next snippet ▶':'كود ثاني ▶')+'</button></div></div>';
-    const codeEl=box.querySelector('#cpCode'),fileEl=box.querySelector('#cpFile'),langs=box.querySelector('#cpLangs');
+    const codeEl=box.querySelector('#cpCode'),fileEl=box.querySelector('#cpFile'),langs=box.querySelector('#cpLangs'),
+          gutEl=box.querySelector('#cpGutter'),outEl=box.querySelector('#cpOut');
     SNIPS.forEach((s,i)=>{const c=document.createElement('span');c.className='cp-lang'+(i===0?' on':'');c.textContent=s.lang;c.onclick=()=>{si=i;type();};langs.appendChild(c);});
     const chips=[...langs.querySelectorAll('.cp-lang')];
     let si=0;
     function type(){
       clearInterval(window._cpTimer);clearTimeout(window._cpWait);
       const s=SNIPS[si];fileEl.textContent=s.file;chips.forEach((c,i)=>c.classList.toggle('on',i===si));
+      outEl.hidden=true;outEl.innerHTML='';
+      const nLines=s.code.split('\n').length;gutEl.textContent=Array.from({length:nLines},(_,k)=>k+1).join('\n');
       const plain=s.code;let i=0;const step=Math.max(1,Math.round(plain.length/80));
       window._cpTimer=setInterval(()=>{
         i+=step;
         if(i>=plain.length){codeEl.innerHTML=color(plain)+'<span class="cp-cursor"></span>';clearInterval(window._cpTimer);
-          window._cpWait=setTimeout(()=>{si=(si+1)%SNIPS.length;type();},2800);return;}
+          outEl.innerHTML='<b>▶ '+(enx?'output:':'الناتج:')+'</b> '+esc2(s.out||'');outEl.hidden=false;
+          window._cpWait=setTimeout(()=>{si=(si+1)%SNIPS.length;type();},3200);return;}
         codeEl.innerHTML=esc2(plain.slice(0,i))+'<span class="cp-cursor"></span>';
       },42);
     }

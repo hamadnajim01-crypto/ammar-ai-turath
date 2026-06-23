@@ -1734,7 +1734,7 @@ const I18N={
   tool_new:'محادثة جديدة',tool_copy:'نسخ آخر رد',tool_clear:'حذف المحادثة',chat_note:'🌙 عمار قد يخطئ أحياناً — تأكد من المعلومات المهمة.',
   testi_eb:'شهادة',testi_t:'كلمةٌ <em>تسعدنا</em>',testi_sub:'آراء تلهمنا للحفاظ على تراث الإمارات وتقديمه بأبهى صورة.',testi_text:'تجربةٌ راقية تجمع تراث الإمارات الأصيل في مكانٍ واحد بأسلوبٍ عصري وذكي. كل تفصيلٍ فيها يحمل روح الهوية الوطنية ويعرّف العالم بكنوزنا — من بيوت العريش والغوص على اللؤلؤ إلى السدو والقهوة. عملٌ يستحق الفخر، ويحفظ ذاكرتنا للأجيال القادمة. 🇦🇪',testi_name:'عمار حميد الدرعي',testi_role:'مهتمّ بالتراث الإماراتي',
   rate_count:'من ٠ تقييم',rate_your:'قيّم تجربتك مع عمار AI',rate_name_ph:'اسمك',rate_text_ph:'رأيك (اختياري)',rate_submit:'أرسل تقييمك ✦',
-  share_eb:'شاركنا',share_t:'أرسل <em>صورتك من الإمارات</em>',share_sub:'عندك صورة حلوة للإمارات؟ ارفعها هنا — تظهر لك فوراً، وتوصل عمار لمراجعتها وإضافتها.',share_pick:'اختر صورتك أو اسحبها هنا',share_name_ph:'اسمك',share_cap_ph:'وصف الصورة (اختياري)',share_btn:'📤 أرسل صورتك',share_gallery:'📸 صورك المرسلة',
+  share_eb:'شاركنا',share_t:'أرسل <em>صورتك من الإمارات</em>',share_sub:'عندك صورة حلوة للإمارات؟ ارفعها هنا — تُرسَل لعمار للمراجعة، وإذا اختيرت بتُضاف للموقع.',share_pick:'اختر صورتك أو اسحبها هنا',share_name_ph:'اسمك',share_cap_ph:'وصف الصورة (اختياري)',share_btn:'📤 أرسل صورتك',share_gallery:'📸 صورك المرسلة',
   fc_txt:'اسأل عمار',
   hero_badge:'🇦🇪 موسوعة التراث الإماراتي التفاعلية',
   man_eb:'فنّ الزخرفة',man_t:'زخرفةٌ <em>إسلامية متحركة</em>',man_sub:'نجمة الخاتم التراثية — هندسةٌ تدور بلا نهاية.',
@@ -1808,7 +1808,7 @@ const I18N={
   tool_new:'New chat',tool_copy:'Copy last reply',tool_clear:'Clear chat',chat_note:'🌙 Ammar may sometimes be wrong — verify important information.',
   testi_eb:'Testimonial',testi_t:'A word that <em>delights us</em>',testi_sub:'Voices that inspire us to preserve the UAE’s heritage and present it at its finest.',testi_text:'A refined experience that brings the authentic heritage of the UAE together in one place with a modern, smart style. Every detail carries the spirit of national identity and introduces the world to our treasures — from areesh houses and pearl diving to Al Sadu and Arabic coffee. A work worthy of pride that preserves our memory for the generations to come. 🇦🇪',testi_name:'Ammar Humaid Al Dari',testi_role:'Emirati heritage enthusiast',
   rate_count:'from 0 ratings',rate_your:'Rate your experience with Ammar AI',rate_name_ph:'Your name',rate_text_ph:'Your review (optional)',rate_submit:'Submit rating ✦',
-  share_eb:'Share with us',share_t:'Send <em>your UAE photo</em>',share_sub:'Got a nice UAE photo? Upload it here — it shows up instantly and reaches Ammar for review and adding.',share_pick:'Choose your photo or drag it here',share_name_ph:'Your name',share_cap_ph:'Photo caption (optional)',share_btn:'📤 Send your photo',share_gallery:'📸 Your sent photos',
+  share_eb:'Share with us',share_t:'Send <em>your UAE photo</em>',share_sub:'Got a nice UAE photo? Upload it here — it is sent to Ammar for review, and if chosen it will be added to the site.',share_pick:'Choose your photo or drag it here',share_name_ph:'Your name',share_cap_ph:'Photo caption (optional)',share_btn:'📤 Send your photo',share_gallery:'📸 Your sent photos',
   fc_txt:'Ask Ammar',
   stat_1:'Documented photos',stat_2:'Heritage bodies',stat_3:'On UNESCO lists',stat_4:'Questions for Ammar AI',
   hero_badge:'🇦🇪 The interactive UAE heritage encyclopedia',
@@ -2733,16 +2733,11 @@ function renderSays(){
   drop.addEventListener('dragleave',()=>drop.classList.remove('drag'));
   drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('drag');
     if(e.dataTransfer.files[0]){inp.files=e.dataTransfer.files;preview(e.dataTransfer.files[0]);}});
-  function render(){const a=load();if(grid){grid.innerHTML=a.slice().reverse().map(p=>{
-      const safe=s=>(s||'').replace(/</g,'&lt;');
-      return `<div class="sh-card"><img src="${p.img}" alt=""><b>${safe(p.name)}${p.cap?`<small>${safe(p.cap)}</small>`:''}</b></div>`;}).join('');}
-    if(gtitle)gtitle.hidden=a.length===0;}
+  function render(){if(grid)grid.innerHTML='';if(gtitle)gtitle.hidden=true;} // photos are NOT shown publicly — sent to owner for review only
   form.addEventListener('submit',()=>{
-    // native submit posts the real file to FormSubmit (owner email) via hidden iframe
-    if(lastData){const a=load();a.push({img:lastData,name:(nameEl.value||'').trim()||'زائر',cap:(capEl.value||'').trim()});
-      if(a.length>16)a.shift();save(a);render();}
-    msg.style.color='var(--teal)';msg.textContent=(LANG!=='ar')?'Thank you! Your photo was sent and added below. 🌟':'شكراً لك! تم إرسال صورتك وإضافتها بالأسفل. 🌟';
-    setTimeout(()=>{prev.hidden=true;dropIn.style.display='';lastData=null;nameEl.value='';capEl.value='';inp.value='';},800);
+    // native submit posts the real file to FormSubmit (owner email) via hidden iframe — review-only, not displayed on the site
+    msg.style.color='var(--teal)';msg.textContent=(LANG!=='ar')?'Thank you! Your photo was sent for review. If chosen, it will be added. 🌟':'شكراً لك! تم إرسال صورتك للمراجعة — إذا اختيرت بتُضاف للموقع. 🌟';
+    setTimeout(()=>{prev.hidden=true;dropIn.style.display='';lastData=null;nameEl.value='';capEl.value='';inp.value='';},900);
   });
   window._renderShare=render;render();
 })();

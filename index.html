@@ -624,6 +624,40 @@
   .cp-langs{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
   .cp-lang{font-size:.75rem;color:#7fa8d8;background:rgba(80,160,255,.1);border:1px solid #25406a;padding:3px 11px;border-radius:20px;cursor:pointer;transition:.2s}
   .cp-lang.on{color:#fff;background:#3b82f6;border-color:#3b82f6}
+  /* ===== saad: peaceful easter egg ===== */
+  .peacepanel{position:relative;max-width:600px;margin:0 auto;text-align:center;border-radius:22px;overflow:hidden;
+    background:linear-gradient(180deg,#0b1a2e,#10243d 45%,#173842);padding:38px 24px 70px;animation:souqpop .5s ease;
+    box-shadow:0 20px 60px -24px rgba(0,0,0,.8)}
+  .peace-star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:twk 3s ease-in-out infinite}
+  @keyframes twk{0%,100%{opacity:.18}50%{opacity:.95}}
+  .peace-moon{position:absolute;top:22px;inset-inline-end:34px;width:52px;height:52px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#fff,#dce8f5);box-shadow:0 0 30px 8px rgba(220,232,245,.35);z-index:2}
+  .breathe{position:relative;width:150px;height:150px;margin:8px auto 20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle,rgba(120,205,215,.4),rgba(120,205,215,0) 70%);animation:breathe 8s ease-in-out infinite;z-index:2}
+  .breathe i{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(150,225,230,.45)}
+  .breathe b{font-size:2.6rem;z-index:3}
+  @keyframes breathe{0%,100%{transform:scale(.72)}50%{transform:scale(1.06)}}
+  .peace-word{color:#cdeef0;font-family:var(--display);font-size:1.7rem;position:relative;z-index:2;margin-bottom:6px}
+  .peace-sub{color:#93b9c6;position:relative;z-index:2;font-size:.96rem;line-height:1.8;max-width:380px;margin:0 auto}
+  .peace-breath-lbl{color:#bfe6ea;position:relative;z-index:2;font-size:.9rem;letter-spacing:2px;margin-bottom:14px;min-height:20px}
+  .peace-dunes{position:absolute;left:-5%;right:-5%;bottom:-10px;height:90px;z-index:1;
+    background:radial-gradient(130% 100% at 25% 100%,#1c3a40 0 50%,transparent 51%),radial-gradient(130% 100% at 78% 100%,#21454d 0 50%,transparent 51%)}
+  .peace-palm{position:absolute;bottom:36px;inset-inline-start:26px;font-size:2rem;opacity:.85;z-index:2}
+  /* ===== ammar: UAE culture easter egg ===== */
+  .culturepanel{position:relative;max-width:620px;margin:0 auto;text-align:center;border-radius:22px;overflow:hidden;
+    background:linear-gradient(165deg,rgba(74,56,33,.55),rgba(36,24,12,.78));padding:0 0 28px;animation:souqpop .5s ease;
+    border:1px solid var(--gold);box-shadow:0 20px 60px -24px rgba(0,0,0,.8)}
+  .cult-flag{display:flex;height:8px}.cult-flag i{flex:1}.cult-flag .r{background:var(--red)}.cult-flag .g{background:var(--green)}.cult-flag .w{background:#fff}.cult-flag .k{background:#111}
+  .cult-h{color:var(--gold);font-family:var(--display);font-size:1.55rem;margin:24px 16px 6px}
+  .cult-sub{color:var(--muted);font-size:.96rem;margin:0 auto 18px;max-width:420px;padding:0 18px;line-height:1.8}
+  .cult-icons{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:6px auto 20px;max-width:440px}
+  .cult-icons span{font-size:2.5rem;animation:cbob 3s ease-in-out infinite;filter:drop-shadow(0 6px 9px rgba(0,0,0,.45));cursor:default}
+  @keyframes cbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-13px) rotate(4deg)}}
+  .cult-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:0 18px;margin-bottom:6px}
+  .cult-chip{background:rgba(201,162,39,.1);border:1px solid var(--line);color:var(--paper);padding:7px 14px;border-radius:20px;font-size:.84rem;transition:.2s}
+  .cult-chip:hover{border-color:var(--gold);background:rgba(201,162,39,.18)}
+  .cult-btn{margin-top:18px;background:linear-gradient(135deg,var(--gold),#a87f1c);color:#1a1208;border:none;padding:12px 28px;border-radius:24px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s}
+  .cult-btn:hover{transform:translateY(-2px)}
   .quiz-box{max-width:640px;margin:0 auto;background:linear-gradient(165deg,rgba(74,56,33,.5),rgba(36,24,12,.6));
     border:1px solid var(--line);border-radius:22px;padding:30px 26px;box-shadow:var(--shadow);min-height:300px;position:relative;overflow:hidden}
   .quiz-prog{height:6px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:22px}
@@ -2280,9 +2314,13 @@ function addTyping(){const m=document.createElement('div');m.className='msg bot'
 function _chatSpecial(t){
   const n=s=>(s||'').toLowerCase().replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/\s+/g,' ').trim();
   const nq=n(t);
-  // exact-name easter egg: "hamad" loves coding & robots
-  if(['hamad','حمد','حمد الدرعي','hamad aldarei','hamad al darei','hamd'].includes(nq))
+  // exact-name easter eggs
+  if(['hamad','حمد','حمد الدرعي','hamad aldarei','hamad al darei','hamd'].includes(nq)) // hamad loves coding & robots
     return LANG==='ar'?'احكِ لي بحماس عن البرمجة والأكواد وكيف أبدأ، وعن الروبوتات والذكاء الاصطناعي وكيف تغيّر العالم':'Tell me enthusiastically about coding and how to start, and about robots and AI and how they’re changing the world';
+  if(['saad','سعد','sa3d','saed','سعد الدرعي'].includes(nq)) // saad is peaceful
+    return LANG==='ar'?'تكلّم معي بهدوءٍ وسكينة عن السلام الداخلي وجمال ليالي الصحراء الهادئة وكيف أرتاح وأطمئن':'Speak to me calmly and peacefully about inner peace, the beauty of quiet desert nights, and how to relax and feel serene';
+  if(['ammar','عمار','عمار الدرعي','ammar aldarei','amar'].includes(nq)) // ammar loves UAE culture
+    return LANG==='ar'?'احكِ لي عن ثقافة الإمارات وتراثها العريق بأسلوبٍ غنيٍّ وملهم — القهوة والصقارة والسدو والمجالس':'Tell me about Emirati culture and its rich heritage in an inspiring way — coffee, falconry, Al Sadu and the majlis';
   const M=[
    {k:['عمار حميد','عمار حميد الدرعي','ammar humaid'],qa:'احكِ لي عن التراث الإماراتي بالتفصيل وبأسلوبٍ شيّق',qe:'Tell me about UAE heritage in rich, engaging detail'},
    {k:['حمد نيم','حمد نعيم','حمد نجيم','hamad naim','hamad najim'],qa:'احكِ لي عن الروبوتات والذكاء الاصطناعي والتقنية الحديثة',qe:'Tell me about robots, AI and modern technology'},
@@ -3115,8 +3153,39 @@ function renderSearch(){
     {keys:['سعد حمد','saad hamad','saad hmd'],ic:'🌱',ta:'الزراعة',te:'Agriculture',da:'الزراعة والنخيل والأفلاج والاستدامة في الإمارات.',de:'Agriculture, palms, aflaj and sustainability in the UAE.',qa:'احكِ لي عن الزراعة والنخيل في الإمارات',qe:'Tell me about agriculture and palms in the UAE'}
   ];
   function special(nq){return SPECIAL.find(s=>s.keys.some(k=>{const nk=norm(k);return nq===nk||nq.includes(nk)||(nq.length>=5&&nk.includes(nq));}));}
-  // ---- "hamad" easter egg: he loves coding & robots ----
+  // ---- name easter eggs ----
   const HAMAD=['hamad','حمد','حمد الدرعي','hamad aldarei','hamad al darei','hamd','حمد الدرعى'];
+  const SAAD=['saad','سعد','sa3d','saed','saad aldarei','سعد الدرعي'];
+  const AMMAR=['ammar','عمار','ammar aldarei','عمار الدرعي','amar'];
+  function peacePanel(){
+    clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
+    const enx=LANG!=='ar';
+    let stars='';for(let i=0;i<26;i++){const x=(i*37%100),y=(i*53%70),d=(i%5);stars+='<i class="peace-star" style="left:'+x+'%;top:'+y+'%;animation-delay:'+d*0.4+'s"></i>';}
+    box.innerHTML='<div class="peacepanel">'+stars+'<div class="peace-moon"></div>'+
+      '<div class="breathe"><i></i><b>🌙</b></div>'+
+      '<div class="peace-breath-lbl" id="peaceLbl">'+(enx?'breathe in…':'شهيق…')+'</div>'+
+      '<div class="peace-word">'+(enx?'Peace & Serenity':'سلامٌ وسكينة')+'</div>'+
+      '<div class="peace-sub">'+(enx?'Saad — calm as a desert night. Take a breath, the dunes are quiet and the stars are out. 🌌':'سعد — هادئٌ كليلة الصحراء. خذ نفساً، الكثبان ساكنة والنجوم تتلألأ. 🌌')+'</div>'+
+      '<div class="peace-palm">🌴</div><div class="peace-dunes"></div></div>';
+    const lbl=box.querySelector('#peaceLbl');let on=true;
+    window._peaceTimer=setInterval(()=>{on=!on;if(lbl)lbl.textContent=on?(enx?'breathe in…':'شهيق…'):(enx?'breathe out…':'زفير…');},4000);
+  }
+  function culturePanel(){
+    clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
+    const enx=LANG!=='ar';
+    const ICONS=['🦅','☕','🐪','🕌','🌴','🗡️','🥁','🧿','🛶','🌙'];
+    let ics='';ICONS.forEach((e,i)=>{ics+='<span style="animation-delay:'+(i*0.22)+'s">'+e+'</span>';});
+    const chipsAr=['القهوة العربية','الصقارة','السدو','العَرضة','المجلس','الغوص على اللؤلؤ','الخنجر','بيت الشعر'];
+    const chipsEn=['Arabic coffee','Falconry','Al Sadu','Al Ayyala','The Majlis','Pearl diving','The Khanjar','Bedouin tent'];
+    const chips=(enx?chipsEn:chipsAr).map(c=>'<span class="cult-chip">'+c+'</span>').join('');
+    box.innerHTML='<div class="culturepanel"><div class="cult-flag"><i class="r"></i><i class="g"></i><i class="w"></i><i class="k"></i></div>'+
+      '<div class="cult-h">'+(enx?'Ammar ❤️ UAE Culture 🇦🇪':'عمار ❤️ ثقافة الإمارات 🇦🇪')+'</div>'+
+      '<div class="cult-sub">'+(enx?'Ammar adores Emirati culture — its coffee, falcons, weaving and warm majlis. A heritage that lives on.':'عمار يعشق ثقافة الإمارات — قهوتها وصقورها وسدوها ومجالسها الدافئة. تراثٌ يبقى حيّاً.')+'</div>'+
+      '<div class="cult-icons">'+ics+'</div>'+
+      '<div class="cult-chips">'+chips+'</div>'+
+      '<button class="cult-btn" id="cultAsk">'+(enx?'Discover our culture with Ammar':'اكتشف ثقافتنا مع عمار')+'</button></div>';
+    box.querySelector('#cultAsk').onclick=()=>{location.hash='#ai';setTimeout(()=>{if(window.ask)window.ask(enx?'Tell me about Emirati culture and heritage in a rich, inspiring way':'احكِ لي عن ثقافة الإمارات وتراثها بأسلوبٍ غنيٍّ وملهم');},350);};
+  }
   function esc2(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function color(code){
     const re=/(\/\/[^\n]*|--[^\n]*|#[^\n]*)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)|\b(local|function|end|if|then|else|return|const|let|var|def|print|new|in|workspace)\b|([A-Za-z_]\w*)(?=\s*\()/g;
@@ -3164,10 +3233,12 @@ function renderSearch(){
     type();
   }
   function run(){
-    clearInterval(window._cpTimer);clearTimeout(window._cpWait);
+    clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
     const nq=norm(inp.value);
     if(!nq){box.innerHTML='';return;}
     if(HAMAD.includes(nq)){hamadPanel();return;}
+    if(SAAD.includes(nq)){peacePanel();return;}
+    if(AMMAR.includes(nq)){culturePanel();return;}
     const sp=special(nq);
     if(sp){box.innerHTML='';const d=document.createElement('div');d.className='sr-item';
       d.innerHTML=`<div class="sr-thumb">${sp.ic}</div><div class="sr-b"><b>${esc(en?sp.te:sp.ta)}</b><span>${esc(en?sp.de:sp.da)}</span></div><span class="sr-tag">${en?'Ask Ammar':'اسأل عمار'}</span>`;

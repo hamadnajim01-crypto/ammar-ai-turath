@@ -525,6 +525,23 @@
   #musicBtn:hover{transform:translateY(-3px)}
   #musicBtn.playing{background:linear-gradient(135deg,#22d3ee,#7c3aed);color:#fff;border-color:transparent;animation:musPulse 1.6s ease-in-out infinite}
   @keyframes musPulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}50%{box-shadow:0 0 0 12px rgba(34,211,238,0)}}
+  /* color theme switcher */
+  #themeBtn{position:fixed;bottom:140px;left:22px;z-index:55;width:48px;height:48px;border-radius:50%;border:1px solid rgba(233,188,70,.5);
+    background:rgba(42,29,16,.75);backdrop-filter:blur(10px);color:var(--gold);cursor:pointer;display:grid;place-items:center;font-size:1.25rem;
+    transition:transform .25s;box-shadow:var(--shadow)}
+  html[dir=ltr] #themeBtn{left:auto;right:22px}
+  #themeBtn:hover{transform:translateY(-3px) rotate(18deg)}
+  #themePanel{position:fixed;bottom:140px;left:80px;z-index:56;background:rgba(36,24,12,.97);backdrop-filter:blur(14px);
+    border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);display:none;width:240px}
+  html[dir=ltr] #themePanel{left:auto;right:80px}
+  #themePanel.open{display:block;animation:souqpop .25s ease}
+  #themePanel h4{color:var(--gold);font-size:.92rem;margin-bottom:12px;text-align:center}
+  .theme-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .theme-opt{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;background:none;border:none;font-family:inherit;padding:0}
+  .theme-sw{width:42px;height:42px;border-radius:50%;border:2px solid transparent;box-shadow:0 4px 10px rgba(0,0,0,.45);transition:transform .15s,border-color .15s}
+  .theme-opt:hover .theme-sw{transform:scale(1.12)}
+  .theme-opt.on .theme-sw{border-color:var(--gold);box-shadow:0 0 0 3px rgba(233,188,70,.3)}
+  .theme-opt em{font-style:normal;font-size:.7rem;color:var(--muted)}
   /* animated Islamic geometric mandala */
   #mandala{text-align:center}
   .mandala{width:320px;height:320px;max-width:80vw;margin:6px auto 0;position:relative}
@@ -1154,6 +1171,8 @@
 <canvas id="aeConfettiCanvas" aria-hidden="true"></canvas>
 <div id="ytWrap" aria-hidden="true"><div id="ytplayer"></div></div>
 <button id="musicBtn" data-k-title="music_title" title="تشغيل أغنية تراثية" aria-label="music">🎵</button>
+<button id="themeBtn" data-k-title="theme_title" title="غيّر ألوان الموقع" aria-label="theme">🎨</button>
+<div id="themePanel"><h4 data-k="theme_h">غيّر ألوان الموقع</h4><div class="theme-opts" id="themeOpts"></div></div>
 <div id="lightbox" aria-hidden="true"><button id="lbClose" aria-label="إغلاق">✕</button><img id="lbImg" src="" alt=""></div>
 <nav>
   <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg> <span data-k="brand">عمار AI</span></div>
@@ -1867,7 +1886,7 @@ const I18N={
   fc_txt:'اسأل عمار',
   hero_badge:'🇦🇪 موسوعة التراث الإماراتي التفاعلية',
   man_eb:'فنّ الزخرفة',man_t:'زخرفةٌ <em>إسلامية متحركة</em>',man_sub:'نجمة الخاتم التراثية — هندسةٌ تدور بلا نهاية.',
-  music_title:'تشغيل أغنية تراثية',
+  music_title:'تشغيل أغنية تراثية',theme_title:'غيّر ألوان الموقع',theme_h:'اختر لون الموقع 🎨',
   prov_eb:'حكمة الأجداد',prov_t:'أمثال <em>شعبية إماراتية</em>',prov_sub:'حِكَمٌ توارثها الأجداد، تختصر تجارب الحياة في كلمات.',
   poem_eb:'بيتٌ من التراث',poem_lines:['من رمالِ الصحراء','تُولَدُ الأساطير','وتبقى خالدةً للأبد'],
   search_eb:'ابحث',search_t:'ابحث في <em>التراث</em>',search_sub:'اكتب أي كلمة (قهوة، صقر، دبي، لؤلؤ...) لتجد ما يخصّها فوراً.',search_ph:'ابحث في التراث الإماراتي...',
@@ -1943,7 +1962,7 @@ const I18N={
   stat_1:'Documented photos',stat_2:'Heritage bodies',stat_3:'On UNESCO lists',stat_4:'Questions for Ammar AI',
   hero_badge:'🇦🇪 The interactive UAE heritage encyclopedia',
   man_eb:'The art of ornament',man_t:'A living <em>Islamic pattern</em>',man_sub:'The traditional khatam star — geometry spinning endlessly.',
-  music_title:'Play heritage music',
+  music_title:'Play heritage music',theme_title:'Change site colors',theme_h:'Pick a color theme 🎨',
   prov_eb:'Wisdom of the elders',prov_t:'Emirati <em>folk proverbs</em>',prov_sub:'Sayings passed down by the ancestors, distilling life into a few words.',
   poem_eb:'A verse of heritage',poem_lines:['From the desert sands','legends are born','and live forever'],
   search_eb:'Search',search_t:'Search the <em>heritage</em>',search_sub:'Type any word (coffee, falcon, Dubai, pearl...) to instantly find what matches.',search_ph:'Search UAE heritage...',
@@ -3010,6 +3029,39 @@ function renderPoem(){
     else{wanted=true;btn.textContent='⏳';btn.title=(LANG==='ar')?'يحمّل الأغنية...':'Loading song...';}
   });
 })();
+// ===== color theme switcher =====
+const THEMES={
+  sand:{n:'رملي',ne:'Sand',sw:'linear-gradient(135deg,#E9BC46,#8B5A2B)',v:{'--bg':'#241809','--surface':'#2e2012','--line':'#5a4327','--paper':'#f4ead6','--muted':'#c9b48c','--gold':'#E9BC46','--sand':'#C2A878','--clay':'#8B5A2B','--teal':'#2A9D8F'}},
+  night:{n:'ليلي',ne:'Night',sw:'linear-gradient(135deg,#8ec5ff,#0b1424)',v:{'--bg':'#0b1424','--surface':'#13203a','--line':'#2b3f63','--paper':'#eaf1fb','--muted':'#9fb3d1','--gold':'#8ec5ff','--sand':'#6e8fc4','--clay':'#46618f','--teal':'#3fb8cc'}},
+  sunset:{n:'غروب',ne:'Sunset',sw:'linear-gradient(135deg,#ff9d5c,#a13b2c)',v:{'--bg':'#2a0f12','--surface':'#3a161a','--line':'#6b2a2f','--paper':'#fbe6d8','--muted':'#e0a68f','--gold':'#ff9d5c','--sand':'#d97b54','--clay':'#a13b2c','--teal':'#e07a5f'}},
+  oasis:{n:'واحة',ne:'Oasis',sw:'linear-gradient(135deg,#2fb39a,#356b48)',v:{'--bg':'#0e2017','--surface':'#15301f','--line':'#2d4f37','--paper':'#e8f5ea','--muted':'#a8c9b2','--gold':'#ecc46a','--sand':'#6fae84','--clay':'#356b48','--teal':'#2fb39a'}},
+  pearl:{n:'لؤلؤي',ne:'Pearl',sw:'linear-gradient(135deg,#cfe8ff,#0c2230)',v:{'--bg':'#0c2230','--surface':'#123040','--line':'#2a5366','--paper':'#eaf6fb','--muted':'#a9cdd8','--gold':'#dcc488','--sand':'#7fb0c4','--clay':'#2f6b7a','--teal':'#39b0c4'}},
+  royal:{n:'ملكي',ne:'Royal',sw:'linear-gradient(135deg,#7c3aed,#e9bc46)',v:{'--bg':'#1a1026','--surface':'#241636','--line':'#43305f','--paper':'#f0e8fb','--muted':'#bda9d6','--gold':'#e9bc46','--sand':'#9d7fc4','--clay':'#5e3a8b','--teal':'#9b6fd6'}}
+};
+(function(){
+  const btn=document.getElementById('themeBtn'),panel=document.getElementById('themePanel'),opts=document.getElementById('themeOpts');
+  if(!btn||!panel||!opts)return;
+  let current='sand';
+  try{const s=localStorage.getItem('ammar_theme');if(s&&THEMES[s])current=s;}catch(e){}
+  function apply(key,save){
+    const t=THEMES[key]||THEMES.sand;current=key;
+    for(const k in t.v)document.documentElement.style.setProperty(k,t.v[k]);
+    if(save){try{localStorage.setItem('ammar_theme',key);}catch(e){}}
+    opts.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('on',o.getAttribute('data-k')===key));
+  }
+  function build(){
+    const ar=(typeof LANG!=='undefined'&&LANG==='ar');opts.innerHTML='';
+    for(const key in THEMES){const t=THEMES[key];
+      const b=document.createElement('button');b.className='theme-opt'+(key===current?' on':'');b.setAttribute('data-k',key);
+      b.innerHTML='<span class="theme-sw" style="background:'+t.sw+'"></span><em>'+(ar?t.n:t.ne)+'</em>';
+      b.onclick=()=>{apply(key,true);};opts.appendChild(b);}
+  }
+  build();apply(current,false);
+  btn.addEventListener('click',e=>{e.stopPropagation();panel.classList.toggle('open');});
+  document.addEventListener('click',e=>{if(panel.classList.contains('open')&&!panel.contains(e.target)&&e.target!==btn)panel.classList.remove('open');});
+  const sel=document.getElementById('langSel');if(sel)sel.addEventListener('change',()=>setTimeout(build,30));
+  window._rebuildThemes=build;
+})();
 // ===== heritage quiz + certificate =====
 const QUIZ=[
  {q:'متى قام اتحاد دولة الإمارات؟',qe:'When was the UAE federation formed?',o:['٢ ديسمبر ١٩٧١','١٩٦٦','١٩٨١','١٩٩١'],oe:['2 December 1971','1966','1981','1991'],c:0},
@@ -3075,18 +3127,38 @@ function renderQuiz(){
 }
 // ===== bedouin stickers shop =====
 const SOUQ=[
- {ic:'🐪',n:'الجمل الأصيل',ne:'Noble Camel',d:'رفيق الصحراء وعز البادية',de:'Desert companion, pride of the dunes',p:8,was:12,tag:'الأكثر طلباً',tage:'Bestseller'},
- {ic:'⛺',n:'بيت الشَّعر',ne:'Bedouin Tent',d:'مأوى الكريم وظل الضيافة',de:'The generous host’s shelter',p:9,was:0,tag:'',tage:''},
- {ic:'☕',n:'دلّة القهوة',ne:'Coffee Dallah',d:'عطر الهيل وكرم الأهل',de:'Cardamom scent and warm hospitality',p:8,was:0,tag:'جديد',tage:'New'},
- {ic:'🦅',n:'الصقر المِلكي',ne:'Royal Falcon',d:'فخر الصياد وشموخ السماء',de:'Hunter’s pride, sovereign of the sky',p:10,was:0,tag:'نادر',tage:'Rare'},
- {ic:'🌴',n:'نخلة وكثبان',ne:'Palm & Dunes',d:'خضرة وسط الرمال الذهبية',de:'Green life amid golden sands',p:7,was:10,tag:'عرض',tage:'Deal'},
- {ic:'🗡️',n:'الخنجر الخليجي',ne:'Gulf Khanjar',d:'رمز العزّة والشهامة',de:'Symbol of dignity and bravery',p:10,was:0,tag:'',tage:''},
- {ic:'🔶',n:'نقش السدو',ne:'Sadu Weave',d:'ألوان التراث في خيط واحد',de:'Heritage woven in every thread',p:9,was:0,tag:'',tage:''},
- {ic:'🌌',n:'ليلة الصحراء',ne:'Desert Night',d:'نجوم البادية تملأ السماء',de:'Stars blanket the open desert sky',p:8,was:0,tag:'جديد',tage:'New'},
- {ic:'🇦🇪',n:'علم الإمارات',ne:'UAE Flag',d:'فخر الوطن وحب الديرة',de:'Pride of the homeland',p:7,was:0,tag:'',tage:''},
- {ic:'🎻',n:'الرّبابة الحنينة',ne:'Rababa Strings',d:'أنغام جدودنا في الليالي',de:'Ancestral melodies of old nights',p:9,was:0,tag:'نادر',tage:'Rare'},
- {ic:'🐑',n:'قطيع الغنم',ne:'Desert Flock',d:'بركة الديرة وعطاء الأرض',de:'The land’s blessing and simple wealth',p:6,was:0,tag:'',tage:''},
- {ic:'🎁',n:'باقة ستيكرات بدوية',ne:'Bedouin Sticker Pack',d:'١٢ ستيكر — كل التراث في باقة',de:'12 stickers — full heritage collection',p:25,was:50,tag:'باقة',tage:'Pack'}
+ {ic:'🐪',n:'الجمل الأصيل',ne:'Noble Camel',d:'رفيق الصحراء وسفينة الرمال',de:'Desert companion, ship of the sands',p:8,was:12,tag:'الأكثر طلباً',tage:'Bestseller'},
+ {ic:'⛺',n:'بيت الشعر',ne:'Bedouin Tent',d:'مأوى القبيلة تحت سماء الصحراء',de:'Tribal shelter under the desert sky',p:7,was:0,tag:'',tage:''},
+ {ic:'☕',n:'دلّة القهوة',ne:'Dallah Coffee Pot',d:'رمز الضيافة والكرم الخليجي',de:'Symbol of Gulf hospitality',p:9,was:14,tag:'الأكثر طلباً',tage:'Bestseller'},
+ {ic:'🦅',n:'الصقر الملكي',ne:'Royal Falcon',d:'طير العزّة وشعار الإمارات',de:'Bird of pride, emblem of the UAE',p:10,was:0,tag:'',tage:''},
+ {ic:'🌴',n:'النخلة الشامخة',ne:'Tall Palm Tree',d:'أمّ الثمار وأيقونة الخليج',de:'Mother of fruits, Gulf icon',p:6,was:0,tag:'',tage:''},
+ {ic:'🏜️',n:'كثبان الرمال',ne:'Sand Dunes',d:'موجات الرمال الذهبية في الغروب',de:'Golden sand waves at sunset',p:7,was:10,tag:'عرض',tage:'Deal'},
+ {ic:'🗡️',n:'الخنجر الخليجي',ne:'Gulf Khanjar',d:'رمز الشرف والأصالة العريقة',de:'Symbol of honour and heritage',p:8,was:0,tag:'',tage:''},
+ {ic:'🧶',n:'نقش السدو',ne:'Sadu Weaving',d:'فنّ النسيج البدوي بألوانه الجريئة',de:'Bold colours of Bedouin weaving art',p:9,was:13,tag:'عرض',tage:'Deal'},
+ {ic:'🌌',n:'ليلة النجوم',ne:'Starry Desert Night',d:'سماء الصحراء مرصوفة بالنجوم',de:'Desert sky paved with stars',p:8,was:0,tag:'',tage:''},
+ {ic:'🇦🇪',n:'علم الإمارات',ne:'UAE Flag',d:'فخر الوطن وعزّ الهوية',de:'Pride of nation and identity',p:6,was:0,tag:'جديد',tage:'New'},
+ {ic:'🎻',n:'الربابة',ne:'Rababa',d:'وتر البادية ونغمة السهر',de:'String of the desert night melodies',p:7,was:0,tag:'',tage:''},
+ {ic:'🐑',n:'قطيع الغنم',ne:'Sheep Flock',d:'خيرات الرزق في أرض البادية',de:'Blessed flock of the open range',p:5,was:8,tag:'عرض',tage:'Deal'},
+ {ic:'🦌',n:'المها العربي',ne:'Arabian Oryx',d:'كنز الصحراء ورمز النقاء',de:'Desert gem, symbol of purity',p:10,was:0,tag:'نادر',tage:'Rare'},
+ {ic:'🐎',n:'الحصان العربي',ne:'Arabian Horse',d:'أصيل الخيل وفخر العرب',de:'Purebred pride of the Arabs',p:10,was:15,tag:'الأكثر طلباً',tage:'Bestseller'},
+ {ic:'🪶',n:'الصقّار',ne:'Falconer',d:'حامل الصقر وصاحب الصحراء',de:'Falcon bearer, desert companion',p:9,was:0,tag:'',tage:''},
+ {ic:'🫖',n:'القهوة العربية',ne:'Arabic Coffee',d:'هيل وزعفران وكرم لا يُضاهى',de:'Cardamom, saffron, endless warmth',p:7,was:10,tag:'عرض',tage:'Deal'},
+ {ic:'🌿',n:'التمر الأخضر',ne:'Fresh Dates',d:'حلاوة الأرض ونعمة الرطب',de:'Earth sweetness, the gift of dates',p:5,was:0,tag:'',tage:''},
+ {ic:'🔥',n:'النار والخيمة',ne:'Campfire & Tent',d:'دفء البادية وقصص الليل',de:'Desert warmth and night tales',p:8,was:12,tag:'عرض',tage:'Deal'},
+ {ic:'🪔',n:'الفانوس القديم',ne:'Old Lantern',d:'نور البادية في الليالي الحالكة',de:'Desert light on dark desert nights',p:7,was:0,tag:'',tage:''},
+ {ic:'🕌',n:'المسجد العتيق',ne:'Ancient Mosque',d:'روح المكان وهدوء الروح',de:'Spirit of place, calm of soul',p:6,was:0,tag:'',tage:''},
+ {ic:'⛵',n:'البوم الشراعية',ne:'Dhow Sailboat',d:'سفينة الأجداد على موج الخليج',de:'Ancestors sail on Gulf waves',p:9,was:0,tag:'نادر',tage:'Rare'},
+ {ic:'🦪',n:'اللؤلؤ والمحار',ne:'Pearl & Oyster',d:'كنز الغوّاص وتاريخ الخليج',de:'Diver treasure, Gulf history',p:10,was:0,tag:'نادر',tage:'Rare'},
+ {ic:'🐚',n:'الصدفة البحرية',ne:'Sea Shell',d:'ذكرى الشاطئ ونسيم البحر',de:'Shore memory and sea breeze',p:5,was:7,tag:'عرض',tage:'Deal'},
+ {ic:'📿',n:'المسبحة الأصيلة',ne:'Prayer Beads',d:'سكينة اليد وذكر القلب',de:'Hand calm and heartfelt remembrance',p:7,was:0,tag:'',tage:''},
+ {ic:'🧿',n:'العين الكريمة',ne:'Evil Eye Charm',d:'حماية وبركة من عين الحاسد',de:'Protection and blessing from envy',p:6,was:9,tag:'عرض',tage:'Deal'},
+ {ic:'🌅',n:'الشمس فوق الكثبان',ne:'Sunrise Over Dunes',d:'فجر الصحراء يشعل الرمال ذهباً',de:'Desert dawn ignites the sand gold',p:8,was:0,tag:'جديد',tage:'New'},
+ {ic:'🌙',n:'هلال الليل',ne:'Desert Crescent',d:'هلال يزيّن سماء الصحراء الصافية',de:'Crescent adorns the clear desert sky',p:6,was:0,tag:'',tage:''},
+ {ic:'👘',n:'الكندورة والغترة',ne:'Kandura & Ghutra',d:'الزي الأصيل عزٌّ وأناقة',de:'Traditional dress, pride and grace',p:9,was:0,tag:'جديد',tage:'New'},
+ {ic:'🪵',n:'المبخرة والبخور',ne:'Incense Burner',d:'دخان العود يعبق المجالس والأرواح',de:'Oud smoke fills gatherings and souls',p:8,was:11,tag:'الأكثر طلباً',tage:'Bestseller'},
+ {ic:'🌹',n:'الورد الجوري',ne:'Desert Rose',d:'عطر الصحراء وجمال الطبيعة البرية',de:'Desert fragrance, wild natural beauty',p:7,was:0,tag:'',tage:''},
+ {ic:'🏺',n:'باقة الصحراء',ne:'Desert Pack',d:'ستيكرات الرمال والنخيل والجمل معاً',de:'Sand, palm and camel stickers bundle',p:25,was:35,tag:'باقة',tage:'Pack'},
+ {ic:'🪆',n:'باقة التراث',ne:'Heritage Pack',d:'أجمل رموز التراث الإماراتي في مجموعة',de:'Best UAE heritage symbols in one set',p:28,was:40,tag:'باقة',tage:'Pack'}
 ];
 let SCART={};
 function renderSouq(){

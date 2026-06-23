@@ -604,6 +604,12 @@
     padding:12px 26px;border-radius:24px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s}
   .souq-checkout:hover{transform:translateY(-2px)}
   .souq-cart-msg{color:var(--green);text-align:center;margin-top:12px;min-height:20px;font-weight:600}
+  .souq-contact-pill{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:-26px auto 34px;color:var(--muted);font-size:.92rem}
+  .souq-wa,.souq-tel{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:22px;font-weight:700;text-decoration:none;transition:transform .18s,filter .18s}
+  .souq-wa{background:linear-gradient(135deg,#25d366,#128c4b);color:#fff}
+  .souq-tel{background:rgba(201,162,39,.12);border:1px solid var(--line);color:var(--gold)}
+  .souq-wa:hover,.souq-tel:hover{transform:translateY(-2px);filter:brightness(1.06)}
+  .souq-checkout.wa{background:linear-gradient(135deg,#25d366,#128c4b);color:#fff}
   /* ===== hamad coding easter egg ===== */
   .codepanel{max-width:600px;margin:0 auto;animation:souqpop .4s ease}
   .cp-head{display:flex;align-items:center;gap:10px;justify-content:center;color:var(--gold);font-family:var(--display);font-size:1.3rem;margin-bottom:14px;text-align:center}
@@ -1726,6 +1732,11 @@
   <span class="eyebrow" data-k="souq_eb">ستيكرات بدوية</span>
   <h2 class="sec-title" data-k="souq_t" data-html>متجر <em>الستيكرات</em> البدوية</h2>
   <p class="sec-sub" data-k="souq_sub">ستيكرات بطابع الصحراء والبادية — زيّن جوالك ودفترك بأسعارٍ حلوة من القلب.</p>
+  <div class="souq-contact-pill">
+    <span data-k="souq_contact">للطلب أو الاستفسار:</span>
+    <a class="souq-wa" href="https://wa.me/971506641407" target="_blank" rel="noopener">🟢 واتساب</a>
+    <a class="souq-tel" href="tel:+971506641407" dir="ltr">📞 050 664 1407</a>
+  </div>
   <div class="souq-grid" id="souqGrid"></div>
   <div class="souq-cart" id="souqCart" hidden>
     <div class="souq-cart-head">
@@ -1736,7 +1747,7 @@
     <div class="souq-cart-items" id="souqItems"></div>
     <div class="souq-cart-foot">
       <div class="souq-cart-total"><span data-k="souq_total">الإجمالي</span>: <b id="souqTotal">0</b> <span data-k="souq_currency">د.إ</span></div>
-      <button class="souq-checkout" id="souqCheckout" data-k="souq_checkout">أرسل طلبك</button>
+      <button class="souq-checkout wa" id="souqCheckout" data-k="souq_checkout">🟢 اطلب عبر واتساب</button>
     </div>
     <p class="souq-cart-msg" id="souqMsg"></p>
   </div>
@@ -1861,7 +1872,7 @@ const I18N={
   poem_eb:'بيتٌ من التراث',poem_lines:['من رمالِ الصحراء','تُولَدُ الأساطير','وتبقى خالدةً للأبد'],
   search_eb:'ابحث',search_t:'ابحث في <em>التراث</em>',search_sub:'اكتب أي كلمة (قهوة، صقر، دبي، لؤلؤ...) لتجد ما يخصّها فوراً.',search_ph:'ابحث في التراث الإماراتي...',
   quiz_eb:'اختبر نفسك',quiz_t:'كم تعرف عن <em>تراثك؟</em>',quiz_sub:'٦ أسئلة سريعة — وفي النهاية احصل على شهادة «سفير التراث» باسمك تقدر تشاركها.',
-  souq_eb:'ستيكرات بدوية',souq_t:'متجر <em>الستيكرات</em> البدوية',souq_sub:'ستيكرات بطابع الصحراء والبادية — زيّن جوالك ودفترك بأسعارٍ حلوة من القلب.',souq_order:'اطلب الآن',souq_added:'أُضيف ✓',souq_cart:'في سلّتك',souq_total:'الإجمالي',souq_checkout:'أرسل طلبك',souq_empty:'سلّتك فارغة — أضف قطعةً تعجبك ✦',souq_sent:'وصلنا طلبك! بنتواصل معك قريباً 🌟',souq_currency:'د.إ',
+  souq_eb:'ستيكرات بدوية',souq_t:'متجر <em>الستيكرات</em> البدوية',souq_sub:'ستيكرات بطابع الصحراء والبادية — زيّن جوالك ودفترك بأسعارٍ حلوة من القلب.',souq_order:'اطلب الآن',souq_added:'أُضيف ✓',souq_cart:'في سلّتك',souq_total:'الإجمالي',souq_checkout:'🟢 اطلب عبر واتساب',souq_empty:'سلّتك فارغة — أضف ستيكر يعجبك ✦',souq_sent:'وصلنا طلبك! بنتواصل معك قريباً 🌟',souq_currency:'د.إ',souq_contact:'للطلب أو الاستفسار:',souq_wa:'فتحنا لك واتساب — أرسل الرسالة لإتمام طلبك ✅',
   wave_eb:'حروفٌ تنبض',wave_t:'تراثنا فخرنا وهويتنا',
   iris_eb:'بوابة التراث',iris_t:'بوابة الصحراء',iris_p:'من كثبان ليوا إلى أبراج الساحل — أرضٌ يلتقي فيها الماضي بالمستقبل.',iris_btn:'اكتشف مع عمار',
   torch_eb:'اكتشف بالفانوس',torch_t:'اكتشف أسرار التراث',torch_p:'حرّك المؤشر فوق المنطقة المظلمة لتكشف ما يختبئ في الظلام — تماماً كمن يستكشف بفانوسٍ وهّاج.',torch_c1:'الحصون',torch_c2:'ليالي الواحة',torch_c3:'القهوة والمجالس',torch_hint:'حرّك الفانوس ✨',
@@ -1937,7 +1948,7 @@ const I18N={
   poem_eb:'A verse of heritage',poem_lines:['From the desert sands','legends are born','and live forever'],
   search_eb:'Search',search_t:'Search the <em>heritage</em>',search_sub:'Type any word (coffee, falcon, Dubai, pearl...) to instantly find what matches.',search_ph:'Search UAE heritage...',
   quiz_eb:'Test yourself',quiz_t:'How well do you know <em>your heritage?</em>',quiz_sub:'6 quick questions — then earn your “Heritage Ambassador” certificate with your name to share.',
-  souq_eb:'Bedouin Stickers',souq_t:'The Bedouin <em>Sticker</em> Shop',souq_sub:'Desert & Bedouin-themed stickers — dress up your phone & notebook at sweet little prices.',souq_order:'Order now',souq_added:'Added ✓',souq_cart:'In your cart',souq_total:'Total',souq_checkout:'Send order',souq_empty:'Your cart is empty — add a piece you love ✦',souq_sent:'We got your order! We’ll reach out soon 🌟',souq_currency:'AED',
+  souq_eb:'Bedouin Stickers',souq_t:'The Bedouin <em>Sticker</em> Shop',souq_sub:'Desert & Bedouin-themed stickers — dress up your phone & notebook at sweet little prices.',souq_order:'Order now',souq_added:'Added ✓',souq_cart:'In your cart',souq_total:'Total',souq_checkout:'🟢 Order on WhatsApp',souq_empty:'Your cart is empty — add a sticker you love ✦',souq_sent:'We got your order! We’ll reach out soon 🌟',souq_currency:'AED',souq_contact:'To order or ask:',souq_wa:'We opened WhatsApp — send the message to place your order ✅',
   wave_eb:'Living letters',wave_t:'Our heritage, our pride',
   iris_eb:'Heritage Gateway',iris_t:'Gateway to the Desert',iris_p:'From the dunes of Liwa to the coastal towers — a land where past and future meet.',iris_btn:'Discover with Ammar',
   torch_eb:'Explore by lantern',torch_t:'Uncover heritage secrets',torch_p:'Move your cursor over the dark area to reveal what hides in the shadows — just like exploring with a glowing lantern.',torch_c1:'Forts',torch_c2:'Oasis Nights',torch_c3:'Coffee & Majlis',torch_hint:'Move the lantern ✨',
@@ -1973,7 +1984,7 @@ const I18N={
 // ---- additional languages (UI strings translated; deep content falls back to English) ----
 I18N.hi={...I18N.en, dir:'ltr', brand:'Ammar AI',
   nav_about:'विरासत', nav_camels:'ऊँट', nav_real:'तस्वीरें', nav_orgs:'विरासत निकाय', nav_souq:'बेडौइन स्टिकर', nav_ai:'अम्मार से पूछें', nav_cta:'अम्मार AI से पूछें',
-  souq_eb:'बेडौइन स्टिकर',souq_t:'बेडौइन <em>स्टिकर</em> शॉप',souq_sub:'रेगिस्तान और बेडौइन थीम वाले स्टिकर — अपने फोन और नोटबुक को सजाएँ, प्यारी कीमतों पर।',souq_order:'अभी ऑर्डर करें',souq_added:'जोड़ा गया ✓',souq_cart:'आपकी टोकरी में',souq_total:'कुल',souq_checkout:'ऑर्डर भेजें',souq_empty:'आपकी टोकरी खाली है — कोई पसंदीदा वस्तु जोड़ें ✦',souq_sent:'आपका ऑर्डर मिल गया! हम जल्द संपर्क करेंगे 🌟',souq_currency:'AED',
+  souq_eb:'बेडौइन स्टिकर',souq_t:'बेडौइन <em>स्टिकर</em> शॉप',souq_sub:'रेगिस्तान और बेडौइन थीम वाले स्टिकर — अपने फोन और नोटबुक को सजाएँ, प्यारी कीमतों पर।',souq_order:'अभी ऑर्डर करें',souq_added:'जोड़ा गया ✓',souq_cart:'आपकी टोकरी में',souq_total:'कुल',souq_checkout:'🟢 WhatsApp पर ऑर्डर करें',souq_empty:'आपकी टोकरी खाली है — कोई पसंदीदा स्टिकर जोड़ें ✦',souq_sent:'आपका ऑर्डर मिल गया! हम जल्द संपर्क करेंगे 🌟',souq_currency:'AED',souq_contact:'ऑर्डर या पूछताछ के लिए:',souq_wa:'हमने WhatsApp खोल दिया — ऑर्डर पूरा करने के लिए मैसेज भेजें ✅',
   hero_badge:'🇦🇪 इंटरैक्टिव UAE विरासत विश्वकोश', hero_h1:'अमीराती विरासत विश्वकोश',
   hero_p:'अमीरात की प्रामाणिकता में एक एनिमेटेड यात्रा — आरीश घरों और मोती गोताखोरी से अल सदू और कॉफ़ी तक। हमारे स्मार्ट सहायक से कुछ भी पूछें 🇦🇪',
   hero_b1:'खोजें', hero_b2:'🎨 अम्मार AI से पूछें',
@@ -1983,7 +1994,7 @@ I18N.hi={...I18N.en, dir:'ltr', brand:'Ammar AI',
   footer:'🇦🇪 अम्मार AI — UAE विरासत विश्वकोश · राष्ट्रीय पहचान के लिए प्यार से बनाया गया'};
 I18N.ur={...I18N.en, dir:'rtl', brand:'عمار AI',
   nav_about:'تراث', nav_camels:'اونٹ', nav_real:'تصاویر', nav_orgs:'تراثی ادارے', nav_souq:'بدوی اسٹیکرز', nav_ai:'عمار سے پوچھیں', nav_cta:'عمار AI سے پوچھیں',
-  souq_eb:'بدوی اسٹیکرز',souq_t:'بدوی <em>اسٹیکر</em> شاپ',souq_sub:'صحرائی اور بدوی تھیم والے اسٹیکرز — اپنے فون اور نوٹ بک کو سجائیں، پیاری قیمتوں پر۔',souq_order:'ابھی آرڈر کریں',souq_added:'شامل ہو گیا ✓',souq_cart:'آپ کی ٹوکری میں',souq_total:'کل',souq_checkout:'آرڈر بھیجیں',souq_empty:'آپ کی ٹوکری خالی ہے — کوئی پسندیدہ چیز شامل کریں ✦',souq_sent:'آپ کا آرڈر مل گیا! ہم جلد رابطہ کریں گے 🌟',souq_currency:'AED',
+  souq_eb:'بدوی اسٹیکرز',souq_t:'بدوی <em>اسٹیکر</em> شاپ',souq_sub:'صحرائی اور بدوی تھیم والے اسٹیکرز — اپنے فون اور نوٹ بک کو سجائیں، پیاری قیمتوں پر۔',souq_order:'ابھی آرڈر کریں',souq_added:'شامل ہو گیا ✓',souq_cart:'آپ کی ٹوکری میں',souq_total:'کل',souq_checkout:'🟢 واٹس ایپ پر آرڈر کریں',souq_empty:'آپ کی ٹوکری خالی ہے — کوئی پسندیدہ اسٹیکر شامل کریں ✦',souq_sent:'آپ کا آرڈر مل گیا! ہم جلد رابطہ کریں گے 🌟',souq_currency:'AED',souq_contact:'آرڈر یا استفسار کے لیے:',souq_wa:'ہم نے واٹس ایپ کھول دیا — آرڈر مکمل کرنے کے لیے میسج بھیجیں ✅',
   hero_badge:'🇦🇪 انٹرایکٹو اماراتی تراث انسائیکلوپیڈیا', hero_h1:'اماراتی تراث کا انسائیکلوپیڈیا',
   hero_p:'امارات کی اصالت میں ایک متحرک سفر — عریش گھروں اور موتی غوطہ خوری سے السدو اور قہوہ تک۔ ہمارے ذہین معاون سے کچھ بھی پوچھیں 🇦🇪',
   hero_b1:'دریافت کریں', hero_b2:'🎨 عمار AI سے پوچھیں',
@@ -1993,7 +2004,7 @@ I18N.ur={...I18N.en, dir:'rtl', brand:'عمار AI',
   footer:'🇦🇪 عمار AI — اماراتی تراث انسائیکلوپیڈیا · قومی شناخت کے لیے محبت سے بنایا گیا'};
 I18N.tl={...I18N.en, dir:'ltr', brand:'Ammar AI',
   nav_about:'Pamana', nav_camels:'Kamelyo', nav_real:'Mga Larawan', nav_orgs:'Mga Ahensya', nav_souq:'Bedouin Stickers', nav_ai:'Tanungin si Ammar', nav_cta:'Tanungin ang Ammar AI',
-  souq_eb:'Bedouin Stickers',souq_t:'Ang Bedouin <em>Sticker</em> Shop',souq_sub:'Mga sticker na desert at Bedouin ang tema — palamutian ang iyong telepono’t notebook sa matatamis na presyo.',souq_order:'Mag-order na',souq_added:'Naidagdag ✓',souq_cart:'Sa iyong cart',souq_total:'Kabuuan',souq_checkout:'Ipadala ang order',souq_empty:'Walang laman ang cart — magdagdag ng gusto mo ✦',souq_sent:'Natanggap ang order mo! Makikipag-ugnayan kami agad 🌟',souq_currency:'AED',
+  souq_eb:'Bedouin Stickers',souq_t:'Ang Bedouin <em>Sticker</em> Shop',souq_sub:'Mga sticker na desert at Bedouin ang tema — palamutian ang iyong telepono’t notebook sa matatamis na presyo.',souq_order:'Mag-order na',souq_added:'Naidagdag ✓',souq_cart:'Sa iyong cart',souq_total:'Kabuuan',souq_checkout:'🟢 Mag-order sa WhatsApp',souq_empty:'Walang laman ang cart — magdagdag ng sticker na gusto mo ✦',souq_sent:'Natanggap ang order mo! Makikipag-ugnayan kami agad 🌟',souq_currency:'AED',souq_contact:'Para mag-order o magtanong:',souq_wa:'Binuksan namin ang WhatsApp — ipadala ang mensahe para mag-order ✅',
   hero_badge:'🇦🇪 Interaktibong ensiklopedya ng pamana ng UAE', hero_h1:'Ensiklopedya ng Pamana ng Emirati',
   hero_p:'Isang animated na paglalakbay sa pagka-tunay ng UAE — mula sa mga bahay-areesh at pangingisda ng perlas hanggang sa Al Sadu at kape. Magtanong sa aming smart assistant 🇦🇪',
   hero_b1:'Tuklasin', hero_b2:'🎨 Tanungin ang Ammar AI',
@@ -3119,18 +3130,25 @@ function paintCart(){
 (function(){
   const btn=document.getElementById('souqCheckout');if(!btn)return;
   btn.addEventListener('click',()=>{
-    const en=LANG!=='ar';const msg=document.getElementById('souqMsg');
+    const en=LANG!=='ar';const msg=document.getElementById('souqMsg');const cur=tr(I18N[LANG].souq_currency);
+    const PHONE='971506641407'; // owner's WhatsApp / order number (050 664 1407)
     const keys=Object.keys(SCART).filter(k=>SCART[k]>0);
     if(!keys.length){if(msg){msg.style.color='var(--muted)';msg.textContent=tr(I18N[LANG].souq_empty);}return;}
-    let total=0;const lines=keys.map(k=>{const it=SOUQ[k],q=SCART[k];total+=it.p*q;return (it.n)+' ×'+q+' = '+(it.p*q)+' د.إ';});
+    let total=0;const lines=keys.map(k=>{const it=SOUQ[k],q=SCART[k];total+=it.p*q;return (en?it.ne:it.n)+' ×'+q+' = '+(it.p*q)+' '+cur;});
+    // 1) build a WhatsApp order message to the owner's number
+    const greet=en?'Hi! I would like to order from the Bedouin Sticker Shop 🎟️':'السلام عليكم 🌟 أبغى أطلب من متجر الستيكرات البدوية 🎟️';
+    const waText=greet+'\n\n'+lines.map(l=>'• '+l).join('\n')+'\n\n'+(en?'Total':'الإجمالي')+': '+total+' '+cur;
+    const wa='https://wa.me/'+PHONE+'?text='+encodeURIComponent(waText);
+    window.open(wa,'_blank','noopener');
+    // 2) also email the owner as a backup record
     fetch('https://formsubmit.co/ajax/aldry6373@gmail.com',{
       method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-      body:JSON.stringify({_subject:'🎟️ طلب ستيكرات بدوية جديد — عمار AI','الطلب':lines.join(' | '),'الإجمالي':total+' د.إ',_template:'table'})
+      body:JSON.stringify({_subject:'🎟️ طلب ستيكرات بدوية جديد — عمار AI','الطلب':lines.join(' | '),'الإجمالي':total+' '+cur,_template:'table'})
     }).catch(()=>{});
     SCART={};
     const items=document.getElementById('souqItems'),cnt=document.getElementById('souqCount'),tot=document.getElementById('souqTotal');
     if(items)items.innerHTML='';if(cnt)cnt.textContent='0';if(tot)tot.textContent='0';
-    if(msg){msg.style.color='var(--green)';msg.textContent=tr(I18N[LANG].souq_sent);}
+    if(msg){msg.style.color='var(--green)';msg.textContent=tr(I18N[LANG].souq_wa);}
   });
 })();
 // ===== heritage search =====

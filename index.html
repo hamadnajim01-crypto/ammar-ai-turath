@@ -575,6 +575,23 @@
   .przn-reset{width:100%;background:none;border:1px dashed var(--line);color:var(--muted);padding:9px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.82rem;transition:.2s}
   .przn-reset:hover{border-color:var(--gold);color:var(--gold)}
   html.no-anim *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  /* ===== name "skin": full-site transform ===== */
+  #skinFx{position:fixed;inset:0;z-index:45;pointer-events:none;overflow:hidden;display:none}
+  #skinFx.on{display:block}
+  .skin-p{position:absolute;bottom:-50px;will-change:transform,opacity;opacity:0;animation:skinUp linear infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))}
+  @keyframes skinUp{0%{transform:translateY(0) rotate(0);opacity:0}8%{opacity:.95}88%{opacity:.95}100%{transform:translateY(-120vh) rotate(300deg);opacity:0}}
+  .skin-dust{position:absolute;border-radius:50%;background:rgba(226,201,143,.7);opacity:0;will-change:transform,opacity;animation:skinDrift linear infinite}
+  @keyframes skinDrift{0%{transform:translate(-12vw,0);opacity:0}12%{opacity:.55}85%{opacity:.55}100%{transform:translate(112vw,-40px);opacity:0}}
+  #skinBar{position:fixed;top:74px;left:50%;transform:translateX(-50%);z-index:60;display:none;align-items:center;gap:12px;
+    background:rgba(20,14,7,.93);backdrop-filter:blur(12px);border:1px solid var(--gold);border-radius:30px;padding:9px 12px 9px 18px;
+    box-shadow:0 14px 40px -12px rgba(0,0,0,.7);max-width:92vw}
+  #skinBar.on{display:flex;animation:souqpop .3s ease}
+  #skinBar .skin-t{color:var(--paper);font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #skinBar .skin-x{background:rgba(255,255,255,.12);border:none;color:var(--paper);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:1.05rem;line-height:1;flex:none;transition:.2s}
+  #skinBar .skin-x:hover{background:var(--red);color:#fff}
+  .culturepanel.plants{border-color:#2fb39a}
+  .culturepanel.plants .cult-h{color:#7fe0b0}
+  .culturepanel.plants .cult-btn{background:linear-gradient(135deg,#2fb39a,#356b48);color:#eafff4}
   /* animated Islamic geometric mandala */
   #mandala{text-align:center}
   .mandala{width:320px;height:320px;max-width:80vw;margin:6px auto 0;position:relative}
@@ -1220,6 +1237,8 @@
   <div class="przn-sec"><div class="przn-row"><span data-k="przn_motion">✨ الحركة والتأثيرات</span><button class="przn-switch on" id="prznMotion" role="switch" aria-checked="true"><i></i></button></div></div>
   <button class="przn-reset" id="prznReset" data-k="przn_reset">↺ إعادة الضبط الافتراضي</button>
 </div>
+<div id="skinFx" aria-hidden="true"></div>
+<div id="skinBar" aria-live="polite"><span class="skin-t"></span><button class="skin-x" id="skinX" aria-label="exit">×</button></div>
 <div id="lightbox" aria-hidden="true"><button id="lbClose" aria-label="إغلاق">✕</button><img id="lbImg" src="" alt=""></div>
 <nav>
   <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg> <span data-k="brand">عمار AI</span></div>
@@ -2394,8 +2413,10 @@ function _chatSpecial(t){
   // exact-name easter eggs
   if(['hamad','حمد','حمد الدرعي','hamad aldarei','hamad al darei','hamd'].includes(nq)) // hamad loves coding & robots
     return LANG==='ar'?'احكِ لي بحماس عن البرمجة والأكواد وكيف أبدأ، وعن الروبوتات والذكاء الاصطناعي وكيف تغيّر العالم':'Tell me enthusiastically about coding and how to start, and about robots and AI and how they’re changing the world';
-  if(['saad','سعد','sa3d','saed','سعد الدرعي'].includes(nq)) // saad is peaceful
-    return LANG==='ar'?'تكلّم معي بهدوءٍ وسكينة عن السلام الداخلي وجمال ليالي الصحراء الهادئة وكيف أرتاح وأطمئن':'Speak to me calmly and peacefully about inner peace, the beauty of quiet desert nights, and how to relax and feel serene';
+  if(['saad','سعد','sa3d','saed','سعد الدرعي'].includes(nq)) // saad loves plants & nature
+    return LANG==='ar'?'احكِ لي عن نباتات الإمارات والطبيعة — شجرة الغاف والسدر والنخيل والأزهار الصحراوية وكيف نحافظ عليها':'Tell me about UAE plants and nature — the Ghaf, Sidr, palms and desert flowers, and how we protect them';
+  if(['thayab','ثياب','ذياب','dhiyab','dhiab','thiyab','theyab','ذئاب','diab'].includes(nq)) // thayab loves plants & nature
+    return LANG==='ar'?'احكِ لي عن نباتات الصحراء والواحات الخضراء في الإمارات وجمال الطبيعة البرية':'Tell me about desert plants and the green oases of the UAE and the beauty of wild nature';
   if(['ammar','عمار','عمار الدرعي','ammar aldarei','amar'].includes(nq)) // ammar loves UAE culture
     return LANG==='ar'?'احكِ لي عن ثقافة الإمارات وتراثها العريق بأسلوبٍ غنيٍّ وملهم — القهوة والصقارة والسدو والمجالس':'Tell me about Emirati culture and its rich heritage in an inspiring way — coffee, falconry, Al Sadu and the majlis';
   const M=[
@@ -3133,8 +3154,48 @@ const FONTS={
   rs&&rs.addEventListener('click',()=>{applyTheme('sand',true);applyFont('kufi',true);applyMotion(true,true);});
   document.addEventListener('click',e=>{if(panel.classList.contains('open')&&!panel.contains(e.target)&&e.target!==btn&&!btn.contains(e.target))panel.classList.remove('open');});
   const sel=document.getElementById('langSel');if(sel)sel.addEventListener('change',()=>setTimeout(build,30));
+  function _setVars(key){const t=THEMES[key]||THEMES.sand;for(const k in t.v)document.documentElement.style.setProperty(k,t.v[k]);}
+  window._skinTheme=function(k){_setVars(k);};        // apply a theme's colors WITHOUT changing the saved choice
+  window._restoreTheme=function(){_setVars(curT);};   // restore the user's saved color theme
   window._rebuildThemes=build;
 })();
+// ===== name "skin": typing a special name transforms the whole site =====
+const SKINS={
+  code:{theme:'night',em:['🤖','💻','⚙️','🔩','👾','🛰️','⌨️','🦾','🧠','📡','🔌','🖥️','</>','{ }'],ar:'💻🤖 وضع البرمجة والروبوتات',en:'💻🤖 Coding & Robots mode'},
+  uae:{theme:'sand',dust:true,em:['🦅','☕','🐪','🕌','🌴','🗡️','🧿','🐎','🇦🇪','🪶','⛺','🫖'],ar:'🇦🇪 وضع التراث الإماراتي',en:'🇦🇪 UAE Heritage mode'},
+  plants:{theme:'oasis',em:['🌿','🌱','🍃','🌴','🌵','🌸','🌻','🪴','🌳','☘️','🌷','🍀','🌾','🪷'],ar:'🌿 وضع النباتات والطبيعة',en:'🌿 Plants & Nature mode'}
+};
+function applySkin(key,who){
+  const s=SKINS[key];if(!s)return;
+  const fx=document.getElementById('skinFx'),bar=document.getElementById('skinBar');if(!fx||!bar)return;
+  if(window._skinTheme)window._skinTheme(s.theme);
+  if(window._activeSkin!==key){
+    fx.innerHTML='';
+    for(let i=0;i<26;i++){const e=document.createElement('span');e.className='skin-p';
+      e.textContent=s.em[i%s.em.length];
+      e.style.left=((i*37+i*i*7)%100)+'%';
+      const big=i%3===0;e.style.fontSize=(big?(1.7+(i%4)*0.35):(0.85+(i%4)*0.22))+'rem';
+      const dur=9+((i*7)%13);e.style.animationDuration=dur+'s';e.style.animationDelay='-'+((i*5)%dur)+'s';
+      fx.appendChild(e);}
+    if(s.dust){for(let i=0;i<22;i++){const d=document.createElement('i');d.className='skin-dust';
+      d.style.top=((i*43+i*i*3)%100)+'%';const sz=2+(i%4);d.style.width=sz+'px';d.style.height=sz+'px';
+      const du=6+((i*5)%9);d.style.animationDuration=du+'s';d.style.animationDelay='-'+((i*4)%du)+'s';
+      fx.appendChild(d);}}
+    window._activeSkin=key;
+  }
+  fx.classList.add('on');
+  const ar=(typeof LANG!=='undefined'&&LANG==='ar');
+  bar.querySelector('.skin-t').textContent=(ar?s.ar:s.en)+(who?(' — '+who):'');
+  bar.classList.add('on');
+}
+function clearSkin(){
+  const fx=document.getElementById('skinFx'),bar=document.getElementById('skinBar');
+  if(fx){fx.classList.remove('on');fx.innerHTML='';}
+  if(bar)bar.classList.remove('on');
+  window._activeSkin=null;
+  if(window._restoreTheme)window._restoreTheme();
+}
+(function(){const x=document.getElementById('skinX');if(x)x.addEventListener('click',clearSkin);})();
 // ===== heritage quiz + certificate =====
 const QUIZ=[
  {q:'متى قام اتحاد دولة الإمارات؟',qe:'When was the UAE federation formed?',o:['٢ ديسمبر ١٩٧١','١٩٦٦','١٩٨١','١٩٩١'],oe:['2 December 1971','1966','1981','1991'],c:0},
@@ -3320,18 +3381,23 @@ function renderSearch(){
   const HAMAD=['hamad','حمد','حمد الدرعي','hamad aldarei','hamad al darei','hamd','حمد الدرعى'];
   const SAAD=['saad','سعد','sa3d','saed','saad aldarei','سعد الدرعي'];
   const AMMAR=['ammar','عمار','ammar aldarei','عمار الدرعي','amar'];
-  function peacePanel(){
+  const THAYAB=['thayab','ثياب','ذياب','dhiyab','dhiab','thiyab','theyab','ذئاب','diab'];
+  function plantsPanel(who){
     clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
     const enx=LANG!=='ar';
-    let stars='';for(let i=0;i<26;i++){const x=(i*37%100),y=(i*53%70),d=(i%5);stars+='<i class="peace-star" style="left:'+x+'%;top:'+y+'%;animation-delay:'+d*0.4+'s"></i>';}
-    box.innerHTML='<div class="peacepanel">'+stars+'<div class="peace-moon"></div>'+
-      '<div class="breathe"><i></i><b>🌙</b></div>'+
-      '<div class="peace-breath-lbl" id="peaceLbl">'+(enx?'breathe in…':'شهيق…')+'</div>'+
-      '<div class="peace-word">'+(enx?'Peace & Serenity':'سلامٌ وسكينة')+'</div>'+
-      '<div class="peace-sub">'+(enx?'Saad — calm as a desert night. Take a breath, the dunes are quiet and the stars are out. 🌌':'سعد — هادئٌ كليلة الصحراء. خذ نفساً، الكثبان ساكنة والنجوم تتلألأ. 🌌')+'</div>'+
-      '<div class="peace-palm">🌴</div><div class="peace-dunes"></div></div>';
-    const lbl=box.querySelector('#peaceLbl');let on=true;
-    window._peaceTimer=setInterval(()=>{on=!on;if(lbl)lbl.textContent=on?(enx?'breathe in…':'شهيق…'):(enx?'breathe out…':'زفير…');},4000);
+    const ICONS=['🌿','🌴','🌵','🌱','🍃','🌾','🪴','🌳','🌸','🌻'];
+    let ics='';ICONS.forEach((e,i)=>{ics+='<span style="animation-delay:'+(i*0.2)+'s">'+e+'</span>';});
+    const chipsAr=['الغاف','السدر','النخيل','الرمث','الأرطى','الشوع','القرض','العوسج'];
+    const chipsEn=['Ghaf','Sidr','Palm','Rimth','Arta','Shua','Qaradh','Awsaj'];
+    const chips=(enx?chipsEn:chipsAr).map(c=>'<span class="cult-chip">'+c+'</span>').join('');
+    const nm=who||(enx?'Saad':'سعد');
+    box.innerHTML='<div class="culturepanel plants">'+
+      '<div class="cult-h">🌿 '+nm+' '+(enx?'❤️ Plants & Nature':'❤️ النباتات والطبيعة')+'</div>'+
+      '<div class="cult-sub">'+(enx?'A green soul — palms, Ghaf trees and desert blossoms. Nature that brings calm and life. 🌱':'روحٌ خضراء — نخيلٌ وأشجار غاف وأزهار الصحراء. طبيعةٌ تبعث الهدوء والحياة. 🌱')+'</div>'+
+      '<div class="cult-icons">'+ics+'</div>'+
+      '<div class="cult-chips">'+chips+'</div>'+
+      '<button class="cult-btn" id="cultAsk">'+(enx?'Explore desert plants with Ammar':'اكتشف نباتات الصحراء مع عمار')+'</button></div>';
+    box.querySelector('#cultAsk').onclick=()=>{location.hash='#ai';setTimeout(()=>{if(window.ask)window.ask(enx?'Tell me about UAE desert plants and nature — the Ghaf, Sidr and palms — in an inspiring way':'احكِ لي عن نباتات الإمارات والطبيعة — الغاف والسدر والنخيل — بأسلوبٍ ملهم');},350);};
   }
   function culturePanel(){
     clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
@@ -3407,9 +3473,10 @@ function renderSearch(){
     clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
     const nq=norm(inp.value);
     if(!nq){box.innerHTML='';return;}
-    if(HAMAD.includes(nq)){hamadPanel();return;}
-    if(SAAD.includes(nq)){peacePanel();return;}
-    if(AMMAR.includes(nq)){culturePanel();return;}
+    if(HAMAD.includes(nq)){applySkin('code',en?'Hamad':'حمد');hamadPanel();return;}
+    if(AMMAR.includes(nq)){applySkin('uae',en?'Ammar':'عمار');culturePanel();return;}
+    if(SAAD.includes(nq)){applySkin('plants',en?'Saad':'سعد');plantsPanel(en?'Saad':'سعد');return;}
+    if(THAYAB.includes(nq)){applySkin('plants',en?'Thayab':'ذياب');plantsPanel(en?'Thayab':'ذياب');return;}
     const sp=special(nq);
     if(sp){box.innerHTML='';const d=document.createElement('div');d.className='sr-item';
       d.innerHTML=`<div class="sr-thumb">${sp.ic}</div><div class="sr-b"><b>${esc(en?sp.te:sp.ta)}</b><span>${esc(en?sp.de:sp.da)}</span></div><span class="sr-tag">${en?'Ask Ammar':'اسأل عمار'}</span>`;

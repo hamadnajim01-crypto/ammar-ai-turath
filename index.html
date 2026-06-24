@@ -592,6 +592,9 @@
   .culturepanel.plants{border-color:#2fb39a}
   .culturepanel.plants .cult-h{color:#7fe0b0}
   .culturepanel.plants .cult-btn{background:linear-gradient(135deg,#2fb39a,#356b48);color:#eafff4}
+  .culturepanel.teach{border-color:#a78bfa}
+  .culturepanel.teach .cult-h{color:#c9b3ff}
+  .culturepanel.teach .cult-btn{background:linear-gradient(135deg,#7c3aed,#4c1d95);color:#fff}
   /* ===== skin scene: animated people + buildings ===== */
   #skinScene{position:fixed;left:0;right:0;bottom:0;height:142px;z-index:44;pointer-events:none;display:none}
   #skinScene.on{display:block}
@@ -628,6 +631,14 @@
   @keyframes armPlantR{0%,100%{transform:rotate(-55deg)}50%{transform:rotate(-105deg)}}
   .fig-laptop{position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:18px;height:6px;background:#10243d;border:1px solid var(--gold);border-radius:2px;z-index:3}
   .fig-prop{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);font-size:1rem;z-index:3}
+  .fig.point .fig-arm.l{animation:armPoint 1.8s ease-in-out infinite}
+  .fig.point .fig-arm.r{transform:rotate(-18deg)}
+  @keyframes armPoint{0%,100%{transform:rotate(150deg)}50%{transform:rotate(132deg)}}
+  .scn-board{width:122px;height:74px;flex:none;background:#0c1320;border:2px solid var(--gold);border-radius:8px;padding:9px 10px;
+    display:flex;flex-direction:column;gap:6px;justify-content:center;box-shadow:0 8px 18px rgba(0,0,0,.45);align-self:flex-end;margin-bottom:6px}
+  .scn-board.big{width:152px;height:92px}
+  .scn-board i{height:5px;border-radius:2px;background:#7ee787;opacity:.85;animation:winBlink 2.4s steps(1) infinite}
+  .scn-board i:nth-child(2){background:#8ec5ff}.scn-board i:nth-child(3){background:#ffd479}.scn-board i:nth-child(4){background:#ff9d6c}.scn-board i:nth-child(5){background:#c9a2ff}
   /* project poster / signature art */
   #poster .poster-frame{max-width:470px;margin:0 auto;padding:14px;cursor:zoom-in;position:relative;
     background:linear-gradient(165deg,rgba(244,234,214,.07),rgba(36,24,12,.45));border:1px solid var(--gold);
@@ -2538,6 +2549,8 @@ function _chatSpecial(t){
     return LANG==='ar'?'احكِ لي عن نباتات الصحراء والواحات الخضراء في الإمارات وجمال الطبيعة البرية':'Tell me about desert plants and the green oases of the UAE and the beauty of wild nature';
   if(['ammar','عمار','عمار الدرعي','ammar aldarei','amar'].includes(nq)) // ammar loves UAE culture
     return LANG==='ar'?'احكِ لي عن ثقافة الإمارات وتراثها العريق بأسلوبٍ غنيٍّ وملهم — القهوة والصقارة والسدو والمجالس':'Tell me about Emirati culture and its rich heritage in an inspiring way — coffee, falconry, Al Sadu and the majlis';
+  if(['abdalla','abdullah','abdalah','abdallah','عبدالله','عبد الله','عبداله','3abdullah','abood'].includes(nq)) // abdalla teaches coding
+    return LANG==='ar'?'احكِ لي كيف أتعلّم البرمجة من الصفر مع معلّمٍ ممتاز وأدوات مثل Claude AI، وأعطني خطة وخطوات أولى ملهمة':'Teach me how to learn coding from scratch with a great mentor and tools like Claude AI — give me an inspiring plan and first steps';
   const M=[
    {k:['عمار حميد','عمار حميد الدرعي','ammar humaid'],qa:'احكِ لي عن التراث الإماراتي بالتفصيل وبأسلوبٍ شيّق',qe:'Tell me about UAE heritage in rich, engaging detail'},
    {k:['حمد نيم','حمد نعيم','حمد نجيم','hamad naim','hamad najim'],qa:'احكِ لي عن الروبوتات والذكاء الاصطناعي والتقنية الحديثة',qe:'Tell me about robots, AI and modern technology'},
@@ -3282,7 +3295,8 @@ const FONTS={
 const SKINS={
   code:{theme:'night',em:['🤖','💻','⚙️','🔩','👾','🛰️','⌨️','🦾','🧠','📡','🔌','🖥️','</>','{ }'],ar:'💻🤖 وضع البرمجة والروبوتات',en:'💻🤖 Coding & Robots mode'},
   uae:{theme:'sand',dust:true,em:['🦅','☕','🐪','🕌','🌴','🗡️','🧿','🐎','🇦🇪','🪶','⛺','🫖'],ar:'🇦🇪 وضع التراث الإماراتي',en:'🇦🇪 UAE Heritage mode'},
-  plants:{theme:'oasis',em:['🌿','🌱','🍃','🌴','🌵','🌸','🌻','🪴','🌳','☘️','🌷','🍀','🌾','🪷'],ar:'🌿 وضع النباتات والطبيعة',en:'🌿 Plants & Nature mode'}
+  plants:{theme:'oasis',em:['🌿','🌱','🍃','🌴','🌵','🌸','🌻','🪴','🌳','☘️','🌷','🍀','🌾','🪷'],ar:'🌿 وضع النباتات والطبيعة',en:'🌿 Plants & Nature mode'},
+  teach:{theme:'royal',em:['🧑‍🏫','💻','📚','💡','⌨️','🎓','🤖','</>','📝','🧠','✏️','🔢','💾','📐'],ar:'👨‍🏫 وضع تعلّم البرمجة',en:'👨‍🏫 Learn to Code mode'}
 };
 function applySkin(key,who){
   const s=SKINS[key];if(!s)return;
@@ -3290,11 +3304,11 @@ function applySkin(key,who){
   if(window._skinTheme)window._skinTheme(s.theme);
   if(window._activeSkin!==key){
     fx.innerHTML='';
-    for(let i=0;i<26;i++){const e=document.createElement('span');e.className='skin-p';
+    for(let i=0;i<32;i++){const e=document.createElement('span');e.className='skin-p';
       e.textContent=s.em[i%s.em.length];
       e.style.left=((i*37+i*i*7)%100)+'%';
-      const big=i%3===0;e.style.fontSize=(big?(1.7+(i%4)*0.35):(0.85+(i%4)*0.22))+'rem';
-      const dur=9+((i*7)%13);e.style.animationDuration=dur+'s';e.style.animationDelay='-'+((i*5)%dur)+'s';
+      const big=i%3===0;e.style.fontSize=(big?(1.8+(i%5)*0.32):(0.8+(i%4)*0.22))+'rem';
+      const dur=8+((i*7)%14);e.style.animationDuration=dur+'s';e.style.animationDelay='-'+((i*5)%dur)+'s';
       fx.appendChild(e);}
     if(s.dust){for(let i=0;i<22;i++){const d=document.createElement('i');d.className='skin-dust';
       d.style.top=((i*43+i*i*3)%100)+'%';const sz=2+(i%4);d.style.width=sz+'px';d.style.height=sz+'px';
@@ -3311,17 +3325,24 @@ function applySkin(key,who){
 function buildScene(key){
   const scene=document.getElementById('skinScene');if(!scene)return;
   function fig(pose,color,prop){return '<div class="fig-wrap"><div class="fig '+pose+'" style="--sk:'+color+'"><div class="fig-head"></div><div class="fig-body"><span class="fig-arm l"></span><span class="fig-arm r"></span></div><div class="fig-leg l"></div><div class="fig-leg r"></div>'+(prop||'')+'</div></div>';}
+  function board(big){return '<div class="scn-board'+(big?' big':'')+'"><i style="width:72%"></i><i style="width:88%"></i><i style="width:56%"></i><i style="width:80%"></i><i style="width:64%"></i></div>';}
   let sky='',ground='';
   if(key==='code'){
-    [78,98,60,86,70,94].forEach((h,i)=>{sky+='<div class="bld'+(i%3===1?' tower':'')+'" style="height:'+h+'px">'+'<i></i>'.repeat(6)+'</div>';});
-    ['#8ec5ff','#7ee787','#ffd479','#ff9d6c'].forEach(c=>ground+=fig('type',c,'<div class="fig-laptop"></div>'));
+    [78,98,60,86,70,94,66].forEach((h,i)=>{sky+='<div class="bld'+(i%3===1?' tower':'')+'" style="height:'+h+'px">'+'<i></i>'.repeat(6)+'</div>';});
+    sky+=board(false);
+    ['#8ec5ff','#7ee787','#ffd479','#ff9d6c','#c9a2ff','#5eead4'].forEach(c=>ground+=fig('type',c,'<div class="fig-laptop"></div>'));
+  }else if(key==='teach'){
+    sky+=board(true);
+    [60,80,54,72].forEach((h,i)=>{sky+='<div class="bld tower" style="height:'+h+'px">'+'<i></i>'.repeat(4)+'</div>';});
+    ground+=fig('point','#c9a2ff','<div class="fig-prop">🎓</div>');
+    ['#8ec5ff','#7ee787','#ffd479','#ff9d6c','#5eead4'].forEach(c=>ground+=fig('type',c,'<div class="fig-laptop"></div>'));
   }else if(key==='uae'){
-    [70,90,58,80,66].forEach((h,i)=>{sky+='<div class="bld'+(i%2?' tower':'')+'" style="height:'+h+'px">'+'<i></i>'.repeat(4)+'</div>';});
+    [70,90,58,80,66,52].forEach((h,i)=>{sky+='<div class="bld'+(i%2?' tower':'')+'" style="height:'+h+'px">'+'<i></i>'.repeat(4)+'</div>';});
     sky+='<div class="tree">🕌</div>';
-    ['#E9BC46','#f4ead6','#C2A878','#e9bc46'].forEach(c=>ground+=fig('wave',c,''));
+    ['#E9BC46','#f4ead6','#C2A878','#e9bc46','#f4ead6','#C2A878'].forEach((c,i)=>ground+=fig('wave',c,i===2?'<div class="fig-prop">🥁</div>':''));
   }else{
-    sky='<div class="tree">🌴</div><div class="tree">🌳</div><div class="tree">🌴</div><div class="tree">🌲</div><div class="tree">🌴</div>';
-    ['#7ee0b0','#2fb39a','#9be7c4','#6fae84'].forEach(c=>ground+=fig('plant',c,'<div class="fig-prop">🌱</div>'));
+    sky='<div class="tree">🌴</div><div class="tree">🌳</div><div class="tree">🌴</div><div class="tree">🌲</div><div class="tree">🌴</div><div class="tree">🌴</div>';
+    ['#7ee0b0','#2fb39a','#9be7c4','#6fae84','#5eead4','#86efac'].forEach((c,i)=>ground+=fig('plant',c,'<div class="fig-prop">'+(i===1?'🚿':i===4?'🌳':'🌱')+'</div>'));
   }
   scene.innerHTML='<div class="scn-sky">'+sky+'</div><div class="scn-ground">'+ground+'</div>';
   scene.classList.add('on');
@@ -3514,6 +3535,23 @@ function renderSearch(){
   const SAAD=['saad','سعد','sa3d','saed','saad aldarei','سعد الدرعي'];
   const AMMAR=['ammar','عمار','ammar aldarei','عمار الدرعي','amar'];
   const THAYAB=['thayab','ثياب','ذياب','dhiyab','dhiab','thiyab','theyab','ذئاب','diab'];
+  const ABDALLA=['abdalla','abdullah','abdalah','abdallah','عبدالله','عبد الله','عبداله','3abdullah','abood'];
+  function abdallaPanel(){
+    clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
+    const enx=LANG!=='ar';
+    const ICONS=['🧑‍🏫','💻','📚','💡','⌨️','🎓','🤖','🧠'];
+    let ics='';ICONS.forEach((e,i)=>{ics+='<span style="animation-delay:'+(i*0.2)+'s">'+e+'</span>';});
+    const chipsAr=['المتغيّرات','الدوال','الحلقات','الشروط','المنطق','أول كود','Claude AI','الذكاء الاصطناعي'];
+    const chipsEn=['Variables','Functions','Loops','Conditions','Logic','First code','Claude AI','AI'];
+    const chips=(enx?chipsEn:chipsAr).map(c=>'<span class="cult-chip">'+c+'</span>').join('');
+    box.innerHTML='<div class="culturepanel teach">'+
+      '<div class="cult-h">👨‍🏫 '+(enx?'Abdalla ❤️ Teaching Code':'عبدالله ❤️ تعليم البرمجة')+'</div>'+
+      '<div class="cult-sub">'+(enx?'Abdalla is the one who taught me how to use Claude and how to code — a mentor who turns curiosity into real skill. 💡':'عبدالله هو اللي علّمني كيف أستخدم Claude وكيف أبرمج — معلّمٌ يحوّل الفضول إلى مهارةٍ حقيقية. شكراً يا معلّم 💡')+'</div>'+
+      '<div class="cult-icons">'+ics+'</div>'+
+      '<div class="cult-chips">'+chips+'</div>'+
+      '<button class="cult-btn" id="cultAsk">'+(enx?'Learn to code with Ammar':'تعلّم البرمجة مع عمار')+'</button></div>';
+    box.querySelector('#cultAsk').onclick=()=>{location.hash='#ai';setTimeout(()=>{if(window.ask)window.ask(enx?'I want to learn to code from scratch with a great teacher and tools like Claude AI — guide me with a clear, inspiring plan':'أبغى أتعلّم البرمجة من الصفر مع معلّمٍ ممتاز وأدوات مثل Claude AI — اشرح لي خطة واضحة وملهمة');},350);};
+  }
   function plantsPanel(who){
     clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
     const enx=LANG!=='ar';
@@ -3606,6 +3644,7 @@ function renderSearch(){
     const nq=norm(inp.value);
     if(!nq){box.innerHTML='';return;}
     if(HAMAD.includes(nq)){applySkin('code',en?'Hamad':'حمد');hamadPanel();return;}
+    if(ABDALLA.includes(nq)){applySkin('teach',en?'Abdalla':'عبدالله');abdallaPanel();return;}
     if(AMMAR.includes(nq)){applySkin('uae',en?'Ammar':'عمار');culturePanel();return;}
     if(SAAD.includes(nq)){applySkin('plants',en?'Saad':'سعد');plantsPanel(en?'Saad':'سعد');return;}
     if(THAYAB.includes(nq)){applySkin('plants',en?'Thayab':'ذياب');plantsPanel(en?'Thayab':'ذياب');return;}

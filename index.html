@@ -637,15 +637,41 @@
   #poster .poster-frame img{width:100%;display:block;border-radius:14px;transition:transform .4s}
   #poster .poster-frame:hover img{transform:scale(1.03)}
   #poster figcaption{text-align:center;color:var(--gold);font-family:var(--display);font-size:.95rem;margin-top:12px}
+  /* animated UAE sky banner */
+  #skyhero{position:relative;height:clamp(280px,42vw,430px);overflow:hidden;margin:10px 0;border-radius:0;max-width:none;padding:0}
+  .sky-grad{position:absolute;inset:0;background:linear-gradient(180deg,#3a2350 0%,#5b2f63 28%,#8a3d57 55%,#c9663f 80%,#e89a4d 100%);animation:sky-cycle 32s ease-in-out infinite}
+  @keyframes sky-cycle{0%{filter:hue-rotate(0deg) saturate(1) brightness(1)}35%{filter:hue-rotate(-18deg) saturate(.95) brightness(.78)}65%{filter:hue-rotate(190deg) saturate(.7) brightness(.42)}100%{filter:hue-rotate(0deg) saturate(1) brightness(1)}}
+  .sky-sun{position:absolute;top:15%;inset-inline-end:14%;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(255,236,190,.95),rgba(255,196,120,.5) 38%,transparent 70%);filter:blur(2px);animation:sky-sun 32s ease-in-out infinite}
+  @keyframes sky-sun{0%{transform:translateY(0) scale(1);opacity:.95}35%{transform:translateY(26px) scale(.9);opacity:.6}65%{transform:translateY(70px) scale(.7);opacity:.25}100%{transform:translateY(0) scale(1);opacity:.95}}
+  .sky-stars{position:absolute;inset:0;opacity:0;animation:sky-stars 32s ease-in-out infinite}
+  @keyframes sky-stars{0%,30%{opacity:0}62%{opacity:1}90%,100%{opacity:0}}
+  .sky-star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;box-shadow:0 0 4px 1px rgba(255,255,255,.7);animation:sky-tw 3.4s ease-in-out infinite}
+  @keyframes sky-tw{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.25)}}
+  .sky-falcon{position:absolute;top:24%;inset-inline-start:0;width:52px;color:rgba(20,16,40,.6);opacity:0;animation:sky-falcon 20s linear infinite}
+  .sky-falcon svg{display:block;width:100%;height:auto;fill:currentColor;animation:sky-flap 1.05s ease-in-out infinite}
+  @keyframes sky-falcon{0%{transform:translateX(-12vw) translateY(0);opacity:0}6%{opacity:.9}50%{transform:translateX(55vw) translateY(-22px)}94%{opacity:.9}100%{transform:translateX(120vw) translateY(8px);opacity:0}}
+  @keyframes sky-flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.6)}}
+  [dir=rtl] .sky-falcon{animation-name:sky-falcon-rtl}
+  [dir=rtl] .sky-falcon svg{transform:scaleX(-1)}
+  @keyframes sky-falcon-rtl{0%{transform:translateX(12vw) translateY(0);opacity:0}6%{opacity:.9}50%{transform:translateX(-55vw) translateY(-22px)}94%{opacity:.9}100%{transform:translateX(-120vw) translateY(8px);opacity:0}}
+  .sky-palm{position:absolute;bottom:30%;font-size:2.4rem;z-index:2;filter:drop-shadow(0 4px 5px rgba(0,0,0,.4));opacity:.92}
+  .sky-dunes{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:1}
+  .sky-dunes svg{position:absolute;bottom:0;width:100%;height:100%;display:block;fill:#241809}
+  .sky-cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;padding:0 18px}
+  .sky-cap h2{color:#fff;font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.3rem);text-shadow:0 3px 16px rgba(0,0,0,.55);margin:0}
+  .sky-cap p{color:rgba(255,255,255,.92);margin-top:8px;font-size:clamp(.9rem,2.5vw,1.05rem);text-shadow:0 2px 10px rgba(0,0,0,.55);max-width:560px}
   /* heritage pieces (cropped from poster) */
-  .pieces-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px;max-width:1100px;margin:0 auto}
+  .pieces-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:20px;max-width:1100px;margin:0 auto;align-items:start}
   .piece{background:linear-gradient(165deg,rgba(244,234,214,.06),rgba(36,24,12,.4));border:1px solid var(--line);border-radius:18px;
-    overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;opacity:0;transform:translateY(20px)}
+    padding:12px;transition:transform .25s,border-color .25s,box-shadow .25s;opacity:0;transform:translateY(20px)}
   .piece.in{opacity:1;transform:none}
   .piece:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px -16px rgba(0,0,0,.6)}
-  .piece-img{width:100%;min-height:120px;background-repeat:no-repeat;background-color:#f4ead6;border-bottom:1px solid var(--line)}
-  .piece:hover .piece-img{filter:saturate(1.08)}
-  .piece-b{padding:12px 15px;display:flex;flex-direction:column}
+  .piece-img{width:100%;min-height:110px;background-repeat:no-repeat;background-color:#fff;border-radius:13px;
+    box-shadow:inset 0 0 0 3px #fff,0 6px 16px rgba(0,0,0,.32);transition:transform .3s,filter .25s}
+  .pieces-grid .piece:nth-child(2n) .piece-img{transform:rotate(-1.6deg)}
+  .pieces-grid .piece:nth-child(2n+1) .piece-img{transform:rotate(1.4deg)}
+  .piece:hover .piece-img{transform:rotate(0deg) scale(1.03);filter:saturate(1.08)}
+  .piece-b{padding:12px 4px 2px;display:flex;flex-direction:column}
   .piece-b h3{color:var(--gold);font-size:1.02rem;font-family:var(--display);margin-bottom:3px}
   .piece-b p{color:var(--muted);font-size:.82rem;line-height:1.6;flex:1;margin-bottom:10px}
   .piece-price{display:flex;align-items:baseline;gap:5px;margin-bottom:10px}
@@ -1412,6 +1438,21 @@
  </div>
 </section>
 
+<!-- ANIMATED UAE SKY BANNER (inspired by UAE Jobs hero) -->
+<section id="skyhero" aria-label="UAE sky">
+  <div class="sky-grad"></div>
+  <div class="sky-sun"></div>
+  <div class="sky-stars" id="skyStars"></div>
+  <div class="sky-falcon"><svg viewBox="0 0 64 24"><path d="M2 12 Q16 2 30 12 Q44 2 62 12 Q44 14 30 13 Q16 14 2 12 Z"/></svg></div>
+  <div class="sky-palm" style="inset-inline-start:7%">🌴</div>
+  <div class="sky-palm" style="inset-inline-end:11%;font-size:2rem">🌴</div>
+  <div class="sky-dunes"><svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0,200 L0,128 Q200,72 420,116 Q640,158 840,96 Q1010,44 1200,108 L1200,200 Z"/></svg></div>
+  <div class="sky-cap">
+    <h2 data-k="sky_t">تحت سماء الإمارات</h2>
+    <p data-k="sky_p">من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.</p>
+  </div>
+</section>
+
 <!-- PROJECT POSTER / SIGNATURE ART -->
 <section id="poster">
   <span class="eyebrow" data-k="poster_eb">لوحة المشروع</span>
@@ -1991,6 +2032,7 @@ const I18N={
   about_eb:'الهوية الوطنية',about_t:'عن <em>التراث الإماراتي</em>',
   poster_eb:'لوحة المشروع',poster_t:'عمّار <em>AI</em> — من القوع نروي تراثنا',poster_sub:'لوحةٌ تجمع روح المشروع: التراث، والأصالة، والهوية. اضغط لتكبيرها.',poster_cap:'عمّار AI · مشروعي.. تراثي.. هويتي 🇦🇪',
   pieces_eb:'ستيكرات التراث',pieces_t:'ستيكرات <em>تراثنا</em>',pieces_sub:'ستيكرات فنية مقصوصة من لوحة عمّار AI — اطلب اللي يعجبك بأسعارٍ حلوة.',
+  sky_t:'تحت سماء الإمارات',sky_p:'من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
   about_p3:'اليوم، تحرص دولة الإمارات على <b>صون هذا التراث</b> وتوثيقه ونقله للأجيال — وقد أدرجت منظمة اليونسكو عناصر إماراتية كثيرة على قوائم التراث الإنساني، من <b>القهوة العربية</b> و<b>السدو</b> و<b>الصقارة</b> إلى <b>العيّالة</b> و<b>النخلة</b>.',
@@ -2068,6 +2110,7 @@ const I18N={
   about_eb:'National Identity',about_t:'About <em>Emirati Heritage</em>',
   poster_eb:'Project Artwork',poster_t:'Ammar <em>AI</em> — telling our heritage from Al Qua’a',poster_sub:'Artwork capturing the soul of the project: heritage, authenticity and identity. Tap to enlarge.',poster_cap:'Ammar AI · my project.. my heritage.. my identity 🇦🇪',
   pieces_eb:'Heritage stickers',pieces_t:'Our heritage <em>stickers</em>',pieces_sub:'Artistic stickers cropped from the Ammar AI artwork — order your favourites at sweet prices.',
+  sky_t:'Under the UAE sky',sky_p:'From desert sunset to night stars — a heritage that soars like a falcon.',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
   about_p3:'Today, the UAE works to <b>preserve this heritage</b> and pass it on — UNESCO has inscribed many Emirati elements, from <b>Arabic coffee</b>, <b>Al Sadu</b> and <b>falconry</b> to <b>Al Ayyala</b> and the <b>date palm</b>.',
@@ -3301,7 +3344,11 @@ const PIECES=[
  {x:25,y:1170,w:180,h:250,n:'الفانوس',ne:'The Lantern',d:'نور أجدادنا في ليالي الصحراء.',de:'Our ancestors’ light on desert nights.',p:9,was:12},
  {x:695,y:1125,w:325,h:305,n:'الضيافة',ne:'Hospitality',d:'قهوةٌ وتمرٌ تحت ظلال النخيل.',de:'Coffee and dates under the palms.',p:12,was:0},
  {x:195,y:1185,w:285,h:205,n:'القوع',ne:'Al Qua’a',d:'منبع الأصالة وبداية الحكاية.',de:'The source of authenticity — where the story begins.',p:10,was:0},
- {x:395,y:878,w:175,h:222,n:'عمّار AI',ne:'Ammar AI',d:'أفكار اليوم.. تراث الغد.',de:'Today’s ideas.. tomorrow’s heritage.',p:8,was:0}
+ {x:395,y:878,w:175,h:222,n:'عمّار AI',ne:'Ammar AI',d:'أفكار اليوم.. تراث الغد.',de:'Today’s ideas.. tomorrow’s heritage.',p:8,was:0},
+ {x:330,y:45,w:340,h:375,n:'ابن القوع',ne:'Son of Al Qua’a',d:'وجهٌ يحمل أصالة الأجداد وفخر الهوية.',de:'A face carrying ancestral pride and identity.',p:10,was:0},
+ {x:18,y:872,w:185,h:215,n:'شجرة السمر',ne:'Acacia Tree',d:'ظلٌّ وارفٌ في قلب الصحراء.',de:'A shady tree in the heart of the desert.',p:8,was:11},
+ {x:475,y:1125,w:200,h:305,n:'خطوةٌ نحو الغد',ne:'A Step Forward',d:'خطوتي اليوم لمستقبلٍ يبني تراثه.',de:'Today’s step toward a future that builds its heritage.',p:9,was:0},
+ {x:0,y:0,w:1024,h:1536,n:'الباقة الكاملة',ne:'Full Sheet',d:'لوحة الستيكرات كاملةً — كل القطع في ورقة واحدة.',de:'The whole sticker sheet — every piece in one.',p:49,was:80}
 ];
 let PCART={};
 function placePieces(){
@@ -3367,6 +3414,13 @@ function paintPCart(){
   });
 })();
 window.addEventListener('resize',()=>{clearTimeout(window._piecesT);window._piecesT=setTimeout(placePieces,150);});
+// ===== animated UAE sky banner: generate twinkling stars =====
+(function(){
+  const box=document.getElementById('skyStars');if(!box)return;
+  let h='';for(let i=0;i<46;i++){const x=(i*53+i*i*7)%100,y=(i*31+i*i*3)%62,d=(i%7)*0.5,s=(i%3)?'':'width:3px;height:3px;';
+    h+='<i class="sky-star" style="left:'+x+'%;top:'+y+'%;'+s+'animation-delay:'+d+'s"></i>';}
+  box.innerHTML=h;
+})();
 // ===== heritage quiz + certificate =====
 const QUIZ=[
  {q:'متى قام اتحاد دولة الإمارات؟',qe:'When was the UAE federation formed?',o:['٢ ديسمبر ١٩٧١','١٩٦٦','١٩٨١','١٩٩١'],oe:['2 December 1971','1966','1981','1991'],c:0},

@@ -3337,18 +3337,23 @@ function clearSkin(){
 (function(){const x=document.getElementById('skinX');if(x)x.addEventListener('click',clearSkin);})();
 // ===== heritage pieces: crops from the poster (img/ammar-poster.jpg, 1024x1536) =====
 const PIECES=[
- {x:795,y:600,w:225,h:290,n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم والضيافة في الدلّة والفنجان.',de:'Symbol of generosity — the dallah and cup.',p:10,was:14},
- {x:25,y:430,w:310,h:400,n:'البوش (الإبل)',ne:'The Camels',d:'سفينة الصحراء ورفيق الأجداد في الترحال.',de:'Ships of the desert, our ancestors’ companions.',p:12,was:0},
- {x:835,y:945,w:185,h:135,n:'السدو',ne:'Al Sadu',d:'نسيجٌ بدوي بنقوشٍ هندسية — تراث يونسكو.',de:'Bedouin weaving with geometric motifs — UNESCO heritage.',p:9,was:0},
- {x:655,y:905,w:185,h:185,n:'المسبحة',ne:'Prayer Beads',d:'سكينةٌ في اليد وذِكرٌ في القلب.',de:'Calm in the hand, remembrance in the heart.',p:8,was:0},
- {x:25,y:1170,w:180,h:250,n:'الفانوس',ne:'The Lantern',d:'نور أجدادنا في ليالي الصحراء.',de:'Our ancestors’ light on desert nights.',p:9,was:12},
- {x:695,y:1125,w:325,h:305,n:'الضيافة',ne:'Hospitality',d:'قهوةٌ وتمرٌ تحت ظلال النخيل.',de:'Coffee and dates under the palms.',p:12,was:0},
- {x:195,y:1185,w:285,h:205,n:'القوع',ne:'Al Qua’a',d:'منبع الأصالة وبداية الحكاية.',de:'The source of authenticity — where the story begins.',p:10,was:0},
- {x:395,y:878,w:175,h:222,n:'عمّار AI',ne:'Ammar AI',d:'أفكار اليوم.. تراث الغد.',de:'Today’s ideas.. tomorrow’s heritage.',p:8,was:0},
- {x:330,y:45,w:340,h:375,n:'ابن القوع',ne:'Son of Al Qua’a',d:'وجهٌ يحمل أصالة الأجداد وفخر الهوية.',de:'A face carrying ancestral pride and identity.',p:10,was:0},
- {x:18,y:872,w:185,h:215,n:'شجرة السمر',ne:'Acacia Tree',d:'ظلٌّ وارفٌ في قلب الصحراء.',de:'A shady tree in the heart of the desert.',p:8,was:11},
- {x:475,y:1125,w:200,h:305,n:'خطوةٌ نحو الغد',ne:'A Step Forward',d:'خطوتي اليوم لمستقبلٍ يبني تراثه.',de:'Today’s step toward a future that builds its heritage.',p:9,was:0},
- {x:0,y:0,w:1024,h:1536,n:'الباقة الكاملة',ne:'Full Sheet',d:'لوحة الستيكرات كاملةً — كل القطع في ورقة واحدة.',de:'The whole sticker sheet — every piece in one.',p:49,was:80}
+ {x:6,y:355,w:415,h:415,n:'رفيق الرحلة',ne:'Travel Companion',d:'الفتى وجمله — صداقة الصحراء.',de:'The boy and his camel — a desert bond.',p:12,was:0},
+ {x:735,y:20,w:285,h:325,n:'البوم',ne:'The Owl',d:'طيرٌ حكيمٌ رفيق الليالي.',de:'A wise bird, companion of the nights.',p:12,was:0},
+ {x:460,y:170,w:150,h:210,n:'الفانوس',ne:'The Lantern',d:'نور أجدادنا في ليالي الصحراء.',de:'Our ancestors’ light on desert nights.',p:9,was:12},
+ {x:515,y:345,w:225,h:220,n:'بيت الشعر',ne:'Bedouin Tent',d:'حياة البدو ومأوى الكرم.',de:'Bedouin life and shelter of generosity.',p:10,was:0},
+ {x:380,y:395,w:140,h:150,n:'تمر البركة',ne:'Blessed Dates',d:'حلاوة الأرض ونعمة النخيل.',de:'The sweetness of the land.',p:7,was:0},
+ {x:826,y:588,w:195,h:240,n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم في الدلّة والفنجان.',de:'Generosity in the dallah and cup.',p:10,was:14},
+ {x:690,y:595,w:140,h:195,n:'قِربة الماء',ne:'Water Flask',d:'حياة المسافر في قلب الرمال.',de:'A traveller’s lifeline in the sands.',p:8,was:0},
+ {x:430,y:595,w:300,h:170,n:'سلاح الجدود',ne:'Ancestors’ Rifle',d:'إرثٌ يحكي شجاعة الأولين.',de:'A heirloom of old courage.',p:11,was:0},
+ {x:140,y:775,w:200,h:175,n:'شنظة الرحّالة',ne:'Saddlebag',d:'حقيبة البدوي بنقوش السدو.',de:'The Bedouin’s woven saddlebag.',p:9,was:13},
+ {x:530,y:780,w:135,h:195,n:'المسبحة',ne:'Prayer Beads',d:'سكينةٌ في اليد وذِكرٌ في القلب.',de:'Calm in the hand, remembrance in the heart.',p:8,was:0},
+ {x:872,y:930,w:150,h:148,n:'السدو',ne:'Al Sadu',d:'نسيجٌ بدوي وفخر البادية — تراث يونسكو.',de:'Bedouin weaving, pride of the desert.',p:9,was:0},
+ {x:332,y:822,w:180,h:200,n:'عمّار AI',ne:'Ammar AI',d:'في الصحراء تبدأ الحكاية.',de:'In the desert the story begins.',p:8,was:0},
+ {x:5,y:995,w:260,h:215,n:'نار الحطب',ne:'Firewood Cooking',d:'على نار الحطب يطيب العيش.',de:'Life tastes better on a wood fire.',p:10,was:0},
+ {x:610,y:980,w:285,h:205,n:'الضيافة',ne:'Hospitality',d:'الضيافة من طبعنا.',de:'Hospitality is in our nature.',p:11,was:0},
+ {x:700,y:1240,w:320,h:245,n:'جلسة البدو',ne:'Bedouin Gathering',d:'دلّةٌ ونارٌ وسهرة تحت النجوم.',de:'Coffee, fire and nights under the stars.',p:11,was:0},
+ {x:5,y:1230,w:380,h:240,n:'صحراء القوع',ne:'Al Qua’a Desert',d:'جبالٌ وسمرٌ ومدى لا ينتهي.',de:'Mountains, acacias and endless space.',p:10,was:0},
+ {x:0,y:0,w:1024,h:1536,n:'الباقة الكاملة',ne:'Full Sheet',d:'لوحة الستيكرات كاملةً — كل القطع في ورقة واحدة.',de:'The whole sticker sheet — every piece in one.',p:59,was:99}
 ];
 let PCART={};
 function placePieces(){

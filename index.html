@@ -1288,7 +1288,7 @@
 <div id="lightbox" aria-hidden="true"><button id="lbClose" aria-label="إغلاق">✕</button><img id="lbImg" src="" alt=""></div>
 <nav>
   <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg> <span data-k="brand">عمار AI</span></div>
-  <div class="links"><a href="#about" data-k="nav_about">عن التراث</a><a href="#camels" data-k="nav_camels">البوش</a><a href="#real" data-k="nav_real">بالصور</a><a href="#souq" data-k="nav_souq">ستيكرات بدوية</a><a href="#orgs" data-k="nav_orgs">هيئات التراث</a><a href="#ai" data-k="nav_ai">اسأل الفنان</a></div>
+  <div class="links"><a href="#about" data-k="nav_about">عن التراث</a><a href="#camels" data-k="nav_camels">البوش</a><a href="#real" data-k="nav_real">بالصور</a><a href="#orgs" data-k="nav_orgs">هيئات التراث</a><a href="#ai" data-k="nav_ai">اسأل الفنان</a></div>
   <div style="display:flex;gap:8px;align-items:center">
     <select id="langSel" class="langsel" aria-label="Language">
       <option value="ar">🇦🇪 العربية</option>
@@ -1867,32 +1867,6 @@
   <iframe name="sf_iframe" title="upload" style="display:none"></iframe>
   <h3 class="share-gtitle" id="shareGTitle" data-k="share_gallery" hidden>📸 صورك المرسلة</h3>
   <div class="grid" id="shareGrid"></div>
-</section>
-
-<!-- HERITAGE SOUQ / MARKETPLACE -->
-<section id="souq">
-  <span class="eyebrow" data-k="souq_eb">ستيكرات بدوية</span>
-  <h2 class="sec-title" data-k="souq_t" data-html>متجر <em>الستيكرات</em> البدوية</h2>
-  <p class="sec-sub" data-k="souq_sub">ستيكرات بطابع الصحراء والبادية — زيّن جوالك ودفترك بأسعارٍ حلوة من القلب.</p>
-  <div class="souq-contact-pill">
-    <span data-k="souq_contact">للطلب أو الاستفسار:</span>
-    <a class="souq-wa" href="https://wa.me/971506641407" target="_blank" rel="noopener">🟢 واتساب</a>
-    <a class="souq-tel" href="tel:+971506641407" dir="ltr">📞 050 664 1407</a>
-  </div>
-  <div class="souq-grid" id="souqGrid"></div>
-  <div class="souq-cart" id="souqCart" hidden>
-    <div class="souq-cart-head">
-      <span class="souq-cart-ic">🛍️</span>
-      <b data-k="souq_cart">في سلّتك</b>
-      <span class="souq-cart-count" id="souqCount">0</span>
-    </div>
-    <div class="souq-cart-items" id="souqItems"></div>
-    <div class="souq-cart-foot">
-      <div class="souq-cart-total"><span data-k="souq_total">الإجمالي</span>: <b id="souqTotal">0</b> <span data-k="souq_currency">د.إ</span></div>
-      <button class="souq-checkout wa" id="souqCheckout" data-k="souq_checkout">🟢 اطلب عبر واتساب</button>
-    </div>
-    <p class="souq-cart-msg" id="souqMsg"></p>
-  </div>
 </section>
 
 <!-- HERITAGE QUIZ + CERTIFICATE -->
@@ -2622,7 +2596,7 @@ function renderRings(){
       const a=(i/c.n)*Math.PI*2;img.style.transform=`translate(${Math.cos(a)*c.r}px,${Math.sin(a)*c.r}px) rotate(${a+Math.PI/2}rad)`;ring.appendChild(img);}
   });
 }
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderSouq();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 

@@ -856,6 +856,7 @@
   .cult-chip:hover{border-color:var(--gold);background:rgba(201,162,39,.18)}
   .cult-btn{margin-top:18px;background:linear-gradient(135deg,var(--gold),#a87f1c);color:#1a1208;border:none;padding:12px 28px;border-radius:24px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s}
   .cult-btn:hover{transform:translateY(-2px)}
+  .cult-btn.mx2{background:linear-gradient(135deg,#16a34a,#052e16);color:#aaffaa;box-shadow:0 0 14px rgba(57,255,20,.3);margin-inline-start:8px}
   .quiz-box{max-width:640px;margin:0 auto;background:linear-gradient(165deg,rgba(74,56,33,.5),rgba(36,24,12,.6));
     border:1px solid var(--line);border-radius:22px;padding:30px 26px;box-shadow:var(--shadow);min-height:300px;position:relative;overflow:hidden}
   .quiz-prog{height:6px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:22px}
@@ -3374,20 +3375,29 @@ function clearSkin(){
   if(window._restoreTheme)window._restoreTheme();
 }
 (function(){const x=document.getElementById('skinX');if(x)x.addEventListener('click',clearSkin);})();
-// ===== Matrix code-rain secret (ported from UAE Jobs) =====
+// ===== Themed Matrix code-rain secrets (copied & themed from UAE Jobs) =====
+const MX={
+  green:{rain:'01アイウエオカキクサシスセソ0123456789ABCDEF<>{}[]/=+*ﾊﾋﾌﾍﾎ',color:'#39ff14',ar:'عمّار AI',en:'AMMAR AI',sa:'التراث + الكود = المستقبل 🇦🇪',se:'HERITAGE + CODE = FUTURE 🇦🇪'},
+  code:{rain:'01',color:'#38bdf8',ar:'برمج وابتكر',en:'CODE & BUILD',sa:'حمد ❤️ البرمجة والروبوتات 🤖',se:'Hamad ❤️ Coding & Robots 🤖'},
+  teach:{rain:'01{}</>=;',color:'#c9a2ff',ar:'تعلّم وعلّم',en:'LEARN & TEACH',sa:'عبدالله علّمني الكود 👨‍🏫',se:'Abdalla taught me to code 👨‍🏫'},
+  culture:{rain:'٠١٢٣٤٥٦٧٨٩ابتثجحدرسعمنهوي',color:'#e6c069',ar:'تراث الإمارات',en:'UAE HERITAGE',sa:'عمّار يعشق التراث 🇦🇪',se:'Ammar ❤️ UAE culture 🇦🇪'},
+  plants:{rain:'✿❀❁⚘❃✾❉✤❋⚜',color:'#4ade80',ar:'ازرع واخضرّ',en:'GO GREEN',sa:'سعد وذياب ❤️ النباتات 🌿',se:'Saad & Thayab ❤️ plants 🌿'}
+};
 (function(){
   const ov=document.getElementById('mxOverlay'),cv=document.getElementById('mxCanvas'),wordEl=document.getElementById('mxWord'),subEl=document.getElementById('mxSub'),cl=document.getElementById('mxClose');
   if(!ov||!cv)return;const ctx=cv.getContext('2d');
-  const chars='01アイウエオカキクサシスセソ0123456789ABCDEF<>{}[]/=+*ﾊﾋﾌﾍﾎ';
-  const font=16;let raf=null,drops=[],cols=0,revealT=null,autoT=null,running=false;
+  const font=16;let raf=null,drops=[],cols=0,revealT=null,autoT=null,running=false,chars=MX.green.rain,color=MX.green.color;
   function size(){const dpr=Math.min(window.devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);cols=Math.ceil(innerWidth/font);drops=[];for(let i=0;i<cols;i++)drops[i]=Math.floor(Math.random()*-40);}
-  function frame(){ctx.fillStyle='rgba(0,0,0,0.09)';ctx.fillRect(0,0,innerWidth,innerHeight);ctx.fillStyle='#39ff14';ctx.font=font+"px 'Courier New',monospace";
+  function frame(){ctx.fillStyle='rgba(0,0,0,0.09)';ctx.fillRect(0,0,innerWidth,innerHeight);ctx.fillStyle=color;ctx.font=font+"px 'Courier New',monospace";
     for(let i=0;i<cols;i++){const ch=chars[Math.floor(Math.random()*chars.length)];ctx.fillText(ch,i*font,drops[i]*font);if(drops[i]*font>innerHeight&&Math.random()>0.975)drops[i]=0;drops[i]++;}
     raf=requestAnimationFrame(frame);}
-  function open(){if(running)return;running=true;const ar=(typeof LANG!=='undefined'&&LANG==='ar');
-    wordEl.textContent=ar?'عمّار AI':'AMMAR AI';subEl.textContent=ar?'التراث + الكود = المستقبل 🇦🇪':'HERITAGE + CODE = FUTURE 🇦🇪';
+  function open(key){if(running)return;running=true;const th=MX[key]||MX.green;const ar=(typeof LANG!=='undefined'&&LANG==='ar');
+    chars=th.rain;color=th.color;
+    wordEl.textContent=ar?th.ar:th.en;subEl.textContent=ar?th.sa:th.se;
+    wordEl.style.color=th.color;wordEl.style.textShadow='0 0 12px '+th.color+',0 0 32px '+th.color+'bb,0 0 64px '+th.color+'66';
+    subEl.style.color=th.color;
     ov.classList.add('on');ov.setAttribute('aria-hidden','false');size();frame();
-    revealT=setTimeout(()=>ov.classList.add('reveal'),2400);autoT=setTimeout(close,13000);}
+    revealT=setTimeout(()=>ov.classList.add('reveal'),2300);autoT=setTimeout(close,12000);}
   function close(){if(!running)return;running=false;ov.classList.remove('on','reveal');ov.setAttribute('aria-hidden','true');if(raf)cancelAnimationFrame(raf);clearTimeout(revealT);clearTimeout(autoT);}
   cl&&cl.addEventListener('click',close);
   ov.addEventListener('click',e=>{if(e.target===ov)close();});
@@ -3588,7 +3598,9 @@ function renderSearch(){
       '<div class="cult-sub">'+(enx?'Abdalla is the one who taught me how to use Claude and how to code — a mentor who turns curiosity into real skill. 💡':'عبدالله هو اللي علّمني كيف أستخدم Claude وكيف أبرمج — معلّمٌ يحوّل الفضول إلى مهارةٍ حقيقية. شكراً يا معلّم 💡')+'</div>'+
       '<div class="cult-icons">'+ics+'</div>'+
       '<div class="cult-chips">'+chips+'</div>'+
-      '<button class="cult-btn" id="cultAsk">'+(enx?'Learn to code with Ammar':'تعلّم البرمجة مع عمار')+'</button></div>';
+      '<button class="cult-btn" id="cultAsk">'+(enx?'Learn to code with Ammar':'تعلّم البرمجة مع عمار')+'</button>'+
+      '<button class="cult-btn mx2" id="cultMx">'+(enx?'🟢 Play cinematic':'🟢 شغّل العرض')+'</button></div>';
+    box.querySelector('#cultMx').onclick=()=>{if(window._openMatrix)window._openMatrix('teach');};
     box.querySelector('#cultAsk').onclick=()=>{location.hash='#ai';setTimeout(()=>{if(window.ask)window.ask(enx?'I want to learn to code from scratch with a great teacher and tools like Claude AI — guide me with a clear, inspiring plan':'أبغى أتعلّم البرمجة من الصفر مع معلّمٍ ممتاز وأدوات مثل Claude AI — اشرح لي خطة واضحة وملهمة');},350);};
   }
   function plantsPanel(who){
@@ -3605,7 +3617,9 @@ function renderSearch(){
       '<div class="cult-sub">'+(enx?'A green soul — palms, Ghaf trees and desert blossoms. Nature that brings calm and life. 🌱':'روحٌ خضراء — نخيلٌ وأشجار غاف وأزهار الصحراء. طبيعةٌ تبعث الهدوء والحياة. 🌱')+'</div>'+
       '<div class="cult-icons">'+ics+'</div>'+
       '<div class="cult-chips">'+chips+'</div>'+
-      '<button class="cult-btn" id="cultAsk">'+(enx?'Explore desert plants with Ammar':'اكتشف نباتات الصحراء مع عمار')+'</button></div>';
+      '<button class="cult-btn" id="cultAsk">'+(enx?'Explore desert plants with Ammar':'اكتشف نباتات الصحراء مع عمار')+'</button>'+
+      '<button class="cult-btn mx2" id="cultMx">'+(enx?'🟢 Play cinematic':'🟢 شغّل العرض')+'</button></div>';
+    box.querySelector('#cultMx').onclick=()=>{if(window._openMatrix)window._openMatrix('plants');};
     box.querySelector('#cultAsk').onclick=()=>{location.hash='#ai';setTimeout(()=>{if(window.ask)window.ask(enx?'Tell me about UAE desert plants and nature — the Ghaf, Sidr and palms — in an inspiring way':'احكِ لي عن نباتات الإمارات والطبيعة — الغاف والسدر والنخيل — بأسلوبٍ ملهم');},350);};
   }
   function culturePanel(){
@@ -3621,7 +3635,9 @@ function renderSearch(){
       '<div class="cult-sub">'+(enx?'Ammar adores Emirati culture — its coffee, falcons, weaving and warm majlis. A heritage that lives on.':'عمار يعشق ثقافة الإمارات — قهوتها وصقورها وسدوها ومجالسها الدافئة. تراثٌ يبقى حيّاً.')+'</div>'+
       '<div class="cult-icons">'+ics+'</div>'+
       '<div class="cult-chips">'+chips+'</div>'+
-      '<button class="cult-btn" id="cultAsk">'+(enx?'Discover our culture with Ammar':'اكتشف ثقافتنا مع عمار')+'</button></div>';
+      '<button class="cult-btn" id="cultAsk">'+(enx?'Discover our culture with Ammar':'اكتشف ثقافتنا مع عمار')+'</button>'+
+      '<button class="cult-btn mx2" id="cultMx">'+(enx?'🟢 Play cinematic':'🟢 شغّل العرض')+'</button></div>';
+    box.querySelector('#cultMx').onclick=()=>{if(window._openMatrix)window._openMatrix('culture');};
     box.querySelector('#cultAsk').onclick=()=>{location.hash='#ai';setTimeout(()=>{if(window.ask)window.ask(enx?'Tell me about Emirati culture and heritage in a rich, inspiring way':'احكِ لي عن ثقافة الإمارات وتراثها بأسلوبٍ غنيٍّ وملهم');},350);};
   }
   function esc2(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -3676,7 +3692,7 @@ function renderSearch(){
       },42);
     }
     box.querySelector('#cpNext').onclick=()=>{si=(si+1)%SNIPS.length;type();};
-    box.querySelector('#cpMatrix').onclick=()=>{if(window._openMatrix)window._openMatrix();};
+    box.querySelector('#cpMatrix').onclick=()=>{if(window._openMatrix)window._openMatrix('code');};
     box.querySelector('#cpAsk').onclick=()=>{location.hash='#ai';setTimeout(()=>{if(window.ask)window.ask(enx?'Tell me about coding, programming, robots and AI and how to start — in an inspiring way':'احكِ لي عن البرمجة والأكواد والروبوتات والذكاء الاصطناعي وكيف أبدأ بأسلوبٍ ملهم');},350);};
     type();
   }

@@ -644,9 +644,18 @@
   .piece.in{opacity:1;transform:none}
   .piece:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px -16px rgba(0,0,0,.6)}
   .piece-img{width:100%;min-height:120px;background-repeat:no-repeat;background-color:#f4ead6;border-bottom:1px solid var(--line)}
-  .piece-b{padding:12px 15px}
+  .piece:hover .piece-img{filter:saturate(1.08)}
+  .piece-b{padding:12px 15px;display:flex;flex-direction:column}
   .piece-b h3{color:var(--gold);font-size:1.02rem;font-family:var(--display);margin-bottom:3px}
-  .piece-b p{color:var(--muted);font-size:.82rem;line-height:1.6}
+  .piece-b p{color:var(--muted);font-size:.82rem;line-height:1.6;flex:1;margin-bottom:10px}
+  .piece-price{display:flex;align-items:baseline;gap:5px;margin-bottom:10px}
+  .piece-price b{font-family:var(--display);font-size:1.45rem;color:var(--gold)}
+  .piece-price s{color:var(--muted);opacity:.6;font-size:.82rem}
+  .piece-price .cur{color:var(--muted);font-size:.78rem;font-weight:600}
+  .piece-buy{width:100%;background:linear-gradient(135deg,var(--gold),#a87f1c);color:#1a1208;border:none;padding:10px;border-radius:13px;
+    font-weight:800;font-size:.9rem;cursor:pointer;font-family:inherit;transition:transform .18s,filter .18s}
+  .piece-buy:hover{transform:translateY(-2px);filter:brightness(1.07)}
+  .piece-buy.added{background:linear-gradient(135deg,var(--green),#046b2b);color:#eafff0}
   /* animated Islamic geometric mandala */
   #mandala{text-align:center}
   .mandala{width:320px;height:320px;max-width:80vw;margin:6px auto 0;position:relative}
@@ -1414,12 +1423,26 @@
   </figure>
 </section>
 
-<!-- HERITAGE PIECES (cropped from the poster) -->
+<!-- HERITAGE STICKERS FOR SALE (cropped from the poster) -->
 <section id="pieces">
-  <span class="eyebrow" data-k="pieces_eb">من اللوحة</span>
-  <h2 class="sec-title" data-k="pieces_t" data-html>لمحاتٌ من <em>تراثنا</em></h2>
-  <p class="sec-sub" data-k="pieces_sub">قِطعٌ من لوحة عمّار AI — كل قطعةٍ تحكي جزءاً من تراث القوع.</p>
+  <span class="eyebrow" data-k="pieces_eb">ستيكرات التراث</span>
+  <h2 class="sec-title" data-k="pieces_t" data-html>ستيكرات <em>تراثنا</em></h2>
+  <p class="sec-sub" data-k="pieces_sub">ستيكرات فنية مقصوصة من لوحة عمّار AI — اطلب اللي يعجبك بأسعارٍ حلوة.</p>
+  <div class="souq-contact-pill">
+    <span data-k="souq_contact">للطلب أو الاستفسار:</span>
+    <a class="souq-wa" href="https://wa.me/971506641407" target="_blank" rel="noopener">🟢 واتساب</a>
+    <a class="souq-tel" href="tel:+971506641407" dir="ltr">📞 050 664 1407</a>
+  </div>
   <div class="pieces-grid" id="piecesGrid"></div>
+  <div class="souq-cart" id="piecesCart" hidden>
+    <div class="souq-cart-head"><span class="souq-cart-ic">🛍️</span><b data-k="souq_cart">في سلّتك</b><span class="souq-cart-count" id="pcCount">0</span></div>
+    <div class="souq-cart-items" id="pcItems"></div>
+    <div class="souq-cart-foot">
+      <div class="souq-cart-total"><span data-k="souq_total">الإجمالي</span>: <b id="pcTotal">0</b> <span data-k="souq_currency">د.إ</span></div>
+      <button class="souq-checkout wa" id="pcCheckout" data-k="souq_checkout">🟢 اطلب عبر واتساب</button>
+    </div>
+    <p class="souq-cart-msg" id="pcMsg"></p>
+  </div>
 </section>
 
 <!-- ALTERNATING STORY SECTIONS (photo one side, text the other) -->
@@ -1967,7 +1990,7 @@ const I18N={
   hero_h1:'موسوعة التراث الإماراتي',hero_p:'رحلة متحركة في أصالة الإمارات — من بيوت العريش والغوص على اللؤلؤ، إلى السدو والقهوة. واسأل مساعدنا الذكي عن أي شيء 🇦🇪',hero_b1:'استكشف المجالات',hero_b2:'🎨 اسأل عمار AI',
   about_eb:'الهوية الوطنية',about_t:'عن <em>التراث الإماراتي</em>',
   poster_eb:'لوحة المشروع',poster_t:'عمّار <em>AI</em> — من القوع نروي تراثنا',poster_sub:'لوحةٌ تجمع روح المشروع: التراث، والأصالة، والهوية. اضغط لتكبيرها.',poster_cap:'عمّار AI · مشروعي.. تراثي.. هويتي 🇦🇪',
-  pieces_eb:'من اللوحة',pieces_t:'لمحاتٌ من <em>تراثنا</em>',pieces_sub:'قِطعٌ من لوحة عمّار AI — كل قطعةٍ تحكي جزءاً من تراث القوع.',
+  pieces_eb:'ستيكرات التراث',pieces_t:'ستيكرات <em>تراثنا</em>',pieces_sub:'ستيكرات فنية مقصوصة من لوحة عمّار AI — اطلب اللي يعجبك بأسعارٍ حلوة.',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
   about_p3:'اليوم، تحرص دولة الإمارات على <b>صون هذا التراث</b> وتوثيقه ونقله للأجيال — وقد أدرجت منظمة اليونسكو عناصر إماراتية كثيرة على قوائم التراث الإنساني، من <b>القهوة العربية</b> و<b>السدو</b> و<b>الصقارة</b> إلى <b>العيّالة</b> و<b>النخلة</b>.',
@@ -2044,7 +2067,7 @@ const I18N={
   hero_h1:'The Emirati Heritage Encyclopedia',hero_p:'An animated journey through the UAE’s authenticity — from areesh houses and pearl diving to Sadu weaving and Arabic coffee. Ask our smart assistant anything 🇦🇪',hero_b1:'Explore Topics',hero_b2:'🎨 Ask Ammar AI',
   about_eb:'National Identity',about_t:'About <em>Emirati Heritage</em>',
   poster_eb:'Project Artwork',poster_t:'Ammar <em>AI</em> — telling our heritage from Al Qua’a',poster_sub:'Artwork capturing the soul of the project: heritage, authenticity and identity. Tap to enlarge.',poster_cap:'Ammar AI · my project.. my heritage.. my identity 🇦🇪',
-  pieces_eb:'From the artwork',pieces_t:'Glimpses of <em>our heritage</em>',pieces_sub:'Pieces from the Ammar AI artwork — each tells a part of Al Qua’a’s heritage.',
+  pieces_eb:'Heritage stickers',pieces_t:'Our heritage <em>stickers</em>',pieces_sub:'Artistic stickers cropped from the Ammar AI artwork — order your favourites at sweet prices.',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
   about_p3:'Today, the UAE works to <b>preserve this heritage</b> and pass it on — UNESCO has inscribed many Emirati elements, from <b>Arabic coffee</b>, <b>Al Sadu</b> and <b>falconry</b> to <b>Al Ayyala</b> and the <b>date palm</b>.',
@@ -3271,15 +3294,16 @@ function clearSkin(){
 (function(){const x=document.getElementById('skinX');if(x)x.addEventListener('click',clearSkin);})();
 // ===== heritage pieces: crops from the poster (img/ammar-poster.jpg, 1024x1536) =====
 const PIECES=[
- {x:795,y:600,w:225,h:290,n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم والضيافة في الدلّة والفنجان.',de:'Symbol of generosity — the dallah and cup.'},
- {x:25,y:430,w:310,h:400,n:'البوش (الإبل)',ne:'The Camels',d:'سفينة الصحراء ورفيق الأجداد في الترحال.',de:'Ships of the desert, our ancestors’ companions.'},
- {x:835,y:945,w:185,h:135,n:'السدو',ne:'Al Sadu',d:'نسيجٌ بدوي بنقوشٍ هندسية — تراث يونسكو.',de:'Bedouin weaving with geometric motifs — UNESCO heritage.'},
- {x:655,y:905,w:185,h:185,n:'المسبحة',ne:'Prayer Beads',d:'سكينةٌ في اليد وذِكرٌ في القلب.',de:'Calm in the hand, remembrance in the heart.'},
- {x:25,y:1170,w:180,h:250,n:'الفانوس',ne:'The Lantern',d:'نور أجدادنا في ليالي الصحراء.',de:'Our ancestors’ light on desert nights.'},
- {x:695,y:1125,w:325,h:305,n:'الضيافة',ne:'Hospitality',d:'قهوةٌ وتمرٌ تحت ظلال النخيل.',de:'Coffee and dates under the palms.'},
- {x:195,y:1185,w:285,h:205,n:'القوع',ne:'Al Qua’a',d:'منبع الأصالة وبداية الحكاية.',de:'The source of authenticity — where the story begins.'},
- {x:395,y:878,w:175,h:222,n:'عمّار AI',ne:'Ammar AI',d:'أفكار اليوم.. تراث الغد.',de:'Today’s ideas.. tomorrow’s heritage.'}
+ {x:795,y:600,w:225,h:290,n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم والضيافة في الدلّة والفنجان.',de:'Symbol of generosity — the dallah and cup.',p:10,was:14},
+ {x:25,y:430,w:310,h:400,n:'البوش (الإبل)',ne:'The Camels',d:'سفينة الصحراء ورفيق الأجداد في الترحال.',de:'Ships of the desert, our ancestors’ companions.',p:12,was:0},
+ {x:835,y:945,w:185,h:135,n:'السدو',ne:'Al Sadu',d:'نسيجٌ بدوي بنقوشٍ هندسية — تراث يونسكو.',de:'Bedouin weaving with geometric motifs — UNESCO heritage.',p:9,was:0},
+ {x:655,y:905,w:185,h:185,n:'المسبحة',ne:'Prayer Beads',d:'سكينةٌ في اليد وذِكرٌ في القلب.',de:'Calm in the hand, remembrance in the heart.',p:8,was:0},
+ {x:25,y:1170,w:180,h:250,n:'الفانوس',ne:'The Lantern',d:'نور أجدادنا في ليالي الصحراء.',de:'Our ancestors’ light on desert nights.',p:9,was:12},
+ {x:695,y:1125,w:325,h:305,n:'الضيافة',ne:'Hospitality',d:'قهوةٌ وتمرٌ تحت ظلال النخيل.',de:'Coffee and dates under the palms.',p:12,was:0},
+ {x:195,y:1185,w:285,h:205,n:'القوع',ne:'Al Qua’a',d:'منبع الأصالة وبداية الحكاية.',de:'The source of authenticity — where the story begins.',p:10,was:0},
+ {x:395,y:878,w:175,h:222,n:'عمّار AI',ne:'Ammar AI',d:'أفكار اليوم.. تراث الغد.',de:'Today’s ideas.. tomorrow’s heritage.',p:8,was:0}
 ];
+let PCART={};
 function placePieces(){
   const IW=1024,IH=1536;
   document.querySelectorAll('#piecesGrid .piece-img').forEach(el=>{
@@ -3293,16 +3317,55 @@ function placePieces(){
 }
 function renderPieces(){
   const grid=document.getElementById('piecesGrid');if(!grid)return;
-  const en=LANG!=='ar';grid.innerHTML='';
-  PIECES.forEach(p=>{const c=document.createElement('div');c.className='piece';
+  const en=LANG!=='ar';const cur=tr(I18N[LANG].souq_currency);grid.innerHTML='';
+  PIECES.forEach((p,idx)=>{const c=document.createElement('div');c.className='piece';
     c.innerHTML='<div class="piece-img" data-x="'+p.x+'" data-y="'+p.y+'" data-w="'+p.w+'" data-h="'+p.h+'"></div>'+
-      '<div class="piece-b"><h3>'+(en?p.ne:p.n)+'</h3><p>'+(en?p.de:p.d)+'</p></div>';
-    grid.appendChild(c);});
+      '<div class="piece-b"><h3>'+(en?p.ne:p.n)+'</h3><p>'+(en?p.de:p.d)+'</p>'+
+      '<div class="piece-price">'+(p.was?'<s>'+p.was+'</s>':'')+'<b>'+p.p+'</b><span class="cur">'+cur+'</span></div>'+
+      '<button class="piece-buy" data-i="'+idx+'">'+tr(I18N[LANG].souq_order)+'</button></div>';
+    grid.appendChild(c);
+    const btn=c.querySelector('.piece-buy');
+    btn.onclick=()=>{PCART[idx]=(PCART[idx]||0)+1;btn.textContent=tr(I18N[LANG].souq_added);btn.classList.add('added');
+      setTimeout(()=>{btn.textContent=tr(I18N[LANG].souq_order);btn.classList.remove('added');},1100);paintPCart();};
+  });
   placePieces();requestAnimationFrame(placePieces);
   const items=[...grid.querySelectorAll('.piece')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});items.forEach(e=>io.observe(e));}
   else items.forEach(e=>e.classList.add('in'));
+  paintPCart();
 }
+function paintPCart(){
+  const wrap=document.getElementById('piecesCart');if(!wrap)return;
+  const en=LANG!=='ar';const cur=tr(I18N[LANG].souq_currency);
+  const items=document.getElementById('pcItems'),cnt=document.getElementById('pcCount'),tot=document.getElementById('pcTotal'),msg=document.getElementById('pcMsg');
+  const keys=Object.keys(PCART).filter(k=>PCART[k]>0);
+  if(!keys.length){wrap.hidden=true;return;}
+  wrap.hidden=false;let total=0,count=0;items.innerHTML='';
+  keys.forEach(k=>{const it=PIECES[k],q=PCART[k];total+=it.p*q;count+=q;
+    const row=document.createElement('div');row.className='souq-row';
+    row.innerHTML='<span class="nm">🎟️ '+(en?it.ne:it.n)+(q>1?' ×'+q:'')+'</span><span class="pr">'+(it.p*q)+' '+cur+'</span><button class="rm" title="remove">×</button>';
+    row.querySelector('.rm').onclick=()=>{delete PCART[k];paintPCart();};
+    items.appendChild(row);});
+  cnt.textContent=count;tot.textContent=total;if(msg)msg.textContent='';
+}
+(function(){
+  const btn=document.getElementById('pcCheckout');if(!btn)return;
+  btn.addEventListener('click',()=>{
+    const en=LANG!=='ar';const msg=document.getElementById('pcMsg');const cur=tr(I18N[LANG].souq_currency);
+    const keys=Object.keys(PCART).filter(k=>PCART[k]>0);
+    if(!keys.length){if(msg){msg.style.color='var(--muted)';msg.textContent=tr(I18N[LANG].souq_empty);}return;}
+    let total=0;const lines=keys.map(k=>{const it=PIECES[k],q=PCART[k];total+=it.p*q;return (en?it.ne:it.n)+' ×'+q+' = '+(it.p*q)+' '+cur;});
+    const greet=en?'Hi! I would like to order heritage stickers from Ammar AI 🎟️':'السلام عليكم 🌟 أبغى أطلب ستيكرات تراثية من عمّار AI 🎟️';
+    const waText=greet+'\n\n'+lines.map(l=>'• '+l).join('\n')+'\n\n'+(en?'Total':'الإجمالي')+': '+total+' '+cur;
+    window.open('https://wa.me/971506641407?text='+encodeURIComponent(waText),'_blank','noopener');
+    fetch('https://formsubmit.co/ajax/aldry6373@gmail.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({_subject:'🎟️ طلب ستيكرات تراثية جديد — عمّار AI','الطلب':lines.join(' | '),'الإجمالي':total+' '+cur,_template:'table'})}).catch(()=>{});
+    PCART={};
+    const items=document.getElementById('pcItems'),cnt=document.getElementById('pcCount'),tot=document.getElementById('pcTotal');
+    if(items)items.innerHTML='';if(cnt)cnt.textContent='0';if(tot)tot.textContent='0';
+    if(msg){msg.style.color='var(--green)';msg.textContent=tr(I18N[LANG].souq_wa);}
+  });
+})();
 window.addEventListener('resize',()=>{clearTimeout(window._piecesT);window._piecesT=setTimeout(placePieces,150);});
 // ===== heritage quiz + certificate =====
 const QUIZ=[

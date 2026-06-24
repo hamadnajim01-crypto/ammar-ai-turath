@@ -637,6 +637,16 @@
   #poster .poster-frame img{width:100%;display:block;border-radius:14px;transition:transform .4s}
   #poster .poster-frame:hover img{transform:scale(1.03)}
   #poster figcaption{text-align:center;color:var(--gold);font-family:var(--display);font-size:.95rem;margin-top:12px}
+  /* heritage pieces (cropped from poster) */
+  .pieces-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px;max-width:1100px;margin:0 auto}
+  .piece{background:linear-gradient(165deg,rgba(244,234,214,.06),rgba(36,24,12,.4));border:1px solid var(--line);border-radius:18px;
+    overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;opacity:0;transform:translateY(20px)}
+  .piece.in{opacity:1;transform:none}
+  .piece:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px -16px rgba(0,0,0,.6)}
+  .piece-img{width:100%;min-height:120px;background-repeat:no-repeat;background-color:#f4ead6;border-bottom:1px solid var(--line)}
+  .piece-b{padding:12px 15px}
+  .piece-b h3{color:var(--gold);font-size:1.02rem;font-family:var(--display);margin-bottom:3px}
+  .piece-b p{color:var(--muted);font-size:.82rem;line-height:1.6}
   /* animated Islamic geometric mandala */
   #mandala{text-align:center}
   .mandala{width:320px;height:320px;max-width:80vw;margin:6px auto 0;position:relative}
@@ -1404,6 +1414,14 @@
   </figure>
 </section>
 
+<!-- HERITAGE PIECES (cropped from the poster) -->
+<section id="pieces">
+  <span class="eyebrow" data-k="pieces_eb">من اللوحة</span>
+  <h2 class="sec-title" data-k="pieces_t" data-html>لمحاتٌ من <em>تراثنا</em></h2>
+  <p class="sec-sub" data-k="pieces_sub">قِطعٌ من لوحة عمّار AI — كل قطعةٍ تحكي جزءاً من تراث القوع.</p>
+  <div class="pieces-grid" id="piecesGrid"></div>
+</section>
+
 <!-- ALTERNATING STORY SECTIONS (photo one side, text the other) -->
 <section class="storysec">
  <div class="about2">
@@ -1949,6 +1967,7 @@ const I18N={
   hero_h1:'موسوعة التراث الإماراتي',hero_p:'رحلة متحركة في أصالة الإمارات — من بيوت العريش والغوص على اللؤلؤ، إلى السدو والقهوة. واسأل مساعدنا الذكي عن أي شيء 🇦🇪',hero_b1:'استكشف المجالات',hero_b2:'🎨 اسأل عمار AI',
   about_eb:'الهوية الوطنية',about_t:'عن <em>التراث الإماراتي</em>',
   poster_eb:'لوحة المشروع',poster_t:'عمّار <em>AI</em> — من القوع نروي تراثنا',poster_sub:'لوحةٌ تجمع روح المشروع: التراث، والأصالة، والهوية. اضغط لتكبيرها.',poster_cap:'عمّار AI · مشروعي.. تراثي.. هويتي 🇦🇪',
+  pieces_eb:'من اللوحة',pieces_t:'لمحاتٌ من <em>تراثنا</em>',pieces_sub:'قِطعٌ من لوحة عمّار AI — كل قطعةٍ تحكي جزءاً من تراث القوع.',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
   about_p3:'اليوم، تحرص دولة الإمارات على <b>صون هذا التراث</b> وتوثيقه ونقله للأجيال — وقد أدرجت منظمة اليونسكو عناصر إماراتية كثيرة على قوائم التراث الإنساني، من <b>القهوة العربية</b> و<b>السدو</b> و<b>الصقارة</b> إلى <b>العيّالة</b> و<b>النخلة</b>.',
@@ -2025,6 +2044,7 @@ const I18N={
   hero_h1:'The Emirati Heritage Encyclopedia',hero_p:'An animated journey through the UAE’s authenticity — from areesh houses and pearl diving to Sadu weaving and Arabic coffee. Ask our smart assistant anything 🇦🇪',hero_b1:'Explore Topics',hero_b2:'🎨 Ask Ammar AI',
   about_eb:'National Identity',about_t:'About <em>Emirati Heritage</em>',
   poster_eb:'Project Artwork',poster_t:'Ammar <em>AI</em> — telling our heritage from Al Qua’a',poster_sub:'Artwork capturing the soul of the project: heritage, authenticity and identity. Tap to enlarge.',poster_cap:'Ammar AI · my project.. my heritage.. my identity 🇦🇪',
+  pieces_eb:'From the artwork',pieces_t:'Glimpses of <em>our heritage</em>',pieces_sub:'Pieces from the Ammar AI artwork — each tells a part of Al Qua’a’s heritage.',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
   about_p3:'Today, the UAE works to <b>preserve this heritage</b> and pass it on — UNESCO has inscribed many Emirati elements, from <b>Arabic coffee</b>, <b>Al Sadu</b> and <b>falconry</b> to <b>Al Ayyala</b> and the <b>date palm</b>.',
@@ -2596,7 +2616,7 @@ function renderRings(){
       const a=(i/c.n)*Math.PI*2;img.style.transform=`translate(${Math.cos(a)*c.r}px,${Math.sin(a)*c.r}px) rotate(${a+Math.PI/2}rad)`;ring.appendChild(img);}
   });
 }
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -3249,6 +3269,41 @@ function clearSkin(){
   if(window._restoreTheme)window._restoreTheme();
 }
 (function(){const x=document.getElementById('skinX');if(x)x.addEventListener('click',clearSkin);})();
+// ===== heritage pieces: crops from the poster (img/ammar-poster.jpg, 1024x1536) =====
+const PIECES=[
+ {x:795,y:600,w:225,h:290,n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم والضيافة في الدلّة والفنجان.',de:'Symbol of generosity — the dallah and cup.'},
+ {x:25,y:430,w:310,h:400,n:'البوش (الإبل)',ne:'The Camels',d:'سفينة الصحراء ورفيق الأجداد في الترحال.',de:'Ships of the desert, our ancestors’ companions.'},
+ {x:835,y:945,w:185,h:135,n:'السدو',ne:'Al Sadu',d:'نسيجٌ بدوي بنقوشٍ هندسية — تراث يونسكو.',de:'Bedouin weaving with geometric motifs — UNESCO heritage.'},
+ {x:655,y:905,w:185,h:185,n:'المسبحة',ne:'Prayer Beads',d:'سكينةٌ في اليد وذِكرٌ في القلب.',de:'Calm in the hand, remembrance in the heart.'},
+ {x:25,y:1170,w:180,h:250,n:'الفانوس',ne:'The Lantern',d:'نور أجدادنا في ليالي الصحراء.',de:'Our ancestors’ light on desert nights.'},
+ {x:695,y:1125,w:325,h:305,n:'الضيافة',ne:'Hospitality',d:'قهوةٌ وتمرٌ تحت ظلال النخيل.',de:'Coffee and dates under the palms.'},
+ {x:195,y:1185,w:285,h:205,n:'القوع',ne:'Al Qua’a',d:'منبع الأصالة وبداية الحكاية.',de:'The source of authenticity — where the story begins.'},
+ {x:395,y:878,w:175,h:222,n:'عمّار AI',ne:'Ammar AI',d:'أفكار اليوم.. تراث الغد.',de:'Today’s ideas.. tomorrow’s heritage.'}
+];
+function placePieces(){
+  const IW=1024,IH=1536;
+  document.querySelectorAll('#piecesGrid .piece-img').forEach(el=>{
+    const x=+el.dataset.x,y=+el.dataset.y,w=+el.dataset.w,h=+el.dataset.h;
+    const cw=el.clientWidth;if(!cw)return;const scale=cw/w;
+    el.style.backgroundImage="url('img/ammar-poster.jpg')";
+    el.style.backgroundSize=(IW*scale).toFixed(1)+'px '+(IH*scale).toFixed(1)+'px';
+    el.style.backgroundPosition='-'+(x*scale).toFixed(1)+'px -'+(y*scale).toFixed(1)+'px';
+    el.style.height=(h*scale).toFixed(1)+'px';
+  });
+}
+function renderPieces(){
+  const grid=document.getElementById('piecesGrid');if(!grid)return;
+  const en=LANG!=='ar';grid.innerHTML='';
+  PIECES.forEach(p=>{const c=document.createElement('div');c.className='piece';
+    c.innerHTML='<div class="piece-img" data-x="'+p.x+'" data-y="'+p.y+'" data-w="'+p.w+'" data-h="'+p.h+'"></div>'+
+      '<div class="piece-b"><h3>'+(en?p.ne:p.n)+'</h3><p>'+(en?p.de:p.d)+'</p></div>';
+    grid.appendChild(c);});
+  placePieces();requestAnimationFrame(placePieces);
+  const items=[...grid.querySelectorAll('.piece')];
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});items.forEach(e=>io.observe(e));}
+  else items.forEach(e=>e.classList.add('in'));
+}
+window.addEventListener('resize',()=>{clearTimeout(window._piecesT);window._piecesT=setTimeout(placePieces,150);});
 // ===== heritage quiz + certificate =====
 const QUIZ=[
  {q:'متى قام اتحاد دولة الإمارات؟',qe:'When was the UAE federation formed?',o:['٢ ديسمبر ١٩٧١','١٩٦٦','١٩٨١','١٩٩١'],oe:['2 December 1971','1966','1981','1991'],c:0},
@@ -3312,104 +3367,6 @@ function renderQuiz(){
   }
   intro();
 }
-// ===== bedouin stickers shop =====
-const SOUQ=[
- {ic:'🐪',n:'الجمل الأصيل',ne:'Noble Camel',d:'رفيق الصحراء وسفينة الرمال',de:'Desert companion, ship of the sands',p:8,was:12,tag:'الأكثر طلباً',tage:'Bestseller'},
- {ic:'⛺',n:'بيت الشعر',ne:'Bedouin Tent',d:'مأوى القبيلة تحت سماء الصحراء',de:'Tribal shelter under the desert sky',p:7,was:0,tag:'',tage:''},
- {ic:'☕',n:'دلّة القهوة',ne:'Dallah Coffee Pot',d:'رمز الضيافة والكرم الخليجي',de:'Symbol of Gulf hospitality',p:9,was:14,tag:'الأكثر طلباً',tage:'Bestseller'},
- {ic:'🦅',n:'الصقر الملكي',ne:'Royal Falcon',d:'طير العزّة وشعار الإمارات',de:'Bird of pride, emblem of the UAE',p:10,was:0,tag:'',tage:''},
- {ic:'🌴',n:'النخلة الشامخة',ne:'Tall Palm Tree',d:'أمّ الثمار وأيقونة الخليج',de:'Mother of fruits, Gulf icon',p:6,was:0,tag:'',tage:''},
- {ic:'🏜️',n:'كثبان الرمال',ne:'Sand Dunes',d:'موجات الرمال الذهبية في الغروب',de:'Golden sand waves at sunset',p:7,was:10,tag:'عرض',tage:'Deal'},
- {ic:'🗡️',n:'الخنجر الخليجي',ne:'Gulf Khanjar',d:'رمز الشرف والأصالة العريقة',de:'Symbol of honour and heritage',p:8,was:0,tag:'',tage:''},
- {ic:'🧶',n:'نقش السدو',ne:'Sadu Weaving',d:'فنّ النسيج البدوي بألوانه الجريئة',de:'Bold colours of Bedouin weaving art',p:9,was:13,tag:'عرض',tage:'Deal'},
- {ic:'🌌',n:'ليلة النجوم',ne:'Starry Desert Night',d:'سماء الصحراء مرصوفة بالنجوم',de:'Desert sky paved with stars',p:8,was:0,tag:'',tage:''},
- {ic:'🇦🇪',n:'علم الإمارات',ne:'UAE Flag',d:'فخر الوطن وعزّ الهوية',de:'Pride of nation and identity',p:6,was:0,tag:'جديد',tage:'New'},
- {ic:'🎻',n:'الربابة',ne:'Rababa',d:'وتر البادية ونغمة السهر',de:'String of the desert night melodies',p:7,was:0,tag:'',tage:''},
- {ic:'🐑',n:'قطيع الغنم',ne:'Sheep Flock',d:'خيرات الرزق في أرض البادية',de:'Blessed flock of the open range',p:5,was:8,tag:'عرض',tage:'Deal'},
- {ic:'🦌',n:'المها العربي',ne:'Arabian Oryx',d:'كنز الصحراء ورمز النقاء',de:'Desert gem, symbol of purity',p:10,was:0,tag:'نادر',tage:'Rare'},
- {ic:'🐎',n:'الحصان العربي',ne:'Arabian Horse',d:'أصيل الخيل وفخر العرب',de:'Purebred pride of the Arabs',p:10,was:15,tag:'الأكثر طلباً',tage:'Bestseller'},
- {ic:'🪶',n:'الصقّار',ne:'Falconer',d:'حامل الصقر وصاحب الصحراء',de:'Falcon bearer, desert companion',p:9,was:0,tag:'',tage:''},
- {ic:'🫖',n:'القهوة العربية',ne:'Arabic Coffee',d:'هيل وزعفران وكرم لا يُضاهى',de:'Cardamom, saffron, endless warmth',p:7,was:10,tag:'عرض',tage:'Deal'},
- {ic:'🌿',n:'التمر الأخضر',ne:'Fresh Dates',d:'حلاوة الأرض ونعمة الرطب',de:'Earth sweetness, the gift of dates',p:5,was:0,tag:'',tage:''},
- {ic:'🔥',n:'النار والخيمة',ne:'Campfire & Tent',d:'دفء البادية وقصص الليل',de:'Desert warmth and night tales',p:8,was:12,tag:'عرض',tage:'Deal'},
- {ic:'🪔',n:'الفانوس القديم',ne:'Old Lantern',d:'نور البادية في الليالي الحالكة',de:'Desert light on dark desert nights',p:7,was:0,tag:'',tage:''},
- {ic:'🕌',n:'المسجد العتيق',ne:'Ancient Mosque',d:'روح المكان وهدوء الروح',de:'Spirit of place, calm of soul',p:6,was:0,tag:'',tage:''},
- {ic:'⛵',n:'البوم الشراعية',ne:'Dhow Sailboat',d:'سفينة الأجداد على موج الخليج',de:'Ancestors sail on Gulf waves',p:9,was:0,tag:'نادر',tage:'Rare'},
- {ic:'🦪',n:'اللؤلؤ والمحار',ne:'Pearl & Oyster',d:'كنز الغوّاص وتاريخ الخليج',de:'Diver treasure, Gulf history',p:10,was:0,tag:'نادر',tage:'Rare'},
- {ic:'🐚',n:'الصدفة البحرية',ne:'Sea Shell',d:'ذكرى الشاطئ ونسيم البحر',de:'Shore memory and sea breeze',p:5,was:7,tag:'عرض',tage:'Deal'},
- {ic:'📿',n:'المسبحة الأصيلة',ne:'Prayer Beads',d:'سكينة اليد وذكر القلب',de:'Hand calm and heartfelt remembrance',p:7,was:0,tag:'',tage:''},
- {ic:'🧿',n:'العين الكريمة',ne:'Evil Eye Charm',d:'حماية وبركة من عين الحاسد',de:'Protection and blessing from envy',p:6,was:9,tag:'عرض',tage:'Deal'},
- {ic:'🌅',n:'الشمس فوق الكثبان',ne:'Sunrise Over Dunes',d:'فجر الصحراء يشعل الرمال ذهباً',de:'Desert dawn ignites the sand gold',p:8,was:0,tag:'جديد',tage:'New'},
- {ic:'🌙',n:'هلال الليل',ne:'Desert Crescent',d:'هلال يزيّن سماء الصحراء الصافية',de:'Crescent adorns the clear desert sky',p:6,was:0,tag:'',tage:''},
- {ic:'👘',n:'الكندورة والغترة',ne:'Kandura & Ghutra',d:'الزي الأصيل عزٌّ وأناقة',de:'Traditional dress, pride and grace',p:9,was:0,tag:'جديد',tage:'New'},
- {ic:'🪵',n:'المبخرة والبخور',ne:'Incense Burner',d:'دخان العود يعبق المجالس والأرواح',de:'Oud smoke fills gatherings and souls',p:8,was:11,tag:'الأكثر طلباً',tage:'Bestseller'},
- {ic:'🌹',n:'الورد الجوري',ne:'Desert Rose',d:'عطر الصحراء وجمال الطبيعة البرية',de:'Desert fragrance, wild natural beauty',p:7,was:0,tag:'',tage:''},
- {ic:'🏺',n:'باقة الصحراء',ne:'Desert Pack',d:'ستيكرات الرمال والنخيل والجمل معاً',de:'Sand, palm and camel stickers bundle',p:25,was:35,tag:'باقة',tage:'Pack'},
- {ic:'🪆',n:'باقة التراث',ne:'Heritage Pack',d:'أجمل رموز التراث الإماراتي في مجموعة',de:'Best UAE heritage symbols in one set',p:28,was:40,tag:'باقة',tage:'Pack'}
-];
-let SCART={};
-function renderSouq(){
-  const grid=document.getElementById('souqGrid');if(!grid)return;
-  const en=LANG!=='ar';const cur=tr(I18N[LANG].souq_currency);
-  grid.innerHTML='';
-  SOUQ.forEach((it,idx)=>{
-    const card=document.createElement('div');card.className='souq-item';card.style.setProperty('transition-delay',(idx%4*0.06)+'s');
-    const tag=en?it.tage:it.tag;
-    card.innerHTML=(tag?'<span class="souq-tag">'+tag+'</span>':'')+
-      '<span class="souq-ic">'+it.ic+'</span>'+
-      '<div class="souq-name">'+(en?it.ne:it.n)+'</div>'+
-      '<div class="souq-desc">'+(en?it.de:it.d)+'</div>'+
-      '<div class="souq-price">'+(it.was?'<s>'+it.was+'</s>':'')+'<b>'+it.p+'</b><span class="cur">'+cur+'</span></div>'+
-      '<button class="souq-buy" data-i="'+idx+'">'+tr(I18N[LANG].souq_order)+'</button>';
-    grid.appendChild(card);
-    const btn=card.querySelector('.souq-buy');
-    btn.onclick=()=>{SCART[idx]=(SCART[idx]||0)+1;btn.textContent=tr(I18N[LANG].souq_added);btn.classList.add('added');
-      setTimeout(()=>{btn.textContent=tr(I18N[LANG].souq_order);btn.classList.remove('added');},1100);paintCart();};
-  });
-  // reveal on scroll
-  const items=[...grid.querySelectorAll('.souq-item')];
-  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});items.forEach(e=>io.observe(e));}
-  else items.forEach(e=>e.classList.add('in'));
-  paintCart();
-}
-function paintCart(){
-  const wrap=document.getElementById('souqCart');if(!wrap)return;
-  const en=LANG!=='ar';const cur=tr(I18N[LANG].souq_currency);
-  const items=document.getElementById('souqItems'),cnt=document.getElementById('souqCount'),tot=document.getElementById('souqTotal'),msg=document.getElementById('souqMsg');
-  const keys=Object.keys(SCART).filter(k=>SCART[k]>0);
-  if(!keys.length){wrap.hidden=true;return;}
-  wrap.hidden=false;let total=0,count=0;items.innerHTML='';
-  keys.forEach(k=>{const it=SOUQ[k],q=SCART[k];total+=it.p*q;count+=q;
-    const row=document.createElement('div');row.className='souq-row';
-    row.innerHTML='<span class="e">'+it.ic+'</span><span class="nm">'+(en?it.ne:it.n)+(q>1?' ×'+q:'')+'</span><span class="pr">'+(it.p*q)+' '+cur+'</span><button class="rm" title="remove">×</button>';
-    row.querySelector('.rm').onclick=()=>{delete SCART[k];paintCart();};
-    items.appendChild(row);});
-  cnt.textContent=count;tot.textContent=total;if(msg)msg.textContent='';
-}
-(function(){
-  const btn=document.getElementById('souqCheckout');if(!btn)return;
-  btn.addEventListener('click',()=>{
-    const en=LANG!=='ar';const msg=document.getElementById('souqMsg');const cur=tr(I18N[LANG].souq_currency);
-    const PHONE='971506641407'; // owner's WhatsApp / order number (050 664 1407)
-    const keys=Object.keys(SCART).filter(k=>SCART[k]>0);
-    if(!keys.length){if(msg){msg.style.color='var(--muted)';msg.textContent=tr(I18N[LANG].souq_empty);}return;}
-    let total=0;const lines=keys.map(k=>{const it=SOUQ[k],q=SCART[k];total+=it.p*q;return (en?it.ne:it.n)+' ×'+q+' = '+(it.p*q)+' '+cur;});
-    // 1) build a WhatsApp order message to the owner's number
-    const greet=en?'Hi! I would like to order from the Bedouin Sticker Shop 🎟️':'السلام عليكم 🌟 أبغى أطلب من متجر الستيكرات البدوية 🎟️';
-    const waText=greet+'\n\n'+lines.map(l=>'• '+l).join('\n')+'\n\n'+(en?'Total':'الإجمالي')+': '+total+' '+cur;
-    const wa='https://wa.me/'+PHONE+'?text='+encodeURIComponent(waText);
-    window.open(wa,'_blank','noopener');
-    // 2) also email the owner as a backup record
-    fetch('https://formsubmit.co/ajax/aldry6373@gmail.com',{
-      method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-      body:JSON.stringify({_subject:'🎟️ طلب ستيكرات بدوية جديد — عمار AI','الطلب':lines.join(' | '),'الإجمالي':total+' '+cur,_template:'table'})
-    }).catch(()=>{});
-    SCART={};
-    const items=document.getElementById('souqItems'),cnt=document.getElementById('souqCount'),tot=document.getElementById('souqTotal');
-    if(items)items.innerHTML='';if(cnt)cnt.textContent='0';if(tot)tot.textContent='0';
-    if(msg){msg.style.color='var(--green)';msg.textContent=tr(I18N[LANG].souq_wa);}
-  });
-})();
 // ===== heritage search =====
 function renderSearch(){
   const inp=document.getElementById('searchInput'),box=document.getElementById('searchResults');

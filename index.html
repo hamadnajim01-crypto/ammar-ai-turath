@@ -595,6 +595,22 @@
   .culturepanel.teach{border-color:#a78bfa}
   .culturepanel.teach .cult-h{color:#c9b3ff}
   .culturepanel.teach .cult-btn{background:linear-gradient(135deg,#7c3aed,#4c1d95);color:#fff}
+  /* ===== Matrix code-rain secret (ported from UAE Jobs) ===== */
+  #mxOverlay{position:fixed;inset:0;z-index:9999;background:#000;display:none;align-items:center;justify-content:center}
+  #mxOverlay.on{display:flex}
+  #mxCanvas{position:absolute;inset:0;width:100%;height:100%}
+  .mx-word{position:relative;z-index:2;font-family:'Courier New',ui-monospace,monospace;font-weight:700;
+    font-size:clamp(30px,9vw,86px);letter-spacing:.12em;color:#39ff14;opacity:0;transition:opacity .8s ease;text-align:center;padding:0 16px;
+    text-shadow:0 0 12px #39ff14,0 0 32px rgba(57,255,20,.7),0 0 64px rgba(57,255,20,.4)}
+  #mxOverlay.reveal .mx-word{opacity:1;animation:mxFlick 2.6s ease-in-out infinite}
+  @keyframes mxFlick{0%,100%{opacity:1}47%{opacity:.65}50%{opacity:.95}53%{opacity:.7}}
+  .mx-sub{position:absolute;bottom:9%;z-index:2;color:rgba(57,255,20,.75);font-family:'Courier New',ui-monospace,monospace;
+    font-size:clamp(.7rem,2.4vw,.9rem);letter-spacing:3px;opacity:0;transition:opacity .8s ease .3s;text-align:center;padding:0 14px}
+  #mxOverlay.reveal .mx-sub{opacity:1}
+  .mx-close{position:absolute;top:18px;inset-inline-end:18px;z-index:3;background:rgba(57,255,20,.12);border:1px solid #39ff14;color:#39ff14;
+    width:42px;height:42px;border-radius:50%;font-size:1.5rem;line-height:1;cursor:pointer;transition:.2s}
+  .mx-close:hover{background:#39ff14;color:#000}
+  @media (prefers-reduced-motion:reduce){#mxOverlay #mxCanvas{display:none}#mxOverlay.on .mx-word,#mxOverlay.on .mx-sub{opacity:1}}
   /* ===== skin scene: animated people + buildings ===== */
   #skinScene{position:fixed;left:0;right:0;bottom:0;height:142px;z-index:44;pointer-events:none;display:none}
   #skinScene.on{display:block}
@@ -802,6 +818,7 @@
   .cp-btn{background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff;border:none;padding:11px 22px;border-radius:22px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .2s}
   .cp-btn:hover{transform:translateY(-2px)}
   .cp-btn.alt{background:linear-gradient(135deg,var(--gold),#a87f1c);color:#1a1208}
+  .cp-btn.mx{background:linear-gradient(135deg,#16a34a,#052e16);color:#aaffaa;box-shadow:0 0 14px rgba(57,255,20,.35)}
   .cp-langs{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
   .cp-lang{font-size:.75rem;color:#7fa8d8;background:rgba(80,160,255,.1);border:1px solid #25406a;padding:3px 11px;border-radius:20px;cursor:pointer;transition:.2s}
   .cp-lang.on{color:#fff;background:#3b82f6;border-color:#3b82f6}
@@ -1341,6 +1358,7 @@
 <div id="skinFx" aria-hidden="true"></div>
 <div id="skinScene" aria-hidden="true"></div>
 <div id="skinBar" aria-live="polite"><span class="skin-t"></span><button class="skin-x" id="skinX" aria-label="exit">×</button></div>
+<div id="mxOverlay" aria-hidden="true"><canvas id="mxCanvas"></canvas><div class="mx-word" id="mxWord"></div><div class="mx-sub" id="mxSub"></div><button class="mx-close" id="mxClose" aria-label="close">×</button></div>
 <div id="lightbox" aria-hidden="true"><button id="lbClose" aria-label="إغلاق">✕</button><img id="lbImg" src="" alt=""></div>
 <nav>
   <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg> <span data-k="brand">عمار AI</span></div>
@@ -3356,6 +3374,27 @@ function clearSkin(){
   if(window._restoreTheme)window._restoreTheme();
 }
 (function(){const x=document.getElementById('skinX');if(x)x.addEventListener('click',clearSkin);})();
+// ===== Matrix code-rain secret (ported from UAE Jobs) =====
+(function(){
+  const ov=document.getElementById('mxOverlay'),cv=document.getElementById('mxCanvas'),wordEl=document.getElementById('mxWord'),subEl=document.getElementById('mxSub'),cl=document.getElementById('mxClose');
+  if(!ov||!cv)return;const ctx=cv.getContext('2d');
+  const chars='01アイウエオカキクサシスセソ0123456789ABCDEF<>{}[]/=+*ﾊﾋﾌﾍﾎ';
+  const font=16;let raf=null,drops=[],cols=0,revealT=null,autoT=null,running=false;
+  function size(){const dpr=Math.min(window.devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);cols=Math.ceil(innerWidth/font);drops=[];for(let i=0;i<cols;i++)drops[i]=Math.floor(Math.random()*-40);}
+  function frame(){ctx.fillStyle='rgba(0,0,0,0.09)';ctx.fillRect(0,0,innerWidth,innerHeight);ctx.fillStyle='#39ff14';ctx.font=font+"px 'Courier New',monospace";
+    for(let i=0;i<cols;i++){const ch=chars[Math.floor(Math.random()*chars.length)];ctx.fillText(ch,i*font,drops[i]*font);if(drops[i]*font>innerHeight&&Math.random()>0.975)drops[i]=0;drops[i]++;}
+    raf=requestAnimationFrame(frame);}
+  function open(){if(running)return;running=true;const ar=(typeof LANG!=='undefined'&&LANG==='ar');
+    wordEl.textContent=ar?'عمّار AI':'AMMAR AI';subEl.textContent=ar?'التراث + الكود = المستقبل 🇦🇪':'HERITAGE + CODE = FUTURE 🇦🇪';
+    ov.classList.add('on');ov.setAttribute('aria-hidden','false');size();frame();
+    revealT=setTimeout(()=>ov.classList.add('reveal'),2400);autoT=setTimeout(close,13000);}
+  function close(){if(!running)return;running=false;ov.classList.remove('on','reveal');ov.setAttribute('aria-hidden','true');if(raf)cancelAnimationFrame(raf);clearTimeout(revealT);clearTimeout(autoT);}
+  cl&&cl.addEventListener('click',close);
+  ov.addEventListener('click',e=>{if(e.target===ov)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&running)close();});
+  window.addEventListener('resize',()=>{if(running)size();});
+  window._openMatrix=open;
+})();
 // ===== heritage pieces: crops from the poster (img/ammar-poster.jpg, 1024x1536) =====
 const PIECES=[
  {x:6,y:355,w:415,h:415,n:'رفيق الرحلة',ne:'Travel Companion',d:'الفتى وجمله — صداقة الصحراء.',de:'The boy and his camel — a desert bond.',p:12,was:0},
@@ -3615,7 +3654,8 @@ function renderSearch(){
       '<div class="cp-out" id="cpOut" hidden></div></div>'+
       '<div class="cp-langs" id="cpLangs"></div>'+
       '<div class="cp-foot"><button class="cp-btn" id="cpAsk">'+(enx?'Ask Ammar about coding & robots':'اسأل عمار عن البرمجة والروبوتات')+'</button>'+
-      '<button class="cp-btn alt" id="cpNext">'+(enx?'Next snippet ▶':'كود ثاني ▶')+'</button></div></div>';
+      '<button class="cp-btn alt" id="cpNext">'+(enx?'Next snippet ▶':'كود ثاني ▶')+'</button>'+
+      '<button class="cp-btn mx" id="cpMatrix">'+(enx?'🟢 Enter the Matrix':'🟢 ادخل المصفوفة')+'</button></div></div>';
     const codeEl=box.querySelector('#cpCode'),fileEl=box.querySelector('#cpFile'),langs=box.querySelector('#cpLangs'),
           gutEl=box.querySelector('#cpGutter'),outEl=box.querySelector('#cpOut');
     SNIPS.forEach((s,i)=>{const c=document.createElement('span');c.className='cp-lang'+(i===0?' on':'');c.textContent=s.lang;c.onclick=()=>{si=i;type();};langs.appendChild(c);});
@@ -3636,6 +3676,7 @@ function renderSearch(){
       },42);
     }
     box.querySelector('#cpNext').onclick=()=>{si=(si+1)%SNIPS.length;type();};
+    box.querySelector('#cpMatrix').onclick=()=>{if(window._openMatrix)window._openMatrix();};
     box.querySelector('#cpAsk').onclick=()=>{location.hash='#ai';setTimeout(()=>{if(window.ask)window.ask(enx?'Tell me about coding, programming, robots and AI and how to start — in an inspiring way':'احكِ لي عن البرمجة والأكواد والروبوتات والذكاء الاصطناعي وكيف أبدأ بأسلوبٍ ملهم');},350);};
     type();
   }
@@ -3643,6 +3684,7 @@ function renderSearch(){
     clearInterval(window._cpTimer);clearTimeout(window._cpWait);clearInterval(window._peaceTimer);
     const nq=norm(inp.value);
     if(!nq){box.innerHTML='';return;}
+    if(['matrix','the matrix','مصفوفة','المصفوفة','claude','كلود','كلاود'].includes(nq)){if(window._openMatrix)window._openMatrix();box.innerHTML='<div class="sr-empty">🟢 '+(en?'Entering the Matrix…':'جارٍ الدخول إلى المصفوفة…')+'</div>';return;}
     if(HAMAD.includes(nq)){applySkin('code',en?'Hamad':'حمد');hamadPanel();return;}
     if(ABDALLA.includes(nq)||/^(abdul|abdal|3abdul|3abdal|abood|aboud)/.test(nq)||nq.replace(/\s/g,'').startsWith('عبدال')){applySkin('teach',en?'Abdalla':'عبدالله');abdallaPanel();return;}
     if(AMMAR.includes(nq)){applySkin('uae',en?'Ammar':'عمار');culturePanel();return;}

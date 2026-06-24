@@ -628,6 +628,15 @@
   @keyframes armPlantR{0%,100%{transform:rotate(-55deg)}50%{transform:rotate(-105deg)}}
   .fig-laptop{position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:18px;height:6px;background:#10243d;border:1px solid var(--gold);border-radius:2px;z-index:3}
   .fig-prop{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);font-size:1rem;z-index:3}
+  /* project poster / signature art */
+  #poster .poster-frame{max-width:470px;margin:0 auto;padding:14px;cursor:zoom-in;position:relative;
+    background:linear-gradient(165deg,rgba(244,234,214,.07),rgba(36,24,12,.45));border:1px solid var(--gold);
+    border-radius:24px;box-shadow:0 26px 64px -22px rgba(0,0,0,.75),0 0 0 6px rgba(233,188,70,.08);overflow:hidden}
+  #poster .poster-frame::before{content:"❁";position:absolute;top:10px;inset-inline-start:16px;color:var(--gold);opacity:.55;font-size:1.2rem;z-index:2}
+  #poster .poster-frame::after{content:"❁";position:absolute;top:10px;inset-inline-end:16px;color:var(--gold);opacity:.55;font-size:1.2rem;z-index:2}
+  #poster .poster-frame img{width:100%;display:block;border-radius:14px;transition:transform .4s}
+  #poster .poster-frame:hover img{transform:scale(1.03)}
+  #poster figcaption{text-align:center;color:var(--gold);font-family:var(--display);font-size:.95rem;margin-top:12px}
   /* animated Islamic geometric mandala */
   #mandala{text-align:center}
   .mandala{width:320px;height:320px;max-width:80vw;margin:6px auto 0;position:relative}
@@ -1384,6 +1393,17 @@
  </div>
 </section>
 
+<!-- PROJECT POSTER / SIGNATURE ART -->
+<section id="poster">
+  <span class="eyebrow" data-k="poster_eb">لوحة المشروع</span>
+  <h2 class="sec-title" data-k="poster_t" data-html>عمّار <em>AI</em> — من القوع نروي تراثنا</h2>
+  <p class="sec-sub" data-k="poster_sub">لوحةٌ تجمع روح المشروع: التراث، والأصالة، والهوية. اضغط لتكبيرها.</p>
+  <figure class="poster-frame reveal" onclick="window._openLightbox&&window._openLightbox('img/ammar-poster.jpg')">
+    <img loading="lazy" src="img/ammar-poster.jpg" alt="عمار AI — لوحة تراث القوع">
+    <figcaption data-k="poster_cap">عمّار AI · مشروعي.. تراثي.. هويتي 🇦🇪</figcaption>
+  </figure>
+</section>
+
 <!-- ALTERNATING STORY SECTIONS (photo one side, text the other) -->
 <section class="storysec">
  <div class="about2">
@@ -1954,6 +1974,7 @@ const I18N={
  ar:{dir:'rtl',btn:'EN',brand:'عمار AI',nav_about:'عن التراث',nav_topics:'المجالات',nav_camels:'البوش',nav_real:'بالصور',nav_ai:'اسأل عمار',nav_cta:'اسأل عمار AI',
   hero_h1:'موسوعة التراث الإماراتي',hero_p:'رحلة متحركة في أصالة الإمارات — من بيوت العريش والغوص على اللؤلؤ، إلى السدو والقهوة. واسأل مساعدنا الذكي عن أي شيء 🇦🇪',hero_b1:'استكشف المجالات',hero_b2:'🎨 اسأل عمار AI',
   about_eb:'الهوية الوطنية',about_t:'عن <em>التراث الإماراتي</em>',
+  poster_eb:'لوحة المشروع',poster_t:'عمّار <em>AI</em> — من القوع نروي تراثنا',poster_sub:'لوحةٌ تجمع روح المشروع: التراث، والأصالة، والهوية. اضغط لتكبيرها.',poster_cap:'عمّار AI · مشروعي.. تراثي.. هويتي 🇦🇪',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
   about_p3:'اليوم، تحرص دولة الإمارات على <b>صون هذا التراث</b> وتوثيقه ونقله للأجيال — وقد أدرجت منظمة اليونسكو عناصر إماراتية كثيرة على قوائم التراث الإنساني، من <b>القهوة العربية</b> و<b>السدو</b> و<b>الصقارة</b> إلى <b>العيّالة</b> و<b>النخلة</b>.',
@@ -2029,6 +2050,7 @@ const I18N={
  en:{dir:'ltr',btn:'ع',brand:'Ammar AI',nav_about:'About',nav_topics:'Topics',nav_camels:'Camels',nav_real:'Photos',nav_ai:'Ask Ammar',nav_cta:'Ask Ammar AI',
   hero_h1:'The Emirati Heritage Encyclopedia',hero_p:'An animated journey through the UAE’s authenticity — from areesh houses and pearl diving to Sadu weaving and Arabic coffee. Ask our smart assistant anything 🇦🇪',hero_b1:'Explore Topics',hero_b2:'🎨 Ask Ammar AI',
   about_eb:'National Identity',about_t:'About <em>Emirati Heritage</em>',
+  poster_eb:'Project Artwork',poster_t:'Ammar <em>AI</em> — telling our heritage from Al Qua’a',poster_sub:'Artwork capturing the soul of the project: heritage, authenticity and identity. Tap to enlarge.',poster_cap:'Ammar AI · my project.. my heritage.. my identity 🇦🇪',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
   about_p3:'Today, the UAE works to <b>preserve this heritage</b> and pass it on — UNESCO has inscribed many Emirati elements, from <b>Arabic coffee</b>, <b>Al Sadu</b> and <b>falconry</b> to <b>Al Ayyala</b> and the <b>date palm</b>.',

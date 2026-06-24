@@ -592,6 +592,42 @@
   .culturepanel.plants{border-color:#2fb39a}
   .culturepanel.plants .cult-h{color:#7fe0b0}
   .culturepanel.plants .cult-btn{background:linear-gradient(135deg,#2fb39a,#356b48);color:#eafff4}
+  /* ===== skin scene: animated people + buildings ===== */
+  #skinScene{position:fixed;left:0;right:0;bottom:0;height:142px;z-index:44;pointer-events:none;display:none}
+  #skinScene.on{display:block}
+  .scn-sky{position:absolute;left:0;right:0;bottom:52px;display:flex;align-items:flex-end;justify-content:center;gap:15px;padding:0 18px;opacity:.5}
+  .scn-ground{position:absolute;left:0;right:0;bottom:0;height:66px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(26px,9vw,60px);padding:0 18px}
+  .scn-ground::before{content:"";position:absolute;left:0;right:0;bottom:0;height:30px;background:linear-gradient(transparent,rgba(0,0,0,.3))}
+  .bld{width:36px;background:var(--surface);border:1px solid var(--line);border-radius:6px 6px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px;align-content:start}
+  .bld.tower{width:23px}
+  .bld i{height:7px;border-radius:1px;background:var(--gold);opacity:.55;animation:winBlink 3s steps(1) infinite}
+  @keyframes winBlink{0%,100%{opacity:.55}50%{opacity:.12}}
+  .tree{font-size:2.6rem;line-height:1;animation:sway 3.4s ease-in-out infinite;transform-origin:bottom center;filter:drop-shadow(0 6px 6px rgba(0,0,0,.3))}
+  @keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+  .fig-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
+  .fig{position:relative;width:26px;height:50px;animation:figBob 1.5s ease-in-out infinite}
+  @keyframes figBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  .fig-head{width:13px;height:13px;border-radius:50%;background:var(--sk,#e9bc46);margin:0 auto}
+  .fig-body{position:relative;width:15px;height:21px;border-radius:7px;background:var(--sk,#e9bc46);margin:1px auto 0}
+  .fig-arm{position:absolute;top:3px;width:4px;height:15px;border-radius:3px;background:var(--sk,#e9bc46);transform-origin:top center}
+  .fig-arm.l{left:-3px}.fig-arm.r{right:-3px}
+  .fig-leg{position:absolute;bottom:0;width:4px;height:13px;border-radius:2px;background:var(--sk,#e9bc46)}
+  .fig-leg.l{left:7px}.fig-leg.r{right:7px}
+  .fig.wave .fig-arm.l{animation:armWaveL 1s ease-in-out infinite}
+  .fig.wave .fig-arm.r{animation:armWaveR 1s ease-in-out infinite}
+  @keyframes armWaveL{0%,100%{transform:rotate(35deg)}50%{transform:rotate(155deg)}}
+  @keyframes armWaveR{0%,100%{transform:rotate(-35deg)}50%{transform:rotate(-155deg)}}
+  .fig.type .fig-arm{top:7px;height:13px}
+  .fig.type .fig-arm.l{animation:armTypeL .32s ease-in-out infinite}
+  .fig.type .fig-arm.r{animation:armTypeR .32s ease-in-out infinite}
+  @keyframes armTypeL{0%,100%{transform:rotate(52deg)}50%{transform:rotate(72deg)}}
+  @keyframes armTypeR{0%,100%{transform:rotate(-52deg)}50%{transform:rotate(-72deg)}}
+  .fig.plant .fig-arm.l{animation:armPlantL 1.1s ease-in-out infinite}
+  .fig.plant .fig-arm.r{animation:armPlantR 1.1s ease-in-out infinite}
+  @keyframes armPlantL{0%,100%{transform:rotate(55deg)}50%{transform:rotate(105deg)}}
+  @keyframes armPlantR{0%,100%{transform:rotate(-55deg)}50%{transform:rotate(-105deg)}}
+  .fig-laptop{position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:18px;height:6px;background:#10243d;border:1px solid var(--gold);border-radius:2px;z-index:3}
+  .fig-prop{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);font-size:1rem;z-index:3}
   /* animated Islamic geometric mandala */
   #mandala{text-align:center}
   .mandala{width:320px;height:320px;max-width:80vw;margin:6px auto 0;position:relative}
@@ -1238,6 +1274,7 @@
   <button class="przn-reset" id="prznReset" data-k="przn_reset">↺ إعادة الضبط الافتراضي</button>
 </div>
 <div id="skinFx" aria-hidden="true"></div>
+<div id="skinScene" aria-hidden="true"></div>
 <div id="skinBar" aria-live="polite"><span class="skin-t"></span><button class="skin-x" id="skinX" aria-label="exit">×</button></div>
 <div id="lightbox" aria-hidden="true"><button id="lbClose" aria-label="إغلاق">✕</button><img id="lbImg" src="" alt=""></div>
 <nav>
@@ -3181,6 +3218,7 @@ function applySkin(key,who){
       d.style.top=((i*43+i*i*3)%100)+'%';const sz=2+(i%4);d.style.width=sz+'px';d.style.height=sz+'px';
       const du=6+((i*5)%9);d.style.animationDuration=du+'s';d.style.animationDelay='-'+((i*4)%du)+'s';
       fx.appendChild(d);}}
+    buildScene(key);
     window._activeSkin=key;
   }
   fx.classList.add('on');
@@ -3188,9 +3226,28 @@ function applySkin(key,who){
   bar.querySelector('.skin-t').textContent=(ar?s.ar:s.en)+(who?(' — '+who):'');
   bar.classList.add('on');
 }
+function buildScene(key){
+  const scene=document.getElementById('skinScene');if(!scene)return;
+  function fig(pose,color,prop){return '<div class="fig-wrap"><div class="fig '+pose+'" style="--sk:'+color+'"><div class="fig-head"></div><div class="fig-body"><span class="fig-arm l"></span><span class="fig-arm r"></span></div><div class="fig-leg l"></div><div class="fig-leg r"></div>'+(prop||'')+'</div></div>';}
+  let sky='',ground='';
+  if(key==='code'){
+    [78,98,60,86,70,94].forEach((h,i)=>{sky+='<div class="bld'+(i%3===1?' tower':'')+'" style="height:'+h+'px">'+'<i></i>'.repeat(6)+'</div>';});
+    ['#8ec5ff','#7ee787','#ffd479','#ff9d6c'].forEach(c=>ground+=fig('type',c,'<div class="fig-laptop"></div>'));
+  }else if(key==='uae'){
+    [70,90,58,80,66].forEach((h,i)=>{sky+='<div class="bld'+(i%2?' tower':'')+'" style="height:'+h+'px">'+'<i></i>'.repeat(4)+'</div>';});
+    sky+='<div class="tree">🕌</div>';
+    ['#E9BC46','#f4ead6','#C2A878','#e9bc46'].forEach(c=>ground+=fig('wave',c,''));
+  }else{
+    sky='<div class="tree">🌴</div><div class="tree">🌳</div><div class="tree">🌴</div><div class="tree">🌲</div><div class="tree">🌴</div>';
+    ['#7ee0b0','#2fb39a','#9be7c4','#6fae84'].forEach(c=>ground+=fig('plant',c,'<div class="fig-prop">🌱</div>'));
+  }
+  scene.innerHTML='<div class="scn-sky">'+sky+'</div><div class="scn-ground">'+ground+'</div>';
+  scene.classList.add('on');
+}
 function clearSkin(){
-  const fx=document.getElementById('skinFx'),bar=document.getElementById('skinBar');
+  const fx=document.getElementById('skinFx'),bar=document.getElementById('skinBar'),scene=document.getElementById('skinScene');
   if(fx){fx.classList.remove('on');fx.innerHTML='';}
+  if(scene){scene.classList.remove('on');scene.innerHTML='';}
   if(bar)bar.classList.remove('on');
   window._activeSkin=null;
   if(window._restoreTheme)window._restoreTheme();

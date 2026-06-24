@@ -2549,7 +2549,7 @@ function _chatSpecial(t){
     return LANG==='ar'?'احكِ لي عن نباتات الصحراء والواحات الخضراء في الإمارات وجمال الطبيعة البرية':'Tell me about desert plants and the green oases of the UAE and the beauty of wild nature';
   if(['ammar','عمار','عمار الدرعي','ammar aldarei','amar'].includes(nq)) // ammar loves UAE culture
     return LANG==='ar'?'احكِ لي عن ثقافة الإمارات وتراثها العريق بأسلوبٍ غنيٍّ وملهم — القهوة والصقارة والسدو والمجالس':'Tell me about Emirati culture and its rich heritage in an inspiring way — coffee, falconry, Al Sadu and the majlis';
-  if(['abdalla','abdullah','abdalah','abdallah','عبدالله','عبد الله','عبداله','3abdullah','abood'].includes(nq)) // abdalla teaches coding
+  if(/^(abdul|abdal|3abdul|3abdal|abood|aboud)/.test(nq)||nq.replace(/\s/g,'').startsWith('عبدال')) // abdalla teaches coding
     return LANG==='ar'?'احكِ لي كيف أتعلّم البرمجة من الصفر مع معلّمٍ ممتاز وأدوات مثل Claude AI، وأعطني خطة وخطوات أولى ملهمة':'Teach me how to learn coding from scratch with a great mentor and tools like Claude AI — give me an inspiring plan and first steps';
   const M=[
    {k:['عمار حميد','عمار حميد الدرعي','ammar humaid'],qa:'احكِ لي عن التراث الإماراتي بالتفصيل وبأسلوبٍ شيّق',qe:'Tell me about UAE heritage in rich, engaging detail'},
@@ -3644,7 +3644,7 @@ function renderSearch(){
     const nq=norm(inp.value);
     if(!nq){box.innerHTML='';return;}
     if(HAMAD.includes(nq)){applySkin('code',en?'Hamad':'حمد');hamadPanel();return;}
-    if(ABDALLA.includes(nq)){applySkin('teach',en?'Abdalla':'عبدالله');abdallaPanel();return;}
+    if(ABDALLA.includes(nq)||/^(abdul|abdal|3abdul|3abdal|abood|aboud)/.test(nq)||nq.replace(/\s/g,'').startsWith('عبدال')){applySkin('teach',en?'Abdalla':'عبدالله');abdallaPanel();return;}
     if(AMMAR.includes(nq)){applySkin('uae',en?'Ammar':'عمار');culturePanel();return;}
     if(SAAD.includes(nq)){applySkin('plants',en?'Saad':'سعد');plantsPanel(en?'Saad':'سعد');return;}
     if(THAYAB.includes(nq)){applySkin('plants',en?'Thayab':'ذياب');plantsPanel(en?'Thayab':'ذياب');return;}

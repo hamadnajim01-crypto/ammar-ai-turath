@@ -701,6 +701,16 @@
   .sky-cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;padding:0 18px}
   .sky-cap h2{color:#fff;font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.3rem);text-shadow:0 3px 16px rgba(0,0,0,.55);margin:0}
   .sky-cap p{color:rgba(255,255,255,.92);margin-top:8px;font-size:clamp(.9rem,2.5vw,1.05rem);text-shadow:0 2px 10px rgba(0,0,0,.55);max-width:560px}
+  /* why we made this */
+  .why-lead{max-width:730px;margin:0 auto 36px;text-align:center;color:var(--paper);font-size:clamp(1rem,2.6vw,1.12rem);line-height:2.1}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:18px;max-width:980px;margin:0 auto}
+  .why-card{background:linear-gradient(165deg,rgba(201,162,39,.08),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:18px;
+    padding:24px 18px;text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s}
+  .why-card:hover{transform:translateY(-7px);border-color:var(--gold);box-shadow:0 18px 40px -18px rgba(0,0,0,.7)}
+  .why-ic{font-size:2.5rem;display:block;margin-bottom:11px;filter:drop-shadow(0 5px 9px rgba(0,0,0,.4));animation:valFloat 3.6s ease-in-out infinite}
+  .why-card:nth-child(2) .why-ic{animation-delay:.5s}.why-card:nth-child(3) .why-ic{animation-delay:1s}.why-card:nth-child(4) .why-ic{animation-delay:1.5s}
+  .why-card h3{color:var(--gold);font-family:var(--display);font-size:1.12rem;margin-bottom:5px}
+  .why-card p{color:var(--muted);font-size:.85rem;line-height:1.7}
   /* UNESCO heritage elements */
   .un-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;max-width:1100px;margin:0 auto}
   .un-card{position:relative;background:linear-gradient(165deg,rgba(42,157,143,.1),rgba(36,24,12,.55));border:1px solid var(--line);border-radius:20px;
@@ -2093,6 +2103,19 @@
   </div>
 </section>
 
+<!-- WHY WE MADE THIS -->
+<section id="why">
+  <span class="eyebrow" data-k="why_eb">رسالتنا</span>
+  <h2 class="sec-title" data-k="why_t" data-html>لماذا أنشأنا <em>هذا الموقع؟</em></h2>
+  <p class="why-lead" data-k="why_p">أنشأنا «عمّار AI» حبًّا في تراث الإمارات وأهل القوع — لنحفظ ذاكرة الأجداد من الضياع، ونرويها للأجيال بأسلوبٍ عصري يفهمه الجميع. نؤمن أن من يعرف ماضيه يصنع مستقبله، فجعلنا التقنية جسرًا بين الأصالة والمستقبل، ليبقى تراثنا حيًّا في قلوب أبنائنا والعالم. 🇦🇪</p>
+  <div class="why-grid">
+    <div class="why-card"><span class="why-ic">🛡️</span><h3 data-k="why_1t">نحفظ تراثنا</h3><p data-k="why_1d">نوثّق عادات الأجداد وحِرَفهم قبل أن تُنسى.</p></div>
+    <div class="why-card"><span class="why-ic">📖</span><h3 data-k="why_2t">نروي قصتنا</h3><p data-k="why_2d">من القوع إلى العالم، نحكي حكايتنا بصوتنا.</p></div>
+    <div class="why-card"><span class="why-ic">🤝</span><h3 data-k="why_3t">نصل الأجيال</h3><p data-k="why_3d">نقرّب الجيل الجديد من جذوره وهويته.</p></div>
+    <div class="why-card"><span class="why-ic">❤️</span><h3 data-k="why_4t">حبًّا للوطن</h3><p data-k="why_4d">فخرٌ بالهوية الإماراتية وانتماءٌ لا ينتهي.</p></div>
+  </div>
+</section>
+
 <!-- ENDING / CTA -->
 <section id="end" class="endsec">
   <div class="end-glow"></div>
@@ -2128,6 +2151,7 @@ const I18N={
   sky_t:'تحت سماء الإمارات',sky_p:'من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.',
   val_eb:'قيمٌ نفتخر بها',val_t:'قِيَمٌ من <em>تراثنا</em>',val_sub:'قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.',sp_sub:'تراث القوع · من القوع نروي تراثنا',
   un_eb:'معترفٌ به عالمياً',un_t:'تراثنا في <em>قوائم اليونسكو</em>',un_sub:'عناصر إماراتية أصيلة سجّلتها اليونسكو ضمن التراث الإنساني — فخرٌ نتشاركه مع العالم.',
+  why_eb:'رسالتنا',why_t:'لماذا أنشأنا <em>هذا الموقع؟</em>',why_p:'أنشأنا «عمّار AI» حبًّا في تراث الإمارات وأهل القوع — لنحفظ ذاكرة الأجداد من الضياع، ونرويها للأجيال بأسلوبٍ عصري يفهمه الجميع. نؤمن أن من يعرف ماضيه يصنع مستقبله، فجعلنا التقنية جسرًا بين الأصالة والمستقبل، ليبقى تراثنا حيًّا في قلوب أبنائنا والعالم. 🇦🇪',why_1t:'نحفظ تراثنا',why_1d:'نوثّق عادات الأجداد وحِرَفهم قبل أن تُنسى.',why_2t:'نروي قصتنا',why_2d:'من القوع إلى العالم، نحكي حكايتنا بصوتنا.',why_3t:'نصل الأجيال',why_3d:'نقرّب الجيل الجديد من جذوره وهويته.',why_4t:'حبًّا للوطن',why_4d:'فخرٌ بالهوية الإماراتية وانتماءٌ لا ينتهي.',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
   about_p3:'اليوم، تحرص دولة الإمارات على <b>صون هذا التراث</b> وتوثيقه ونقله للأجيال — وقد أدرجت منظمة اليونسكو عناصر إماراتية كثيرة على قوائم التراث الإنساني، من <b>القهوة العربية</b> و<b>السدو</b> و<b>الصقارة</b> إلى <b>العيّالة</b> و<b>النخلة</b>.',
@@ -2208,6 +2232,7 @@ const I18N={
   sky_t:'Under the UAE sky',sky_p:'From desert sunset to night stars — a heritage that soars like a falcon.',
   val_eb:'Values we cherish',val_t:'Values of <em>our heritage</em>',val_sub:'Values inherited from our ancestors, still beating in the heart of the UAE.',sp_sub:'Tirath Al Qua’a · telling our heritage',
   un_eb:'Recognised worldwide',un_t:'Our heritage on the <em>UNESCO lists</em>',un_sub:'Authentic Emirati elements inscribed by UNESCO as intangible cultural heritage — a pride we share with the world.',
+  why_eb:'Our mission',why_t:'Why we built <em>this website</em>',why_p:'We created “Ammar AI” out of love for the heritage of the UAE and the people of Al Qua’a — to save our ancestors’ memory from being lost, and tell it to new generations in a modern way everyone understands. We believe whoever knows their past builds their future, so we made technology a bridge between authenticity and the future, keeping our heritage alive in the hearts of our children and the world. 🇦🇪',why_1t:'We preserve our heritage',why_1d:'We document our ancestors’ customs and crafts before they fade.',why_2t:'We tell our story',why_2d:'From Al Qua’a to the world, in our own voice.',why_3t:'We connect generations',why_3d:'Bringing the new generation closer to its roots.',why_4t:'For love of the nation',why_4d:'Pride in Emirati identity and endless belonging.',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
   about_p3:'Today, the UAE works to <b>preserve this heritage</b> and pass it on — UNESCO has inscribed many Emirati elements, from <b>Arabic coffee</b>, <b>Al Sadu</b> and <b>falconry</b> to <b>Al Ayyala</b> and the <b>date palm</b>.',
@@ -3322,7 +3347,11 @@ const THEMES={
   sunset:{n:'غروب',ne:'Sunset',sw:'linear-gradient(135deg,#ff9d5c,#a13b2c)',v:{'--bg':'#2a0f12','--surface':'#3a161a','--line':'#6b2a2f','--paper':'#fbe6d8','--muted':'#e0a68f','--gold':'#ff9d5c','--sand':'#d97b54','--clay':'#a13b2c','--teal':'#e07a5f'}},
   oasis:{n:'واحة',ne:'Oasis',sw:'linear-gradient(135deg,#2fb39a,#356b48)',v:{'--bg':'#0e2017','--surface':'#15301f','--line':'#2d4f37','--paper':'#e8f5ea','--muted':'#a8c9b2','--gold':'#ecc46a','--sand':'#6fae84','--clay':'#356b48','--teal':'#2fb39a'}},
   pearl:{n:'لؤلؤي',ne:'Pearl',sw:'linear-gradient(135deg,#cfe8ff,#0c2230)',v:{'--bg':'#0c2230','--surface':'#123040','--line':'#2a5366','--paper':'#eaf6fb','--muted':'#a9cdd8','--gold':'#dcc488','--sand':'#7fb0c4','--clay':'#2f6b7a','--teal':'#39b0c4'}},
-  royal:{n:'ملكي',ne:'Royal',sw:'linear-gradient(135deg,#7c3aed,#e9bc46)',v:{'--bg':'#1a1026','--surface':'#241636','--line':'#43305f','--paper':'#f0e8fb','--muted':'#bda9d6','--gold':'#e9bc46','--sand':'#9d7fc4','--clay':'#5e3a8b','--teal':'#9b6fd6'}}
+  royal:{n:'ملكي',ne:'Royal',sw:'linear-gradient(135deg,#7c3aed,#e9bc46)',v:{'--bg':'#1a1026','--surface':'#241636','--line':'#43305f','--paper':'#f0e8fb','--muted':'#bda9d6','--gold':'#e9bc46','--sand':'#9d7fc4','--clay':'#5e3a8b','--teal':'#9b6fd6'}},
+  rose:{n:'وردي',ne:'Rose',sw:'linear-gradient(135deg,#ff9ec4,#a13b6b)',v:{'--bg':'#2a1420','--surface':'#3a1c2c','--line':'#5e2f45','--paper':'#fbe6f0','--muted':'#d9a8c0','--gold':'#ff9ec4','--sand':'#d97ba8','--clay':'#a13b6b','--teal':'#e07a9f'}},
+  emerald:{n:'زمردي',ne:'Emerald',sw:'linear-gradient(135deg,#34d399,#0a201a)',v:{'--bg':'#0a201a','--surface':'#103029','--line':'#235045','--paper':'#e6fff5','--muted':'#9fd9c4','--gold':'#34d399','--sand':'#5fae8f','--clay':'#1f6b53','--teal':'#10b981'}},
+  copper:{n:'نحاسي',ne:'Copper',sw:'linear-gradient(135deg,#e08a4f,#5e3326)',v:{'--bg':'#241310','--surface':'#331c14','--line':'#5e3326','--paper':'#fbe8dc','--muted':'#dba893','--gold':'#e08a4f','--sand':'#cf8a6a','--clay':'#9c4a2a','--teal':'#c9744f'}},
+  ocean:{n:'سماوي',ne:'Ocean',sw:'linear-gradient(135deg,#4cc9f0,#0a1a26)',v:{'--bg':'#0a1a26','--surface':'#102a3a','--line':'#234c63','--paper':'#e6f4fb','--muted':'#9fc4d9','--gold':'#4cc9f0','--sand':'#5f9fc4','--clay':'#2a6b8b','--teal':'#48cae4'}}
 };
 const FONTS={
   kufi:{n:'كوفي',ne:'Kufi',pv:'أبجد',d:'"Reem Kufi"',b:'"Tajawal"'},

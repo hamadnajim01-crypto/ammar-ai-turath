@@ -711,6 +711,19 @@
   .sky-cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;padding:0 18px}
   .sky-cap h2{color:#fff;font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.3rem);text-shadow:0 3px 16px rgba(0,0,0,.55);margin:0}
   .sky-cap p{color:rgba(255,255,255,.92);margin-top:8px;font-size:clamp(.9rem,2.5vw,1.05rem);text-shadow:0 2px 10px rgba(0,0,0,.55);max-width:560px}
+  /* heritage landmarks */
+  .places-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px;max-width:1080px;margin:0 auto}
+  .place-card{position:relative;background:linear-gradient(165deg,rgba(201,162,39,.1),rgba(36,24,12,.55));border:1px solid var(--line);border-radius:18px;
+    padding:22px 16px;text-align:center;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;opacity:0;transform:translateY(20px)}
+  .place-card.in{opacity:1;transform:none}
+  .place-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--red),var(--green),#fff,var(--gold));transform:scaleX(0);transform-origin:center;transition:transform .35s}
+  .place-card:hover::after{transform:scaleX(1)}
+  .place-card:hover{transform:translateY(-7px);border-color:var(--gold);box-shadow:0 18px 40px -18px rgba(0,0,0,.7)}
+  .place-ic{font-size:2.8rem;display:block;margin-bottom:9px;transition:transform .3s}
+  .place-card:hover .place-ic{transform:scale(1.15)}
+  .place-card h3{color:var(--gold);font-family:var(--display);font-size:1.08rem;margin-bottom:2px}
+  .place-loc{color:var(--teal);font-size:.72rem;font-weight:700;margin-bottom:6px}
+  .place-card p{color:var(--muted);font-size:.8rem;line-height:1.6}
   /* traditional crafts */
   .crafts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:16px;max-width:1080px;margin:0 auto}
   .craft-card{background:linear-gradient(165deg,rgba(139,90,43,.14),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:18px;
@@ -1626,6 +1639,14 @@
   <div class="crafts-grid" id="craftsGrid"></div>
 </section>
 
+<!-- HERITAGE LANDMARKS (animated) -->
+<section id="places">
+  <span class="eyebrow" data-k="pl_eb">شواهد على المجد</span>
+  <h2 class="sec-title" data-k="pl_t" data-html>معالمٌ <em>تراثية</em></h2>
+  <p class="sec-sub" data-k="pl_sub">حصونٌ وواحاتٌ وكثبانٌ تروي قصة الإمارات عبر الزمن — شواهد تحكي أصالة المكان.</p>
+  <div class="places-grid" id="placesGrid"></div>
+</section>
+
 <!-- ANIMATED UAE SKY BANNER (inspired by UAE Jobs hero) -->
 <section id="skyhero" aria-label="UAE sky">
   <div class="sky-grad"></div>
@@ -2240,6 +2261,7 @@ const I18N={
   fd_eb:'من مطبخ الجدّات',fd_t:'المأكولات <em>الشعبية</em>',fd_sub:'نكهاتٌ تجمع العائلة على السفرة — طعمٌ يحمل دفء البيوت الإماراتية.',
   dr_eb:'زينة وأصالة',dr_t:'الأزياء <em>الشعبية</em>',dr_sub:'لباسٌ يجمع الأناقة بالحشمة، ويحكي هوية أهل الإمارات بكل خيط.',
   cr_eb:'صنعة الأيادي',cr_t:'الحِرف <em>اليدوية</em>',cr_sub:'مهاراتٌ صنعها الأجداد بأيديهم من خيرات البر والبحر — إبداعٌ يحكي الصبر والإتقان.',
+  pl_eb:'شواهد على المجد',pl_t:'معالمٌ <em>تراثية</em>',pl_sub:'حصونٌ وواحاتٌ وكثبانٌ تروي قصة الإمارات عبر الزمن — شواهد تحكي أصالة المكان.',
   why_eb:'رسالتنا',why_t:'لماذا أنشأنا <em>هذا الموقع؟</em>',why_p:'أنشأنا «عمّار AI» حبًّا في تراث الإمارات وأهل القوع — لنحفظ ذاكرة الأجداد من الضياع، ونرويها للأجيال بأسلوبٍ عصري يفهمه الجميع. نؤمن أن من يعرف ماضيه يصنع مستقبله، فجعلنا التقنية جسرًا بين الأصالة والمستقبل، ليبقى تراثنا حيًّا في قلوب أبنائنا والعالم. 🇦🇪',why_1t:'نحفظ تراثنا',why_1d:'نوثّق عادات الأجداد وحِرَفهم قبل أن تُنسى.',why_2t:'نروي قصتنا',why_2d:'من القوع إلى العالم، نحكي حكايتنا بصوتنا.',why_3t:'نصل الأجيال',why_3d:'نقرّب الجيل الجديد من جذوره وهويته.',why_4t:'حبًّا للوطن',why_4d:'فخرٌ بالهوية الإماراتية وانتماءٌ لا ينتهي.',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
@@ -2325,6 +2347,7 @@ const I18N={
   fd_eb:'From grandma’s kitchen',fd_t:'Traditional <em>dishes</em>',fd_sub:'Flavours that gather the family around the table — the warmth of Emirati homes.',
   dr_eb:'Adornment & authenticity',dr_t:'Traditional <em>dress</em>',dr_sub:'Attire that blends elegance with modesty, telling Emirati identity in every thread.',
   cr_eb:'Made by hand',cr_t:'Traditional <em>crafts</em>',cr_sub:'Skills our ancestors made by hand from land and sea — creativity born of patience and mastery.',
+  pl_eb:'Witnesses to glory',pl_t:'Heritage <em>landmarks</em>',pl_sub:'Forts, oases and dunes that tell the UAE’s story through time — witnesses to the soul of place.',
   why_eb:'Our mission',why_t:'Why we built <em>this website</em>',why_p:'We created “Ammar AI” out of love for the heritage of the UAE and the people of Al Qua’a — to save our ancestors’ memory from being lost, and tell it to new generations in a modern way everyone understands. We believe whoever knows their past builds their future, so we made technology a bridge between authenticity and the future, keeping our heritage alive in the hearts of our children and the world. 🇦🇪',why_1t:'We preserve our heritage',why_1d:'We document our ancestors’ customs and crafts before they fade.',why_2t:'We tell our story',why_2d:'From Al Qua’a to the world, in our own voice.',why_3t:'We connect generations',why_3d:'Bringing the new generation closer to its roots.',why_4t:'For love of the nation',why_4d:'Pride in Emirati identity and endless belonging.',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
@@ -2899,7 +2922,7 @@ function renderRings(){
       const a=(i/c.n)*Math.PI*2;img.style.transform=`translate(${Math.cos(a)*c.r}px,${Math.sin(a)*c.r}px) rotate(${a+Math.PI/2}rad)`;ring.appendChild(img);}
   });
 }
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -3711,6 +3734,27 @@ const VALUES=[
  {ic:'🐪',n:'الوفاء',ne:'Loyalty',d:'وفاءٌ كرفقة الجمل في الترحال.',de:'Loyalty like a camel on the journey.'},
  {ic:'⏳',n:'الصبر',ne:'Patience',d:'صبرٌ يحوّل الصحراء إلى واحة.',de:'Patience that turns desert into oasis.'}
 ];
+// ===== heritage landmarks (animated) =====
+const PLACES=[
+ {ic:'🏰',n:'قصر الحصن',ne:'Qasr Al Hosn',l:'أبوظبي',le:'Abu Dhabi',d:'أقدم مبنى في أبوظبي وقلبها التاريخي.',de:'Abu Dhabi’s oldest building and historic heart.'},
+ {ic:'🏯',n:'حصن الجاهلي',ne:'Al Jahili Fort',l:'العين',le:'Al Ain',d:'حصنٌ طيني عريق من أجمل حصون الإمارات.',de:'A grand mud fort, one of the finest in the UAE.'},
+ {ic:'⛰️',n:'جبل حفيت',ne:'Jebel Hafeet',l:'العين',le:'Al Ain',d:'أعلى قمم الإمارات ومقابر أثرية حوله.',de:'The UAE’s tallest peak with ancient tombs nearby.'},
+ {ic:'🌴',n:'واحة العين',ne:'Al Ain Oasis',l:'العين',le:'Al Ain',d:'واحةٌ خضراء بنظام أفلاج عمره قرون.',de:'A green oasis with a centuries-old aflaj system.'},
+ {ic:'🏜️',n:'كثبان ليوا',ne:'Liwa Dunes',l:'الظفرة',le:'Al Dhafra',d:'بوابة الربع الخالي وأعلى الكثبان.',de:'Gateway to the Empty Quarter and towering dunes.'},
+ {ic:'🏘️',n:'حي الفهيدي',ne:'Al Fahidi',l:'دبي',le:'Dubai',d:'أزقّةٌ طينية وأبراج هواء من دبي القديمة.',de:'Mud alleys and wind towers of old Dubai.'},
+ {ic:'🕌',n:'مسجد البِدية',ne:'Al Bidya Mosque',l:'الفجيرة',le:'Fujairah',d:'أقدم مسجد في الإمارات بقبابه الطينية.',de:'The UAE’s oldest mosque with its mud domes.'},
+ {ic:'🐪',n:'القوع',ne:'Al Qua’a',l:'العين',le:'Al Ain',d:'موطن المشروع — منبع الأصالة والبداوة.',de:'Home of the project — source of authenticity.'}
+];
+function renderPlaces(){
+  const grid=document.getElementById('placesGrid');if(!grid)return;
+  const en=LANG!=='ar';grid.innerHTML='';
+  PLACES.forEach(x=>{const c=document.createElement('div');c.className='place-card';
+    c.innerHTML='<span class="place-ic">'+x.ic+'</span><h3>'+(en?x.ne:x.n)+'</h3><div class="place-loc">📍 '+(en?x.le:x.l)+'</div><p>'+(en?x.de:x.d)+'</p>';
+    grid.appendChild(c);});
+  const items=[...grid.querySelectorAll('.place-card')];
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
+  else items.forEach(e=>e.classList.add('in'));
+}
 // ===== traditional crafts (animated) =====
 const CRAFTS=[
  {ic:'🧶',n:'السدو',ne:'Al Sadu Weaving',d:'نسجٌ بدوي من صوف الإبل والأغنام.',de:'Bedouin weaving from camel and sheep wool.'},

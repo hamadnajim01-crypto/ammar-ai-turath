@@ -701,6 +701,19 @@
   .sky-cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;padding:0 18px}
   .sky-cap h2{color:#fff;font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.3rem);text-shadow:0 3px 16px rgba(0,0,0,.55);margin:0}
   .sky-cap p{color:rgba(255,255,255,.92);margin-top:8px;font-size:clamp(.9rem,2.5vw,1.05rem);text-shadow:0 2px 10px rgba(0,0,0,.55);max-width:560px}
+  /* UNESCO heritage elements */
+  .un-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;max-width:1100px;margin:0 auto}
+  .un-card{position:relative;background:linear-gradient(165deg,rgba(42,157,143,.1),rgba(36,24,12,.55));border:1px solid var(--line);border-radius:20px;
+    padding:22px 18px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;opacity:0;transform:translateY(22px)}
+  .un-card.in{opacity:1;transform:none}
+  .un-card:hover{transform:translateY(-7px);border-color:var(--teal);box-shadow:0 20px 44px -18px rgba(0,0,0,.7)}
+  .un-badge{position:absolute;top:12px;inset-inline-end:12px;font-size:.6rem;font-weight:800;letter-spacing:1px;color:#0b2b27;
+    background:linear-gradient(135deg,#5ecfc0,#2A9D8F);padding:3px 8px;border-radius:20px}
+  .un-ic{font-size:2.8rem;display:block;margin-bottom:10px;filter:drop-shadow(0 5px 9px rgba(0,0,0,.4));transition:transform .3s}
+  .un-card:hover .un-ic{transform:scale(1.15) rotate(-5deg)}
+  .un-card h3{color:#7fe0d3;font-family:var(--display);font-size:1.12rem;margin-bottom:3px}
+  .un-year{color:var(--gold);font-size:.72rem;font-weight:700;margin-bottom:7px}
+  .un-card p{color:var(--muted);font-size:.82rem;line-height:1.65}
   /* heritage values (animated) */
   .vals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:18px;max-width:1080px;margin:0 auto}
   .val{position:relative;background:linear-gradient(165deg,rgba(201,162,39,.08),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:20px;
@@ -1510,6 +1523,14 @@
   <div class="vals-grid" id="valsGrid"></div>
 </section>
 
+<!-- UNESCO HERITAGE ELEMENTS (animated) -->
+<section id="unesco">
+  <span class="eyebrow" data-k="un_eb">معترفٌ به عالمياً</span>
+  <h2 class="sec-title" data-k="un_t" data-html>تراثنا في <em>قوائم اليونسكو</em></h2>
+  <p class="sec-sub" data-k="un_sub">عناصر إماراتية أصيلة سجّلتها اليونسكو ضمن التراث الإنساني — فخرٌ نتشاركه مع العالم.</p>
+  <div class="un-grid" id="unGrid"></div>
+</section>
+
 <!-- ANIMATED UAE SKY BANNER (inspired by UAE Jobs hero) -->
 <section id="skyhero" aria-label="UAE sky">
   <div class="sky-grad"></div>
@@ -2106,6 +2127,7 @@ const I18N={
   pieces_eb:'ستيكرات التراث',pieces_t:'ستيكرات <em>تراثنا</em>',pieces_sub:'ستيكرات فنية مقصوصة من لوحة عمّار AI — اطلب اللي يعجبك بأسعارٍ حلوة.',
   sky_t:'تحت سماء الإمارات',sky_p:'من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.',
   val_eb:'قيمٌ نفتخر بها',val_t:'قِيَمٌ من <em>تراثنا</em>',val_sub:'قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.',sp_sub:'تراث القوع · من القوع نروي تراثنا',
+  un_eb:'معترفٌ به عالمياً',un_t:'تراثنا في <em>قوائم اليونسكو</em>',un_sub:'عناصر إماراتية أصيلة سجّلتها اليونسكو ضمن التراث الإنساني — فخرٌ نتشاركه مع العالم.',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
   about_p3:'اليوم، تحرص دولة الإمارات على <b>صون هذا التراث</b> وتوثيقه ونقله للأجيال — وقد أدرجت منظمة اليونسكو عناصر إماراتية كثيرة على قوائم التراث الإنساني، من <b>القهوة العربية</b> و<b>السدو</b> و<b>الصقارة</b> إلى <b>العيّالة</b> و<b>النخلة</b>.',
@@ -2185,6 +2207,7 @@ const I18N={
   pieces_eb:'Heritage stickers',pieces_t:'Our heritage <em>stickers</em>',pieces_sub:'Artistic stickers cropped from the Ammar AI artwork — order your favourites at sweet prices.',
   sky_t:'Under the UAE sky',sky_p:'From desert sunset to night stars — a heritage that soars like a falcon.',
   val_eb:'Values we cherish',val_t:'Values of <em>our heritage</em>',val_sub:'Values inherited from our ancestors, still beating in the heart of the UAE.',sp_sub:'Tirath Al Qua’a · telling our heritage',
+  un_eb:'Recognised worldwide',un_t:'Our heritage on the <em>UNESCO lists</em>',un_sub:'Authentic Emirati elements inscribed by UNESCO as intangible cultural heritage — a pride we share with the world.',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
   about_p3:'Today, the UAE works to <b>preserve this heritage</b> and pass it on — UNESCO has inscribed many Emirati elements, from <b>Arabic coffee</b>, <b>Al Sadu</b> and <b>falconry</b> to <b>Al Ayyala</b> and the <b>date palm</b>.',
@@ -2758,7 +2781,7 @@ function renderRings(){
       const a=(i/c.n)*Math.PI*2;img.style.transform=`translate(${Math.cos(a)*c.r}px,${Math.sin(a)*c.r}px) rotate(${a+Math.PI/2}rad)`;ring.appendChild(img);}
   });
 }
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -3549,6 +3572,27 @@ const VALUES=[
  {ic:'🐪',n:'الوفاء',ne:'Loyalty',d:'وفاءٌ كرفقة الجمل في الترحال.',de:'Loyalty like a camel on the journey.'},
  {ic:'⏳',n:'الصبر',ne:'Patience',d:'صبرٌ يحوّل الصحراء إلى واحة.',de:'Patience that turns desert into oasis.'}
 ];
+// ===== UNESCO heritage elements (animated) =====
+const UNESCO=[
+ {ic:'☕',y:'2015',n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم والضيافة في الخليج.',de:'A symbol of Gulf generosity and hospitality.'},
+ {ic:'🦅',y:'2010',n:'الصقارة',ne:'Falconry',d:'إرثٌ حيّ يربط الإنسان بالطبيعة.',de:'A living link between people and nature.'},
+ {ic:'🧶',y:'2011',n:'السدو',ne:'Al Sadu Weaving',d:'نسيجٌ بدوي بنقوشٍ هندسية أصيلة.',de:'Traditional Bedouin weaving with geometric motifs.'},
+ {ic:'🥁',y:'2014',n:'العيّالة',ne:'Al-Ayyala',d:'رقصة العصا وفنّ النخوة والفخر.',de:'The stick dance of pride and valour.'},
+ {ic:'🎶',y:'2012',n:'التغرودة',ne:'Al-Taghrooda',d:'شعرٌ بدوي يُنشد على ظهور الإبل.',de:'Bedouin chanted poetry of camel riders.'},
+ {ic:'🌴',y:'2019',n:'النخلة',ne:'The Date Palm',d:'شجرة الحياة وعطاء الصحراء.',de:'The tree of life and gift of the desert.'},
+ {ic:'🎵',y:'2015',n:'الرزفة',ne:'Al-Razfah',d:'فنّ أداء جماعي بالأهازيج والإيقاع.',de:'A communal performance art of chants and rhythm.'},
+ {ic:'📜',y:'2017',n:'العازي',ne:'Al-Azi',d:'شعرٌ يُلقى بالمدح والفخر دون إيقاع.',de:'A non-rhythmic poetry of praise and pride.'}
+];
+function renderUnesco(){
+  const grid=document.getElementById('unGrid');if(!grid)return;
+  const en=LANG!=='ar';grid.innerHTML='';
+  UNESCO.forEach(u=>{const c=document.createElement('div');c.className='un-card';
+    c.innerHTML='<span class="un-badge">UNESCO</span><span class="un-ic">'+u.ic+'</span><h3>'+(en?u.ne:u.n)+'</h3><div class="un-year">'+(en?'Inscribed ':'سُجِّل ')+u.y+'</div><p>'+(en?u.de:u.d)+'</p>';
+    grid.appendChild(c);});
+  const items=[...grid.querySelectorAll('.un-card')];
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
+  else items.forEach(e=>e.classList.add('in'));
+}
 function renderValues(){
   const grid=document.getElementById('valsGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';

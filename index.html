@@ -18,6 +18,20 @@
     --shadow:0 18px 50px -12px rgba(0,0,0,.7);
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  /* intro splash */
+  #splash{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;
+    background:radial-gradient(circle at 50% 35%,#3a2817,#241809 72%);transition:opacity .7s ease,visibility .7s;text-align:center;padding:20px}
+  #splash.gone{opacity:0;visibility:hidden}
+  #splash .sp-falcon{font-size:2.6rem;animation:spBob 1.4s ease-in-out infinite;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
+  #splash .sp-logo{font-family:"Reem Kufi","Segoe UI",sans-serif;font-size:clamp(2.1rem,9vw,3.6rem);font-weight:700;color:#E9BC46;
+    text-shadow:0 0 32px rgba(233,188,70,.55);animation:spPop .8s cubic-bezier(.2,.9,.3,1.3)}
+  #splash .sp-sub{color:#f4ead6;opacity:.92;letter-spacing:2px;font-size:clamp(.78rem,3vw,1rem);animation:spFade 1s ease .25s both}
+  #splash .sp-bar{width:170px;height:4px;border-radius:4px;background:rgba(255,255,255,.14);overflow:hidden}
+  #splash .sp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#E9BC46,#ffe7a3);animation:spBar 1.8s ease forwards}
+  @keyframes spPop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes spFade{from{opacity:0}to{opacity:.92}}
+  @keyframes spBar{to{width:100%}}
+  @keyframes spBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
   html{scroll-behavior:smooth}
   body{font-family:var(--body);background:
       radial-gradient(1200px 600px at 80% -10%,rgba(201,162,39,.10),transparent 60%),
@@ -687,6 +701,19 @@
   .sky-cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;padding:0 18px}
   .sky-cap h2{color:#fff;font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.3rem);text-shadow:0 3px 16px rgba(0,0,0,.55);margin:0}
   .sky-cap p{color:rgba(255,255,255,.92);margin-top:8px;font-size:clamp(.9rem,2.5vw,1.05rem);text-shadow:0 2px 10px rgba(0,0,0,.55);max-width:560px}
+  /* heritage values (animated) */
+  .vals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:18px;max-width:1080px;margin:0 auto}
+  .val{position:relative;background:linear-gradient(165deg,rgba(201,162,39,.08),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:20px;
+    padding:24px 18px;text-align:center;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;opacity:0;transform:translateY(22px)}
+  .val.in{opacity:1;transform:none}
+  .val::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(233,188,70,.16),transparent 62%);opacity:0;transition:opacity .35s}
+  .val:hover{transform:translateY(-7px);border-color:var(--gold);box-shadow:0 20px 44px -18px rgba(0,0,0,.7)}
+  .val:hover::before{opacity:1}
+  .val-ic{font-size:3rem;display:block;margin-bottom:12px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4));animation:valFloat 3.5s ease-in-out infinite}
+  .val:nth-child(2n) .val-ic{animation-delay:.6s}.val:nth-child(3n) .val-ic{animation-delay:1.1s}
+  @keyframes valFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(4deg)}}
+  .val h3{color:var(--gold);font-family:var(--display);font-size:1.18rem;margin-bottom:5px}
+  .val p{color:var(--muted);font-size:.85rem;line-height:1.7}
   /* heritage pieces (cropped from poster) */
   .pieces-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:20px;max-width:1100px;margin:0 auto;align-items:start}
   .piece{background:linear-gradient(165deg,rgba(244,234,214,.06),rgba(36,24,12,.4));border:1px solid var(--line);border-radius:18px;
@@ -1329,6 +1356,13 @@
 </head>
 <body>
 
+<div id="splash">
+  <div class="sp-falcon">🦅</div>
+  <div class="sp-logo">عمّار AI</div>
+  <div class="sp-sub" data-k="sp_sub">تراث القوع · من القوع نروي تراثنا</div>
+  <div class="sp-bar"><i></i></div>
+</div>
+
 <canvas id="sparkles" aria-hidden="true"></canvas>
 
 <!-- INTRO SPLASH -->
@@ -1466,6 +1500,14 @@
     <div class="cap"><h3 data-k="about_img_t">حي الفهيدي التاريخي</h3><p data-k="about_img_d">البستكية — أقدم أحياء دبي بأبراج هوائها وأزقّتها الطينية</p></div>
   </div>
  </div>
+</section>
+
+<!-- HERITAGE VALUES (animated) -->
+<section id="values">
+  <span class="eyebrow" data-k="val_eb">قيمٌ نفتخر بها</span>
+  <h2 class="sec-title" data-k="val_t" data-html>قِيَمٌ من <em>تراثنا</em></h2>
+  <p class="sec-sub" data-k="val_sub">قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.</p>
+  <div class="vals-grid" id="valsGrid"></div>
 </section>
 
 <!-- ANIMATED UAE SKY BANNER (inspired by UAE Jobs hero) -->
@@ -2063,6 +2105,7 @@ const I18N={
   poster_eb:'لوحة المشروع',poster_t:'عمّار <em>AI</em> — من القوع نروي تراثنا',poster_sub:'لوحةٌ تجمع روح المشروع: التراث، والأصالة، والهوية. اضغط لتكبيرها.',poster_cap:'عمّار AI · مشروعي.. تراثي.. هويتي 🇦🇪',
   pieces_eb:'ستيكرات التراث',pieces_t:'ستيكرات <em>تراثنا</em>',pieces_sub:'ستيكرات فنية مقصوصة من لوحة عمّار AI — اطلب اللي يعجبك بأسعارٍ حلوة.',
   sky_t:'تحت سماء الإمارات',sky_p:'من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.',
+  val_eb:'قيمٌ نفتخر بها',val_t:'قِيَمٌ من <em>تراثنا</em>',val_sub:'قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.',sp_sub:'تراث القوع · من القوع نروي تراثنا',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
   about_p3:'اليوم، تحرص دولة الإمارات على <b>صون هذا التراث</b> وتوثيقه ونقله للأجيال — وقد أدرجت منظمة اليونسكو عناصر إماراتية كثيرة على قوائم التراث الإنساني، من <b>القهوة العربية</b> و<b>السدو</b> و<b>الصقارة</b> إلى <b>العيّالة</b> و<b>النخلة</b>.',
@@ -2141,6 +2184,7 @@ const I18N={
   poster_eb:'Project Artwork',poster_t:'Ammar <em>AI</em> — telling our heritage from Al Qua’a',poster_sub:'Artwork capturing the soul of the project: heritage, authenticity and identity. Tap to enlarge.',poster_cap:'Ammar AI · my project.. my heritage.. my identity 🇦🇪',
   pieces_eb:'Heritage stickers',pieces_t:'Our heritage <em>stickers</em>',pieces_sub:'Artistic stickers cropped from the Ammar AI artwork — order your favourites at sweet prices.',
   sky_t:'Under the UAE sky',sky_p:'From desert sunset to night stars — a heritage that soars like a falcon.',
+  val_eb:'Values we cherish',val_t:'Values of <em>our heritage</em>',val_sub:'Values inherited from our ancestors, still beating in the heart of the UAE.',sp_sub:'Tirath Al Qua’a · telling our heritage',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
   about_p3:'Today, the UAE works to <b>preserve this heritage</b> and pass it on — UNESCO has inscribed many Emirati elements, from <b>Arabic coffee</b>, <b>Al Sadu</b> and <b>falconry</b> to <b>Al Ayyala</b> and the <b>date palm</b>.',
@@ -2714,7 +2758,7 @@ function renderRings(){
       const a=(i/c.n)*Math.PI*2;img.style.transform=`translate(${Math.cos(a)*c.r}px,${Math.sin(a)*c.r}px) rotate(${a+Math.PI/2}rad)`;ring.appendChild(img);}
   });
 }
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -3375,6 +3419,13 @@ function clearSkin(){
   if(window._restoreTheme)window._restoreTheme();
 }
 (function(){const x=document.getElementById('skinX');if(x)x.addEventListener('click',clearSkin);})();
+// ===== intro splash (once per session) =====
+(function(){var sp=document.getElementById('splash');if(!sp)return;
+  var seen=false;try{seen=!!sessionStorage.getItem('ammar_splash');}catch(e){}
+  if(seen){sp.parentNode&&sp.parentNode.removeChild(sp);return;}
+  function go(){sp.classList.add('gone');try{sessionStorage.setItem('ammar_splash','1');}catch(e){}setTimeout(function(){sp.parentNode&&sp.parentNode.removeChild(sp);},800);}
+  sp.addEventListener('click',go);setTimeout(go,2100);
+})();
 // ===== Themed Matrix code-rain secrets (copied & themed from UAE Jobs) =====
 const MX={
   green:{rain:'01アイウエオカキクサシスセソ0123456789ABCDEF<>{}[]/=+*ﾊﾋﾌﾍﾎ',color:'#39ff14',ar:'عمّار AI',en:'AMMAR AI',sa:'التراث + الكود = المستقبل 🇦🇪',se:'HERITAGE + CODE = FUTURE 🇦🇪'},
@@ -3407,23 +3458,23 @@ const MX={
 })();
 // ===== heritage pieces: crops from the poster (img/ammar-poster.jpg, 1024x1536) =====
 const PIECES=[
- {x:6,y:355,w:415,h:415,n:'رفيق الرحلة',ne:'Travel Companion',d:'الفتى وجمله — صداقة الصحراء.',de:'The boy and his camel — a desert bond.',p:12,was:0},
- {x:735,y:20,w:285,h:325,n:'البوم',ne:'The Owl',d:'طيرٌ حكيمٌ رفيق الليالي.',de:'A wise bird, companion of the nights.',p:12,was:0},
- {x:460,y:170,w:150,h:210,n:'الفانوس',ne:'The Lantern',d:'نور أجدادنا في ليالي الصحراء.',de:'Our ancestors’ light on desert nights.',p:9,was:12},
- {x:515,y:345,w:225,h:220,n:'بيت الشعر',ne:'Bedouin Tent',d:'حياة البدو ومأوى الكرم.',de:'Bedouin life and shelter of generosity.',p:10,was:0},
- {x:380,y:395,w:140,h:150,n:'تمر البركة',ne:'Blessed Dates',d:'حلاوة الأرض ونعمة النخيل.',de:'The sweetness of the land.',p:7,was:0},
- {x:826,y:588,w:195,h:240,n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم في الدلّة والفنجان.',de:'Generosity in the dallah and cup.',p:10,was:14},
- {x:690,y:595,w:140,h:195,n:'قِربة الماء',ne:'Water Flask',d:'حياة المسافر في قلب الرمال.',de:'A traveller’s lifeline in the sands.',p:8,was:0},
- {x:430,y:595,w:300,h:170,n:'سلاح الجدود',ne:'Ancestors’ Rifle',d:'إرثٌ يحكي شجاعة الأولين.',de:'A heirloom of old courage.',p:11,was:0},
- {x:140,y:775,w:200,h:175,n:'شنظة الرحّالة',ne:'Saddlebag',d:'حقيبة البدوي بنقوش السدو.',de:'The Bedouin’s woven saddlebag.',p:9,was:13},
- {x:530,y:780,w:135,h:195,n:'المسبحة',ne:'Prayer Beads',d:'سكينةٌ في اليد وذِكرٌ في القلب.',de:'Calm in the hand, remembrance in the heart.',p:8,was:0},
- {x:872,y:930,w:150,h:148,n:'السدو',ne:'Al Sadu',d:'نسيجٌ بدوي وفخر البادية — تراث يونسكو.',de:'Bedouin weaving, pride of the desert.',p:9,was:0},
- {x:332,y:822,w:180,h:200,n:'عمّار AI',ne:'Ammar AI',d:'في الصحراء تبدأ الحكاية.',de:'In the desert the story begins.',p:8,was:0},
- {x:5,y:995,w:260,h:215,n:'نار الحطب',ne:'Firewood Cooking',d:'على نار الحطب يطيب العيش.',de:'Life tastes better on a wood fire.',p:10,was:0},
- {x:610,y:980,w:285,h:205,n:'الضيافة',ne:'Hospitality',d:'الضيافة من طبعنا.',de:'Hospitality is in our nature.',p:11,was:0},
- {x:700,y:1240,w:320,h:245,n:'جلسة البدو',ne:'Bedouin Gathering',d:'دلّةٌ ونارٌ وسهرة تحت النجوم.',de:'Coffee, fire and nights under the stars.',p:11,was:0},
- {x:5,y:1230,w:380,h:240,n:'صحراء القوع',ne:'Al Qua’a Desert',d:'جبالٌ وسمرٌ ومدى لا ينتهي.',de:'Mountains, acacias and endless space.',p:10,was:0},
- {x:0,y:0,w:1024,h:1536,n:'الباقة الكاملة',ne:'Full Sheet',d:'لوحة الستيكرات كاملةً — كل القطع في ورقة واحدة.',de:'The whole sticker sheet — every piece in one.',p:59,was:99}
+ {x:6,y:355,w:415,h:415,n:'رفيق الرحلة',ne:'Travel Companion',d:'الفتى وجمله — صداقة الصحراء.',de:'The boy and his camel — a desert bond.',p:5,was:0},
+ {x:735,y:20,w:285,h:325,n:'البوم',ne:'The Owl',d:'طيرٌ حكيمٌ رفيق الليالي.',de:'A wise bird, companion of the nights.',p:5,was:0},
+ {x:460,y:170,w:150,h:210,n:'الفانوس',ne:'The Lantern',d:'نور أجدادنا في ليالي الصحراء.',de:'Our ancestors’ light on desert nights.',p:4,was:6},
+ {x:515,y:345,w:225,h:220,n:'بيت الشعر',ne:'Bedouin Tent',d:'حياة البدو ومأوى الكرم.',de:'Bedouin life and shelter of generosity.',p:5,was:0},
+ {x:380,y:395,w:140,h:150,n:'تمر البركة',ne:'Blessed Dates',d:'حلاوة الأرض ونعمة النخيل.',de:'The sweetness of the land.',p:3,was:0},
+ {x:826,y:588,w:195,h:240,n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم في الدلّة والفنجان.',de:'Generosity in the dallah and cup.',p:5,was:7},
+ {x:690,y:595,w:140,h:195,n:'قِربة الماء',ne:'Water Flask',d:'حياة المسافر في قلب الرمال.',de:'A traveller’s lifeline in the sands.',p:4,was:0},
+ {x:430,y:595,w:300,h:170,n:'سلاح الجدود',ne:'Ancestors’ Rifle',d:'إرثٌ يحكي شجاعة الأولين.',de:'A heirloom of old courage.',p:5,was:0},
+ {x:140,y:775,w:200,h:175,n:'شنظة الرحّالة',ne:'Saddlebag',d:'حقيبة البدوي بنقوش السدو.',de:'The Bedouin’s woven saddlebag.',p:4,was:7},
+ {x:530,y:780,w:135,h:195,n:'المسبحة',ne:'Prayer Beads',d:'سكينةٌ في اليد وذِكرٌ في القلب.',de:'Calm in the hand, remembrance in the heart.',p:4,was:0},
+ {x:872,y:930,w:150,h:148,n:'السدو',ne:'Al Sadu',d:'نسيجٌ بدوي وفخر البادية — تراث يونسكو.',de:'Bedouin weaving, pride of the desert.',p:4,was:0},
+ {x:332,y:822,w:180,h:200,n:'عمّار AI',ne:'Ammar AI',d:'في الصحراء تبدأ الحكاية.',de:'In the desert the story begins.',p:4,was:0},
+ {x:5,y:995,w:260,h:215,n:'نار الحطب',ne:'Firewood Cooking',d:'على نار الحطب يطيب العيش.',de:'Life tastes better on a wood fire.',p:5,was:0},
+ {x:610,y:980,w:285,h:205,n:'الضيافة',ne:'Hospitality',d:'الضيافة من طبعنا.',de:'Hospitality is in our nature.',p:5,was:0},
+ {x:700,y:1240,w:320,h:245,n:'جلسة البدو',ne:'Bedouin Gathering',d:'دلّةٌ ونارٌ وسهرة تحت النجوم.',de:'Coffee, fire and nights under the stars.',p:5,was:0},
+ {x:5,y:1230,w:380,h:240,n:'صحراء القوع',ne:'Al Qua’a Desert',d:'جبالٌ وسمرٌ ومدى لا ينتهي.',de:'Mountains, acacias and endless space.',p:5,was:0},
+ {x:0,y:0,w:1024,h:1536,n:'الباقة الكاملة',ne:'Full Sheet',d:'لوحة الستيكرات كاملةً — كل القطع في ورقة واحدة.',de:'The whole sticker sheet — every piece in one.',p:25,was:45}
 ];
 let PCART={};
 function placePieces(){
@@ -3489,6 +3540,25 @@ function paintPCart(){
   });
 })();
 window.addEventListener('resize',()=>{clearTimeout(window._piecesT);window._piecesT=setTimeout(placePieces,150);});
+// ===== heritage values (animated) =====
+const VALUES=[
+ {ic:'🤲',n:'الكرم',ne:'Generosity',d:'بيتٌ مفتوحٌ وقهوةٌ لا تنقطع.',de:'An open home and endless coffee.'},
+ {ic:'🦅',n:'الشجاعة',ne:'Courage',d:'عزيمةٌ كالصقر لا تعرف المستحيل.',de:'A falcon’s spirit that knows no limits.'},
+ {ic:'🏛️',n:'الأصالة',ne:'Authenticity',d:'جذورٌ راسخةٌ في رمال الزمن.',de:'Roots firmly planted in the sands of time.'},
+ {ic:'☕',n:'الضيافة',ne:'Hospitality',d:'ترحيبٌ من القلب بكل ضيف.',de:'A heartfelt welcome for every guest.'},
+ {ic:'🐪',n:'الوفاء',ne:'Loyalty',d:'وفاءٌ كرفقة الجمل في الترحال.',de:'Loyalty like a camel on the journey.'},
+ {ic:'⏳',n:'الصبر',ne:'Patience',d:'صبرٌ يحوّل الصحراء إلى واحة.',de:'Patience that turns desert into oasis.'}
+];
+function renderValues(){
+  const grid=document.getElementById('valsGrid');if(!grid)return;
+  const en=LANG!=='ar';grid.innerHTML='';
+  VALUES.forEach(v=>{const c=document.createElement('div');c.className='val';
+    c.innerHTML='<span class="val-ic">'+v.ic+'</span><h3>'+(en?v.ne:v.n)+'</h3><p>'+(en?v.de:v.d)+'</p>';
+    grid.appendChild(c);});
+  const items=[...grid.querySelectorAll('.val')];
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
+  else items.forEach(e=>e.classList.add('in'));
+}
 // ===== animated UAE sky banner: generate twinkling stars =====
 (function(){
   const box=document.getElementById('skyStars');if(!box)return;

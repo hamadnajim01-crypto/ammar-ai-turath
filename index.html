@@ -574,6 +574,16 @@
   .theme-opt:hover .theme-sw{transform:scale(1.12)}
   .theme-opt.on .theme-sw{border-color:var(--gold);box-shadow:0 0 0 3px rgba(233,188,70,.3)}
   .theme-opt em{font-style:normal;font-size:.68rem;color:var(--muted)}
+  .przn-mini{color:var(--muted);font-size:.72rem;margin:-4px 0 9px;line-height:1.5}
+  .accent-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .accent-sw{width:30px;height:30px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .15s,border-color .15s;position:relative;padding:0}
+  .accent-sw:hover{transform:scale(1.14)}
+  .accent-sw.on{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+  .accent-sw.on::after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:.82rem;font-weight:900;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .accent-custom{display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--muted);font-size:.74rem}
+  .accent-custom input[type=color]{width:30px;height:30px;border:none;border-radius:50%;background:none;cursor:pointer;padding:0}
+  .accent-custom input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+  .accent-custom input[type=color]::-webkit-color-swatch{border:2px solid var(--line);border-radius:50%}
   .przn-fonts{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
   .przn-font{padding:10px;border-radius:13px;border:1px solid var(--line);background:rgba(201,162,39,.05);color:var(--paper);
     cursor:pointer;font-size:1.05rem;text-align:center;transition:.15s}
@@ -1409,6 +1419,7 @@
   <div class="przn-head"><b data-k="przn_t">🪄 خصّص موقعك</b><button class="przn-x" id="prznX" aria-label="close">×</button></div>
   <p class="przn-tip" data-k="przn_tip">اختر شكل الموقع كما يعجبك — يُحفظ تلقائياً.</p>
   <div class="przn-sec"><span class="przn-lbl" data-k="przn_color">🎨 اللون</span><div class="theme-opts" id="themeOpts"></div></div>
+  <div class="przn-sec"><span class="przn-lbl" data-k="przn_accent">🎯 لون التمييز</span><p class="przn-mini" data-k="przn_accent_d">يلوّن الأزرار والتدرّجات والإبرازات في الموقع كله.</p><div class="accent-row" id="prznAccent"></div></div>
   <div class="przn-sec"><span class="przn-lbl" data-k="przn_font">🔤 الخط</span><div class="przn-fonts" id="prznFonts"></div></div>
   <div class="przn-sec"><div class="przn-row"><span data-k="przn_motion">✨ الحركة والتأثيرات</span><button class="przn-switch on" id="prznMotion" role="switch" aria-checked="true"><i></i></button></div></div>
   <button class="przn-reset" id="prznReset" data-k="przn_reset">↺ إعادة الضبط الافتراضي</button>
@@ -2187,7 +2198,7 @@ const I18N={
   fc_txt:'اسأل عمار',
   hero_badge:'🇦🇪 موسوعة التراث الإماراتي التفاعلية',
   man_eb:'فنّ الزخرفة',man_t:'زخرفةٌ <em>إسلامية متحركة</em>',man_sub:'نجمة الخاتم التراثية — هندسةٌ تدور بلا نهاية.',
-  music_title:'تشغيل أغنية تراثية',przn_btn:'خصّص الموقع',przn_t:'🪄 خصّص موقعك',przn_tip:'اختر شكل الموقع كما يعجبك — يُحفظ تلقائياً.',przn_color:'🎨 اللون',przn_font:'🔤 الخط',przn_motion:'✨ الحركة والتأثيرات',przn_reset:'↺ إعادة الضبط الافتراضي',
+  music_title:'تشغيل أغنية تراثية',przn_btn:'خصّص الموقع',przn_t:'🪄 خصّص موقعك',przn_tip:'اختر شكل الموقع كما يعجبك — يُحفظ تلقائياً.',przn_color:'🎨 اللون',przn_accent:'🎯 لون التمييز',przn_accent_d:'يلوّن الأزرار والتدرّجات والإبرازات في الموقع كله.',przn_font:'🔤 الخط',przn_motion:'✨ الحركة والتأثيرات',przn_reset:'↺ إعادة الضبط الافتراضي',
   prov_eb:'حكمة الأجداد',prov_t:'أمثال <em>شعبية إماراتية</em>',prov_sub:'حِكَمٌ توارثها الأجداد، تختصر تجارب الحياة في كلمات.',
   poem_eb:'بيتٌ من التراث',poem_lines:['من رمالِ الصحراء','تُولَدُ الأساطير','وتبقى خالدةً للأبد'],
   search_eb:'ابحث',search_t:'ابحث في <em>التراث</em>',search_sub:'اكتب أي كلمة (قهوة، صقر، دبي، لؤلؤ...) لتجد ما يخصّها فوراً.',search_ph:'ابحث في التراث الإماراتي...',
@@ -2269,7 +2280,7 @@ const I18N={
   stat_1:'Documented photos',stat_2:'Heritage bodies',stat_3:'On UNESCO lists',stat_4:'Questions for Ammar AI',
   hero_badge:'🇦🇪 The interactive UAE heritage encyclopedia',
   man_eb:'The art of ornament',man_t:'A living <em>Islamic pattern</em>',man_sub:'The traditional khatam star — geometry spinning endlessly.',
-  music_title:'Play heritage music',przn_btn:'Personalize',przn_t:'🪄 Personalize your site',przn_tip:'Choose how the site looks — saved automatically.',przn_color:'🎨 Color',przn_font:'🔤 Font',przn_motion:'✨ Motion & effects',przn_reset:'↺ Reset to default',
+  music_title:'Play heritage music',przn_btn:'Personalize',przn_t:'🪄 Personalize your site',przn_tip:'Choose how the site looks — saved automatically.',przn_color:'🎨 Color',przn_accent:'🎯 Accent color',przn_accent_d:'Recolors buttons, gradients and highlights across the whole site.',przn_font:'🔤 Font',przn_motion:'✨ Motion & effects',przn_reset:'↺ Reset to default',
   prov_eb:'Wisdom of the elders',prov_t:'Emirati <em>folk proverbs</em>',prov_sub:'Sayings passed down by the ancestors, distilling life into a few words.',
   poem_eb:'A verse of heritage',poem_lines:['From the desert sands','legends are born','and live forever'],
   search_eb:'Search',search_t:'Search the <em>heritage</em>',search_sub:'Type any word (coffee, falcon, Dubai, pearl...) to instantly find what matches.',search_ph:'Search UAE heritage...',
@@ -3363,14 +3374,23 @@ const FONTS={
   const btn=document.getElementById('prznBtn'),panel=document.getElementById('prznPanel'),opts=document.getElementById('themeOpts'),
         fbox=document.getElementById('prznFonts'),mot=document.getElementById('prznMotion'),xb=document.getElementById('prznX'),rs=document.getElementById('prznReset');
   if(!btn||!panel||!opts)return;
-  const LS={t:'ammar_theme',f:'ammar_font',m:'ammar_motion'};
-  let curT='sand',curF='kufi',motion=true;
+  const LS={t:'ammar_theme',f:'ammar_font',m:'ammar_motion',a:'ammar_accent'};
+  const abox=document.getElementById('prznAccent');
+  const ACCENTS=[null,'#a855f7','#06b6d4','#f59e0b','#22c55e','#ec4899','#ef4444'];
+  let curT='sand',curF='kufi',motion=true,curAccent=null;
   try{const a=localStorage.getItem(LS.t);if(a&&THEMES[a])curT=a;
       const b=localStorage.getItem(LS.f);if(b&&FONTS[b])curF=b;
-      if(localStorage.getItem(LS.m)==='off')motion=false;}catch(e){}
+      if(localStorage.getItem(LS.m)==='off')motion=false;
+      const ac=localStorage.getItem(LS.a);if(ac)curAccent=ac;}catch(e){}
   function save(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function applyAccent(color,store){curAccent=color||null;
+    if(color){document.documentElement.style.setProperty('--gold',color);}
+    else{const t=THEMES[curT]||THEMES.sand;document.documentElement.style.setProperty('--gold',t.v['--gold']);}
+    if(store){try{color?localStorage.setItem(LS.a,color):localStorage.removeItem(LS.a);}catch(e){}}
+    if(abox)abox.querySelectorAll('.accent-sw').forEach(o=>o.classList.toggle('on',(o.getAttribute('data-c')||'')===(color||'')));}
   function applyTheme(key,store){const t=THEMES[key]||THEMES.sand;curT=key;
     for(const k in t.v)document.documentElement.style.setProperty(k,t.v[k]);
+    if(curAccent)document.documentElement.style.setProperty('--gold',curAccent);
     if(store)save(LS.t,key);
     opts.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('on',o.getAttribute('data-k')===key));}
   function applyFont(key,store){const f=FONTS[key]||FONTS.kufi;curF=key;
@@ -3393,15 +3413,23 @@ const FONTS={
         const b=document.createElement('button');b.className='przn-font'+(key===curF?' on':'');b.setAttribute('data-k',key);
         b.innerHTML='<span style="font-family:'+f.d+'">'+f.pv+'</span><em>'+(ar?f.n:f.ne)+'</em>';
         b.onclick=()=>applyFont(key,true);fbox.appendChild(b);}}
+    if(abox){abox.innerHTML='';
+      ACCENTS.forEach(c=>{const b=document.createElement('button');b.className='accent-sw'+(((c||'')===(curAccent||''))?' on':'');b.setAttribute('data-c',c||'');
+        b.style.background=c||'linear-gradient(135deg,var(--gold),#a87f1c)';b.title=c?c:(ar?'افتراضي':'Default');
+        b.onclick=()=>applyAccent(c,true);abox.appendChild(b);});
+      const lab=document.createElement('label');lab.className='accent-custom';
+      const inp=document.createElement('input');inp.type='color';inp.value=(curAccent&&/^#/.test(curAccent))?curAccent:'#e9bc46';
+      inp.oninput=()=>applyAccent(inp.value,true);lab.appendChild(inp);
+      const sp=document.createElement('span');sp.textContent=ar?'مخصّص':'Custom';lab.appendChild(sp);abox.appendChild(lab);}
   }
-  build();applyTheme(curT,false);applyFont(curF,false);applyMotion(motion,false);
+  build();applyTheme(curT,false);applyFont(curF,false);applyMotion(motion,false);applyAccent(curAccent,false);
   btn.addEventListener('click',e=>{e.stopPropagation();panel.classList.toggle('open');});
   xb&&xb.addEventListener('click',()=>panel.classList.remove('open'));
   mot&&mot.addEventListener('click',()=>applyMotion(!motion,true));
-  rs&&rs.addEventListener('click',()=>{applyTheme('sand',true);applyFont('kufi',true);applyMotion(true,true);});
+  rs&&rs.addEventListener('click',()=>{applyAccent(null,true);applyTheme('sand',true);applyFont('kufi',true);applyMotion(true,true);build();});
   document.addEventListener('click',e=>{if(panel.classList.contains('open')&&!panel.contains(e.target)&&e.target!==btn&&!btn.contains(e.target))panel.classList.remove('open');});
   const sel=document.getElementById('langSel');if(sel)sel.addEventListener('change',()=>setTimeout(build,30));
-  function _setVars(key){const t=THEMES[key]||THEMES.sand;for(const k in t.v)document.documentElement.style.setProperty(k,t.v[k]);}
+  function _setVars(key){const t=THEMES[key]||THEMES.sand;for(const k in t.v)document.documentElement.style.setProperty(k,t.v[k]);if(curAccent)document.documentElement.style.setProperty('--gold',curAccent);}
   window._skinTheme=function(k){_setVars(k);};        // apply a theme's colors WITHOUT changing the saved choice
   window._restoreTheme=function(){_setVars(curT);};   // restore the user's saved color theme
   window._rebuildThemes=build;

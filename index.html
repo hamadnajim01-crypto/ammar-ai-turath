@@ -712,6 +712,16 @@
   .sky-cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;padding:0 18px}
   .sky-cap h2{color:#fff;font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.3rem);text-shadow:0 3px 16px rgba(0,0,0,.55);margin:0}
   .sky-cap p{color:rgba(255,255,255,.92);margin-top:8px;font-size:clamp(.9rem,2.5vw,1.05rem);text-shadow:0 2px 10px rgba(0,0,0,.55);max-width:560px}
+  /* seasons & star calendar */
+  .seasons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:16px;max-width:1080px;margin:0 auto}
+  .season-card{background:linear-gradient(165deg,rgba(76,201,240,.09),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:18px;
+    padding:20px 14px;text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s;opacity:0;transform:translateY(20px)}
+  .season-card.in{opacity:1;transform:none}
+  .season-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 16px 36px -16px rgba(0,0,0,.65)}
+  .season-ic{font-size:2.7rem;display:block;margin-bottom:9px;animation:valFloat 4s ease-in-out infinite}
+  .season-card:nth-child(2n) .season-ic{animation-delay:.6s}.season-card:nth-child(3n) .season-ic{animation-delay:1.2s}
+  .season-card h3{color:var(--gold);font-family:var(--display);font-size:1.05rem;margin-bottom:4px}
+  .season-card p{color:var(--muted);font-size:.8rem;line-height:1.6}
   /* music & folk arts */
   .music-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:16px;max-width:1080px;margin:0 auto}
   .music-card{background:linear-gradient(165deg,rgba(124,58,237,.1),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:18px;
@@ -1668,6 +1678,14 @@
   <div class="music-grid" id="musicGrid"></div>
 </section>
 
+<!-- SEASONS & STAR CALENDAR (animated) -->
+<section id="seasons">
+  <span class="eyebrow" data-k="se_eb">حكمة الأجداد</span>
+  <h2 class="sec-title" data-k="se_t" data-html>المواسم و<em>التقويم</em></h2>
+  <p class="sec-sub" data-k="se_sub">قرأ الأجداد النجوم والفصول فعرفوا مواعيد الغوص والزرع والترحال — علمٌ توارثوه بالفطرة.</p>
+  <div class="seasons-grid" id="seasonsGrid"></div>
+</section>
+
 <!-- ANIMATED UAE SKY BANNER (inspired by UAE Jobs hero) -->
 <section id="skyhero" aria-label="UAE sky">
   <div class="sky-grad"></div>
@@ -2284,6 +2302,7 @@ const I18N={
   cr_eb:'صنعة الأيادي',cr_t:'الحِرف <em>اليدوية</em>',cr_sub:'مهاراتٌ صنعها الأجداد بأيديهم من خيرات البر والبحر — إبداعٌ يحكي الصبر والإتقان.',
   pl_eb:'شواهد على المجد',pl_t:'معالمٌ <em>تراثية</em>',pl_sub:'حصونٌ وواحاتٌ وكثبانٌ تروي قصة الإمارات عبر الزمن — شواهد تحكي أصالة المكان.',
   mu_eb:'إيقاع البادية',mu_t:'الآلات و<em>الفنون</em>',mu_sub:'أنغامٌ وإيقاعاتٌ رافقت الأجداد في الفرح والبحر والصحراء — نبض التراث الحيّ.',
+  se_eb:'حكمة الأجداد',se_t:'المواسم و<em>التقويم</em>',se_sub:'قرأ الأجداد النجوم والفصول فعرفوا مواعيد الغوص والزرع والترحال — علمٌ توارثوه بالفطرة.',
   why_eb:'رسالتنا',why_t:'لماذا أنشأنا <em>هذا الموقع؟</em>',why_p:'أنشأنا «عمّار AI» حبًّا في تراث الإمارات وأهل القوع — لنحفظ ذاكرة الأجداد من الضياع، ونرويها للأجيال بأسلوبٍ عصري يفهمه الجميع. نؤمن أن من يعرف ماضيه يصنع مستقبله، فجعلنا التقنية جسرًا بين الأصالة والمستقبل، ليبقى تراثنا حيًّا في قلوب أبنائنا والعالم. 🇦🇪',why_1t:'نحفظ تراثنا',why_1d:'نوثّق عادات الأجداد وحِرَفهم قبل أن تُنسى.',why_2t:'نروي قصتنا',why_2d:'من القوع إلى العالم، نحكي حكايتنا بصوتنا.',why_3t:'نصل الأجيال',why_3d:'نقرّب الجيل الجديد من جذوره وهويته.',why_4t:'حبًّا للوطن',why_4d:'فخرٌ بالهوية الإماراتية وانتماءٌ لا ينتهي.',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
@@ -2371,6 +2390,7 @@ const I18N={
   cr_eb:'Made by hand',cr_t:'Traditional <em>crafts</em>',cr_sub:'Skills our ancestors made by hand from land and sea — creativity born of patience and mastery.',
   pl_eb:'Witnesses to glory',pl_t:'Heritage <em>landmarks</em>',pl_sub:'Forts, oases and dunes that tell the UAE’s story through time — witnesses to the soul of place.',
   mu_eb:'Rhythm of the desert',mu_t:'Instruments & <em>arts</em>',mu_sub:'Melodies and rhythms that accompanied our ancestors in joy, at sea and in the desert — the living pulse of heritage.',
+  se_eb:'Ancestral wisdom',se_t:'Seasons & the <em>calendar</em>',se_sub:'Our ancestors read the stars and seasons to time diving, planting and travel — knowledge passed down by instinct.',
   why_eb:'Our mission',why_t:'Why we built <em>this website</em>',why_p:'We created “Ammar AI” out of love for the heritage of the UAE and the people of Al Qua’a — to save our ancestors’ memory from being lost, and tell it to new generations in a modern way everyone understands. We believe whoever knows their past builds their future, so we made technology a bridge between authenticity and the future, keeping our heritage alive in the hearts of our children and the world. 🇦🇪',why_1t:'We preserve our heritage',why_1d:'We document our ancestors’ customs and crafts before they fade.',why_2t:'We tell our story',why_2d:'From Al Qua’a to the world, in our own voice.',why_3t:'We connect generations',why_3d:'Bringing the new generation closer to its roots.',why_4t:'For love of the nation',why_4d:'Pride in Emirati identity and endless belonging.',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
@@ -2945,7 +2965,7 @@ function renderRings(){
       const a=(i/c.n)*Math.PI*2;img.style.transform=`translate(${Math.cos(a)*c.r}px,${Math.sin(a)*c.r}px) rotate(${a+Math.PI/2}rad)`;ring.appendChild(img);}
   });
 }
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -3762,6 +3782,27 @@ const VALUES=[
  {ic:'🐪',n:'الوفاء',ne:'Loyalty',d:'وفاءٌ كرفقة الجمل في الترحال.',de:'Loyalty like a camel on the journey.'},
  {ic:'⏳',n:'الصبر',ne:'Patience',d:'صبرٌ يحوّل الصحراء إلى واحة.',de:'Patience that turns desert into oasis.'}
 ];
+// ===== seasons & star calendar (animated) =====
+const SEASONS=[
+ {ic:'☀️',n:'القيظ',ne:'Al-Qaith',d:'ذروة الحرّ وموسم جني الرطب.',de:'Peak summer heat and the date harvest.'},
+ {ic:'🍂',n:'الصَّفري',ne:'Al-Safari',d:'اعتدالٌ بعد القيظ ولطفٌ في الجو.',de:'A mild spell after the summer heat.'},
+ {ic:'❄️',n:'المربعانية',ne:'Al-Marbaaniya',d:'أربعون يومًا هي أبرد الشتاء.',de:'The forty coldest days of winter.'},
+ {ic:'🌷',n:'البريح',ne:'Al-Breeh',d:'اخضرارٌ وربيعٌ بعد المطر.',de:'Greenery and spring after the rains.'},
+ {ic:'⭐',n:'نجم سهيل',ne:'Suhail Star',d:'طلوعه يبشّر بنهاية القيظ وقدوم البرد.',de:'Its rise signals summer’s end and cooler days.'},
+ {ic:'✨',n:'الثريّا',ne:'Al-Thuraya',d:'نجومٌ اهتدى بها البحّارة والرعاة.',de:'Stars that guided sailors and herders.'},
+ {ic:'🚢',n:'الغوص الكبير',ne:'The Great Dive',d:'موسم الغوص على اللؤلؤ في الصيف.',de:'The summer pearl-diving season.'},
+ {ic:'🧭',n:'الدرور',ne:'Al-Duroor',d:'تقويمٌ نجمي لمعرفة المواسم.',de:'A star calendar for tracking the seasons.'}
+];
+function renderSeasons(){
+  const grid=document.getElementById('seasonsGrid');if(!grid)return;
+  const en=LANG!=='ar';grid.innerHTML='';
+  SEASONS.forEach(x=>{const c=document.createElement('div');c.className='season-card';
+    c.innerHTML='<span class="season-ic">'+x.ic+'</span><h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
+    grid.appendChild(c);});
+  const items=[...grid.querySelectorAll('.season-card')];
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
+  else items.forEach(e=>e.classList.add('in'));
+}
 // ===== music & folk arts (animated) =====
 const MUSIC=[
  {ic:'🪘',n:'الطار',ne:'Al-Tar',d:'دفٌّ جلدي يقود إيقاع الأهازيج.',de:'A frame drum leading the rhythm of chants.'},

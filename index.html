@@ -711,6 +711,18 @@
   .sky-cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;padding:0 18px}
   .sky-cap h2{color:#fff;font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.3rem);text-shadow:0 3px 16px rgba(0,0,0,.55);margin:0}
   .sky-cap p{color:rgba(255,255,255,.92);margin-top:8px;font-size:clamp(.9rem,2.5vw,1.05rem);text-shadow:0 2px 10px rgba(0,0,0,.55);max-width:560px}
+  /* traditional games */
+  .gm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:16px;max-width:1080px;margin:0 auto}
+  .gm-card{background:linear-gradient(165deg,rgba(206,17,38,.07),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:18px;
+    padding:20px 14px;text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s;opacity:0;transform:translateY(20px)}
+  .gm-card.in{opacity:1;transform:none}
+  .gm-card:hover{transform:translateY(-6px) rotate(-1deg);border-color:var(--gold);box-shadow:0 16px 36px -16px rgba(0,0,0,.65)}
+  .gm-ic{font-size:2.6rem;display:block;margin-bottom:9px;animation:gmSpin 5s linear infinite}
+  .gm-card:nth-child(2n) .gm-ic{animation:valFloat 3s ease-in-out infinite}
+  .gm-card:nth-child(3n) .gm-ic{animation:valFloat 3.6s ease-in-out infinite .4s}
+  @keyframes gmSpin{0%,70%{transform:rotate(0)}85%{transform:rotate(-12deg)}100%{transform:rotate(0)}}
+  .gm-card h3{color:var(--gold);font-family:var(--display);font-size:1.05rem;margin-bottom:4px}
+  .gm-card p{color:var(--muted);font-size:.8rem;line-height:1.6}
   /* why we made this */
   .why-lead{max-width:730px;margin:0 auto 36px;text-align:center;color:var(--paper);font-size:clamp(1rem,2.6vw,1.12rem);line-height:2.1}
   .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:18px;max-width:980px;margin:0 auto}
@@ -1552,6 +1564,14 @@
   <div class="un-grid" id="unGrid"></div>
 </section>
 
+<!-- TRADITIONAL GAMES (animated) -->
+<section id="games">
+  <span class="eyebrow" data-k="gm_eb">ذكريات الفريج</span>
+  <h2 class="sec-title" data-k="gm_t" data-html>ألعابٌ <em>شعبية</em></h2>
+  <p class="sec-sub" data-k="gm_sub">ألعابٌ ملأت أزقّة الفريج بالضحك قبل زمن الشاشات — تراثٌ من طفولة الأجداد.</p>
+  <div class="gm-grid" id="gmGrid"></div>
+</section>
+
 <!-- ANIMATED UAE SKY BANNER (inspired by UAE Jobs hero) -->
 <section id="skyhero" aria-label="UAE sky">
   <div class="sky-grad"></div>
@@ -2162,6 +2182,7 @@ const I18N={
   sky_t:'تحت سماء الإمارات',sky_p:'من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.',
   val_eb:'قيمٌ نفتخر بها',val_t:'قِيَمٌ من <em>تراثنا</em>',val_sub:'قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.',sp_sub:'تراث القوع · من القوع نروي تراثنا',
   un_eb:'معترفٌ به عالمياً',un_t:'تراثنا في <em>قوائم اليونسكو</em>',un_sub:'عناصر إماراتية أصيلة سجّلتها اليونسكو ضمن التراث الإنساني — فخرٌ نتشاركه مع العالم.',
+  gm_eb:'ذكريات الفريج',gm_t:'ألعابٌ <em>شعبية</em>',gm_sub:'ألعابٌ ملأت أزقّة الفريج بالضحك قبل زمن الشاشات — تراثٌ من طفولة الأجداد.',
   why_eb:'رسالتنا',why_t:'لماذا أنشأنا <em>هذا الموقع؟</em>',why_p:'أنشأنا «عمّار AI» حبًّا في تراث الإمارات وأهل القوع — لنحفظ ذاكرة الأجداد من الضياع، ونرويها للأجيال بأسلوبٍ عصري يفهمه الجميع. نؤمن أن من يعرف ماضيه يصنع مستقبله، فجعلنا التقنية جسرًا بين الأصالة والمستقبل، ليبقى تراثنا حيًّا في قلوب أبنائنا والعالم. 🇦🇪',why_1t:'نحفظ تراثنا',why_1d:'نوثّق عادات الأجداد وحِرَفهم قبل أن تُنسى.',why_2t:'نروي قصتنا',why_2d:'من القوع إلى العالم، نحكي حكايتنا بصوتنا.',why_3t:'نصل الأجيال',why_3d:'نقرّب الجيل الجديد من جذوره وهويته.',why_4t:'حبًّا للوطن',why_4d:'فخرٌ بالهوية الإماراتية وانتماءٌ لا ينتهي.',
   about_p1:'التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر — نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج، وصاغته حياة <b>البر والبحر</b> عبر قرون من الكرم والصبر والإبداع. لم يكن مجرد إرثٍ يُحكى، بل أسلوب حياةٍ متكامل صنع شخصية الإنسان الإماراتي.',
   about_p2:'قبل اكتشاف النفط، عاش الأجداد على <b>الغوص على اللؤلؤ</b> وصيد الأسماك والتجارة البحرية صيفاً، وعلى تربية <b>الإبل</b> والصيد بالصقور والترحال بحثاً عن الماء والكلأ في البر. ومن رحم هذه الحياة الصعبة وُلدت قيمٌ خالدة: الكرم، والشجاعة، والتكافل بين أبناء "الفريج" الواحد، واحترام الكبير.',
@@ -2243,6 +2264,7 @@ const I18N={
   sky_t:'Under the UAE sky',sky_p:'From desert sunset to night stars — a heritage that soars like a falcon.',
   val_eb:'Values we cherish',val_t:'Values of <em>our heritage</em>',val_sub:'Values inherited from our ancestors, still beating in the heart of the UAE.',sp_sub:'Tirath Al Qua’a · telling our heritage',
   un_eb:'Recognised worldwide',un_t:'Our heritage on the <em>UNESCO lists</em>',un_sub:'Authentic Emirati elements inscribed by UNESCO as intangible cultural heritage — a pride we share with the world.',
+  gm_eb:'Neighbourhood memories',gm_t:'Traditional <em>games</em>',gm_sub:'Games that filled the old alleys with laughter before screens — heritage from our grandparents’ childhood.',
   why_eb:'Our mission',why_t:'Why we built <em>this website</em>',why_p:'We created “Ammar AI” out of love for the heritage of the UAE and the people of Al Qua’a — to save our ancestors’ memory from being lost, and tell it to new generations in a modern way everyone understands. We believe whoever knows their past builds their future, so we made technology a bridge between authenticity and the future, keeping our heritage alive in the hearts of our children and the world. 🇦🇪',why_1t:'We preserve our heritage',why_1d:'We document our ancestors’ customs and crafts before they fade.',why_2t:'We tell our story',why_2d:'From Al Qua’a to the world, in our own voice.',why_3t:'We connect generations',why_3d:'Bringing the new generation closer to its roots.',why_4t:'For love of the nation',why_4d:'Pride in Emirati identity and endless belonging.',
   about_p1:'Emirati heritage is the memory of the ancestors and the spirit of today — a fabric of customs, arts and crafts born between the desert sands and the Gulf waters, shaped by <b>land and sea</b> over centuries of generosity, patience and creativity.',
   about_p2:'Before oil, the ancestors lived on <b>pearl diving</b>, fishing and maritime trade in summer, and on raising <b>camels</b>, falconry and travel in search of water and pasture. From that hard life were born timeless values: generosity, courage and solidarity.',
@@ -2817,7 +2839,7 @@ function renderRings(){
       const a=(i/c.n)*Math.PI*2;img.style.transform=`translate(${Math.cos(a)*c.r}px,${Math.sin(a)*c.r}px) rotate(${a+Math.PI/2}rad)`;ring.appendChild(img);}
   });
 }
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderGames();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -3629,6 +3651,27 @@ const VALUES=[
  {ic:'🐪',n:'الوفاء',ne:'Loyalty',d:'وفاءٌ كرفقة الجمل في الترحال.',de:'Loyalty like a camel on the journey.'},
  {ic:'⏳',n:'الصبر',ne:'Patience',d:'صبرٌ يحوّل الصحراء إلى واحة.',de:'Patience that turns desert into oasis.'}
 ];
+// ===== traditional games (animated) =====
+const GAMES=[
+ {ic:'🌀',n:'الدوّامة',ne:'Spinning Top',d:'تُلفّ بخيطٍ وتدور على الأرض.',de:'Wound with string and spun on the ground.'},
+ {ic:'🔵',n:'التيلة',ne:'Marbles',d:'كراتٌ زجاجية ومهارةٌ في التصويب.',de:'Glass balls and skillful aim.'},
+ {ic:'🪢',n:'نطّ الحبل',ne:'Skipping Rope',d:'قفزٌ ونشاطٌ على إيقاع الأهازيج.',de:'Jumping to the rhythm of chants.'},
+ {ic:'🦶',n:'الحجلة',ne:'Hopscotch',d:'مربعاتٌ تُرسم وقفزٌ على قدمٍ واحدة.',de:'Drawn squares and hopping on one foot.'},
+ {ic:'🏃',n:'العسكر والحرامي',ne:'Cops & Robbers',d:'جريٌ ومطاردةٌ بين الأزقّة.',de:'Running and chasing through the alleys.'},
+ {ic:'💍',n:'الخاتم',ne:'The Ring Game',d:'إخفاء الخاتم وحزر مكانه.',de:'Hide the ring and guess where it is.'},
+ {ic:'🛝',n:'المريحانة',ne:'The Swing',d:'أرجوحةٌ تُعلّق بين نخلتين.',de:'A swing hung between two palms.'},
+ {ic:'🐚',n:'لقفة الصدف',ne:'Shell Toss',d:'قذفٌ والتقاطٌ بحصى البحر.',de:'Tossing and catching sea pebbles.'}
+];
+function renderGames(){
+  const grid=document.getElementById('gmGrid');if(!grid)return;
+  const en=LANG!=='ar';grid.innerHTML='';
+  GAMES.forEach(g=>{const c=document.createElement('div');c.className='gm-card';
+    c.innerHTML='<span class="gm-ic">'+g.ic+'</span><h3>'+(en?g.ne:g.n)+'</h3><p>'+(en?g.de:g.d)+'</p>';
+    grid.appendChild(c);});
+  const items=[...grid.querySelectorAll('.gm-card')];
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
+  else items.forEach(e=>e.classList.add('in'));
+}
 // ===== UNESCO heritage elements (animated) =====
 const UNESCO=[
  {ic:'☕',y:'2015',n:'القهوة العربية',ne:'Arabic Coffee',d:'رمز الكرم والضيافة في الخليج.',de:'A symbol of Gulf generosity and hospitality.'},

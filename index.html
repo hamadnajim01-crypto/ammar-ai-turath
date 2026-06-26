@@ -2971,7 +2971,7 @@ function renderRings(){
 }
 function _emo(cls,ic){var s=document.createElement('span');s.className=cls;s.textContent=ic;return s;}
 window._emo=_emo;
-function RIMG(im,ic,cls){return im?'<img class="'+cls+' rimg" src="img/real/'+im+'.jpg" loading="lazy" alt="" onerror="this.replaceWith(window._emo(\''+cls+'\',\''+ic+'\'))">':'<span class="'+cls+'">'+ic+'</span>';}
+function RIMG(im,ic,cls){return im?'<img class="'+cls+' rimg" src="img/real/'+im+'.jpg" loading="lazy" decoding="async" alt="" onerror="this.replaceWith(window._emo(\''+cls+'\',\''+ic+'\'))">':'<span class="'+cls+'">'+ic+'</span>';}
 function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();

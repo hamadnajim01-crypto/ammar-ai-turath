@@ -63,6 +63,11 @@
   .pg-unlock button{background:linear-gradient(135deg,var(--gold),#a87f1c);color:#1a1208;border:none;padding:12px 22px;border-radius:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s}
   .pg-unlock button:hover{transform:translateY(-2px)}
   .pg-msg{min-height:20px;margin-top:12px;font-weight:700}
+  .pg-free{color:#5ecfc0;font-weight:700;font-size:.9rem;margin-bottom:10px}
+  #freeToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);z-index:9997;opacity:0;transition:transform .4s,opacity .4s;
+    background:linear-gradient(135deg,var(--green),#046b2b);color:#eafff0;font-weight:700;padding:12px 22px;border-radius:30px;
+    box-shadow:0 14px 36px -10px rgba(0,0,0,.6);max-width:90vw;text-align:center;font-size:.92rem}
+  #freeToast.go{opacity:1;transform:translateX(-50%) translateY(0)}
   /* real heritage photos (replace emoji) */
   img.rimg{width:92px;height:92px;object-fit:cover;border-radius:16px;display:block;margin:0 auto 12px;
     box-shadow:0 9px 22px rgba(0,0,0,.5);border:2px solid rgba(233,188,70,.25);background:#1a1208;transition:transform .3s}
@@ -1855,6 +1860,7 @@
 <section id="payGate" hidden>
   <div class="pg-card">
     <div class="pg-lock">🔒</div>
+    <p class="pg-free" id="pgFree">🎁 انتهى العرض المجاني (أول ١٥٠ زائر).</p>
     <h2 data-k="pg_t">تابِع الموقع الكامل</h2>
     <p data-k="pg_p">باقي الموقع (الفيديوهات، الستيكرات، الأسرار، والمزيد) يُفتح لمرة واحدة بـ ٥$ فقط.</p>
     <a class="pg-pay" id="pgPay" href="#" target="_blank" rel="noopener" data-k="pg_pay">💳 ادفع ٥$ عبر PayPal</a>
@@ -3708,23 +3714,48 @@ function clearSkin(){
   function upd(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop||0,max=(h.scrollHeight-h.clientHeight)||1;bar.style.width=Math.min(100,Math.max(0,sc/max*100))+'%';}
   window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
 })();
-// ===== paywall gate ($5 to continue past the stats) =====
+// ===== paywall gate (first 150 visitors FREE, then $5) =====
 (function(){
   var PAYPAL_URL=''; // ← ضع رابط PayPal.me هنا (مثال: https://www.paypal.com/paypalme/USERNAME/5USD). فاضي = يفتح واتساب.
   var UNLOCK_CODE='AMMAR2026'; // الرمز اللي تعطيه للي يدفع
+  var FREE_LIMIT=150; // أول كم زائر مجاناً
+  var COUNTER='https://abacus.jasoncameron.dev/hit/ammar-turath/visitors'; // عدّاد زوّار عالمي مجاني
   var gate=document.getElementById('payGate');if(!gate)return;
-  var unlocked=false;try{unlocked=localStorage.getItem('ammar_unlocked')==='1';}catch(e){}
+  var ar=(typeof LANG!=='undefined'&&LANG==='ar');
+  function L(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function S(k,v){try{localStorage.setItem(k,v);}catch(e){}}
   function setLock(lock){var el=gate.nextElementSibling;while(el){var t=el.tagName;if(t==='SECTION'||t==='FOOTER'||el.classList.contains('ticker'))el.style.display=lock?'none':'';el=el.nextElementSibling;}}
-  if(unlocked){gate.setAttribute('hidden','');setLock(false);return;}
+  var pay=document.getElementById('pgPay'),go=document.getElementById('pgGo'),code=document.getElementById('pgCode'),msg=document.getElementById('pgMsg');
+  function wirePay(){
+    if(pay)pay.href=PAYPAL_URL||('https://wa.me/971506641407?text='+encodeURIComponent('السلام عليكم 🌟 أبغى أدفع ٥$ لفتح الموقع الكامل وأستلم رمز الفتح 🔓'));
+    function tryUnlock(){var v=((code&&code.value)||'').trim().toUpperCase();
+      if(v===UNLOCK_CODE){S('ammar_unlocked','1');if(msg){msg.style.color='var(--green)';msg.textContent=ar?'تم الفتح! ✓':'Unlocked! ✓';}setTimeout(function(){location.reload();},650);}
+      else if(msg){msg.style.color='var(--red)';msg.textContent=ar?'رمز غير صحيح — تأكد منه.':'Wrong code — try again.';}}
+    if(go)go.addEventListener('click',tryUnlock);
+    if(code)code.addEventListener('keydown',function(e){if(e.key==='Enter')tryUnlock();});
+  }
+  function freeToast(n){var t=document.createElement('div');t.id='freeToast';
+    t.innerHTML='🎁 '+(ar?('دخول مجاني! أنت الزائر رقم '+n+' من أول '+FREE_LIMIT):('Free access! You are visitor #'+n+' of the first '+FREE_LIMIT));
+    document.body.appendChild(t);setTimeout(function(){t.classList.add('go');},50);setTimeout(function(){t.remove();},6000);}
+  function grantFree(n){S('ammar_unlocked','1');S('ammar_free','1');gate.setAttribute('hidden','');setLock(false);if(n)freeToast(n);}
+  function showPaid(){var f=document.getElementById('pgFree');if(f){f.textContent=ar?'🎁 انتهى العرض المجاني (أول '+FREE_LIMIT+' زائر).':'🎁 The free offer (first '+FREE_LIMIT+') has ended.';}if(msg)msg.textContent='';gate.removeAttribute('hidden');setLock(true);wirePay();}
+
+  // already unlocked (paid or was-free) → full access
+  if(L('ammar_unlocked')==='1'){gate.setAttribute('hidden','');setLock(false);return;}
+  // lock immediately while checking (no flash of paid content)
   gate.removeAttribute('hidden');setLock(true);
-  var pay=document.getElementById('pgPay');
-  if(pay)pay.href=PAYPAL_URL||('https://wa.me/971506641407?text='+encodeURIComponent('السلام عليكم 🌟 أبغى أدفع ٥$ لفتح الموقع الكامل وأستلم رمز الفتح 🔓'));
-  var go=document.getElementById('pgGo'),code=document.getElementById('pgCode'),msg=document.getElementById('pgMsg');
-  function tryUnlock(){var ar=(typeof LANG!=='undefined'&&LANG==='ar');var v=((code&&code.value)||'').trim().toUpperCase();
-    if(v===UNLOCK_CODE){try{localStorage.setItem('ammar_unlocked','1');}catch(e){}if(msg){msg.style.color='var(--green)';msg.textContent=ar?'تم الفتح! ✓':'Unlocked! ✓';}setTimeout(function(){location.reload();},650);}
-    else if(msg){msg.style.color='var(--red)';msg.textContent=ar?'رمز غير صحيح — تأكد منه.':'Wrong code — try again.';}}
-  if(go)go.addEventListener('click',tryUnlock);
-  if(code)code.addEventListener('keydown',function(e){if(e.key==='Enter')tryUnlock();});
+  if(msg){msg.style.color='var(--muted)';msg.textContent=ar?'جارٍ التحقق من العرض المجاني…':'Checking the free offer…';}
+
+  var stored=L('ammar_visnum');
+  function decide(n){S('ammar_visnum',String(n)); if(n<=FREE_LIMIT){grantFree(n);} else {showPaid();}}
+  if(stored!==null){decide(parseInt(stored,10)||99999);}
+  else{
+    fetch(COUNTER,{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      var n=(d&&(d.value||d.count));
+      if(!n){grantFree(0);return;} // counter weird → let them in free
+      decide(n);
+    }).catch(function(){grantFree(0);}); // counter down → free access (visitor-friendly)
+  }
 })();
 // ===== intro splash (once per session) =====
 (function(){var sp=document.getElementById('splash');if(!sp)return;

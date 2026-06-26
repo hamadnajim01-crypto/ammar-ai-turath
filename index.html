@@ -35,8 +35,9 @@
   html{scroll-behavior:smooth}
   #scrollProg{position:fixed;top:0;left:0;height:3px;width:0;z-index:9998;background:linear-gradient(90deg,var(--gold),#ffe7a3,var(--teal));box-shadow:0 0 8px rgba(233,188,70,.55);transition:width .08s linear;pointer-events:none}
   /* real heritage photos (replace emoji) */
-  img.rimg{width:66px;height:66px;object-fit:cover;border-radius:14px;display:block;margin:0 auto 11px;
-    box-shadow:0 7px 18px rgba(0,0,0,.45);border:2px solid rgba(255,255,255,.1);background:#1a1208}
+  img.rimg{width:92px;height:92px;object-fit:cover;border-radius:16px;display:block;margin:0 auto 12px;
+    box-shadow:0 9px 22px rgba(0,0,0,.5);border:2px solid rgba(233,188,70,.25);background:#1a1208;transition:transform .3s}
+  .val:hover img.rimg,.un-card:hover img.rimg,.gm-card:hover img.rimg,.food-card:hover img.rimg,.dress-card:hover img.rimg,.craft-card:hover img.rimg,.place-card:hover img.rimg,.music-card:hover img.rimg,.season-card:hover img.rimg{transform:scale(1.07)}
   body{font-family:var(--body);background:
       radial-gradient(1200px 600px at 80% -10%,rgba(201,162,39,.10),transparent 60%),
       radial-gradient(900px 500px at 0% 20%,rgba(42,157,143,.08),transparent 55%),
@@ -3802,7 +3803,7 @@ const SEASONS=[
 function renderSeasons(){
   const grid=document.getElementById('seasonsGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';
-  const SIM=['','','','','suhail','thuraya','diving',''];
+  const SIM=['s_summer','s_autumn','s_winter','s_spring','suhail','thuraya','diving','s_duroor'];
   SEASONS.forEach((x,i)=>{const c=document.createElement('div');c.className='season-card';
     c.innerHTML=RIMG(SIM[i],x.ic,'season-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
@@ -3824,7 +3825,7 @@ const MUSIC=[
 function renderMusic(){
   const grid=document.getElementById('musicGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';
-  const MIM=['tar','tabl','','mizmar','habban','nahma','','oud'];
+  const MIM=['tar','tabl','','mizmar','habban','nahma','m_shilla','oud'];
   MUSIC.forEach((x,i)=>{const c=document.createElement('div');c.className='music-card';
     c.innerHTML=RIMG(MIM[i],x.ic,'music-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
@@ -3934,7 +3935,7 @@ const GAMES=[
 function renderGames(){
   const grid=document.getElementById('gmGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';
-  const GIM=['top','marbles','','hopscotch','','','swing','seashell'];
+  const GIM=['top','marbles','g_rope','hopscotch','g_cops','g_ring','swing','seashell'];
   GAMES.forEach((g,i)=>{const c=document.createElement('div');c.className='gm-card';
     c.innerHTML=RIMG(GIM[i],g.ic,'gm-ic')+'<h3>'+(en?g.ne:g.n)+'</h3><p>'+(en?g.de:g.d)+'</p>';
     grid.appendChild(c);});

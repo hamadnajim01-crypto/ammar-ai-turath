@@ -3825,7 +3825,7 @@ const MUSIC=[
 function renderMusic(){
   const grid=document.getElementById('musicGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';
-  const MIM=['tar','tabl','','mizmar','habban','nahma','m_shilla','oud'];
+  const MIM=['tar','tabl','rababa','mizmar','habban','nahma','m_shilla','oud'];
   MUSIC.forEach((x,i)=>{const c=document.createElement('div');c.className='music-card';
     c.innerHTML=RIMG(MIM[i],x.ic,'music-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});

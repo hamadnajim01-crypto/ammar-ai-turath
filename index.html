@@ -3869,7 +3869,7 @@ const CRAFTS=[
 function renderCrafts(){
   const grid=document.getElementById('craftsGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';
-  const CIM=['un_sadu','khoos','pottery','dhow','spinning','blacksmith','nets',''];
+  const CIM=['un_sadu','khoos','pottery','dhow','spinning','blacksmith','nets','perfume'];
   CRAFTS.forEach((x,i)=>{const c=document.createElement('div');c.className='craft-card';
     c.innerHTML=RIMG(CIM[i],x.ic,'craft-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
@@ -3891,7 +3891,7 @@ const DRESS=[
 function renderDress(){
   const grid=document.getElementById('dressGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';
-  const DIM=['','ghutra','agal','abaya','talli','goldjewel','bisht','sandals'];
+  const DIM=['kandura','ghutra','agal','abaya','talli','goldjewel','bisht','sandals'];
   DRESS.forEach((x,i)=>{const c=document.createElement('div');c.className='dress-card';
     c.innerHTML=RIMG(DIM[i],x.ic,'dress-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
@@ -3913,7 +3913,7 @@ const FOOD=[
 function renderFood(){
   const grid=document.getElementById('foodGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';
-  const FIM=['harees','machboos','luqaimat','balaleet','','aseedah','khabeesa','dates'];
+  const FIM=['harees','machboos','luqaimat','balaleet','tharid','aseedah','khabeesa','dates'];
   FOOD.forEach((f,i)=>{const c=document.createElement('div');c.className='food-card';
     c.innerHTML=RIMG(FIM[i],f.ic,'food-ic')+'<h3>'+(en?f.ne:f.n)+'</h3><p>'+(en?f.de:f.d)+'</p>';
     grid.appendChild(c);});
@@ -3957,7 +3957,7 @@ const UNESCO=[
 function renderUnesco(){
   const grid=document.getElementById('unGrid');if(!grid)return;
   const en=LANG!=='ar';grid.innerHTML='';
-  const UIM=['un_coffee','un_falconry','un_sadu','','un_taghrooda','un_palm','',''];
+  const UIM=['un_coffee','un_falconry','un_sadu','un_ayyala','un_taghrooda','un_palm','un_razfa','un_azi'];
   UNESCO.forEach((u,i)=>{const c=document.createElement('div');c.className='un-card';
     c.innerHTML='<span class="un-badge">UNESCO</span>'+RIMG(UIM[i],u.ic,'un-ic')+'<h3>'+(en?u.ne:u.n)+'</h3><div class="un-year">'+(en?'Inscribed ':'سُجِّل ')+u.y+'</div><p>'+(en?u.de:u.d)+'</p>';
     grid.appendChild(c);});

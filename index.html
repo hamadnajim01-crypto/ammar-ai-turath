@@ -889,6 +889,26 @@
   .idc-title{color:var(--gold);font-family:var(--display);font-size:1.15rem;margin-bottom:4px}
   .idc-line{color:var(--paper);font-size:.92rem;opacity:.9;margin-bottom:14px}
   .idc-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line);padding-top:12px;color:var(--muted);font-size:.78rem}
+  /* daily challenge + leaderboard */
+  .dc-wrap{max-width:720px;margin:24px auto 0;display:grid;gap:18px}
+  .dc-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 22px;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+  .dc-q{font-family:var(--display);font-size:clamp(1.2rem,3.5vw,1.55rem);color:var(--ink);line-height:1.7;margin-bottom:18px;text-align:center}
+  .dc-opts{display:grid;gap:11px}
+  .dc-opt{display:flex;align-items:center;gap:10px;text-align:start;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:1.04rem;font-family:inherit;cursor:pointer;transition:.18s;font-weight:600}
+  .dc-opt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-2px)}
+  .dc-opt:disabled{cursor:default}
+  .dc-opt.right{border-color:#1f9d55;background:rgba(31,157,85,.14);color:#0f6b39}
+  .dc-opt.wrong{border-color:#d23b3b;background:rgba(210,59,59,.12);color:#9a2020}
+  .dc-opt .dc-mk{margin-inline-start:auto;font-size:1.2rem}
+  .dc-exp{margin-top:16px;padding:14px 16px;border-radius:14px;background:var(--bg);border:1px dashed var(--line);color:var(--muted);line-height:1.9;font-size:.98rem;text-align:center}
+  .dc-done{text-align:center;color:var(--muted);font-size:1.05rem;line-height:1.9}
+  .dc-done b{color:var(--accent)}
+  .dc-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .dc-st{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 8px;text-align:center}
+  .dc-st .dc-n{font-family:var(--display);font-size:clamp(1.3rem,5vw,1.9rem);color:var(--accent);font-weight:800;line-height:1}
+  .dc-st .dc-l{font-size:.78rem;color:var(--muted);margin-top:6px}
+  .dc-badge{grid-column:1/-1;text-align:center;background:linear-gradient(120deg,var(--accent),var(--accent2,var(--accent)));color:#fff;border-radius:16px;padding:14px;font-family:var(--display);font-size:1.05rem;box-shadow:0 10px 28px rgba(0,0,0,.18)}
+  @media(max-width:560px){.dc-stats{grid-template-columns:repeat(2,1fr)}}
   /* heritage values (animated) */
   .vals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:18px;max-width:1080px;margin:0 auto}
   .val{position:relative;background:linear-gradient(165deg,rgba(201,162,39,.08),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:20px;
@@ -1724,6 +1744,17 @@
   </div>
 </section>
 
+<!-- DAILY CHALLENGE + LEADERBOARD -->
+<section id="daily">
+  <span class="eyebrow" data-k="dc_eb">تحدّي يومي</span>
+  <h2 class="sec-title" data-k="dc_t" data-html>تحدّي <em>اليوم</em></h2>
+  <p class="sec-sub" data-k="dc_sub">سؤالٌ جديد كل يوم عن تراثنا. جاوب صح وحافظ على سلسلتك!</p>
+  <div class="dc-wrap">
+    <div class="dc-card" id="dcCard"></div>
+    <div class="dc-stats" id="dcStats"></div>
+  </div>
+</section>
+
 <!-- HERITAGE VALUES (animated) -->
 <section id="values">
   <span class="eyebrow" data-k="val_eb">قيمٌ نفتخر بها</span>
@@ -2422,6 +2453,7 @@ const I18N={
   pieces_eb:'ستيكرات التراث',pieces_t:'ستيكرات <em>تراثنا</em>',pieces_sub:'ستيكرات فنية مقصوصة من لوحة عمّار AI — اطلب اللي يعجبك بأسعارٍ حلوة.',
   sky_t:'تحت سماء الإمارات',sky_p:'من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.',
   jr_eb:'رحلة في الزمن',jr_t:'رحلة <em>الأجداد</em>',jr_sub:'انزل ببطء… وعِش رحلة تراثنا من أعماق البحر إلى آفاق المستقبل.',
+  dc_eb:'تحدّي يومي',dc_t:'تحدّي <em>اليوم</em>',dc_sub:'سؤالٌ جديد كل يوم عن تراثنا. جاوب صح وحافظ على سلسلتك!',
   id_eb:'هويتك',id_t:'اصنع <em>هويتك التراثية</em>',id_sub:'اختر إمارتك وما يعجبك من تراثنا، واحصل على بطاقةٍ باسمك تقدر تشاركها مع أصحابك.',id_name_ph:'اكتب اسمك',id_emirate:'اختر الإمارة',id_trait:'اختر ما يعجبك',id_make:'✨ اصنع بطاقتي',id_share:'↗ شارك بطاقتي',
   val_eb:'قيمٌ نفتخر بها',val_t:'قِيَمٌ من <em>تراثنا</em>',val_sub:'قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.',sp_sub:'تراث القوع · من القوع نروي تراثنا',
   un_eb:'معترفٌ به عالمياً',un_t:'تراثنا في <em>قوائم اليونسكو</em>',un_sub:'عناصر إماراتية أصيلة سجّلتها اليونسكو ضمن التراث الإنساني — فخرٌ نتشاركه مع العالم.',
@@ -2512,6 +2544,7 @@ const I18N={
   pieces_eb:'Heritage stickers',pieces_t:'Our heritage <em>stickers</em>',pieces_sub:'Artistic stickers cropped from the Ammar AI artwork — order your favourites at sweet prices.',
   sky_t:'Under the UAE sky',sky_p:'From desert sunset to night stars — a heritage that soars like a falcon.',
   jr_eb:'A journey through time',jr_t:'The <em>Ancestors’</em> Journey',jr_sub:'Scroll slowly… and live the journey of our heritage, from the depths of the sea to the horizons of the future.',
+  dc_eb:'Daily challenge',dc_t:'Today’s <em>Challenge</em>',dc_sub:'A new question about our heritage every day. Answer right and keep your streak!',
   id_eb:'Your identity',id_t:'Create your <em>heritage identity</em>',id_sub:'Pick your emirate and what you love from our heritage, and get a card with your name to share with friends.',id_name_ph:'Enter your name',id_emirate:'Choose emirate',id_trait:'Choose what you love',id_make:'✨ Make my card',id_share:'↗ Share my card',
   val_eb:'Values we cherish',val_t:'Values of <em>our heritage</em>',val_sub:'Values inherited from our ancestors, still beating in the heart of the UAE.',sp_sub:'Tirath Al Qua’a · telling our heritage',
   un_eb:'Recognised worldwide',un_t:'Our heritage on the <em>UNESCO lists</em>',un_sub:'Authentic Emirati elements inscribed by UNESCO as intangible cultural heritage — a pride we share with the world.',
@@ -3099,7 +3132,7 @@ function renderRings(){
 function _emo(cls,ic){var s=document.createElement('span');s.className=cls;s.textContent=ic;return s;}
 window._emo=_emo;
 function RIMG(im,ic,cls,nm){return im?'<img class="'+cls+' rimg" src="img/real/'+im+'.jpg" loading="lazy" decoding="async" alt="'+((nm||im)+'').replace(/"/g,'')+'" onerror="this.replaceWith(window._emo(\''+cls+'\',\''+ic+'\'))">':'<span class="'+cls+'">'+ic+'</span>';}
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderJourney();renderIdentity();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderJourney();renderIdentity();renderDaily();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -4187,6 +4220,79 @@ const JOURNEY=[
   p:'نحفظ إرث الأجداد ونبني عليه، أصالةٌ تُنير طريق الأجيال. من القوع… نروي تراثنا للعالم.',
   pe:'We preserve our ancestors’ legacy and build upon it — authenticity lighting the path of generations. From Al Qua’a, we tell our heritage to the world.'}
 ];
+// ===== daily challenge + leaderboard =====
+const DAILY=[
+ {q:'كم عدد إمارات دولة الإمارات؟',qe:'How many emirates form the UAE?',o:['خمس','ست','سبع','تسع'],oe:['Five','Six','Seven','Nine'],c:2,ex:'تأسس الاتحاد عام ١٩٧١ من سبع إمارات.',exe:'The federation was founded in 1971 from seven emirates.'},
+ {q:'ما المشروب الذي يرمز للكرم والضيافة؟',qe:'Which drink symbolizes generosity and hospitality?',o:['الشاي','القهوة العربية','اللبن','العصير'],oe:['Tea','Arabic coffee','Milk','Juice'],c:1,ex:'القهوة العربية (القهوة) رمزٌ للضيافة، أُدرجت في قائمة اليونسكو.',exe:'Arabic coffee is a symbol of hospitality, inscribed on the UNESCO list.'},
+ {q:'ما الحرفة التي تُنسج بها بيوت الشعر والسجاد بخيوط ملونة؟',qe:'Which craft weaves tents and rugs with colored threads?',o:['التلّي','السدو','الخوص','الدوخلة'],oe:['Al Talli','Al Sadu','Palm weaving','Dukhla'],c:1,ex:'السدو حرفة نسيج بدوية أصيلة على قائمة اليونسكو.',exe:'Al Sadu is an authentic Bedouin weaving craft on the UNESCO list.'},
+ {q:'بماذا اشتهر أهل الساحل قديماً قبل النفط؟',qe:'What were coastal people known for before oil?',o:['الزراعة','الغوص على اللؤلؤ','التعدين','الصناعة'],oe:['Farming','Pearl diving','Mining','Industry'],c:1,ex:'الغوص على اللؤلؤ كان مصدر الرزق الأهم قبل اكتشاف النفط.',exe:'Pearl diving was the main livelihood before oil was discovered.'},
+ {q:'من هو مؤسس دولة الإمارات؟',qe:'Who is the founding father of the UAE?',o:['الشيخ راشد','الشيخ زايد','الشيخ خليفة','الشيخ سلطان'],oe:['Sheikh Rashid','Sheikh Zayed','Sheikh Khalifa','Sheikh Sultan'],c:1,ex:'الشيخ زايد بن سلطان آل نهيان، رحمه الله، باني الاتحاد.',exe:'Sheikh Zayed bin Sultan Al Nahyan, the founder of the union.'},
+ {q:'ما اسم الإناء النحاسي الذي تُقدّم فيه القهوة؟',qe:'What is the copper pot used to serve coffee called?',o:['الدلّة','الجِرن','المبخرة','الطشت'],oe:['Dallah','Mortar','Incense burner','Basin'],c:0,ex:'الدلّة إناء القهوة العربي الشهير، رمزٌ للكرم.',exe:'The dallah is the famous Arabic coffee pot, a symbol of generosity.'},
+ {q:'ما الشجرة التي تُسمى «أم البيت» لكثرة فوائدها؟',qe:'Which tree is called "mother of the home" for its many uses?',o:['السدر','النخلة','الغاف','السمر'],oe:['Sidr','The date palm','Ghaf','Samar'],c:1,ex:'النخلة مصدر التمر وسعفها وجذوعها تُستخدم في كل شيء.',exe:'The date palm gives dates; its fronds and trunk are used for everything.'},
+ {q:'ما الرياضة التراثية المرتبطة بالصحراء والصيد؟',qe:'Which heritage sport is tied to the desert and hunting?',o:['الغوص','الصقارة','المصارعة','السباحة'],oe:['Diving','Falconry','Wrestling','Swimming'],c:1,ex:'الصقارة (الصقور) فنّ صيدٍ عريق على قائمة اليونسكو.',exe:'Falconry is an ancient hunting art on the UNESCO list.'},
+ {q:'ما اسم الزيّ النسائي المطرّز بخيوط الذهب على الوجه؟',qe:'What is the gold-thread face adornment in women’s dress?',o:['البرقع','العباءة','الشيلة','الكندورة'],oe:['Burqa','Abaya','Shayla','Kandura'],c:0,ex:'البرقع زينةٌ تقليدية تُميّز المرأة الإماراتية قديماً.',exe:'The burqa is a traditional adornment of Emirati women.'},
+ {q:'في أي عام أُعلن قيام دولة الإمارات؟',qe:'In which year was the UAE established?',o:['١٩٦٨','١٩٧١','١٩٧٥','١٩٨١'],oe:['1968','1971','1975','1981'],c:1,ex:'في الثاني من ديسمبر ١٩٧١ قام الاتحاد.',exe:'The union was declared on December 2nd, 1971.'}
+];
+const DC_NS='ammar-turath';
+function dcToday(){const d=new Date();const s=new Date(d.getFullYear(),0,0);return{idx:Math.floor((d-s)/86400000)%DAILY.length,date:d.toISOString().slice(0,10)};}
+function dcDayDiff(a,b){return Math.round((new Date(b)-new Date(a))/86400000);}
+async function dcCount(date,hit){try{const u='https://abacus.jasoncameron.dev/'+(hit?'hit':'get')+'/'+DC_NS+'/daily-'+date;const r=await fetch(u);const j=await r.json();return j.value;}catch(e){return null;}}
+function dcBadge(streak,en){
+  if(streak>=30)return en?'🏆 Heritage Legend!':'🏆 أسطورة التراث!';
+  if(streak>=14)return en?'🌟 Heritage Expert':'🌟 خبير تراث';
+  if(streak>=7)return en?'🔥 A full week streak!':'🔥 سلسلة أسبوع كامل!';
+  if(streak>=3)return en?'💪 Great, keep going!':'💪 ماشي زين، كمّل!';
+  if(streak>=1)return en?'👏 Great start':'👏 بداية موفقة';
+  return'';
+}
+function renderDailyStats(){
+  const box=document.getElementById('dcStats');if(!box)return;const en=LANG!=='ar';
+  const streak=+localStorage.getItem('ammar_d_streak')||0,best=+localStorage.getItem('ammar_d_best')||0,total=+localStorage.getItem('ammar_d_total')||0;
+  const today=localStorage.getItem('ammar_d_today')||'…';
+  const badge=dcBadge(streak,en);
+  box.innerHTML=
+   (badge?`<div class="dc-badge">${badge}</div>`:'')+
+   `<div class="dc-st"><div class="dc-n">🔥 ${streak}</div><div class="dc-l">${en?'Day streak':'سلسلتك (يوم)'}</div></div>`+
+   `<div class="dc-st"><div class="dc-n">🏅 ${best}</div><div class="dc-l">${en?'Best streak':'أطول سلسلة'}</div></div>`+
+   `<div class="dc-st"><div class="dc-n">📚 ${total}</div><div class="dc-l">${en?'Total solved':'مجموع ما حللت'}</div></div>`+
+   `<div class="dc-st"><div class="dc-n">🌍 ${today}</div><div class="dc-l">${en?'Solved today':'حلّوا تحدّي اليوم'}</div></div>`;
+}
+function renderDaily(){
+  const card=document.getElementById('dcCard');if(!card)return;const en=LANG!=='ar';
+  const{idx,date}=dcToday();const Q=DAILY[idx];
+  const answered=localStorage.getItem('ammar_d_ansdate')===date;
+  const opts=en?Q.oe:Q.o,q=en?Q.qe:Q.q,ex=en?Q.exe:Q.ex;
+  const showResult=(picked)=>{
+    const correct=Q.c;
+    card.querySelectorAll('.dc-opt').forEach((b,i)=>{b.disabled=true;
+      if(i===correct){b.classList.add('right');b.querySelector('.dc-mk').textContent='✔';}
+      else if(i===picked){b.classList.add('wrong');b.querySelector('.dc-mk').textContent='✗';}
+    });
+    let exp=card.querySelector('.dc-exp');if(!exp){exp=document.createElement('div');exp.className='dc-exp';card.appendChild(exp);}
+    exp.innerHTML=(picked===correct?(en?'✅ Correct! ':'✅ صحيح! '):(en?'❌ Not quite. ':'❌ مو بالضبط. '))+ex+(en?'<br><span style="opacity:.7">Come back tomorrow for a new challenge.</span>':'<br><span style="opacity:.7">تعال بكرة لتحدٍّ جديد.</span>');
+  };
+  card.innerHTML=`<div class="dc-q">${q}</div><div class="dc-opts">`+opts.map((o,i)=>`<button class="dc-opt" data-i="${i}">${o}<span class="dc-mk"></span></button>`).join('')+`</div>`;
+  if(answered){
+    const picked=+localStorage.getItem('ammar_d_pick');
+    showResult(isNaN(picked)?-1:picked);
+    dcCount(date,false).then(v=>{if(v!=null){localStorage.setItem('ammar_d_today',v);renderDailyStats();}});
+  }else{
+    card.querySelectorAll('.dc-opt').forEach(b=>b.addEventListener('click',()=>{
+      const picked=+b.dataset.i,correct=picked===Q.c;
+      localStorage.setItem('ammar_d_ansdate',date);localStorage.setItem('ammar_d_pick',picked);
+      localStorage.setItem('ammar_d_total',(+localStorage.getItem('ammar_d_total')||0)+1);
+      const last=localStorage.getItem('ammar_d_lastcorrect');let streak=+localStorage.getItem('ammar_d_streak')||0;
+      if(correct){streak=(last&&dcDayDiff(last,date)===1)?streak+1:1;localStorage.setItem('ammar_d_lastcorrect',date);}
+      else{streak=0;}
+      localStorage.setItem('ammar_d_streak',streak);
+      const best=+localStorage.getItem('ammar_d_best')||0;if(streak>best)localStorage.setItem('ammar_d_best',streak);
+      showResult(picked);
+      dcCount(date,true).then(v=>{if(v!=null){localStorage.setItem('ammar_d_today',v);}renderDailyStats();});
+      renderDailyStats();
+    }));
+  }
+  renderDailyStats();
+}
 let _journeyObs=null;
 function renderJourney(){
   const wrap=document.getElementById('journeyScenes');if(!wrap)return;

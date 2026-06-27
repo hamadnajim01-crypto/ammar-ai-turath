@@ -578,6 +578,13 @@
   #musicBtn:hover{transform:translateY(-3px)}
   #musicBtn.playing{background:linear-gradient(135deg,#22d3ee,#7c3aed);color:#fff;border-color:transparent;animation:musPulse 1.6s ease-in-out infinite}
   @keyframes musPulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}50%{box-shadow:0 0 0 12px rgba(34,211,238,0)}}
+  /* heritage narrator (read-aloud) */
+  #narrateBtn{position:fixed;bottom:200px;left:22px;z-index:55;width:48px;height:48px;border-radius:50%;border:1px solid rgba(46,157,143,.55);
+    background:rgba(42,29,16,.78);backdrop-filter:blur(10px);color:var(--teal);cursor:pointer;display:grid;place-items:center;font-size:1.2rem;
+    transition:transform .2s;box-shadow:var(--shadow)}
+  html[dir=ltr] #narrateBtn{left:auto;right:22px}
+  #narrateBtn:hover{transform:translateY(-3px)}
+  #narrateBtn.on{background:linear-gradient(135deg,var(--teal),#1f7a6e);color:#fff;border-color:transparent;animation:musPulse 1.5s ease-in-out infinite}
   /* ===== Personalize pill + panel ===== */
   #prznBtn{position:fixed;bottom:140px;left:22px;z-index:55;display:inline-flex;align-items:center;gap:9px;padding:8px 16px 8px 9px;
     border-radius:30px;border:none;cursor:pointer;background:rgba(20,14,7,.82);backdrop-filter:blur(10px);color:var(--paper);
@@ -1533,6 +1540,7 @@
 <canvas id="aeConfettiCanvas" aria-hidden="true"></canvas>
 <div id="ytWrap" aria-hidden="true"><div id="ytplayer"></div></div>
 <button id="musicBtn" data-k-title="music_title" title="تشغيل أغنية تراثية" aria-label="music">🎵</button>
+<button id="narrateBtn" data-k-title="nar_title" title="راوي التراث — استمع" aria-label="narrate">🔊</button>
 <button id="prznBtn" aria-label="personalize"><span class="przn-orb"><b>🪄</b></span><span data-k="przn_btn">خصّص الموقع</span></button>
 <div id="prznPanel" class="przn-panel" aria-hidden="true">
   <div class="przn-head"><b data-k="przn_t">🪄 خصّص موقعك</b><button class="przn-x" id="prznX" aria-label="close">×</button></div>
@@ -2398,7 +2406,7 @@ const I18N={
   fc_txt:'اسأل عمار',
   hero_badge:'🇦🇪 موسوعة التراث الإماراتي التفاعلية',hero_welcome:'🌿 أهلاً وسهلاً بك في',
   man_eb:'فنّ الزخرفة',man_t:'زخرفةٌ <em>إسلامية متحركة</em>',man_sub:'نجمة الخاتم التراثية — هندسةٌ تدور بلا نهاية.',
-  music_title:'تشغيل أغنية تراثية',przn_btn:'خصّص الموقع',przn_t:'🪄 خصّص موقعك',przn_tip:'اختر شكل الموقع كما يعجبك — يُحفظ تلقائياً.',przn_color:'🎨 اللون',przn_accent:'🎯 لون التمييز',przn_accent_d:'يلوّن الأزرار والتدرّجات والإبرازات في الموقع كله.',przn_font:'🔤 الخط',przn_motion:'✨ الحركة والتأثيرات',przn_reset:'↺ إعادة الضبط الافتراضي',pg_t:'تابِع الموقع الكامل',pg_p:'باقي الموقع (الفيديوهات، الستيكرات، الأسرار، والمزيد) يُفتح لمرة واحدة بـ ٥$ فقط.',pg_pay:'💳 ادفع ٥$ عبر PayPal',pg_go:'🔓 افتح',pg_ph:'أدخل رمز الفتح',
+  music_title:'تشغيل أغنية تراثية',nar_title:'راوي التراث — استمع',przn_btn:'خصّص الموقع',przn_t:'🪄 خصّص موقعك',przn_tip:'اختر شكل الموقع كما يعجبك — يُحفظ تلقائياً.',przn_color:'🎨 اللون',przn_accent:'🎯 لون التمييز',przn_accent_d:'يلوّن الأزرار والتدرّجات والإبرازات في الموقع كله.',przn_font:'🔤 الخط',przn_motion:'✨ الحركة والتأثيرات',przn_reset:'↺ إعادة الضبط الافتراضي',pg_t:'تابِع الموقع الكامل',pg_p:'باقي الموقع (الفيديوهات، الستيكرات، الأسرار، والمزيد) يُفتح لمرة واحدة بـ ٥$ فقط.',pg_pay:'💳 ادفع ٥$ عبر PayPal',pg_go:'🔓 افتح',pg_ph:'أدخل رمز الفتح',
   prov_eb:'حكمة الأجداد',prov_t:'أمثال <em>شعبية إماراتية</em>',prov_sub:'حِكَمٌ توارثها الأجداد، تختصر تجارب الحياة في كلمات.',
   poem_eb:'بيتٌ من التراث',poem_lines:['من رمالِ الصحراء','تُولَدُ الأساطير','وتبقى خالدةً للأبد'],
   search_eb:'ابحث',search_t:'ابحث في <em>التراث</em>',search_sub:'اكتب أي كلمة (قهوة، صقر، دبي، لؤلؤ...) لتجد ما يخصّها فوراً.',search_ph:'ابحث في التراث الإماراتي...',
@@ -2487,7 +2495,7 @@ const I18N={
   stat_1:'Documented photos',stat_2:'Heritage bodies',stat_3:'On UNESCO lists',stat_4:'Questions for Ammar AI',
   hero_badge:'🇦🇪 The interactive UAE heritage encyclopedia',hero_welcome:'🌿 Welcome to',
   man_eb:'The art of ornament',man_t:'A living <em>Islamic pattern</em>',man_sub:'The traditional khatam star — geometry spinning endlessly.',
-  music_title:'Play heritage music',przn_btn:'Personalize',przn_t:'🪄 Personalize your site',przn_tip:'Choose how the site looks — saved automatically.',przn_color:'🎨 Color',przn_accent:'🎯 Accent color',przn_accent_d:'Recolors buttons, gradients and highlights across the whole site.',przn_font:'🔤 Font',pg_t:'Continue to the full site',pg_p:'The rest of the site (videos, stickers, secrets and more) unlocks once for just $5.',pg_pay:'💳 Pay $5 via PayPal',pg_go:'🔓 Unlock',pg_ph:'Enter unlock code',przn_motion:'✨ Motion & effects',przn_reset:'↺ Reset to default',
+  music_title:'Play heritage music',nar_title:'Heritage narrator — listen',przn_btn:'Personalize',przn_t:'🪄 Personalize your site',przn_tip:'Choose how the site looks — saved automatically.',przn_color:'🎨 Color',przn_accent:'🎯 Accent color',przn_accent_d:'Recolors buttons, gradients and highlights across the whole site.',przn_font:'🔤 Font',pg_t:'Continue to the full site',pg_p:'The rest of the site (videos, stickers, secrets and more) unlocks once for just $5.',pg_pay:'💳 Pay $5 via PayPal',pg_go:'🔓 Unlock',pg_ph:'Enter unlock code',przn_motion:'✨ Motion & effects',przn_reset:'↺ Reset to default',
   prov_eb:'Wisdom of the elders',prov_t:'Emirati <em>folk proverbs</em>',prov_sub:'Sayings passed down by the ancestors, distilling life into a few words.',
   poem_eb:'A verse of heritage',poem_lines:['From the desert sands','legends are born','and live forever'],
   search_eb:'Search',search_t:'Search the <em>heritage</em>',search_sub:'Type any word (coffee, falcon, Dubai, pearl...) to instantly find what matches.',search_ph:'Search UAE heritage...',
@@ -3756,6 +3764,24 @@ function clearSkin(){
       decide(n);
     }).catch(function(){grantFree(0);}); // counter down → free access (visitor-friendly)
   }
+})();
+// ===== heritage narrator (read-aloud via browser speech) =====
+(function(){
+  var btn=document.getElementById('narrateBtn');if(!btn||!('speechSynthesis'in window))return;
+  var TXT={
+    ar:'أهلاً وسهلاً بك في موقع عمّار AI لتراث القوع. التراث الإماراتي هو ذاكرة الأجداد وروح الحاضر، نسيجٌ من العادات والفنون والحِرَف نشأ بين رمال الصحراء وأمواج الخليج. عاش الأجداد على الغوص على اللؤلؤ، وتربية الإبل، والصيد بالصقور، فوُلدت قيم الكرم والشجاعة والوفاء والصبر. واليوم نحفظ هذا التراث ونرويه للأجيال. تفضّل بتصفّح الموقع لتكتشف القهوة العربية، والسدو، والصقارة، والمأكولات، والألعاب الشعبية، والمعالم، والمزيد. من القوع نروي تراثنا.',
+    en:'Welcome to Ammar AI, the heritage of Al Qua’a. Emirati heritage is the memory of our ancestors and the soul of today — woven from customs, arts and crafts born between the desert sands and the Gulf waves. Our ancestors lived by pearl diving, raising camels and falconry, giving birth to the values of generosity, courage, loyalty and patience. Today we preserve this heritage and pass it to new generations. Explore the site to discover Arabic coffee, Al Sadu, falconry, food, folk games, landmarks and more.'
+  };
+  var speaking=false;
+  function stop(){try{speechSynthesis.cancel();}catch(e){}speaking=false;btn.classList.remove('on');btn.textContent='🔊';}
+  function pickVoice(ar){try{var vs=speechSynthesis.getVoices()||[];return vs.find(function(v){return /^ar/i.test(v.lang);})||(ar?null:vs.find(function(v){return /^en/i.test(v.lang);}))||null;}catch(e){return null;}}
+  function speak(){var ar=(typeof LANG!=='undefined'&&LANG==='ar');var u=new SpeechSynthesisUtterance(ar?TXT.ar:TXT.en);
+    u.lang=ar?'ar':'en-US';u.rate=ar?.96:1;u.pitch=1;var v=pickVoice(ar);if(v)u.voice=v;
+    u.onend=stop;u.onerror=stop;speaking=true;btn.classList.add('on');btn.textContent='⏸️';
+    try{speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){stop();}}
+  btn.addEventListener('click',function(){if(speaking)stop();else speak();});
+  if(speechSynthesis.onvoiceschanged!==undefined)speechSynthesis.onvoiceschanged=function(){};
+  window.addEventListener('beforeunload',stop);
 })();
 // ===== intro splash (once per session) =====
 (function(){var sp=document.getElementById('splash');if(!sp)return;

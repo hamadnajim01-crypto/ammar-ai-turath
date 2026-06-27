@@ -1755,78 +1755,6 @@
   </div>
 </section>
 
-<!-- HERITAGE VALUES (animated) -->
-<section id="values">
-  <span class="eyebrow" data-k="val_eb">قيمٌ نفتخر بها</span>
-  <h2 class="sec-title" data-k="val_t" data-html>قِيَمٌ من <em>تراثنا</em></h2>
-  <p class="sec-sub" data-k="val_sub">قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.</p>
-  <div class="vals-grid" id="valsGrid"></div>
-</section>
-
-<!-- UNESCO HERITAGE ELEMENTS (animated) -->
-<section id="unesco">
-  <span class="eyebrow" data-k="un_eb">معترفٌ به عالمياً</span>
-  <h2 class="sec-title" data-k="un_t" data-html>تراثنا في <em>قوائم اليونسكو</em></h2>
-  <p class="sec-sub" data-k="un_sub">عناصر إماراتية أصيلة سجّلتها اليونسكو ضمن التراث الإنساني — فخرٌ نتشاركه مع العالم.</p>
-  <div class="un-grid" id="unGrid"></div>
-</section>
-
-<!-- TRADITIONAL GAMES (animated) -->
-<section id="games">
-  <span class="eyebrow" data-k="gm_eb">ذكريات الفريج</span>
-  <h2 class="sec-title" data-k="gm_t" data-html>ألعابٌ <em>شعبية</em></h2>
-  <p class="sec-sub" data-k="gm_sub">ألعابٌ ملأت أزقّة الفريج بالضحك قبل زمن الشاشات — تراثٌ من طفولة الأجداد.</p>
-  <div class="gm-grid" id="gmGrid"></div>
-</section>
-
-<!-- TRADITIONAL FOOD (animated) -->
-<section id="food">
-  <span class="eyebrow" data-k="fd_eb">من مطبخ الجدّات</span>
-  <h2 class="sec-title" data-k="fd_t" data-html>المأكولات <em>الشعبية</em></h2>
-  <p class="sec-sub" data-k="fd_sub">نكهاتٌ تجمع العائلة على السفرة — طعمٌ يحمل دفء البيوت الإماراتية.</p>
-  <div class="food-grid" id="foodGrid"></div>
-</section>
-
-<!-- TRADITIONAL DRESS (animated) -->
-<section id="dress">
-  <span class="eyebrow" data-k="dr_eb">زينة وأصالة</span>
-  <h2 class="sec-title" data-k="dr_t" data-html>الأزياء <em>الشعبية</em></h2>
-  <p class="sec-sub" data-k="dr_sub">لباسٌ يجمع الأناقة بالحشمة، ويحكي هوية أهل الإمارات بكل خيط.</p>
-  <div class="dress-grid" id="dressGrid"></div>
-</section>
-
-<!-- TRADITIONAL CRAFTS (animated) -->
-<section id="crafts">
-  <span class="eyebrow" data-k="cr_eb">صنعة الأيادي</span>
-  <h2 class="sec-title" data-k="cr_t" data-html>الحِرف <em>اليدوية</em></h2>
-  <p class="sec-sub" data-k="cr_sub">مهاراتٌ صنعها الأجداد بأيديهم من خيرات البر والبحر — إبداعٌ يحكي الصبر والإتقان.</p>
-  <div class="crafts-grid" id="craftsGrid"></div>
-</section>
-
-<!-- HERITAGE LANDMARKS (animated) -->
-<section id="places">
-  <span class="eyebrow" data-k="pl_eb">شواهد على المجد</span>
-  <h2 class="sec-title" data-k="pl_t" data-html>معالمٌ <em>تراثية</em></h2>
-  <p class="sec-sub" data-k="pl_sub">حصونٌ وواحاتٌ وكثبانٌ تروي قصة الإمارات عبر الزمن — شواهد تحكي أصالة المكان.</p>
-  <div class="places-grid" id="placesGrid"></div>
-</section>
-
-<!-- MUSIC & FOLK ARTS (animated) -->
-<section id="music">
-  <span class="eyebrow" data-k="mu_eb">إيقاع البادية</span>
-  <h2 class="sec-title" data-k="mu_t" data-html>الآلات و<em>الفنون</em></h2>
-  <p class="sec-sub" data-k="mu_sub">أنغامٌ وإيقاعاتٌ رافقت الأجداد في الفرح والبحر والصحراء — نبض التراث الحيّ.</p>
-  <div class="music-grid" id="musicGrid"></div>
-</section>
-
-<!-- SEASONS & STAR CALENDAR (animated) -->
-<section id="seasons">
-  <span class="eyebrow" data-k="se_eb">حكمة الأجداد</span>
-  <h2 class="sec-title" data-k="se_t" data-html>المواسم و<em>التقويم</em></h2>
-  <p class="sec-sub" data-k="se_sub">قرأ الأجداد النجوم والفصول فعرفوا مواعيد الغوص والزرع والترحال — علمٌ توارثوه بالفطرة.</p>
-  <div class="seasons-grid" id="seasonsGrid"></div>
-</section>
-
 <!-- ANIMATED UAE SKY BANNER (inspired by UAE Jobs hero) -->
 <section id="skyhero" aria-label="UAE sky">
   <div class="sky-grad"></div>
@@ -3132,7 +3060,7 @@ function renderRings(){
 function _emo(cls,ic){var s=document.createElement('span');s.className=cls;s.textContent=ic;return s;}
 window._emo=_emo;
 function RIMG(im,ic,cls,nm){return im?'<img class="'+cls+' rimg" src="img/real/'+im+'.jpg" loading="lazy" decoding="async" alt="'+((nm||im)+'').replace(/"/g,'')+'" onerror="this.replaceWith(window._emo(\''+cls+'\',\''+ic+'\'))">':'<span class="'+cls+'">'+ic+'</span>';}
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderJourney();renderIdentity();renderDaily();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderJourney();renderIdentity();renderDaily();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 

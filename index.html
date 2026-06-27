@@ -856,6 +856,18 @@
   .un-card h3{color:#7fe0d3;font-family:var(--display);font-size:1.12rem;margin-bottom:3px}
   .un-year{color:var(--gold);font-size:.72rem;font-weight:700;margin-bottom:7px}
   .un-card p{color:var(--muted);font-size:.82rem;line-height:1.65}
+  /* ancestors' journey (scrollytelling) */
+  #journey{max-width:none;padding:50px 0 0}
+  #journey .jhead{max-width:760px;margin:0 auto 10px;padding:0 18px}
+  .jscene{min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:50px 20px;position:relative;overflow:hidden}
+  .jscene .jbg{position:absolute;inset:0;z-index:0}
+  .jscene .jbg::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent,rgba(0,0,0,.35))}
+  .jscene .jin{position:relative;z-index:2;max-width:680px;opacity:0;transform:translateY(46px) scale(.98);transition:opacity .9s ease,transform .9s ease}
+  .jscene.in .jin{opacity:1;transform:none}
+  .jscene .jic{font-size:clamp(3.5rem,13vw,6.5rem);line-height:1;margin-bottom:16px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55));animation:valFloat 4s ease-in-out infinite;display:inline-block}
+  .jscene .jt{font-family:var(--display);font-size:clamp(1.6rem,5.5vw,2.6rem);color:#fff;margin-bottom:12px;text-shadow:0 3px 18px rgba(0,0,0,.6)}
+  .jscene .jp{color:rgba(255,255,255,.94);font-size:clamp(1rem,2.7vw,1.18rem);line-height:2.1;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+  .jscene .jnum{position:absolute;top:18px;inset-inline-start:24px;z-index:2;font-family:var(--display);font-size:1.1rem;color:rgba(255,255,255,.5);font-weight:800}
   /* my heritage identity card */
   .idc-wrap{max-width:560px;margin:0 auto;text-align:center}
   .idc-form{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:22px}
@@ -1685,6 +1697,16 @@
  </div>
 </section>
 
+<!-- ANCESTORS' JOURNEY (scrollytelling) -->
+<section id="journey">
+  <div class="jhead">
+    <span class="eyebrow" data-k="jr_eb">رحلة في الزمن</span>
+    <h2 class="sec-title" data-k="jr_t" data-html>رحلة <em>الأجداد</em></h2>
+    <p class="sec-sub" data-k="jr_sub">انزل ببطء… وعِش رحلة تراثنا من أعماق البحر إلى آفاق المستقبل.</p>
+  </div>
+  <div id="journeyScenes"></div>
+</section>
+
 <!-- MY HERITAGE IDENTITY CARD -->
 <section id="identity">
   <span class="eyebrow" data-k="id_eb">هويتك</span>
@@ -2399,6 +2421,7 @@ const I18N={
   poster_eb:'لوحة المشروع',poster_t:'عمّار <em>AI</em> — من القوع نروي تراثنا',poster_sub:'لوحةٌ تجمع روح المشروع: التراث، والأصالة، والهوية. اضغط لتكبيرها.',poster_cap:'عمّار AI · مشروعي.. تراثي.. هويتي 🇦🇪',
   pieces_eb:'ستيكرات التراث',pieces_t:'ستيكرات <em>تراثنا</em>',pieces_sub:'ستيكرات فنية مقصوصة من لوحة عمّار AI — اطلب اللي يعجبك بأسعارٍ حلوة.',
   sky_t:'تحت سماء الإمارات',sky_p:'من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.',
+  jr_eb:'رحلة في الزمن',jr_t:'رحلة <em>الأجداد</em>',jr_sub:'انزل ببطء… وعِش رحلة تراثنا من أعماق البحر إلى آفاق المستقبل.',
   id_eb:'هويتك',id_t:'اصنع <em>هويتك التراثية</em>',id_sub:'اختر إمارتك وما يعجبك من تراثنا، واحصل على بطاقةٍ باسمك تقدر تشاركها مع أصحابك.',id_name_ph:'اكتب اسمك',id_emirate:'اختر الإمارة',id_trait:'اختر ما يعجبك',id_make:'✨ اصنع بطاقتي',id_share:'↗ شارك بطاقتي',
   val_eb:'قيمٌ نفتخر بها',val_t:'قِيَمٌ من <em>تراثنا</em>',val_sub:'قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.',sp_sub:'تراث القوع · من القوع نروي تراثنا',
   un_eb:'معترفٌ به عالمياً',un_t:'تراثنا في <em>قوائم اليونسكو</em>',un_sub:'عناصر إماراتية أصيلة سجّلتها اليونسكو ضمن التراث الإنساني — فخرٌ نتشاركه مع العالم.',
@@ -2488,6 +2511,7 @@ const I18N={
   poster_eb:'Project Artwork',poster_t:'Ammar <em>AI</em> — telling our heritage from Al Qua’a',poster_sub:'Artwork capturing the soul of the project: heritage, authenticity and identity. Tap to enlarge.',poster_cap:'Ammar AI · my project.. my heritage.. my identity 🇦🇪',
   pieces_eb:'Heritage stickers',pieces_t:'Our heritage <em>stickers</em>',pieces_sub:'Artistic stickers cropped from the Ammar AI artwork — order your favourites at sweet prices.',
   sky_t:'Under the UAE sky',sky_p:'From desert sunset to night stars — a heritage that soars like a falcon.',
+  jr_eb:'A journey through time',jr_t:'The <em>Ancestors’</em> Journey',jr_sub:'Scroll slowly… and live the journey of our heritage, from the depths of the sea to the horizons of the future.',
   id_eb:'Your identity',id_t:'Create your <em>heritage identity</em>',id_sub:'Pick your emirate and what you love from our heritage, and get a card with your name to share with friends.',id_name_ph:'Enter your name',id_emirate:'Choose emirate',id_trait:'Choose what you love',id_make:'✨ Make my card',id_share:'↗ Share my card',
   val_eb:'Values we cherish',val_t:'Values of <em>our heritage</em>',val_sub:'Values inherited from our ancestors, still beating in the heart of the UAE.',sp_sub:'Tirath Al Qua’a · telling our heritage',
   un_eb:'Recognised worldwide',un_t:'Our heritage on the <em>UNESCO lists</em>',un_sub:'Authentic Emirati elements inscribed by UNESCO as intangible cultural heritage — a pride we share with the world.',
@@ -3075,7 +3099,7 @@ function renderRings(){
 function _emo(cls,ic){var s=document.createElement('span');s.className=cls;s.textContent=ic;return s;}
 window._emo=_emo;
 function RIMG(im,ic,cls,nm){return im?'<img class="'+cls+' rimg" src="img/real/'+im+'.jpg" loading="lazy" decoding="async" alt="'+((nm||im)+'').replace(/"/g,'')+'" onerror="this.replaceWith(window._emo(\''+cls+'\',\''+ic+'\'))">':'<span class="'+cls+'">'+ic+'</span>';}
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderIdentity();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderJourney();renderIdentity();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -4141,6 +4165,37 @@ const IDTRAITS=[
  {ic:'🌴',n:'النخيل',ne:'The Date Palm',t:'راعي النخيل',te:'Keeper of the Palms'},
  {ic:'🧶',n:'السدو',ne:'Al Sadu',t:'حارس السدو',te:'Guardian of Al Sadu'}
 ];
+const JOURNEY=[
+ {bg:'linear-gradient(180deg,#06222f,#0d4356,#1a6b7a)',ic:'🦪',
+  t:'الغوص على اللؤلؤ',te:'The Pearl Dive',
+  p:'في أعماق الخليج غاص الأجداد بحثاً عن اللؤلؤ، رزقٌ من البحر نالوه بالصبر والشجاعة والنفَس الطويل.',
+  pe:'In the depths of the Gulf, our ancestors dove for pearls — a livelihood from the sea earned with patience, courage and a long breath.'},
+ {bg:'linear-gradient(180deg,#2c1b46,#7a3551,#c9663f,#e8a24d)',ic:'🐪',
+  t:'رحلة الصحراء',te:'The Desert Journey',
+  p:'على ظهور الإبل عبروا الكثبان يتبعون النجوم والكلأ، حياةٌ من الترحال يحرسها الكرم وحُسن الضيافة.',
+  pe:'On camelback they crossed the dunes, following the stars and the pasture — a nomadic life guarded by generosity and hospitality.'},
+ {bg:'linear-gradient(180deg,#1c1305,#3a2817,#15100a)',ic:'☕',
+  t:'دفء المجلس',te:'Warmth of the Majlis',
+  p:'حول الدلّة والنار اجتمع الكبار، تُروى الحكايات ويُقال الشعر وتُحَلّ القضايا، مدرسةُ القيم الأولى.',
+  pe:'Around the dallah and the fire, elders gathered — stories told, poetry recited, matters resolved. The first school of values.'},
+ {bg:'linear-gradient(180deg,#08182b,#10243f,#163a5a)',ic:'🇦🇪',
+  t:'قيام الاتحاد ١٩٧١',te:'The Union, 1971',
+  p:'بحكمة الشيخ زايد توحّدت الإمارات، فصار الحلم وطناً، والتراث جسراً يربط الأمس بالغد.',
+  pe:'With the wisdom of Sheikh Zayed the Emirates united — the dream became a nation, and heritage a bridge from yesterday to tomorrow.'},
+ {bg:'linear-gradient(180deg,#e8a24d,#c9663f,#2c1b46)',ic:'🌆',
+  t:'من التراث إلى الغد',te:'From Heritage to Tomorrow',
+  p:'نحفظ إرث الأجداد ونبني عليه، أصالةٌ تُنير طريق الأجيال. من القوع… نروي تراثنا للعالم.',
+  pe:'We preserve our ancestors’ legacy and build upon it — authenticity lighting the path of generations. From Al Qua’a, we tell our heritage to the world.'}
+];
+let _journeyObs=null;
+function renderJourney(){
+  const wrap=document.getElementById('journeyScenes');if(!wrap)return;
+  const en=LANG!=='ar';
+  wrap.innerHTML=JOURNEY.map((s,i)=>`<div class="jscene"><div class="jbg" style="background:${s.bg}"></div><span class="jnum">${String(i+1).padStart(2,'0')}</span><div class="jin"><div class="jic">${s.ic}</div><div class="jt">${en?s.te:s.t}</div><div class="jp">${en?s.pe:s.p}</div></div></div>`).join('');
+  if(_journeyObs)_journeyObs.disconnect();
+  _journeyObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.35});
+  wrap.querySelectorAll('.jscene').forEach(el=>_journeyObs.observe(el));
+}
 function renderIdentity(){
   const es=document.getElementById('idEmirate'),ts=document.getElementById('idTrait'),mk=document.getElementById('idMake');if(!es||!ts)return;
   const en=LANG!=='ar';

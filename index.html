@@ -4026,7 +4026,7 @@ function renderSeasons(){
   const en=LANG!=='ar';grid.innerHTML='';
   const SIM=['s_summer','s_autumn','s_winter','s_spring','suhail','thuraya','diving','s_duroor'];
   SEASONS.forEach((x,i)=>{const c=document.createElement('div');c.className='season-card';
-    c.innerHTML=RIMG(SIM[i],x.ic,'season-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
+    c.innerHTML=RIMG(SIM[i],x.ic,'season-ic',(en?x.ne:x.n))+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.season-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
@@ -4048,7 +4048,7 @@ function renderMusic(){
   const en=LANG!=='ar';grid.innerHTML='';
   const MIM=['tar','tabl','rababa','mizmar','habban','nahma','m_shilla','oud'];
   MUSIC.forEach((x,i)=>{const c=document.createElement('div');c.className='music-card';
-    c.innerHTML=RIMG(MIM[i],x.ic,'music-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
+    c.innerHTML=RIMG(MIM[i],x.ic,'music-ic',(en?x.ne:x.n))+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.music-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
@@ -4070,7 +4070,7 @@ function renderPlaces(){
   const en=LANG!=='ar';grid.innerHTML='';
   const PIM=['authenticity','jahili','hafeet','oasis','liwa','fahidi','bidya','alain'];
   PLACES.forEach((x,i)=>{const c=document.createElement('div');c.className='place-card';
-    c.innerHTML=RIMG(PIM[i],x.ic,'place-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><div class="place-loc">📍 '+(en?x.le:x.l)+'</div><p>'+(en?x.de:x.d)+'</p>';
+    c.innerHTML=RIMG(PIM[i],x.ic,'place-ic',(en?x.ne:x.n))+'<h3>'+(en?x.ne:x.n)+'</h3><div class="place-loc">📍 '+(en?x.le:x.l)+'</div><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.place-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
@@ -4092,7 +4092,7 @@ function renderCrafts(){
   const en=LANG!=='ar';grid.innerHTML='';
   const CIM=['un_sadu','khoos','pottery','dhow','spinning','blacksmith','nets','perfume'];
   CRAFTS.forEach((x,i)=>{const c=document.createElement('div');c.className='craft-card';
-    c.innerHTML=RIMG(CIM[i],x.ic,'craft-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
+    c.innerHTML=RIMG(CIM[i],x.ic,'craft-ic',(en?x.ne:x.n))+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.craft-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
@@ -4114,7 +4114,7 @@ function renderDress(){
   const en=LANG!=='ar';grid.innerHTML='';
   const DIM=['','','','','','','',''];
   DRESS.forEach((x,i)=>{const c=document.createElement('div');c.className='dress-card';
-    c.innerHTML=RIMG(DIM[i],x.ic,'dress-ic')+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
+    c.innerHTML=RIMG(DIM[i],x.ic,'dress-ic',(en?x.ne:x.n))+'<h3>'+(en?x.ne:x.n)+'</h3><p>'+(en?x.de:x.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.dress-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
@@ -4136,7 +4136,7 @@ function renderFood(){
   const en=LANG!=='ar';grid.innerHTML='';
   const FIM=['harees','machboos','luqaimat','balaleet','tharid','aseedah','khabeesa','dates'];
   FOOD.forEach((f,i)=>{const c=document.createElement('div');c.className='food-card';
-    c.innerHTML=RIMG(FIM[i],f.ic,'food-ic')+'<h3>'+(en?f.ne:f.n)+'</h3><p>'+(en?f.de:f.d)+'</p>';
+    c.innerHTML=RIMG(FIM[i],f.ic,'food-ic',(en?f.ne:f.n))+'<h3>'+(en?f.ne:f.n)+'</h3><p>'+(en?f.de:f.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.food-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
@@ -4158,7 +4158,7 @@ function renderGames(){
   const en=LANG!=='ar';grid.innerHTML='';
   const GIM=['top','marbles','g_rope','hopscotch','g_cops','g_ring','swing','seashell'];
   GAMES.forEach((g,i)=>{const c=document.createElement('div');c.className='gm-card';
-    c.innerHTML=RIMG(GIM[i],g.ic,'gm-ic')+'<h3>'+(en?g.ne:g.n)+'</h3><p>'+(en?g.de:g.d)+'</p>';
+    c.innerHTML=RIMG(GIM[i],g.ic,'gm-ic',(en?g.ne:g.n))+'<h3>'+(en?g.ne:g.n)+'</h3><p>'+(en?g.de:g.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.gm-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
@@ -4180,7 +4180,7 @@ function renderUnesco(){
   const en=LANG!=='ar';grid.innerHTML='';
   const UIM=['un_coffee','un_falconry','un_sadu','un_ayyala','un_taghrooda','un_palm','un_razfa','un_azi'];
   UNESCO.forEach((u,i)=>{const c=document.createElement('div');c.className='un-card';
-    c.innerHTML='<span class="un-badge">UNESCO</span>'+RIMG(UIM[i],u.ic,'un-ic')+'<h3>'+(en?u.ne:u.n)+'</h3><div class="un-year">'+(en?'Inscribed ':'سُجِّل ')+u.y+'</div><p>'+(en?u.de:u.d)+'</p>';
+    c.innerHTML='<span class="un-badge">UNESCO</span>'+RIMG(UIM[i],u.ic,'un-ic',(en?u.ne:u.n))+'<h3>'+(en?u.ne:u.n)+'</h3><div class="un-year">'+(en?'Inscribed ':'سُجِّل ')+u.y+'</div><p>'+(en?u.de:u.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.un-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
@@ -4335,7 +4335,7 @@ function renderValues(){
   const en=LANG!=='ar';grid.innerHTML='';
   const VIM=['generosity','courage','authenticity','hospitality','loyalty','patience'];
   VALUES.forEach((v,i)=>{const c=document.createElement('div');c.className='val';
-    c.innerHTML=RIMG(VIM[i],v.ic,'val-ic')+'<h3>'+(en?v.ne:v.n)+'</h3><p>'+(en?v.de:v.d)+'</p>';
+    c.innerHTML=RIMG(VIM[i],v.ic,'val-ic',(en?v.ne:v.n))+'<h3>'+(en?v.ne:v.n)+'</h3><p>'+(en?v.de:v.d)+'</p>';
     grid.appendChild(c);});
   const items=[...grid.querySelectorAll('.val')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}

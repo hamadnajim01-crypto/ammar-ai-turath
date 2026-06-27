@@ -856,6 +856,27 @@
   .un-card h3{color:#7fe0d3;font-family:var(--display);font-size:1.12rem;margin-bottom:3px}
   .un-year{color:var(--gold);font-size:.72rem;font-weight:700;margin-bottom:7px}
   .un-card p{color:var(--muted);font-size:.82rem;line-height:1.65}
+  /* my heritage identity card */
+  .idc-wrap{max-width:560px;margin:0 auto;text-align:center}
+  .idc-form{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:22px}
+  .idc-field{background:var(--bg);border:1px solid var(--line);border-radius:13px;color:var(--paper);padding:12px 16px;font-family:inherit;font-size:1rem;outline:none;flex:1;min-width:150px}
+  .idc-field:focus{border-color:var(--gold)}
+  .idc-btn{background:linear-gradient(135deg,var(--gold),#a87f1c);color:#1a1208;border:none;padding:13px 26px;border-radius:24px;font-weight:800;cursor:pointer;font-family:inherit;font-size:1rem;transition:transform .2s;flex:none}
+  .idc-btn:hover{transform:translateY(-2px)}
+  .idc-btn.alt{background:linear-gradient(135deg,var(--teal),#1f7a6e);color:#fff}
+  .idc-share{margin-top:16px}
+  .idcard{position:relative;max-width:460px;margin:0 auto;background:radial-gradient(circle at 50% 0%,#3a2817,#241809);
+    border:2px solid var(--gold);border-radius:20px;padding:30px 24px 24px;box-shadow:0 0 0 6px rgba(233,188,70,.1),var(--shadow);animation:souqpop .4s ease;overflow:hidden}
+  .idcard::before,.idcard::after{content:"❁";position:absolute;top:12px;color:var(--gold);opacity:.55;font-size:1.3rem}
+  .idcard::before{inset-inline-start:16px}.idcard::after{inset-inline-end:16px}
+  .idc-flag{display:flex;width:96px;height:7px;margin:0 auto 16px;border-radius:4px;overflow:hidden}
+  .idc-flag i{flex:1}.idc-flag .r{background:var(--red)}.idc-flag .g{background:var(--green)}.idc-flag .w{background:#fff}.idc-flag .k{background:#111}
+  .idc-ic{font-size:3.2rem;display:block;margin-bottom:8px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+  .idc-h{color:var(--muted);font-size:.82rem;letter-spacing:2px;margin-bottom:4px}
+  .idc-name{color:#fff;font-family:var(--display);font-size:1.9rem;margin-bottom:6px;text-shadow:0 0 20px rgba(233,188,70,.4)}
+  .idc-title{color:var(--gold);font-family:var(--display);font-size:1.15rem;margin-bottom:4px}
+  .idc-line{color:var(--paper);font-size:.92rem;opacity:.9;margin-bottom:14px}
+  .idc-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line);padding-top:12px;color:var(--muted);font-size:.78rem}
   /* heritage values (animated) */
   .vals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:18px;max-width:1080px;margin:0 auto}
   .val{position:relative;background:linear-gradient(165deg,rgba(201,162,39,.08),rgba(36,24,12,.5));border:1px solid var(--line);border-radius:20px;
@@ -1664,6 +1685,23 @@
  </div>
 </section>
 
+<!-- MY HERITAGE IDENTITY CARD -->
+<section id="identity">
+  <span class="eyebrow" data-k="id_eb">هويتك</span>
+  <h2 class="sec-title" data-k="id_t" data-html>اصنع <em>هويتك التراثية</em></h2>
+  <p class="sec-sub" data-k="id_sub">اختر إمارتك وما يعجبك من تراثنا، واحصل على بطاقةٍ باسمك تقدر تشاركها مع أصحابك.</p>
+  <div class="idc-wrap">
+    <div class="idc-form">
+      <input id="idName" class="idc-field" type="text" maxlength="28" data-k-ph="id_name_ph" placeholder="اكتب اسمك">
+      <select id="idEmirate" class="idc-field" data-k-title="id_emirate"></select>
+      <select id="idTrait" class="idc-field" data-k-title="id_trait"></select>
+      <button id="idMake" class="idc-btn" data-k="id_make">✨ اصنع بطاقتي</button>
+    </div>
+    <div id="idCardWrap"></div>
+    <div class="idc-share" id="idShareRow" hidden><button id="idShare" class="idc-btn alt" data-k="id_share">↗ شارك بطاقتي</button></div>
+  </div>
+</section>
+
 <!-- HERITAGE VALUES (animated) -->
 <section id="values">
   <span class="eyebrow" data-k="val_eb">قيمٌ نفتخر بها</span>
@@ -2361,6 +2399,7 @@ const I18N={
   poster_eb:'لوحة المشروع',poster_t:'عمّار <em>AI</em> — من القوع نروي تراثنا',poster_sub:'لوحةٌ تجمع روح المشروع: التراث، والأصالة، والهوية. اضغط لتكبيرها.',poster_cap:'عمّار AI · مشروعي.. تراثي.. هويتي 🇦🇪',
   pieces_eb:'ستيكرات التراث',pieces_t:'ستيكرات <em>تراثنا</em>',pieces_sub:'ستيكرات فنية مقصوصة من لوحة عمّار AI — اطلب اللي يعجبك بأسعارٍ حلوة.',
   sky_t:'تحت سماء الإمارات',sky_p:'من غروب الصحراء إلى نجوم الليل — تراثٌ يحلّق كالصقر.',
+  id_eb:'هويتك',id_t:'اصنع <em>هويتك التراثية</em>',id_sub:'اختر إمارتك وما يعجبك من تراثنا، واحصل على بطاقةٍ باسمك تقدر تشاركها مع أصحابك.',id_name_ph:'اكتب اسمك',id_emirate:'اختر الإمارة',id_trait:'اختر ما يعجبك',id_make:'✨ اصنع بطاقتي',id_share:'↗ شارك بطاقتي',
   val_eb:'قيمٌ نفتخر بها',val_t:'قِيَمٌ من <em>تراثنا</em>',val_sub:'قيمٌ توارثناها عن الأجداد، وما زالت تنبض في قلب الإمارات.',sp_sub:'تراث القوع · من القوع نروي تراثنا',
   un_eb:'معترفٌ به عالمياً',un_t:'تراثنا في <em>قوائم اليونسكو</em>',un_sub:'عناصر إماراتية أصيلة سجّلتها اليونسكو ضمن التراث الإنساني — فخرٌ نتشاركه مع العالم.',
   gm_eb:'ذكريات الفريج',gm_t:'ألعابٌ <em>شعبية</em>',gm_sub:'ألعابٌ ملأت أزقّة الفريج بالضحك قبل زمن الشاشات — تراثٌ من طفولة الأجداد.',
@@ -2449,6 +2488,7 @@ const I18N={
   poster_eb:'Project Artwork',poster_t:'Ammar <em>AI</em> — telling our heritage from Al Qua’a',poster_sub:'Artwork capturing the soul of the project: heritage, authenticity and identity. Tap to enlarge.',poster_cap:'Ammar AI · my project.. my heritage.. my identity 🇦🇪',
   pieces_eb:'Heritage stickers',pieces_t:'Our heritage <em>stickers</em>',pieces_sub:'Artistic stickers cropped from the Ammar AI artwork — order your favourites at sweet prices.',
   sky_t:'Under the UAE sky',sky_p:'From desert sunset to night stars — a heritage that soars like a falcon.',
+  id_eb:'Your identity',id_t:'Create your <em>heritage identity</em>',id_sub:'Pick your emirate and what you love from our heritage, and get a card with your name to share with friends.',id_name_ph:'Enter your name',id_emirate:'Choose emirate',id_trait:'Choose what you love',id_make:'✨ Make my card',id_share:'↗ Share my card',
   val_eb:'Values we cherish',val_t:'Values of <em>our heritage</em>',val_sub:'Values inherited from our ancestors, still beating in the heart of the UAE.',sp_sub:'Tirath Al Qua’a · telling our heritage',
   un_eb:'Recognised worldwide',un_t:'Our heritage on the <em>UNESCO lists</em>',un_sub:'Authentic Emirati elements inscribed by UNESCO as intangible cultural heritage — a pride we share with the world.',
   gm_eb:'Neighbourhood memories',gm_t:'Traditional <em>games</em>',gm_sub:'Games that filled the old alleys with laughter before screens — heritage from our grandparents’ childhood.',
@@ -3035,7 +3075,7 @@ function renderRings(){
 function _emo(cls,ic){var s=document.createElement('span');s.className=cls;s.textContent=ic;return s;}
 window._emo=_emo;
 function RIMG(im,ic,cls,nm){return im?'<img class="'+cls+' rimg" src="img/real/'+im+'.jpg" loading="lazy" decoding="async" alt="'+((nm||im)+'').replace(/"/g,'')+'" onerror="this.replaceWith(window._emo(\''+cls+'\',\''+ic+'\'))">':'<span class="'+cls+'">'+ic+'</span>';}
-function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
+function renderAll(){applyStatic();renderReal();renderOrgs();renderCamels();renderCInfo();renderTicker();renderTabs();renderSuggests();renderSays();renderWave();renderSearch();renderIdentity();renderValues();renderUnesco();renderGames();renderFood();renderDress();renderCrafts();renderPlaces();renderMusic();renderSeasons();renderPieces();renderQuiz();renderPoem();renderProverbs();renderDeck();renderReveal();renderBento();renderTilt();renderFlip();renderDyk();renderTL();renderEmirates();renderMap();renderFloat();renderArc();renderStrips();renderOrbit();startOrbit();renderRings();}
 function setLang(l){LANG=l;renderAll();chat.innerHTML='';history=[];addMsg(I18N[LANG].welcome,'bot');if(window._renderReviews)window._renderReviews();}
 (function(){var ls=document.getElementById('langSel');if(ls)ls.addEventListener('change',()=>setLang(ls.value));})();
 
@@ -4088,6 +4128,46 @@ function renderUnesco(){
   const items=[...grid.querySelectorAll('.un-card')];
   if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});items.forEach(e=>io.observe(e));}
   else items.forEach(e=>e.classList.add('in'));
+}
+// ===== my heritage identity card =====
+const IDEMS=[['أبوظبي','Abu Dhabi'],['دبي','Dubai'],['الشارقة','Sharjah'],['عجمان','Ajman'],['أم القيوين','Umm Al Quwain'],['رأس الخيمة','Ras Al Khaimah'],['الفجيرة','Fujairah'],['القوع','Al Qua’a']];
+const IDTRAITS=[
+ {ic:'🤲',n:'الكرم',ne:'Generosity',t:'رمز الكرم',te:'Symbol of Generosity'},
+ {ic:'🦅',n:'الصقارة',ne:'Falconry',t:'صقّار الإمارات',te:'A True Falconer'},
+ {ic:'🦪',n:'الغوص واللؤلؤ',ne:'Pearl Diving',t:'ابن البحر',te:'Child of the Sea'},
+ {ic:'🏜️',n:'الصحراء',ne:'The Desert',t:'ابن البادية',te:'Child of the Desert'},
+ {ic:'☕',n:'القهوة العربية',ne:'Arabic Coffee',t:'فنجان الضيافة',te:'Cup of Hospitality'},
+ {ic:'🐎',n:'الخيل العربية',ne:'Arabian Horses',t:'فارسٌ أصيل',te:'A Noble Knight'},
+ {ic:'🌴',n:'النخيل',ne:'The Date Palm',t:'راعي النخيل',te:'Keeper of the Palms'},
+ {ic:'🧶',n:'السدو',ne:'Al Sadu',t:'حارس السدو',te:'Guardian of Al Sadu'}
+];
+function renderIdentity(){
+  const es=document.getElementById('idEmirate'),ts=document.getElementById('idTrait'),mk=document.getElementById('idMake');if(!es||!ts)return;
+  const en=LANG!=='ar';
+  es.innerHTML=IDEMS.map((e,i)=>'<option value="'+i+'">'+(en?e[1]:e[0])+'</option>').join('');
+  ts.innerHTML=IDTRAITS.map((t,i)=>'<option value="'+i+'">'+t.ic+' '+(en?t.ne:t.n)+'</option>').join('');
+  if(mk&&!mk._wired){mk._wired=1;mk.addEventListener('click',makeIdCard);}
+}
+function makeIdCard(){
+  const en=LANG!=='ar';
+  const nm=((document.getElementById('idName')||{}).value||'').trim()||(en?'Heritage friend':'صديق التراث');
+  const e=IDEMS[+(document.getElementById('idEmirate')||{}).value||0];
+  const t=IDTRAITS[+(document.getElementById('idTrait')||{}).value||0];
+  const d=new Date();const ds=d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+  const wrap=document.getElementById('idCardWrap');
+  wrap.innerHTML='<div class="idcard"><div class="idc-flag"><i class="r"></i><i class="g"></i><i class="w"></i><i class="k"></i></div>'+
+    '<span class="idc-ic">'+t.ic+'</span>'+
+    '<div class="idc-h">'+(en?'MY HERITAGE IDENTITY':'هويتي التراثية')+'</div>'+
+    '<div class="idc-name">'+nm.replace(/</g,'&lt;')+'</div>'+
+    '<div class="idc-title">'+(en?t.te:t.t)+'</div>'+
+    '<div class="idc-line">'+(en?('From '+e[1]+' · loves '+t.ne):('من '+e[0]+' · يعشق '+t.n))+'</div>'+
+    '<div class="idc-foot"><span>عمّار AI 🇦🇪</span><span>'+ds+'</span></div></div>';
+  const row=document.getElementById('idShareRow');if(row)row.hidden=false;
+  const sh=document.getElementById('idShare');if(sh)sh.onclick=function(){
+    const txt=(en?('I am “'+t.te+'” from '+e[1]+' on Ammar AI — UAE Heritage!'):('أنا «'+t.t+'» من '+e[0]+' في موقع عمّار AI للتراث!'))+' 🇦🇪';
+    if(navigator.share)navigator.share({title:'عمّار AI',text:txt,url:location.href}).catch(function(){});
+    else{navigator.clipboard&&navigator.clipboard.writeText(txt+' '+location.href);sh.textContent=en?'Copied ✓':'تم النسخ ✓';}
+  };
 }
 function renderValues(){
   const grid=document.getElementById('valsGrid');if(!grid)return;
